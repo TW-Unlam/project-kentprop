@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/proyect-kentprop.iml" filepath="$PROJECT_DIR$/.idea/proyect-kentprop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/project-kentprop.iml" filepath="$PROJECT_DIR$/project-kentprop.iml" />
     </modules>
   </component>
 </project>

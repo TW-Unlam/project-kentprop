@@ -2,26 +2,70 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="proyect-kentprop:war exploded" />
+      <artifact name="project-kentprop" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fd420ffd-49e0-47ad-904e-9b19e88d356e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/ControladorPropiedades.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/Propiedad.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/Property.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/PropertyController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ar/edu/unlam/tallerweb1/controller/PropertyControllerTest.java" beforeDir="false" />
+    <list default="true" id="cfba70e5-4b8d-4471-952f-7f9d5e210aa4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project-kentprop.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/DatosBusqueda.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/general.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/home.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/home-bg.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/proyect_kentprop_war.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/proyect_kentprop_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/project_kentprop.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/ControladorLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/ControladorLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/ControladorPropiedades.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/ControladorPropiedades.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/servicios/ServicioPropiedades.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/servicios/ServicioPropiedades.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/servicios/ServicioPropiedadesDefault.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/servicios/ServicioPropiedadesDefault.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/spring-servlet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spring-servlet.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/vistas/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/vistas/home.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ar/edu/unlam/tallerweb1/controller/ControladorPropiedadesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ar/edu/unlam/tallerweb1/controladores/ControladorPropiedadesTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/controladores/ControladorLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/controladores/ControladorLogin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/controladores/ControladorPropiedades.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/controladores/ControladorPropiedades.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/controladores/DatosLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/controladores/DatosLogin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/controladores/Propiedad.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/controladores/Propiedad.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/modelo/Usuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/modelo/Usuario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/repositorios/RepositorioUsuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/repositorios/RepositorioUsuario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/repositorios/RepositorioUsuarioImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/repositorios/RepositorioUsuarioImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/servicios/ServicioLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/servicios/ServicioLogin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/servicios/ServicioLoginImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/servicios/ServicioLoginImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/servicios/ServicioPropiedades.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/servicios/ServicioPropiedades.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/servicios/ServicioPropiedadesDefault.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/servicios/ServicioPropiedadesDefault.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/spring-servlet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/spring-servlet.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/ar/edu/unlam/tallerweb1/SpringTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/ar/edu/unlam/tallerweb1/SpringTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/ar/edu/unlam/tallerweb1/controller/ControladorPropiedadesTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/ar/edu/unlam/tallerweb1/persistencia/ConexionBaseDeDatosTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/ar/edu/unlam/tallerweb1/persistencia/ConexionBaseDeDatosTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/test-hibernateContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/test-hibernateContext.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="Jsp File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JpbToolWindowState">
@@ -55,45 +99,70 @@
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectId" id="29XUBrvpvVHJtVlNcNPi70ZHk23" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Programas/IdeaProjects/proyect-kentprop/src/main/java/ar/edu/unlam/tallerweb1/controladores",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "spring.configuration.checksum": "d4ccfb3ab342332cccc5d5cb7221d47f"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;11&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Programas/IdeaProjects/proyect-kentprop/src/main/java/ar/edu/unlam/tallerweb1/controladores&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;806e0e1b02fee36e3bf3e8d0e553ddf4&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Programas\IdeaProjects\proyect-kentprop\src\main\java\ar\edu\unlam\tallerweb1\controladores" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/webapp/images" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="ar.edu.unlam.tallerweb1.servicios" />
       <recent name="ar.edu.unlam.tallerweb1.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ControladorPropiedadesTest">
+  <component name="RunManager" selected="JUnit.ControladorPropiedadesTest (1)">
+    <configuration name="ControladorPropiedadesTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="project-kentprop" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ar.edu.unlam.tallerweb1.controladores.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ar.edu.unlam.tallerweb1.controladores" />
+      <option name="MAIN_CLASS_NAME" value="ar.edu.unlam.tallerweb1.controladores.ControladorPropiedadesTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ControladorPropiedadesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="proyect-kentprop" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ar.edu.unlam.tallerweb1.controller.*" />
+          <option name="PATTERN" value="ar.edu.unlam.tallerweb1.controladores.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="ar.edu.unlam.tallerweb1.controller" />
-      <option name="MAIN_CLASS_NAME" value="ar.edu.unlam.tallerweb1.controller.ControladorPropiedadesTest" />
+      <option name="MAIN_CLASS_NAME" value="ar.edu.unlam.tallerweb1.controladores.ControladorPropiedadesTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -103,12 +172,12 @@
       <module name="proyect-kentprop" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ar.edu.unlam.tallerweb1.controller.*" />
+          <option name="PATTERN" value="ar.edu.unlam.tallerweb1.controladores.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="ar.edu.unlam.tallerweb1.controller" />
-      <option name="MAIN_CLASS_NAME" value="ar.edu.unlam.tallerweb1.controller.ControladorPropiedadesTest" />
+      <option name="MAIN_CLASS_NAME" value="ar.edu.unlam.tallerweb1.controladores.ControladorPropiedadesTest" />
       <option name="METHOD_NAME" value="alPedirTodasLasBirrasDevuelveLaListaCompleta" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -118,9 +187,9 @@
     <configuration name="Tomcat 8.5.78" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.78" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
-        <artifact name="proyect-kentprop:war exploded">
+        <artifact name="project-kentprop">
           <settings>
-            <option name="CONTEXT_PATH" value="/proyect_kentprop_war_exploded" />
+            <option name="CONTEXT_PATH" value="/project_kentprop" />
           </settings>
         </artifact>
       </deployment>
@@ -198,13 +267,19 @@
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="project-kentprop:war exploded" />
-          <artifact name="proyect-kentprop:war exploded" />
+          <artifact name="project-kentprop" />
         </option>
       </method>
     </configuration>
+    <list>
+      <item itemvalue="JUnit.ControladorPropiedadesTest (1)" />
+      <item itemvalue="JUnit.ControladorPropiedadesTest" />
+      <item itemvalue="JUnit.ControladorPropiedadesTest.alPedirTodasLasBirrasDevuelveLaListaCompleta" />
+      <item itemvalue="Tomcat Server.Tomcat 8.5.78" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ControladorPropiedadesTest (1)" />
         <item itemvalue="JUnit.ControladorPropiedadesTest" />
         <item itemvalue="JUnit.ControladorPropiedadesTest.alPedirTodasLasBirrasDevuelveLaListaCompleta" />
       </list>
@@ -213,7 +288,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="fd420ffd-49e0-47ad-904e-9b19e88d356e" name="Changes" comment="" />
+      <changelist id="cfba70e5-4b8d-4471-952f-7f9d5e210aa4" name="Changes" comment="" />
       <created>1653258791793</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -225,6 +300,14 @@
       <workItem from="1653265072488" duration="852000" />
       <workItem from="1653354055680" duration="259000" />
       <workItem from="1653435219536" duration="3226000" />
+      <workItem from="1653536417847" duration="35000" />
+      <workItem from="1653536455190" duration="112000" />
+      <workItem from="1653765042611" duration="529000" />
+      <workItem from="1653765824747" duration="16036000" />
+      <workItem from="1653840831318" duration="533000" />
+      <workItem from="1653845874711" duration="961000" />
+      <workItem from="1653849220685" duration="183000" />
+      <workItem from="1653850714540" duration="1239000" />
     </task>
     <servers />
   </component>

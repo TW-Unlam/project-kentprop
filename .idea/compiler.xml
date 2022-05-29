@@ -6,10 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="project-kentprop" />
         <module name="proyect-kentprop" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="project-kentprop" target="11" />
       <module name="proyect-kentprop" target="11" />
     </bytecodeTargetLevel>
   </component>

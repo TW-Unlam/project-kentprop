@@ -1,11 +1,12 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import ar.edu.unlam.tallerweb1.controladores.DatosBusqueda;
 import ar.edu.unlam.tallerweb1.controladores.Propiedad;
 
 import java.util.List;
 
 public interface ServicioPropiedades {
-    List<Propiedad> buscarPropiedadPorUbicacion(String ubicacion);
+    List<Propiedad> buscarPropiedadPorUbicacion(DatosBusqueda datosBusqueda);
 }
 
 // Vamos a usar test doubles con un mock, para hacer pruebas de un controlador que dependen de un servicio

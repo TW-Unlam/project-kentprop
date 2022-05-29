@@ -15,9 +15,8 @@
 			<div class="search-container">
 <%--				<div class="search-container_img"></div>--%>
 				<div>
-
-					<form:form  method="GET">
-						<form:input path="email" id="email" type="email" class="form-control" />
+					<form:form action="buscar-propiedades" method="POST" modelAttribute="datosBusqueda">
+						<form:input path="ubicacion" id="ubicacion" type="text" class="form-control" />
 
 						<button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Login</button>
 					</form:form>

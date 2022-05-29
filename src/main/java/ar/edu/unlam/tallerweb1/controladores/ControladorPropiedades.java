@@ -36,7 +36,7 @@ public class ControladorPropiedades {
         try{
             resultado = servicioPropiedades.buscarPropiedadPorUbicacion(datosBusqueda);
         } catch(Exception e) {
-            modelo.put("msg-error", "ubicacion inexistente");
+            modelo.put("msg-error", "No se encontraron propiedades para esta ubicacion");
         }
         modelo.put("propiedades", resultado);
         return new ModelAndView("lista-propiedades", modelo);

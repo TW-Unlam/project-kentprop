@@ -16,13 +16,15 @@ import static org.mockito.Mockito.when;
 public class ControladorPropiedadesTest {
 
     public static final String VISTA_LISTA_PROPIEDADES = "lista-propiedades";
-    public static final String TIPO_INVALIDO = "FRUTA";
-    public static final String MENSAJE_TIPO_INVALIDO = "ubicacion inexistente";
+    public static final String MENSAJE_TIPO_INVALIDO = "No se encontraron propiedades para esta ubicacion";
+    public static  DatosBusqueda datosBusqueda;
     private ControladorPropiedades controladorPropiedades;
+
     private ServicioPropiedades servicioPropiedades;
 
     @Before
     public void init(){
+        datosBusqueda = new DatosBusqueda();
         servicioPropiedades = mock(ServicioPropiedades.class);
         controladorPropiedades = new ControladorPropiedades(servicioPropiedades);
     }
@@ -31,41 +33,33 @@ public class ControladorPropiedadesTest {
     public void alBuscarUnaUbicacionExistenteDeberiaDevolvermeLaListaDePropiedades(){
 
         //Preparacion
-        dadoQueTenemosUnaListaDePropiedades(10, "Ramos Mejia");
-
-        //Ejecucion
-        DatosBusqueda datosBusqueda = new DatosBusqueda();
         datosBusqueda.setTipoPropiedad("Departamento");
         datosBusqueda.setTipoAccion("Alquilar");
         datosBusqueda.setUbicacion("Ramos");
+        dadoQueTenemosUnaListaDePropiedades(10);
+
+        //Ejecucion
         ModelAndView mav = cuandoBuscoUnaPropiedadDeLa(datosBusqueda);
 
         entoncesEncuentro(mav, 10);
         entoncesMeLLevaALaVista(VISTA_LISTA_PROPIEDADES, mav.getViewName());
     }
 
-//    @Test
-//    public void alPedirUnTipoInvalidoLlevaAPantallaDeError(){
-//        when(servicioPropiedades.buscarPropiedadPorUbicacion(TIPO_INVALIDO)).thenThrow(new RuntimeException());
-//
-//        ModelAndView mav = cuandoBuscoUnaPropiedadDeLa(TIPO_INVALIDO);
-//
-//        entoncesMeLLevaALaVista(VISTA_LISTA_PROPIEDADES, mav.getViewName());
-//        entoncesSeRecibeMensaje(MENSAJE_TIPO_INVALIDO, mav.getModel());
-//    }
+    @Test
+    public void alBuscarUnaUbicacionInexistenteDeberiaDevolvermeMensajeDeError(){
+        when(servicioPropiedades.buscarPropiedadPorUbicacion(datosBusqueda)).thenThrow(new RuntimeException());
 
-    private void dadoQueTenemosUnaListaDePropiedades(int cantidad, String ubicacion) {
+        ModelAndView mav = cuandoBuscoUnaPropiedadDeLa(datosBusqueda);
+
+        entoncesMeLLevaALaVista(VISTA_LISTA_PROPIEDADES, mav.getViewName());
+        entoncesSeRecibeMensaje(MENSAJE_TIPO_INVALIDO, mav.getModel());
+   }
+
+    private void dadoQueTenemosUnaListaDePropiedades(int cantidad) {
         List<Propiedad> lista = new LinkedList<>();
         for(int i = 0 ; i < cantidad; i++){
-            lista.add(new Propiedad(ubicacion));
+            lista.add(new Propiedad());
         }
-
-
-        DatosBusqueda datosBusqueda = new DatosBusqueda();
-        datosBusqueda.setTipoPropiedad("Departamento");
-        datosBusqueda.setTipoAccion("Alquilar");
-        datosBusqueda.setUbicacion("Ramos");
-
         when(servicioPropiedades.buscarPropiedadPorUbicacion(datosBusqueda)).thenReturn(lista);
     }
 

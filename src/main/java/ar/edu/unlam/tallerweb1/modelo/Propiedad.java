@@ -1,12 +1,17 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
-public class Propiedad {
+import javax.persistence.*;
 
-    private Ubicacion ubicacion;
+@Entity @Table(name = "TABLA_PROPIEDAD")
+public class Propiedad {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @ManyToOne @JoinColumn(name = "ubicacion_id")
+    private Ubicacion ubicacion;
     private TipoPropiedad tipoPropiedad;
     private Accion tipoAccion;
     private Estatus estatus;
+    @OneToOne @JoinColumn(name = "detalle_id")
     private Detalle detalle;
 
     public Propiedad(Ubicacion ubicacion, Integer id, TipoPropiedad tipoPropiedad, Accion tipoAccion, Estatus estatus, Detalle detalle) {

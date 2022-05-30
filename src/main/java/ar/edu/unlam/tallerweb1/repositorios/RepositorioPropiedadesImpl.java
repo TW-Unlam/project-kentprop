@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
 @Repository
 public class RepositorioPropiedadesImpl implements RepositorioPropiedades{
 
@@ -16,7 +15,6 @@ public class RepositorioPropiedadesImpl implements RepositorioPropiedades{
 
     @Autowired
     public RepositorioPropiedadesImpl(SessionFactory sessionFactory){
-
         this.sessionFactory = sessionFactory;
     }
 

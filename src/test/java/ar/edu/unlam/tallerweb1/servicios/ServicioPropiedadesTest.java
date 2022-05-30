@@ -1,7 +1,9 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.controladores.DatosBusqueda;
-import ar.edu.unlam.tallerweb1.controladores.Propiedad;
+import ar.edu.unlam.tallerweb1.modelo.Detalle;
+import ar.edu.unlam.tallerweb1.modelo.Propiedad;
+import ar.edu.unlam.tallerweb1.excepciones.PropiedadNoEncontrada;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPropiedades;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,43 +21,89 @@ public class ServicioPropiedadesTest {
     private ServicioPropiedades servicioPropiedades;
 
     private DatosBusqueda datosBusqueda;
-    private final String ubicacion = "Ramos Mejia";
+    private Detalle detallePropiedad;
+    private static final Integer ID_PROPIEDAD = 1;
 
     @Before
     public void init(){
-        datosBusqueda = new DatosBusqueda();
+        detallePropiedad = mock(Detalle.class);
+        datosBusqueda = mock(DatosBusqueda.class);
         repositorio = mock(RepositorioPropiedades.class);
         servicioPropiedades = new ServicioPropiedadesDefault(repositorio);
     }
 
     @Test
-    public void queAlBuscarUnaPropiedadPorDatosDeBusquedaDeberaTraerObjetoPropiedad(){
+    public void queAlBuscarUnaPropiedadPorDatosDeBusquedaDeberaTraerObjetoPropiedad() throws PropiedadNoEncontrada{
+        dadoQueExisteUnaListaDePropiedades(3);
+
+        List<Propiedad> busqueda = cuandoBuscoUnaPropiedad(datosBusqueda);
+
+        entoncesSeObtieneTodasLasPropiedades(busqueda,3);
+
+    }
+
+    private void entoncesSeObtieneTodasLasPropiedades(List<Propiedad> busqueda, int cantidadEsperada) {
+        assertThat(busqueda).hasSize(cantidadEsperada);
+
+    }
+
+    private List<Propiedad> cuandoBuscoUnaPropiedad(DatosBusqueda datosBusqueda) throws PropiedadNoEncontrada {
+        return servicioPropiedades.buscarPropiedadPorUbicacion(datosBusqueda);
+    }
+
+    private void dadoQueExisteUnaListaDePropiedades(int cantidad) {
         datosBusqueda.setTipoPropiedad("Departamento");
         datosBusqueda.setTipoAccion("Alquilar");
         datosBusqueda.setUbicacion("Ramos");
-        dadoQueExisteUnaListaDePropiedades(3, ubicacion);
 
-        cuandoBuscoUnaPropiedad(datosBusqueda);
+        List<Propiedad> lista = givenExistenPropiedades(cantidad);
 
-        entoncesSeObtieneTodasLasPropiedades();
-
-    }
-
-    private void entoncesSeObtieneTodasLasPropiedades() {
+        when(repositorio.buscarPropiedad(datosBusqueda)).thenReturn(lista);
 
     }
 
-    private void cuandoBuscoUnaPropiedad(DatosBusqueda datosBusqueda) {
-        servicioPropiedades.buscarPropiedadPorUbicacion(datosBusqueda);
-    }
-
-    private void dadoQueExisteUnaListaDePropiedades(int cantidad, String ubicacion) {
+    private List<Propiedad> givenExistenPropiedades(int cantidad){
         List<Propiedad> lista = new LinkedList<>();
         for(int i = 0 ; i < cantidad; i++) {
             lista.add(new Propiedad());
         }
+        return lista;
+    }
 
-        when(repositorio.buscarPropiedad(datosBusqueda)).thenReturn(lista);
+    @Test(expected = PropiedadNoEncontrada.class)
+    public void alBuscarUnaPropiedadQueNoExisteDeberanDeArrojarUnaExcepcion() throws PropiedadNoEncontrada {
+
+        dadoQueNoExisteUnaListaDePropiedades();
+        cuandoBuscoUnaPropiedad(datosBusqueda);
+
+    }
+
+    private void dadoQueNoExisteUnaListaDePropiedades() {
+    }
+    
+    @Test
+    public void solicitarDetalleDePropiedadMedianteNumeroId(){
+        
+        dadoQueExisteUnaPropiedad();
+        
+        Propiedad resultado = cuandoSolicitoVerDetalle();
+
+        entoncesSeObtieneElDetalleDeLaPropiedad(resultado);
+        
+    }
+
+    private void entoncesSeObtieneElDetalleDeLaPropiedad(Propiedad resultado) {
+        assertThat(resultado.getId()).isEqualTo(ID_PROPIEDAD);
+    }
+
+    private Propiedad cuandoSolicitoVerDetalle() {
+        return servicioPropiedades.verDetallePropiedad(ID_PROPIEDAD);
+
+    }
+
+    private void dadoQueExisteUnaPropiedad() {
+        Propiedad propiedad = new Propiedad(ID_PROPIEDAD, detallePropiedad);
+        when(repositorio.buscarDetallePropiedad(ID_PROPIEDAD)).thenReturn(propiedad);
 
     }
 

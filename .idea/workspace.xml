@@ -57,6 +57,7 @@
         <option value="CSS File" />
         <option value="Jsp File" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -72,6 +73,7 @@
   <component name="JpbToolWindowState">
     <option name="myId2FirstActivated">
       <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
         <entry key="com.haulmont.jpb.jpaPalette" value="true" />
         <entry key="com.haulmont.jpb.jpaStructure" value="true" />
       </map>
@@ -109,24 +111,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;11&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Programas/IdeaProjects/proyect-kentprop/src/main/java/ar/edu/unlam/tallerweb1/controladores&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;806e0e1b02fee36e3bf3e8d0e553ddf4&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "11",
+    "last_opened_file_path": "D:/Programas/IdeaProjects/asd",
+    "list.type.of.created.stylesheet": "CSS",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "spring.configuration.checksum": "806e0e1b02fee36e3bf3e8d0e553ddf4"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="ar.edu.unlam.tallerweb1.modelo" />
+      <recent name="ar.edu.unlam.tallerweb1.excepciones" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Programas\IdeaProjects\proyect-kentprop\src\main\java\ar\edu\unlam\tallerweb1\controladores" />
     </key>
@@ -138,38 +144,23 @@
       <recent name="ar.edu.unlam.tallerweb1.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ServicioPropiedadesTest.queAlBuscarUnaPropiedadPorDatosDeBusquedaDeberaTraerObjetoPropiedad">
-    <configuration name="ControladorPropiedadesTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="project-kentprop" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ar.edu.unlam.tallerweb1.controladores.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="ar.edu.unlam.tallerweb1.controladores" />
-      <option name="MAIN_CLASS_NAME" value="ar.edu.unlam.tallerweb1.controladores.ControladorPropiedadesTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.ServicioPropiedadesTest">
     <configuration name="ControladorPropiedadesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="proyect-kentprop" />
+      <module name="project-kentprop" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ar.edu.unlam.tallerweb1.controladores.*" />
+          <option name="PATTERN" value="ar.edu.unlam.tallerweb1.modelo.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="ar.edu.unlam.tallerweb1.controller" />
+      <option name="PACKAGE_NAME" value="ar.edu.unlam.tallerweb1.controladores" />
       <option name="MAIN_CLASS_NAME" value="ar.edu.unlam.tallerweb1.controladores.ControladorPropiedadesTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ControladorPropiedadesTest.alBuscarUnaUbicacionExistenteDeberiaDevolvermeLaListaDePropiedades" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ControladorPropiedadesTest.alSeleccionarVerDetalleMeTraeLaVistaDetalle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="project-kentprop" />
       <extension name="coverage">
         <pattern>
@@ -179,23 +170,38 @@
       </extension>
       <option name="PACKAGE_NAME" value="ar.edu.unlam.tallerweb1.controladores" />
       <option name="MAIN_CLASS_NAME" value="ar.edu.unlam.tallerweb1.controladores.ControladorPropiedadesTest" />
-      <option name="METHOD_NAME" value="alBuscarUnaUbicacionExistenteDeberiaDevolvermeLaListaDePropiedades" />
+      <option name="METHOD_NAME" value="alSeleccionarVerDetalleMeTraeLaVistaDetalle" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ControladorPropiedadesTest.alBuscarUnaUbicacionInexistenteDeberiaDevolvermeMensajeDeError" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ServicioPropiedadesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="project-kentprop" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ar.edu.unlam.tallerweb1.controladores.*" />
+          <option name="PATTERN" value="ar.edu.unlam.tallerweb1.servicios.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="ar.edu.unlam.tallerweb1.controladores" />
-      <option name="MAIN_CLASS_NAME" value="ar.edu.unlam.tallerweb1.controladores.ControladorPropiedadesTest" />
-      <option name="METHOD_NAME" value="alBuscarUnaUbicacionInexistenteDeberiaDevolvermeMensajeDeError" />
+      <option name="PACKAGE_NAME" value="ar.edu.unlam.tallerweb1.servicios" />
+      <option name="MAIN_CLASS_NAME" value="ar.edu.unlam.tallerweb1.servicios.ServicioPropiedadesTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServicioPropiedadesTest.alBuscarUnaPropiedadQueNoExisteDeberanDeArrojarUnaExcepcion" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="project-kentprop" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ar.edu.unlam.tallerweb1.servicios.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ar.edu.unlam.tallerweb1.servicios" />
+      <option name="MAIN_CLASS_NAME" value="ar.edu.unlam.tallerweb1.servicios.ServicioPropiedadesTest" />
+      <option name="METHOD_NAME" value="alBuscarUnaPropiedadQueNoExisteDeberanDeArrojarUnaExcepcion" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -318,20 +324,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.ControladorPropiedadesTest.alBuscarUnaUbicacionExistenteDeberiaDevolvermeLaListaDePropiedades" />
-      <item itemvalue="JUnit.ControladorPropiedadesTest.alBuscarUnaUbicacionInexistenteDeberiaDevolvermeMensajeDeError" />
+      <item itemvalue="JUnit.ControladorPropiedadesTest.alSeleccionarVerDetalleMeTraeLaVistaDetalle" />
+      <item itemvalue="JUnit.ServicioPropiedadesTest" />
+      <item itemvalue="JUnit.ServicioPropiedadesTest.alBuscarUnaPropiedadQueNoExisteDeberanDeArrojarUnaExcepcion" />
       <item itemvalue="JUnit.ServicioPropiedadesTest.queAlBuscarUnaPropiedadPorDatosDeBusquedaDeberaTraerObjetoPropiedad" />
       <item itemvalue="JUnit.ControladorPropiedadesTest (1)" />
-      <item itemvalue="JUnit.ControladorPropiedadesTest" />
       <item itemvalue="Tomcat Server.Tomcat 8.5.78" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ServicioPropiedadesTest.queAlBuscarUnaPropiedadPorDatosDeBusquedaDeberaTraerObjetoPropiedad" />
+        <item itemvalue="JUnit.ServicioPropiedadesTest" />
         <item itemvalue="JUnit.ControladorPropiedadesTest (1)" />
-        <item itemvalue="JUnit.ControladorPropiedadesTest.alBuscarUnaUbicacionInexistenteDeberiaDevolvermeMensajeDeError" />
-        <item itemvalue="JUnit.ControladorPropiedadesTest.alBuscarUnaUbicacionExistenteDeberiaDevolvermeLaListaDePropiedades" />
-        <item itemvalue="JUnit.ControladorPropiedadesTest" />
+        <item itemvalue="JUnit.ControladorPropiedadesTest.alSeleccionarVerDetalleMeTraeLaVistaDetalle" />
+        <item itemvalue="JUnit.ServicioPropiedadesTest.alBuscarUnaPropiedadQueNoExisteDeberanDeArrojarUnaExcepcion" />
+        <item itemvalue="JUnit.ServicioPropiedadesTest.queAlBuscarUnaPropiedadPorDatosDeBusquedaDeberaTraerObjetoPropiedad" />
       </list>
     </recent_temporary>
   </component>

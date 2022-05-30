@@ -9,7 +9,6 @@ public class Propiedad {
     private Estatus estatus;
     private Detalle detalle;
 
-
     public Propiedad(Ubicacion ubicacion, Integer id, TipoPropiedad tipoPropiedad, Accion tipoAccion, Estatus estatus, Detalle detalle) {
         this.ubicacion = ubicacion;
         this.id = id;

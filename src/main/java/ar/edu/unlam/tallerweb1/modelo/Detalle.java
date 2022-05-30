@@ -1,7 +1,11 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+import javax.persistence.*;
+
+@Entity @Table(name = "TABLA_DETALLE_PROPIEDAD")
 public class Detalle {
 
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Double metrosCuadrados;
     private Integer cantidadAmbientes;
@@ -19,6 +23,11 @@ public class Detalle {
         this.descripcion = descripcion;
         this.fechaPublicacion = fechaPublicacion;
     }
+
+    public Detalle() {
+
+    }
+
 
     public Integer getId() {
         return id;

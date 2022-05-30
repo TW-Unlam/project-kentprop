@@ -1,7 +1,10 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
-public class Ubicacion {
+import javax.persistence.*;
 
+@Entity @Table(name = "TABLA_UBICACION")
+public class Ubicacion {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String provincia;
     private String localidad;
@@ -15,6 +18,11 @@ public class Ubicacion {
         this.codigoPostal = codigoPostal;
         this.calle = calle;
     }
+
+    public Ubicacion() {
+
+    }
+
 
     public Integer getId() {
         return id;

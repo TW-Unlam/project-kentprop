@@ -82,7 +82,7 @@ public class ServicioPropiedadesTest {
     }
 
     private void dadoQueExisteUnaPropiedad() {
-        Detalle detalle = new Detalle();
+        Detalle detalle = new Detalle(ID_PROPIEDAD);
         when(repositorio.buscarDetallePropiedad(ID_PROPIEDAD)).thenReturn(detalle);
     }
 

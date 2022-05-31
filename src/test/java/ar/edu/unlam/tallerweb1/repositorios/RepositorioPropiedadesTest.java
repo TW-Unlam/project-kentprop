@@ -16,6 +16,7 @@ public class RepositorioPropiedadesTest extends SpringTest {
 
     @Autowired
     private RepositorioPropiedades repositorioPropiedades;
+    private static final Integer ID_BUSCADO = 2;
 
     @Test @Transactional @Rollback
     public void busquedaPropiedadesConDevolucion(){
@@ -61,17 +62,20 @@ public class RepositorioPropiedadesTest extends SpringTest {
     }
 
     @Test @Transactional @Rollback
-    public void datoQueExisteUnaPropiedadDeberiaDevolvermeSuDetalle(){
+    public void obtenerObjetoDetalleAlVerDetalleDeLaPropiedad(){
+
         dadoQueExisteUnaListaDePropiedades();
 
         DatosBusqueda datos = dadoqueExisteUnaBusqueda();
         List<Propiedad> propiedades = repositorioPropiedades.buscarPropiedad(datos);
+        Detalle resultado = repositorioPropiedades.buscarDetallePropiedad(ID_BUSCADO);
 
-        Propiedad primerPropiedadEncontrada = propiedades.get(0);
-        Detalle detallePropiedad = repositorioPropiedades.buscarDetallePropiedad(primerPropiedadEncontrada.getId());
-
+        entoncesMeDevuelveElDetalleDeLaPropiedadConId(propiedades.get(0).getId(), resultado.getId());
     }
 
+    private void entoncesMeDevuelveElDetalleDeLaPropiedadConId(Integer idPropiedad, Integer idDetalle) {
+        assertThat(idPropiedad).isEqualTo(idDetalle);
+    }
 
     private void entoncesNoMeDevuelveNingunaPropiedad(List<Propiedad> propiedades) {
         assertThat(propiedades).hasSize(0);
@@ -97,6 +101,9 @@ public class RepositorioPropiedadesTest extends SpringTest {
         Propiedad propiedadUno = new Propiedad();
         Propiedad propiedadDos = new Propiedad();
 
+        Detalle detalleUno = new Detalle();
+        Detalle detalloDos = new Detalle();
+
         Ubicacion ubicacionDos = new Ubicacion();
         ubicacionDos.setProvincia("Buenos Aires");
         ubicacionDos.setLocalidad("Ramos Mejia");
@@ -104,6 +111,7 @@ public class RepositorioPropiedadesTest extends SpringTest {
         propiedadUno.setUbicacion(ubicacionDos);
         propiedadUno.setTipoPropiedad(TipoPropiedad.CASA);
         propiedadUno.setTipoAccion(Accion.COMPRAR);
+        propiedadUno.setDetalle(detalleUno);
 
         Ubicacion ubicacionUno = new Ubicacion();
         ubicacionUno.setProvincia("Buenos Aires");
@@ -112,7 +120,10 @@ public class RepositorioPropiedadesTest extends SpringTest {
         propiedadDos.setUbicacion(ubicacionUno);
         propiedadDos.setTipoPropiedad(TipoPropiedad.DEPARTAMENTO);
         propiedadDos.setTipoAccion(Accion.ALQUILAR);
+        propiedadDos.setDetalle(detalloDos);
 
+        session().save(detalleUno);
+        session().save(detalloDos);
         session().save(ubicacionUno);
         session().save(ubicacionDos);
         session().save(propiedadUno);

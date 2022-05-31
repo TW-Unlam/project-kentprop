@@ -30,6 +30,10 @@ public class Detalle {
     }
 
 
+    public Detalle(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }

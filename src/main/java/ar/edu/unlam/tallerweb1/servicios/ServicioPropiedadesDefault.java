@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.controladores.DatosBusqueda;
+import ar.edu.unlam.tallerweb1.modelo.Detalle;
 import ar.edu.unlam.tallerweb1.modelo.Propiedad;
 import ar.edu.unlam.tallerweb1.excepciones.PropiedadNoEncontrada;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPropiedades;
@@ -31,8 +32,8 @@ public class ServicioPropiedadesDefault implements ServicioPropiedades {
     }
 
     @Override
-    public Propiedad verDetallePropiedad(Integer id) {
-        Propiedad resultado = repositorioPropiedades.buscarDetallePropiedad(id);
+    public Detalle verDetallePropiedad(Integer id) {
+        Detalle resultado = repositorioPropiedades.buscarDetallePropiedad(id);
         return resultado;
     }
 }

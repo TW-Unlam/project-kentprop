@@ -79,8 +79,8 @@ public class ControladorPropiedadesTest {
     }
 
     private void dadoQueExisteUnaPropiedad() {
-       Propiedad propiedad = new Propiedad(PROPIEDAD_ID,detallePropiedad);
-       when(servicioPropiedades.verDetallePropiedad(PROPIEDAD_ID)).thenReturn(propiedad);
+       Detalle detalle = new Detalle();
+       when(servicioPropiedades.verDetallePropiedad(PROPIEDAD_ID)).thenReturn(detalle);
     }
 
     private void dadoQueTenemosUnaListaDePropiedades(int cantidad) throws PropiedadNoEncontrada{

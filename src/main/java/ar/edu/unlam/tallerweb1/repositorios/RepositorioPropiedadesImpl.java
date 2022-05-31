@@ -1,8 +1,8 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.controladores.DatosBusqueda;
+import ar.edu.unlam.tallerweb1.modelo.Detalle;
 import ar.edu.unlam.tallerweb1.modelo.Propiedad;
-import ar.edu.unlam.tallerweb1.modelo.Ubicacion;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +37,8 @@ public class RepositorioPropiedadesImpl implements RepositorioPropiedades {
     }
 
     @Override
-    public Propiedad buscarDetallePropiedad(Integer id) {
-        return null;
+    public Detalle buscarDetallePropiedad(Integer id) {
+        return sessionFactory.getCurrentSession().get(Detalle.class, id);
     }
 
 }

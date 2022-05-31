@@ -2,7 +2,6 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Accion;
 import ar.edu.unlam.tallerweb1.modelo.TipoPropiedad;
-import ar.edu.unlam.tallerweb1.modelo.Ubicacion;
 
 public class DatosBusqueda {
   private TipoPropiedad tipoPropiedad;

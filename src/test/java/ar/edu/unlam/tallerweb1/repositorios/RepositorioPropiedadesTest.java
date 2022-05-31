@@ -16,7 +16,6 @@ public class RepositorioPropiedadesTest extends SpringTest {
 
     @Autowired
     private RepositorioPropiedades repositorioPropiedades;
-    private static final Integer ID_BUSCADO = 2;
 
     @Test @Transactional @Rollback
     public void busquedaPropiedadesConDevolucion(){
@@ -68,7 +67,7 @@ public class RepositorioPropiedadesTest extends SpringTest {
 
         DatosBusqueda datos = dadoqueExisteUnaBusqueda();
         List<Propiedad> propiedades = repositorioPropiedades.buscarPropiedad(datos);
-        Detalle resultado = repositorioPropiedades.buscarDetallePropiedad(ID_BUSCADO);
+        Detalle resultado = repositorioPropiedades.buscarDetallePropiedad(propiedades.get(0).getId());
 
         entoncesMeDevuelveElDetalleDeLaPropiedadConId(propiedades.get(0).getId(), resultado.getId());
     }

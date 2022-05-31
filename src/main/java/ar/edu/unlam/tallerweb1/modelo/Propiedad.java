@@ -11,7 +11,7 @@ public class Propiedad {
     @ManyToOne @JoinColumn(name = "ubicacion_id")
     private Ubicacion ubicacion;
     private TipoPropiedad tipoPropiedad;
-    private Accion tipoAccion;
+    private Accion tipoAccion; //
     private Estatus estatus;
     @OneToOne @JoinColumn(name = "detalle_id")
     private Detalle detalle;

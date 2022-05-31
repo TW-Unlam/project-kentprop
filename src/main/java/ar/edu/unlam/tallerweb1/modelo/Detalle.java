@@ -10,19 +10,16 @@ public class Detalle {
     private Integer id;
     private Double metrosCuadrados; //Propiedad
     private Integer cantidadAmbientes; //Propiedad
-    private Double precio; //
     private Boolean cochera; //Propiedad
-    private String descripcion; //
-    private LocalDate fechaPublicacion; //
 
-    public Detalle(Integer id, Double metrosCuadrados, Integer cantidadAmbientes, Double precio, Boolean cochera, String descripcion, LocalDate fechaPublicacion) {
+
+
+    public Detalle(Integer id, Double metrosCuadrados, Integer cantidadAmbientes, Boolean cochera) {
         this.id = id;
         this.metrosCuadrados = metrosCuadrados;
         this.cantidadAmbientes = cantidadAmbientes;
-        this.precio = precio;
         this.cochera = cochera;
-        this.descripcion = descripcion;
-        this.fechaPublicacion = fechaPublicacion;
+
     }
 
     public Detalle() {
@@ -58,14 +55,6 @@ public class Detalle {
         this.cantidadAmbientes = cantidadAmbientes;
     }
 
-    public Double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
-
     public Boolean getCochera() {
         return cochera;
     }
@@ -74,19 +63,4 @@ public class Detalle {
         this.cochera = cochera;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public LocalDate getFechaPublicacion() {
-        return fechaPublicacion;
-    }
-
-    public void setFechaPublicacion(LocalDate fechaPublicacion) {
-        this.fechaPublicacion = fechaPublicacion;
-    }
 }

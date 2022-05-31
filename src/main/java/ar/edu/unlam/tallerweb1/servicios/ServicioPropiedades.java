@@ -19,7 +19,6 @@ public interface ServicioPropiedades {
 // Ej: un controlador que depende de un servicio, un servicio de otro servicio, un servicio de un repositorio, etc.
 // Esto se hace para probar solo un objeto y no dos en simultaneo.
 
-
 /* Los metodos que usamos por el mock lo que hacen es que almacena un resultado que cuando son llamados adentro
 del objeto del test, devuelven un resultado esperando.
  */

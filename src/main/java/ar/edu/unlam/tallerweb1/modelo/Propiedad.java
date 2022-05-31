@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 
 @Entity @Table(name = "TABLA_PROPIEDAD")
@@ -9,7 +11,7 @@ public class Propiedad {
     @ManyToOne @JoinColumn(name = "ubicacion_id")
     private Ubicacion ubicacion;
     private TipoPropiedad tipoPropiedad;
-    private Accion tipoAccion;
+    private Accion tipoAccion; //
     private Estatus estatus;
     @OneToOne @JoinColumn(name = "detalle_id")
     private Detalle detalle;

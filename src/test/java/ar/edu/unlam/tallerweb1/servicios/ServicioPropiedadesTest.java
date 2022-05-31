@@ -42,22 +42,6 @@ public class ServicioPropiedadesTest {
 
     }
 
-    private void entoncesSeObtieneTodasLasPropiedades(List<Propiedad> busqueda, int cantidadEsperada) {
-        assertThat(busqueda).hasSize(cantidadEsperada);
-
-    }
-
-    private List<Propiedad> cuandoBuscoUnaPropiedad(DatosBusqueda datosBusqueda) throws PropiedadNoEncontrada {
-        return servicioPropiedades.buscarPropiedadPorUbicacion(datosBusqueda);
-    }
-
-    private void dadoQueExisteUnaListaDePropiedades(int cantidad) {
-        List<Propiedad> lista = givenExistenPropiedades(cantidad);
-
-        when(repositorio.buscarPropiedad(datosBusqueda)).thenReturn(lista);
-
-    }
-
     private List<Propiedad> givenExistenPropiedades(int cantidad){
         List<Propiedad> lista = new LinkedList<>();
         for(int i = 0 ; i < cantidad; i++) {
@@ -98,8 +82,24 @@ public class ServicioPropiedadesTest {
     }
 
     private void dadoQueExisteUnaPropiedad() {
-        Detalle detalle = new Detalle();
+        Detalle detalle = new Detalle(ID_PROPIEDAD);
         when(repositorio.buscarDetallePropiedad(ID_PROPIEDAD)).thenReturn(detalle);
+    }
+
+    private void entoncesSeObtieneTodasLasPropiedades(List<Propiedad> busqueda, int cantidadEsperada) {
+        assertThat(busqueda).hasSize(cantidadEsperada);
+
+    }
+
+    private List<Propiedad> cuandoBuscoUnaPropiedad(DatosBusqueda datosBusqueda) throws PropiedadNoEncontrada {
+        return servicioPropiedades.buscarPropiedadPorUbicacion(datosBusqueda);
+    }
+
+    private void dadoQueExisteUnaListaDePropiedades(int cantidad) {
+        List<Propiedad> lista = givenExistenPropiedades(cantidad);
+
+        when(repositorio.buscarPropiedad(datosBusqueda)).thenReturn(lista);
+
     }
 
 

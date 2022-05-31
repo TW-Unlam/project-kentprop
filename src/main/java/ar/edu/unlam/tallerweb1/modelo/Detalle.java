@@ -8,12 +8,12 @@ public class Detalle {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Double metrosCuadrados;
-    private Integer cantidadAmbientes;
-    private Double precio;
-    private Boolean cochera;
-    private String descripcion;
-    private LocalDate fechaPublicacion;
+    private Double metrosCuadrados; //Propiedad
+    private Integer cantidadAmbientes; //Propiedad
+    private Double precio; //
+    private Boolean cochera; //Propiedad
+    private String descripcion; //
+    private LocalDate fechaPublicacion; //
 
     public Detalle(Integer id, Double metrosCuadrados, Integer cantidadAmbientes, Double precio, Boolean cochera, String descripcion, LocalDate fechaPublicacion) {
         this.id = id;
@@ -29,6 +29,10 @@ public class Detalle {
 
     }
 
+
+    public Detalle(Integer id) {
+        this.id = id;
+    }
 
     public Integer getId() {
         return id;

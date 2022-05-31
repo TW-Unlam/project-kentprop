@@ -1,23 +1,36 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.Accion;
+import ar.edu.unlam.tallerweb1.modelo.TipoPropiedad;
+import ar.edu.unlam.tallerweb1.modelo.Ubicacion;
+
 public class DatosBusqueda {
-  private String tipoPropiedad;
-  private String tipoAccion;
+  private TipoPropiedad tipoPropiedad;
+  private Accion tipoAccion;
   private String ubicacion;
 
-  public String getTipoPropiedad() {
+  public DatosBusqueda(TipoPropiedad tipoPropiedad, Accion tipoAccion, String ubicacion) {
+    this.tipoPropiedad = tipoPropiedad;
+    this.tipoAccion = tipoAccion;
+    this.ubicacion = ubicacion;
+  }
+
+  public DatosBusqueda() {
+  }
+
+  public TipoPropiedad getTipoPropiedad() {
     return tipoPropiedad;
   }
 
-  public void setTipoPropiedad(String tipoPropiedad) {
+  public void setTipoPropiedad(TipoPropiedad tipoPropiedad) {
     this.tipoPropiedad = tipoPropiedad;
   }
 
-  public String getTipoAccion() {
+  public Accion getTipoAccion() {
     return tipoAccion;
   }
 
-  public void setTipoAccion(String tipoAccion) {
+  public void setTipoAccion(Accion tipoAccion) {
     this.tipoAccion = tipoAccion;
   }
 

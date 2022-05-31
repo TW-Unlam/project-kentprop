@@ -8,15 +8,13 @@ public class Ubicacion {
     private Integer id;
     private String provincia;
     private String localidad;
-    private String codigoPostal;
-    private String calle;
 
-    public Ubicacion(Integer id, String provincia, String localidad, String codigoPostal, String calle) {
+
+    public Ubicacion(Integer id, String provincia, String localidad) {
         this.id = id;
         this.provincia = provincia;
         this.localidad = localidad;
-        this.codigoPostal = codigoPostal;
-        this.calle = calle;
+
     }
 
     public Ubicacion() {
@@ -48,19 +46,4 @@ public class Ubicacion {
         this.localidad = localidad;
     }
 
-    public String getCodigoPostal() {
-        return codigoPostal;
-    }
-
-    public void setCodigoPostal(String codigoPostal) {
-        this.codigoPostal = codigoPostal;
-    }
-
-    public String getCalle() {
-        return calle;
-    }
-
-    public void setCalle(String calle) {
-        this.calle = calle;
-    }
 }

@@ -52,10 +52,6 @@ public class ServicioPropiedadesTest {
     }
 
     private void dadoQueExisteUnaListaDePropiedades(int cantidad) {
-        datosBusqueda.setTipoPropiedad("Departamento");
-        datosBusqueda.setTipoAccion("Alquilar");
-        datosBusqueda.setUbicacion("Ramos");
-
         List<Propiedad> lista = givenExistenPropiedades(cantidad);
 
         when(repositorio.buscarPropiedad(datosBusqueda)).thenReturn(lista);
@@ -86,25 +82,24 @@ public class ServicioPropiedadesTest {
         
         dadoQueExisteUnaPropiedad();
         
-        Propiedad resultado = cuandoSolicitoVerDetalle();
+        Detalle resultado = cuandoSolicitoVerDetalle();
 
         entoncesSeObtieneElDetalleDeLaPropiedad(resultado);
         
     }
 
-    private void entoncesSeObtieneElDetalleDeLaPropiedad(Propiedad resultado) {
+    private void entoncesSeObtieneElDetalleDeLaPropiedad(Detalle resultado) {
         assertThat(resultado.getId()).isEqualTo(ID_PROPIEDAD);
     }
 
-    private Propiedad cuandoSolicitoVerDetalle() {
+    private Detalle cuandoSolicitoVerDetalle() {
         return servicioPropiedades.verDetallePropiedad(ID_PROPIEDAD);
 
     }
 
     private void dadoQueExisteUnaPropiedad() {
-        Propiedad propiedad = new Propiedad(ID_PROPIEDAD, detallePropiedad);
-        when(repositorio.buscarDetallePropiedad(ID_PROPIEDAD)).thenReturn(propiedad);
-
+        Detalle detalle = new Detalle();
+        when(repositorio.buscarDetallePropiedad(ID_PROPIEDAD)).thenReturn(detalle);
     }
 
 

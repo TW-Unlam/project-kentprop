@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity @Table(name = "TABLA_DETALLE_PROPIEDAD")
 public class Detalle {
@@ -12,9 +13,9 @@ public class Detalle {
     private Double precio;
     private Boolean cochera;
     private String descripcion;
-    private String fechaPublicacion;
+    private LocalDate fechaPublicacion;
 
-    public Detalle(Integer id, Double metrosCuadrados, Integer cantidadAmbientes, Double precio, Boolean cochera, String descripcion, String fechaPublicacion) {
+    public Detalle(Integer id, Double metrosCuadrados, Integer cantidadAmbientes, Double precio, Boolean cochera, String descripcion, LocalDate fechaPublicacion) {
         this.id = id;
         this.metrosCuadrados = metrosCuadrados;
         this.cantidadAmbientes = cantidadAmbientes;
@@ -77,11 +78,11 @@ public class Detalle {
         this.descripcion = descripcion;
     }
 
-    public String getFechaPublicacion() {
+    public LocalDate getFechaPublicacion() {
         return fechaPublicacion;
     }
 
-    public void setFechaPublicacion(String fechaPublicacion) {
+    public void setFechaPublicacion(LocalDate fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
 }

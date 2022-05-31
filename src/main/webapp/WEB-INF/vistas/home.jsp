@@ -13,7 +13,9 @@
 	<body>
 		<div class = "home-container">
 			<div class="search-container">
-<%--				<div class="search-container_img"></div>--%>
+				<div class="search-container_img">
+					<img src="images/kentprop-logo.png" alt="KentProp logo">
+				</div>
 				<div>
 					<form:form action="buscar-propiedades" method="POST" modelAttribute="datosBusqueda">
 						<form:input path="ubicacion" id="ubicacion" type="text" class="form-control" />

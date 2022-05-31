@@ -11,54 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="cfba70e5-4b8d-4471-952f-7f9d5e210aa4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/project_kentprop/WEB-INF/classes/ar/edu/unlam/tallerweb1/controladores/ControladorPropiedades.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/project_kentprop/WEB-INF/classes/ar/edu/unlam/tallerweb1/controladores/ControladorPropiedades.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/project_kentprop/WEB-INF/classes/ar/edu/unlam/tallerweb1/controladores/Propiedad.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/project_kentprop/WEB-INF/classes/ar/edu/unlam/tallerweb1/servicios/ServicioPropiedades.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/project_kentprop/WEB-INF/classes/ar/edu/unlam/tallerweb1/servicios/ServicioPropiedades.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/project_kentprop/WEB-INF/classes/ar/edu/unlam/tallerweb1/servicios/ServicioPropiedadesDefault.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/project_kentprop/WEB-INF/classes/ar/edu/unlam/tallerweb1/servicios/ServicioPropiedadesDefault.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/project_kentprop/WEB-INF/vistas/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/project_kentprop/WEB-INF/vistas/home.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/project_kentprop/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/project_kentprop/css/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/DatosBusqueda.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/DatosBusqueda.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/modelo/Detalle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/modelo/Detalle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/modelo/Ubicacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/modelo/Ubicacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/repositorios/RepositorioPropiedades.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/repositorios/RepositorioPropiedades.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/repositorios/RepositorioPropiedadesImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/repositorios/RepositorioPropiedadesImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernateContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernateContext.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/spring-servlet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spring-servlet.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ar/edu/unlam/tallerweb1/controladores/ControladorPropiedadesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ar/edu/unlam/tallerweb1/controladores/ControladorPropiedadesTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ar/edu/unlam/tallerweb1/servicios/ServicioPropiedadesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ar/edu/unlam/tallerweb1/servicios/ServicioPropiedadesTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/test-hibernateContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/test-hibernateContext.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/applicationContext.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/controladores/ControladorLogin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/controladores/ControladorPropiedades.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/controladores/DatosBusqueda.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/controladores/DatosLogin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/excepciones/PropiedadNoEncontrada.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/modelo/Accion.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/modelo/Detalle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/modelo/Estatus.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/modelo/Propiedad.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/modelo/TipoPropiedad.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/modelo/Ubicacion.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/modelo/Usuario.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/repositorios/RepositorioPropiedades.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/repositorios/RepositorioPropiedadesImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/repositorios/RepositorioUsuario.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/repositorios/RepositorioUsuarioImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/servicios/ServicioLogin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/servicios/ServicioLoginImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/servicios/ServicioPropiedades.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ar/edu/unlam/tallerweb1/servicios/ServicioPropiedadesDefault.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hibernateContext.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/log4j.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/spring-servlet.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/ar/edu/unlam/tallerweb1/SpringTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/ar/edu/unlam/tallerweb1/controladores/ControladorPropiedadesTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/ar/edu/unlam/tallerweb1/persistencia/ConexionBaseDeDatosTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/ar/edu/unlam/tallerweb1/servicios/ServicioPropiedadesTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/log4j.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/test-applicationContext.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/test-hibernateContext.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +113,7 @@
       <recent name="ar.edu.unlam.tallerweb1.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ControladorPropiedadesTest">
+  <component name="RunManager" selected="JUnit.ServicioPropiedadesTest">
     <configuration name="ControladorPropiedadesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="project-kentprop" />
       <extension name="coverage">
@@ -334,11 +288,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ServicioPropiedadesTest" />
         <item itemvalue="JUnit.ControladorPropiedadesTest" />
         <item itemvalue="JUnit.RepositorioPropiedadesTest" />
         <item itemvalue="JUnit.RepositorioPropiedadesTest.realizarUnaBusquedaConDatosDeBusquedaInexistentes" />
         <item itemvalue="JUnit.RepositorioPropiedadesTest.busquedaPropiedadesDevuelvePor" />
-        <item itemvalue="JUnit.ServicioPropiedadesTest" />
       </list>
     </recent_temporary>
   </component>

@@ -11,12 +11,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class RepositorioPropiedadesImpl implements RepositorioPropiedades{
+public class RepositorioPropiedadesImpl implements RepositorioPropiedades {
 
     private final SessionFactory sessionFactory;
 
     @Autowired
-    public RepositorioPropiedadesImpl(SessionFactory sessionFactory){
+    public RepositorioPropiedadesImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
@@ -26,17 +26,19 @@ public class RepositorioPropiedadesImpl implements RepositorioPropiedades{
                 .createCriteria(Propiedad.class)
                 .createAlias("ubicacion", "ubi")
                 .add(Restrictions.or(
-                        Restrictions.like("ubi.localidad",datosBusqueda.getUbicacion()),
-                        Restrictions.like("ubi.provincia",datosBusqueda.getUbicacion()))
+                        Restrictions.like("ubi.localidad", datosBusqueda.getUbicacion()),
+                        Restrictions.like("ubi.provincia", datosBusqueda.getUbicacion()))
                 )
-                .add(Restrictions.eq("tipoPropiedad",datosBusqueda.getTipoPropiedad()))
+                .add(Restrictions.eq("tipoPropiedad", datosBusqueda.getTipoPropiedad()))
                 .add(Restrictions.eq("tipoAccion", datosBusqueda.getTipoAccion()))
                 .list();
 
 
     }
+
     @Override
     public Propiedad buscarDetallePropiedad(Integer id) {
         return null;
     }
+
 }

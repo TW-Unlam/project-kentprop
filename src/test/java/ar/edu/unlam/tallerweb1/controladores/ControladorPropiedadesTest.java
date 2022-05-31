@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.controladores;
 import ar.edu.unlam.tallerweb1.excepciones.PropiedadNoEncontrada;
 import ar.edu.unlam.tallerweb1.modelo.Detalle;
 import ar.edu.unlam.tallerweb1.modelo.Propiedad;
+import ar.edu.unlam.tallerweb1.modelo.TipoPropiedad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPropiedades;
 import org.junit.Before;
 import org.junit.Test;
@@ -83,9 +84,6 @@ public class ControladorPropiedadesTest {
     }
 
     private void dadoQueTenemosUnaListaDePropiedades(int cantidad) throws PropiedadNoEncontrada{
-        datosBusqueda.setTipoPropiedad("Departamento");
-        datosBusqueda.setTipoAccion("Alquilar");
-        datosBusqueda.setUbicacion("Ramos");
         List<Propiedad> lista = new LinkedList<>();
         for(int i = 0 ; i < cantidad; i++){
             lista.add(new Propiedad());

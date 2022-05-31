@@ -52,10 +52,6 @@ public class ServicioPropiedadesTest {
     }
 
     private void dadoQueExisteUnaListaDePropiedades(int cantidad) {
-        datosBusqueda.setTipoPropiedad("Departamento");
-        datosBusqueda.setTipoAccion("Alquilar");
-        datosBusqueda.setUbicacion("Ramos");
-
         List<Propiedad> lista = givenExistenPropiedades(cantidad);
 
         when(repositorio.buscarPropiedad(datosBusqueda)).thenReturn(lista);

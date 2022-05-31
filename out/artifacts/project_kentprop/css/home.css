@@ -1,7 +1,6 @@
 .home-container {
     height: 100%;
-    background: url("../images/home-bg.png");
-    background-size: cover;
+    background: url("/images/home-bg.png") #adc7de;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -9,14 +9,11 @@
 	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 		<link href="css/general.css" rel="stylesheet">
 		<link href="css/home.css" rel="stylesheet">
-		<title>Kent Propiedades</title>
 	</head>
 	<body>
 		<div class = "home-container">
 			<div class="search-container">
-			<div class="search-container_img">
-				<img src="/images/kentprop-logo.png">
-			</div>
+<%--				<div class="search-container_img"></div>--%>
 				<div>
 					<form:form action="buscar-propiedades" method="POST" modelAttribute="datosBusqueda">
 						<form:input path="ubicacion" id="ubicacion" type="text" class="form-control" />

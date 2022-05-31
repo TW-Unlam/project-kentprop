@@ -52,11 +52,6 @@ public class RepositorioPropiedadesTest extends SpringTest {
 
     }
 
-    @Test @Transactional @Rollback
-    public void a(){
-
-    }
-
     private DatosBusqueda dadoqueExisteUnaBusquedaInexistente() {
         DatosBusqueda datos = new DatosBusqueda();
         datos.setTipoPropiedad(TipoPropiedad.DEPARTAMENTO);
@@ -64,6 +59,19 @@ public class RepositorioPropiedadesTest extends SpringTest {
         datos.setUbicacion("Puerta de Hierro");
         return datos;
     }
+
+    @Test @Transactional @Rollback
+    public void datoQueExisteUnaPropiedadDeberiaDevolvermeSuDetalle(){
+        dadoQueExisteUnaListaDePropiedades();
+
+        DatosBusqueda datos = dadoqueExisteUnaBusqueda();
+        List<Propiedad> propiedades = repositorioPropiedades.buscarPropiedad(datos);
+
+        Propiedad primerPropiedadEncontrada = propiedades.get(0);
+        Detalle detallePropiedad = repositorioPropiedades.buscarDetallePropiedad(primerPropiedadEncontrada.getId());
+
+    }
+
 
     private void entoncesNoMeDevuelveNingunaPropiedad(List<Propiedad> propiedades) {
         assertThat(propiedades).hasSize(0);

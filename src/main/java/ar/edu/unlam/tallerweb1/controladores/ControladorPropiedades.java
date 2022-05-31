@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.Detalle;
 import ar.edu.unlam.tallerweb1.modelo.Propiedad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPropiedades;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class ControladorPropiedades {
 
     public ModelAndView verDetalle(Integer id) {
         ModelMap modelo = new ModelMap();
-        Propiedad resultado = new Propiedad();
+        Detalle resultado = new Detalle();
         try{
             resultado = servicioPropiedades.verDetallePropiedad(id);
         }catch(Exception e){

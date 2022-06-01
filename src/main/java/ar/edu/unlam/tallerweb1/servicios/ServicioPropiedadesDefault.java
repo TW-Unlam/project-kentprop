@@ -4,6 +4,7 @@ import ar.edu.unlam.tallerweb1.controladores.DatosBusqueda;
 import ar.edu.unlam.tallerweb1.modelo.Detalle;
 import ar.edu.unlam.tallerweb1.modelo.Propiedad;
 import ar.edu.unlam.tallerweb1.excepciones.PropiedadNoEncontrada;
+import ar.edu.unlam.tallerweb1.modelo.Publicacion;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPropiedades;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,8 @@ public class ServicioPropiedadesDefault implements ServicioPropiedades {
     }
 
     @Override
-    public List<Propiedad> buscarPropiedadPorUbicacion(DatosBusqueda datosBusqueda) throws PropiedadNoEncontrada{
-        List<Propiedad> lista = repositorioPropiedades.buscarPropiedad(datosBusqueda);
+    public List<Publicacion> buscarPublicacion(DatosBusqueda datosBusqueda) throws PropiedadNoEncontrada{
+        List<Publicacion> lista = repositorioPropiedades.buscarPropiedad(datosBusqueda);
         if(lista.isEmpty()){
             throw new PropiedadNoEncontrada();
         }else{
@@ -32,8 +33,8 @@ public class ServicioPropiedadesDefault implements ServicioPropiedades {
     }
 
     @Override
-    public Detalle verDetallePropiedad(Integer id) {
-        Detalle resultado = repositorioPropiedades.buscarDetallePropiedad(id);
+    public Publicacion verDetallePublicacion(Integer id) {
+        Publicacion resultado = repositorioPropiedades.buscarDetallePropiedad(id);
         return resultado;
     }
 }

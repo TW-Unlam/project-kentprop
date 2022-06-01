@@ -23,7 +23,7 @@ public class RepositorioPropiedadesTest extends SpringTest {
         dadoQueExisteUnaListaDePropiedades();
 
         DatosBusqueda datos = dadoqueExisteUnaBusqueda();
-        List<Propiedad> propiedades = repositorioPropiedades.buscarPropiedad(datos);
+        List<Publicacion> propiedades = repositorioPropiedades.buscarPropiedad(datos);
 
         entoncesMeDevuelveUnaPropiedad(propiedades);
     }
@@ -34,7 +34,7 @@ public class RepositorioPropiedadesTest extends SpringTest {
         dadoQueNoExisteUnaListaDePropiedades();
 
         DatosBusqueda datos = dadoqueExisteUnaBusqueda();
-        List<Propiedad> propiedades = repositorioPropiedades.buscarPropiedad(datos);
+        List<Publicacion> propiedades = repositorioPropiedades.buscarPropiedad(datos);
 
         entoncesNoMeDevuelveNingunaPropiedad(propiedades);
 
@@ -46,7 +46,7 @@ public class RepositorioPropiedadesTest extends SpringTest {
         dadoQueExisteUnaListaDePropiedades();
 
         DatosBusqueda datos = dadoqueExisteUnaBusquedaInexistente();
-        List<Propiedad> propiedades = repositorioPropiedades.buscarPropiedad(datos);
+        List<Publicacion> propiedades = repositorioPropiedades.buscarPropiedad(datos);
 
         entoncesNoMeDevuelveNingunaPropiedad(propiedades);
 
@@ -66,8 +66,8 @@ public class RepositorioPropiedadesTest extends SpringTest {
         dadoQueExisteUnaListaDePropiedades();
 
         DatosBusqueda datos = dadoqueExisteUnaBusqueda();
-        List<Propiedad> propiedades = repositorioPropiedades.buscarPropiedad(datos);
-        Detalle resultado = repositorioPropiedades.buscarDetallePropiedad(propiedades.get(0).getId());
+        List<Publicacion> propiedades = repositorioPropiedades.buscarPropiedad(datos);
+        Publicacion resultado = repositorioPropiedades.buscarDetallePropiedad(propiedades.get(0).getId());
 
         entoncesMeDevuelveElDetalleDeLaPropiedadConId(propiedades.get(0).getId(), resultado.getId());
     }
@@ -76,14 +76,14 @@ public class RepositorioPropiedadesTest extends SpringTest {
         assertThat(idPropiedad).isEqualTo(idDetalle);
     }
 
-    private void entoncesNoMeDevuelveNingunaPropiedad(List<Propiedad> propiedades) {
+    private void entoncesNoMeDevuelveNingunaPropiedad(List<Publicacion> propiedades) {
         assertThat(propiedades).hasSize(0);
     }
 
     private void dadoQueNoExisteUnaListaDePropiedades() {
     }
 
-    private void entoncesMeDevuelveUnaPropiedad(List<Propiedad> propiedades) {
+    private void entoncesMeDevuelveUnaPropiedad(List<Publicacion> propiedades) {
         assertThat(propiedades).hasSize(1);
     }
 
@@ -109,7 +109,6 @@ public class RepositorioPropiedadesTest extends SpringTest {
 
         propiedadUno.setUbicacion(ubicacionDos);
         propiedadUno.setTipoPropiedad(TipoPropiedad.CASA);
-        propiedadUno.setTipoAccion(Accion.COMPRAR);
         propiedadUno.setDetalle(detalleUno);
 
         Ubicacion ubicacionUno = new Ubicacion();
@@ -118,7 +117,6 @@ public class RepositorioPropiedadesTest extends SpringTest {
 
         propiedadDos.setUbicacion(ubicacionUno);
         propiedadDos.setTipoPropiedad(TipoPropiedad.DEPARTAMENTO);
-        propiedadDos.setTipoAccion(Accion.ALQUILAR);
         propiedadDos.setDetalle(detalloDos);
 
         session().save(detalleUno);

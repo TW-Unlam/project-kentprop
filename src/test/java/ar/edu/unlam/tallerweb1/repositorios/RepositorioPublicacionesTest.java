@@ -1,7 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.SpringTest;
-import ar.edu.unlam.tallerweb1.controladores.DatosBusqueda;
 import ar.edu.unlam.tallerweb1.modelo.*;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,9 @@ public class RepositorioPublicacionesTest extends SpringTest {
 
         dadoQueExisteUnaListaDePublicaciones();
 
-        List<Publicacion> propiedades = repositorioPublicaciones.buscarPublicaciones(ACCION_EXISTENTE, TIPO_EXISTENTE, DESCRIPCION_EXISTENTE);
+        List<Publicacion> propiedades = repositorioPublicaciones.buscarPublicaciones(ACCION_EXISTENTE,
+                TIPO_EXISTENTE,
+                DESCRIPCION_EXISTENTE);
 
         entoncesMeDevuelveUnaListaDePublicacionesQueCoinciden(propiedades);
     }
@@ -37,13 +38,13 @@ public class RepositorioPublicacionesTest extends SpringTest {
     @Test @Transactional @Rollback
     public void busquedaPublicacionesSinDevolucion(){
 
-        dadoQueNoExisteUnaListaDePropiedades();
+        dadoQueNoExisteUnaListaDePublicaciones();
         
-        List<Publicacion> propiedades = repositorioPublicaciones.buscarPublicaciones(ACCION_EXISTENTE,
+        List<Publicacion> publicaciones = repositorioPublicaciones.buscarPublicaciones(ACCION_EXISTENTE,
                 TIPO_EXISTENTE,
                 DESCRIPCION_EXISTENTE);
 
-        entoncesNoMeDevuelveNingunaPropiedad(propiedades);
+        entoncesNoMeDevuelveNingunaPublicacion(publicaciones);
 
     }
 
@@ -56,12 +57,12 @@ public class RepositorioPublicacionesTest extends SpringTest {
                 TIPO_INEXISTENTE,
                 DESCRIPCION_INEXISTENTE);
 
-        entoncesNoMeDevuelveNingunaPropiedad(propiedades);
+        entoncesNoMeDevuelveNingunaPublicacion(propiedades);
 
     }
 
     @Test @Transactional @Rollback
-    public void obtenerObjetoDetalleAlVerDetalleDeLaPropiedad(){
+    public void obtenerElObjetoPropiedadAlVerDetalleDeLaPublicacion(){
         dadoQueExisteUnaListaDePublicaciones();
         
         List<Publicacion> propiedades = repositorioPublicaciones.buscarPublicaciones(ACCION_EXISTENTE, TIPO_EXISTENTE, DESCRIPCION_EXISTENTE);
@@ -74,11 +75,11 @@ public class RepositorioPublicacionesTest extends SpringTest {
         assertThat(idPropiedad).isEqualTo(idDetalle);
     }
 
-    private void entoncesNoMeDevuelveNingunaPropiedad(List<Publicacion> propiedades) {
+    private void entoncesNoMeDevuelveNingunaPublicacion(List<Publicacion> propiedades) {
         assertThat(propiedades).hasSize(0);
     }
 
-    private void dadoQueNoExisteUnaListaDePropiedades() {
+    private void dadoQueNoExisteUnaListaDePublicaciones() {
     }
 
     private void entoncesMeDevuelveUnaListaDePublicacionesQueCoinciden(List<Publicacion> propiedades) {

@@ -16,11 +16,18 @@
 				<div class="search-container_img">
 					<img src="images/kentprop-logo.png" alt="KentProp logo">
 				</div>
-				<div>
-					<form:form action="buscar-propiedades" method="POST" modelAttribute="datosBusqueda">
-						<form:input path="ubicacion" id="ubicacion" type="text" class="form-control" />
+				<div class="search">
+					<form:form action="buscar-publicaciones" method="POST" modelAttribute="datosBusqueda" class="search_form">
+						<form:select path="tipoPropiedad">
+							<form:options items="${tipoPropiedades}"></form:options>
+						</form:select>
+						<form:select path="tipoAccion">
+							<form:options items="${tipoAcciones}"></form:options>
+						</form:select>
 
-						<button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Login</button>
+						<form:input required="required" path="ubicacion" placeholder="Buscar por provincio o localidad" id="ubicacion" type="text" class="form-control" />
+
+						<button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Buscar</button>
 					</form:form>
 				</div>
 			</div>

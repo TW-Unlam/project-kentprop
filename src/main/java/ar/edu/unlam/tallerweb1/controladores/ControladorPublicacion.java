@@ -1,6 +1,8 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.Accion;
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
+import ar.edu.unlam.tallerweb1.modelo.TipoPropiedad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,8 @@ public class ControladorPublicacion {
     {
         ModelMap modelo = new ModelMap();
         modelo.put("datosBusqueda", new DatosBusqueda());
+        modelo.put("tipoPropiedades", TipoPropiedad.values());
+        modelo.put("tipoAcciones", Accion.values());
         return new ModelAndView("home", modelo);
     }
 
@@ -41,7 +45,8 @@ public class ControladorPublicacion {
             modelo.put("msg-error", "No se encontraron publicaciones con estos datos");
         }
         modelo.put("publicaciones", resultado);
-        return new ModelAndView("lista-publicaciones", modelo);
+
+        return new ModelAndView("redirect:/lista-publicaciones", modelo);
     }
 
     public ModelAndView verDetallePublicacion(Integer id) {
@@ -54,5 +59,10 @@ public class ControladorPublicacion {
         }
         modelo.put("detalle", resultado);
         return new ModelAndView("detalle-publicacion", modelo);
+    }
+
+    @RequestMapping(path = "/lista-publicaciones")
+    public ModelAndView irAListaDePublicaciones() {
+        return new ModelAndView("lista-publicaciones");
     }
 }

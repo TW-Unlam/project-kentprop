@@ -11,6 +11,7 @@
     <title>Lista publicaciones</title>
 </head>
 <body>
-
+    <h1>HOLA</h1>
+    ${publicaciones}
 </body>
 </html>

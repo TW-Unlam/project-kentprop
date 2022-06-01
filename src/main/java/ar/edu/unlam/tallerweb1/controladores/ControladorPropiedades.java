@@ -1,7 +1,9 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.Accion;
 import ar.edu.unlam.tallerweb1.modelo.Detalle;
 import ar.edu.unlam.tallerweb1.modelo.Propiedad;
+import ar.edu.unlam.tallerweb1.modelo.TipoPropiedad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPropiedades;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,8 @@ public class ControladorPropiedades {
     {
         ModelMap modelo = new ModelMap();
         modelo.put("datosBusqueda", new DatosBusqueda());
+        modelo.put("tipoPropiedades", TipoPropiedad.values());
+        modelo.put("tipoAcciones", Accion.values());
         return new ModelAndView("home", modelo);
     }
 

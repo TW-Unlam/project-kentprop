@@ -2,8 +2,8 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.controladores.DatosBusqueda;
 import ar.edu.unlam.tallerweb1.modelo.Detalle;
-import ar.edu.unlam.tallerweb1.modelo.Propiedad;
 import ar.edu.unlam.tallerweb1.excepciones.PropiedadNoEncontrada;
+import ar.edu.unlam.tallerweb1.modelo.Publicacion;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPropiedades;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,16 +36,16 @@ public class ServicioPropiedadesTest {
     public void queAlBuscarUnaPropiedadPorDatosDeBusquedaDeberaTraerObjetoPropiedad() throws PropiedadNoEncontrada{
         dadoQueExisteUnaListaDePropiedades(3);
 
-        List<Propiedad> busqueda = cuandoBuscoUnaPropiedad(datosBusqueda);
+        List<Publicacion> busqueda = cuandoBuscoUnaPropiedad(datosBusqueda);
 
         entoncesSeObtieneTodasLasPropiedades(busqueda,3);
 
     }
 
-    private List<Propiedad> givenExistenPropiedades(int cantidad){
-        List<Propiedad> lista = new LinkedList<>();
+    private List<Publicacion> givenExistenPropiedades(int cantidad){
+        List<Publicacion> lista = new LinkedList<>();
         for(int i = 0 ; i < cantidad; i++) {
-            lista.add(new Propiedad());
+            lista.add(new Publicacion());
         }
         return lista;
     }
@@ -66,37 +66,37 @@ public class ServicioPropiedadesTest {
         
         dadoQueExisteUnaPropiedad();
         
-        Detalle resultado = cuandoSolicitoVerDetalle();
+        Publicacion resultado = cuandoSolicitoVerDetalle();
 
         entoncesSeObtieneElDetalleDeLaPropiedad(resultado);
         
     }
 
-    private void entoncesSeObtieneElDetalleDeLaPropiedad(Detalle resultado) {
+    private void entoncesSeObtieneElDetalleDeLaPropiedad(Publicacion resultado) {
         assertThat(resultado.getId()).isEqualTo(ID_PROPIEDAD);
     }
 
-    private Detalle cuandoSolicitoVerDetalle() {
-        return servicioPropiedades.verDetallePropiedad(ID_PROPIEDAD);
+    private Publicacion cuandoSolicitoVerDetalle() {
+        return servicioPropiedades.verDetallePublicacion(ID_PROPIEDAD);
 
     }
 
     private void dadoQueExisteUnaPropiedad() {
-        Detalle detalle = new Detalle(ID_PROPIEDAD);
+        Publicacion detalle = new Publicacion();
         when(repositorio.buscarDetallePropiedad(ID_PROPIEDAD)).thenReturn(detalle);
     }
 
-    private void entoncesSeObtieneTodasLasPropiedades(List<Propiedad> busqueda, int cantidadEsperada) {
+    private void entoncesSeObtieneTodasLasPropiedades(List<Publicacion> busqueda, int cantidadEsperada) {
         assertThat(busqueda).hasSize(cantidadEsperada);
 
     }
 
-    private List<Propiedad> cuandoBuscoUnaPropiedad(DatosBusqueda datosBusqueda) throws PropiedadNoEncontrada {
-        return servicioPropiedades.buscarPropiedadPorUbicacion(datosBusqueda);
+    private List<Publicacion> cuandoBuscoUnaPropiedad(DatosBusqueda datosBusqueda) throws PropiedadNoEncontrada {
+        return servicioPropiedades.buscarPublicacion(datosBusqueda);
     }
 
     private void dadoQueExisteUnaListaDePropiedades(int cantidad) {
-        List<Propiedad> lista = givenExistenPropiedades(cantidad);
+        List<Publicacion> lista = givenExistenPropiedades(cantidad);
 
         when(repositorio.buscarPropiedad(datosBusqueda)).thenReturn(lista);
 

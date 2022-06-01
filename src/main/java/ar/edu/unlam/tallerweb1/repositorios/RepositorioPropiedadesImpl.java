@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.repositorios;
 import ar.edu.unlam.tallerweb1.controladores.DatosBusqueda;
 import ar.edu.unlam.tallerweb1.modelo.Detalle;
 import ar.edu.unlam.tallerweb1.modelo.Propiedad;
+import ar.edu.unlam.tallerweb1.modelo.Publicacion;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class RepositorioPropiedadesImpl implements RepositorioPropiedades {
     }
 
     @Override
-    public List<Propiedad> buscarPropiedad(DatosBusqueda datosBusqueda) {
+    public List<Publicacion> buscarPropiedad(DatosBusqueda datosBusqueda) {
         return sessionFactory.getCurrentSession()
                 .createCriteria(Propiedad.class)
                 .createAlias("ubicacion", "ubi")
@@ -33,13 +34,11 @@ public class RepositorioPropiedadesImpl implements RepositorioPropiedades {
                 .add(Restrictions.eq("tipoPropiedad", datosBusqueda.getTipoPropiedad()))
                 .add(Restrictions.eq("tipoAccion", datosBusqueda.getTipoAccion()))
                 .list();
-
-
     }
 
     @Override
-    public Detalle buscarDetallePropiedad(Integer id) {
-        return sessionFactory.getCurrentSession().get(Detalle.class, id);
+    public Publicacion buscarDetallePropiedad(Integer id) {
+        return sessionFactory.getCurrentSession().get(Publicacion.class, id);
     }
 
 }

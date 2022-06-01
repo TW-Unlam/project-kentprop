@@ -12,12 +12,13 @@ public class Publicacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Double precio;
-
     private String descripcion;
-
     private LocalDate fechaPublicacion;
-
     private boolean isActivo;
+
+    private Accion tipoAccion;
+
+    private Estatus estatus;
 
     @OneToOne
     @JoinColumn(name = "propiedad_id")
@@ -66,19 +67,35 @@ public class Publicacion {
         this.fechaPublicacion = fechaPublicacion;
     }
 
-    public Propiedad getPropiedad() {
-        return propiedad;
-    }
-
-    public void setPropiedad(Propiedad propiedad) {
-        this.propiedad = propiedad;
-    }
-
     public boolean isActivo() {
         return isActivo;
     }
 
     public void setActivo(boolean activo) {
         isActivo = activo;
+    }
+
+    public Accion getTipoAccion() {
+        return tipoAccion;
+    }
+
+    public void setTipoAccion(Accion tipoAccion) {
+        this.tipoAccion = tipoAccion;
+    }
+
+    public Estatus getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(Estatus estatus) {
+        this.estatus = estatus;
+    }
+
+    public Propiedad getPropiedad() {
+        return propiedad;
+    }
+
+    public void setPropiedad(Propiedad propiedad) {
+        this.propiedad = propiedad;
     }
 }

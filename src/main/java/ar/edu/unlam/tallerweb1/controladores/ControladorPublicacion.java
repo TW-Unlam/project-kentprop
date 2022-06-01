@@ -1,7 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
-import ar.edu.unlam.tallerweb1.modelo.Detalle;
-import ar.edu.unlam.tallerweb1.modelo.Propiedad;
+import ar.edu.unlam.tallerweb1.modelo.Publicacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPropiedades;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,13 +13,13 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-public class ControladorPropiedades {
+public class ControladorPublicacion {
 
-    private ServicioPropiedades servicioPropiedades;
+    private ServicioPropiedades servicioPublicacion;
 
     @Autowired
-    public ControladorPropiedades(ServicioPropiedades servicioPropiedades){
-        this.servicioPropiedades = servicioPropiedades;
+    public ControladorPublicacion(ServicioPropiedades servicioPublicacion){
+        this.servicioPublicacion = servicioPublicacion;
     }
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public ModelAndView irAHome()
@@ -30,28 +29,28 @@ public class ControladorPropiedades {
         return new ModelAndView("home", modelo);
     }
 
-    @RequestMapping(path="/buscar-propiedades", method = RequestMethod.POST)
+    @RequestMapping(path="/buscar-publicaciones", method = RequestMethod.POST)
     public ModelAndView buscar(@ModelAttribute("datosBusqueda") DatosBusqueda datosBusqueda) {
         ModelMap modelo = new ModelMap();
-        List<Propiedad> resultado = null;
+        List<Publicacion> resultado = null;
         try{
-            resultado = servicioPropiedades.buscarPropiedadPorUbicacion(datosBusqueda);
+            resultado = servicioPublicacion.buscarPublicacion(datosBusqueda);
         } catch(Exception e) {
-            modelo.put("msg-error", "No se encontraron propiedades para esta ubicacion");
+            modelo.put("msg-error", "No se encontraron publicaciones con estos datos");
         }
-        modelo.put("propiedades", resultado);
-        return new ModelAndView("lista-propiedades", modelo);
+        modelo.put("publicaciones", resultado);
+        return new ModelAndView("lista-publicaciones", modelo);
     }
 
-    public ModelAndView verDetalle(Integer id) {
+    public ModelAndView verDetallePublicacion(Integer id) {
         ModelMap modelo = new ModelMap();
-        Detalle resultado = new Detalle();
+        Publicacion resultado = null;
         try{
-            resultado = servicioPropiedades.verDetallePropiedad(id);
+            resultado = servicioPublicacion.verDetallePublicacion(id);
         }catch(Exception e){
             modelo.put("msg-error", "Pagina inexistente");
         }
         modelo.put("detalle", resultado);
-        return new ModelAndView("detalle-propiedad", modelo);
+        return new ModelAndView("detalle-publicacion", modelo);
     }
 }

@@ -6,12 +6,12 @@ import ar.edu.unlam.tallerweb1.modelo.TipoPropiedad;
 public class DatosBusqueda {
   private TipoPropiedad tipoPropiedad;
   private Accion tipoAccion;
-  private String ubicacion;
+  private String descripcion;
 
-  public DatosBusqueda(TipoPropiedad tipoPropiedad, Accion tipoAccion, String ubicacion) {
+  public DatosBusqueda(TipoPropiedad tipoPropiedad, Accion tipoAccion, String descripcion) {
     this.tipoPropiedad = tipoPropiedad;
     this.tipoAccion = tipoAccion;
-    this.ubicacion = ubicacion;
+    this.descripcion = descripcion;
   }
 
   public DatosBusqueda() {
@@ -34,10 +34,10 @@ public class DatosBusqueda {
   }
 
   public String getUbicacion() {
-    return ubicacion;
+    return descripcion;
   }
 
-  public void setUbicacion(String ubicacion) {
-    this.ubicacion = ubicacion;
+  public void setUbicacion(String descripcion) {
+    this.descripcion = descripcion;
   }
 }

@@ -1,7 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
-import ar.edu.unlam.tallerweb1.servicios.ServicioPropiedades;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,10 +15,10 @@ import java.util.List;
 @Controller
 public class ControladorPublicacion {
 
-    private ServicioPropiedades servicioPublicacion;
+    private ServicioPublicaciones servicioPublicacion;
 
     @Autowired
-    public ControladorPublicacion(ServicioPropiedades servicioPublicacion){
+    public ControladorPublicacion(ServicioPublicaciones servicioPublicacion){
         this.servicioPublicacion = servicioPublicacion;
     }
     @RequestMapping(path = "/", method = RequestMethod.GET)
@@ -34,7 +34,9 @@ public class ControladorPublicacion {
         ModelMap modelo = new ModelMap();
         List<Publicacion> resultado = null;
         try{
-            resultado = servicioPublicacion.buscarPublicacion(datosBusqueda);
+            resultado = servicioPublicacion.buscarPublicacion(datosBusqueda.getTipoAccion(),
+                    datosBusqueda.getTipoPropiedad(),
+                    datosBusqueda.getUbicacion());
         } catch(Exception e) {
             modelo.put("msg-error", "No se encontraron publicaciones con estos datos");
         }

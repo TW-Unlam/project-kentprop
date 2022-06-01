@@ -10,19 +10,13 @@ public class Propiedad {
     private Integer id;
     @ManyToOne @JoinColumn(name = "ubicacion_id")
     private Ubicacion ubicacion;
-
     private Double metrosCuadrados; //Propiedad
-
     private Boolean cochera; //Propiedad
-
     private Integer cantidadAmbientes; //Propiedad
     private TipoPropiedad tipoPropiedad;
 
-    @OneToOne @JoinColumn(name = "detalle_id")
-    private Detalle detalle;
-
-    public Propiedad(Ubicacion ubicacion, Integer id, TipoPropiedad tipoPropiedad,
-                     Integer cantidadAmbientes, Detalle detalle,
+    public Propiedad(Ubicacion ubicacion, Integer id,
+                     TipoPropiedad tipoPropiedad, Integer cantidadAmbientes,
                      Double metrosCuadrados, Boolean cochera) {
         this.ubicacion = ubicacion;
         this.id = id;
@@ -30,16 +24,9 @@ public class Propiedad {
         this.metrosCuadrados=metrosCuadrados;
         this.cantidadAmbientes = cantidadAmbientes;
         this.cochera=cochera;
-        this.detalle = detalle;
     }
 
     public Propiedad(){
-
-    }
-
-    public Propiedad(Integer id , Detalle detalle){
-        this.id = id;
-        this.detalle =detalle;
 
     }
 
@@ -91,11 +78,4 @@ public class Propiedad {
         this.tipoPropiedad = tipoPropiedad;
     }
 
-    public Detalle getDetalle() {
-        return detalle;
-    }
-
-    public void setDetalle(Detalle detalle) {
-        this.detalle = detalle;
-    }
 }

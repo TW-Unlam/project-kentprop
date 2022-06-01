@@ -15,7 +15,6 @@ public class Publicacion {
     private String descripcion;
     private LocalDate fechaPublicacion;
     private boolean isActivo;
-
     private Accion tipoAccion;
 
     private Estatus estatus;

@@ -1,8 +1,8 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
-import ar.edu.unlam.tallerweb1.excepciones.PropiedadNoEncontrada;
+import ar.edu.unlam.tallerweb1.excepciones.PublicacionNoEncontrada;
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
-import ar.edu.unlam.tallerweb1.servicios.ServicioPropiedades;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,18 +23,18 @@ public class ControladorPublicacionesTest {
     private static final Integer PROPIEDAD_ID = 1;
     public static  DatosBusqueda datosBusqueda;
     private ControladorPublicacion controladorPublicacion;
-    private ServicioPropiedades servicioPublicaciones;
+    private ServicioPublicaciones servicioPublicaciones;
 
 
     @Before
     public void init(){
         datosBusqueda = mock(DatosBusqueda.class);
-        servicioPublicaciones = mock(ServicioPropiedades.class);
+        servicioPublicaciones = mock(ServicioPublicaciones.class);
         controladorPublicacion = new ControladorPublicacion(servicioPublicaciones);
     }
 
     @Test
-    public void alBuscarUnaPublicacionDeberiaDevolvermeUnaListaPublicaciones() throws PropiedadNoEncontrada{
+    public void alBuscarUnaPublicacionDeberiaDevolvermeUnaListaPublicaciones() throws PublicacionNoEncontrada {
         //Preparacion
         dadoQueTenemosUnaListaDePublicaciones(10);
 
@@ -46,8 +46,10 @@ public class ControladorPublicacionesTest {
     }
 
     @Test
-    public void alBuscarUnaPublicacionInexistenteDeberiaDevolvermeMensajeDeError() throws PropiedadNoEncontrada{
-        when(servicioPublicaciones.buscarPublicacion(datosBusqueda)).thenThrow(new PropiedadNoEncontrada());
+    public void alBuscarUnaPublicacionInexistenteDeberiaDevolvermeMensajeDeError() throws PublicacionNoEncontrada {
+        when(servicioPublicaciones.buscarPublicacion(datosBusqueda.getTipoAccion(),
+                datosBusqueda.getTipoPropiedad(),
+                datosBusqueda.getUbicacion())).thenThrow(new PublicacionNoEncontrada());
 
         ModelAndView mav = cuandoBuscoUnaPublicacion(datosBusqueda);
 
@@ -75,12 +77,14 @@ public class ControladorPublicacionesTest {
        when(servicioPublicaciones.verDetallePublicacion(PROPIEDAD_ID)).thenReturn(detalle);
     }
 
-    private void dadoQueTenemosUnaListaDePublicaciones(int cantidad) throws PropiedadNoEncontrada{
+    private void dadoQueTenemosUnaListaDePublicaciones(int cantidad) throws PublicacionNoEncontrada {
         List<Publicacion> lista = new LinkedList<>();
         for(int i = 0 ; i < cantidad; i++){
             lista.add(new Publicacion());
         }
-        when(servicioPublicaciones.buscarPublicacion(datosBusqueda)).thenReturn(lista);
+        when(servicioPublicaciones.buscarPublicacion(datosBusqueda.getTipoAccion(),
+                datosBusqueda.getTipoPropiedad(),
+                datosBusqueda.getUbicacion())).thenReturn(lista);
     }
 
     private ModelAndView cuandoBuscoUnaPublicacion(DatosBusqueda datosBusqueda) {

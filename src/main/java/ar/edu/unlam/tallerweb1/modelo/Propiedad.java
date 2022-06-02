@@ -4,7 +4,7 @@ import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 
-@Entity @Table(name = "TABLA_PROPIEDAD")
+@Entity @Table(name = "PROPIEDAD")
 public class Propiedad {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

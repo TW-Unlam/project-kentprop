@@ -13,5 +13,6 @@
 <body>
     <h1>HOLA</h1>
     ${publicaciones}
+    ${publicaciones}
 </body>
 </html>

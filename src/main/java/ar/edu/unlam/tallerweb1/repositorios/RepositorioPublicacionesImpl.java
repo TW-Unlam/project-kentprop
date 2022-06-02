@@ -29,8 +29,8 @@ public class RepositorioPublicacionesImpl implements RepositorioPublicaciones {
                 .createAlias("propiedad", "prop")
                 .createAlias("prop.ubicacion", "ubi")
                 .add(Restrictions.or(
-                        Restrictions.like("ubi.localidad", descripcion),
-                        Restrictions.like("ubi.provincia", descripcion))
+                        Restrictions.like("ubi.localidad", "%" + descripcion + "%"),
+                        Restrictions.like("ubi.provincia", "%" + descripcion +"%" ))
                 )
                 .add(Restrictions.eq("prop.tipoPropiedad", tipo))
                 .add(Restrictions.eq("tipoAccion", accion))

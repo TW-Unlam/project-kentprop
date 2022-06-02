@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "TABLA_PUBLICIDAD")
+@Table
 public class Publicacion {
 
     @Id

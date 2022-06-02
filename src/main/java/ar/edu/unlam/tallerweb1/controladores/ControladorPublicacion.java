@@ -46,7 +46,7 @@ public class ControladorPublicacion {
         }
         modelo.put("publicaciones", resultado);
 
-        return new ModelAndView("redirect:/lista-publicaciones", modelo);
+        return new ModelAndView("lista-publicaciones", modelo);
     }
 
     public ModelAndView verDetallePublicacion(Integer id) {

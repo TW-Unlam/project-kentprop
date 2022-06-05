@@ -42,11 +42,11 @@ public class ControladorPublicacion {
                     datosBusqueda.getTipoPropiedad(),
                     datosBusqueda.getUbicacion());
         } catch(Exception e) {
-            modelo.put("msg-error", "No se encontraron publicaciones con estos datos");
+            modelo.put("msg_error", "No se encontraron publicaciones con estos datos");
         }
         modelo.put("publicaciones", resultado);
 
-        return new ModelAndView("/lista-publicaciones", modelo);
+        return new ModelAndView("lista-publicaciones", modelo);
     }
 
     public ModelAndView verDetallePublicacion(Integer id) {

@@ -16,10 +16,8 @@
 <body>
     <h1>Lista de Publicaciones localizadas-....</h1>
 
-
-    publicaciones
     <c:forEach var="a" items="${publicaciones}" >
-        <c:out value="a.publicaciones.id"/>
+        <c:out value="a.publicaciones"/>
     </c:forEach>
 
     <c:if test="${not empty msg_error}">

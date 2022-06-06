@@ -15,15 +15,33 @@
 </head>
 <body>
     <h1>Lista de Publicaciones localizadas-....</h1>
-
-    <c:forEach var="a" items="${publicaciones}" >
-        <c:out value="a.publicaciones"/>
+    <%--${publicaciones}--%>
+   <c:forEach var="publi" items="${publicaciones}" >
+    <span>  <c:out value="${publi.tipoAccion.name()}"/> </span>
+    <span>  <c:out value="${publi.descripcion}"/> </span>
+    <span> <c:out value="${publi.precio}"/> </span>
+    <span>  <c:out value="${publi.propiedad.cantidadAmbientes}"/> </span>
+    <span>  <c:out value="${publi.propiedad.cochera}"/> </span>
+    <span>  <c:out value="${publi.propiedad.tipoPropiedad.name()}"/> </span>
+    <span>  <c:out value="${publi.propiedad.metrosCuadrados}"/> </span>
+    <span>  <c:out value="${publi.propiedad.ubicacion.localidad}"/> </span>
+    <span>   <c:out value="${publi.propiedad.ubicacion.provincia}"/> </span>
+    <a href="detalle-publicacion?id=${publi.propiedad.id}">VER DETALLES</a>
+       <br>
     </c:forEach>
 
     <c:if test="${not empty msg_error}">
         <h4><span>${msg_error}</span></h4>
         <br>
     </c:if>
-    ${publicaciones}
+
+  <%--  ${publicaciones.get(0).descripcion}
+    ${publicaciones.get(0).fechaPublicacion}
+    ${publicaciones.get(0).propiedad}--%>
+
+   <%-- ${publicaciones.get(1).descripcion}
+    ${publicaciones.get(2).fechaPublicacion}
+    ${publicaciones.get(3).propiedad}--%>
+
 </body>
 </html>

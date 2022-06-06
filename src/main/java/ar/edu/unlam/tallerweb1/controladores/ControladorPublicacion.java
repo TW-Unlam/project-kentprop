@@ -48,7 +48,7 @@ public class ControladorPublicacion {
 
         return new ModelAndView("lista-publicaciones", modelo);
     }
-
+    @RequestMapping(path = "/detalle-publicacion",method = RequestMethod.GET)
     public ModelAndView verDetallePublicacion(Integer id) {
         ModelMap modelo = new ModelMap();
         Publicacion resultado = null;

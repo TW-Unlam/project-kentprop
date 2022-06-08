@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>Home</title>
 		<!-- Bootstrap core CSS -->
 	    <link href="css/bootstrap.min.css" rel="stylesheet" >
 	    <!-- Bootstrap theme -->
@@ -11,7 +12,7 @@
 		<link href="css/home.css" rel="stylesheet">
 	</head>
 	<body>
-		<div class = "home-container">
+		<div class="bg-container">
 			<div class="search-container">
 				<div class="search-container_img">
 					<img src="images/kentprop-logo.png" alt="KentProp logo">

@@ -7,11 +7,19 @@ public class DatosBusqueda {
   private TipoPropiedad tipoPropiedad;
   private Accion tipoAccion;
   private String descripcion;
+  private double precioMaximo;
 
   public DatosBusqueda(TipoPropiedad tipoPropiedad, Accion tipoAccion, String descripcion) {
     this.tipoPropiedad = tipoPropiedad;
     this.tipoAccion = tipoAccion;
     this.descripcion = descripcion;
+  }
+
+  public DatosBusqueda(TipoPropiedad tipoPropiedad, Accion tipoAccion, String descripcion, double precioMaximo) {
+    this.tipoPropiedad = tipoPropiedad;
+    this.tipoAccion = tipoAccion;
+    this.descripcion = descripcion;
+    this.precioMaximo = precioMaximo;
   }
 
   public DatosBusqueda() {
@@ -39,5 +47,9 @@ public class DatosBusqueda {
 
   public void setUbicacion(String descripcion) {
     this.descripcion = descripcion;
+  }
+
+  public double getPrecioMaximo() {
+ return precioMaximo;
   }
 }

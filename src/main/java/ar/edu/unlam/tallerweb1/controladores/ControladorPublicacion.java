@@ -3,6 +3,8 @@ package ar.edu.unlam.tallerweb1.controladores;
 import ar.edu.unlam.tallerweb1.modelo.Accion;
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
 import ar.edu.unlam.tallerweb1.modelo.TipoPropiedad;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.servicios.ServicioEmail;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,10 +20,12 @@ import java.util.List;
 public class ControladorPublicacion {
 
     private ServicioPublicaciones servicioPublicacion;
+    private ServicioEmail servicioEmail;
 
     @Autowired
-    public ControladorPublicacion(ServicioPublicaciones servicioPublicacion){
+    public ControladorPublicacion(ServicioPublicaciones servicioPublicacion, ServicioEmail servicioEmail){
         this.servicioPublicacion = servicioPublicacion;
+        this.servicioEmail=servicioEmail;
     }
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public ModelAndView irAHome()
@@ -63,6 +67,25 @@ public class ControladorPublicacion {
 
     @RequestMapping(path = "/lista-publicaciones")
     public ModelAndView irAListaDePublicaciones() {
+
         return new ModelAndView("lista-publicaciones");
+    }
+    @RequestMapping(path = "/enviar-consulta-privada",method = RequestMethod.POST)
+    public ModelAndView enviarConsulta(DatosConsulta datosConsulta, Integer propiedadId) {
+        ModelMap modelo = new ModelMap();
+        Usuario resultado = null;
+        try{
+            resultado = servicioEmail.enviarConsultaPrivada(
+                    datosConsulta.getEmail(),
+                    datosConsulta.getTelefono(),
+                    datosConsulta.getMensaje(),
+                    propiedadId);
+        }catch(Exception e){
+            modelo.put("msg-error", "Propietario inexistente");
+        }
+        modelo.put("msg", "Mensaje_Enviado_Correctamente");
+        modelo.put("usuario", resultado);
+
+        return new ModelAndView("detalle-publicacion",modelo);
     }
 }

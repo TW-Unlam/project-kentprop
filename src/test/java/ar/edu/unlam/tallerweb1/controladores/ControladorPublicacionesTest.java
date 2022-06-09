@@ -1,7 +1,9 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.excepciones.PublicacionNoEncontrada;
+import ar.edu.unlam.tallerweb1.excepciones.UsuarioInexistente;
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
+import ar.edu.unlam.tallerweb1.servicios.ServicioEmail;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,12 +27,17 @@ public class ControladorPublicacionesTest {
     private ControladorPublicacion controladorPublicacion;
     private ServicioPublicaciones servicioPublicaciones;
 
+    private ServicioEmail servicioEmail;
+    private DatosConsulta datosConsulta;
+
 
     @Before
     public void init(){
         datosBusqueda = mock(DatosBusqueda.class);
+        datosConsulta=mock(DatosConsulta.class);
         servicioPublicaciones = mock(ServicioPublicaciones.class);
-        controladorPublicacion = new ControladorPublicacion(servicioPublicaciones);
+        servicioEmail=mock(ServicioEmail.class);
+        controladorPublicacion = new ControladorPublicacion(servicioPublicaciones,servicioEmail);
     }
 
     @Test
@@ -45,19 +52,31 @@ public class ControladorPublicacionesTest {
         entoncesMeLLevaALaVista(VISTA_LISTA_PUBLICACIONES, mav.getViewName());
     }
 
+   /* @Test
+    public void alBuscarUnaPublicacionConFiltrosDeberiaDevolvermeUnaListaPublicaciones() throws PublicacionNoEncontrada {
+        //Preparacion
+        dadoQueTenemosUnaListaDePublicaciones(10);
+
+        //Ejecucion
+        ModelAndView mav = cuandoBuscoUnaPublicacion(datosBusqueda);
+
+        entoncesEncuentro(mav, 10);
+        entoncesMeLLevaALaVista(VISTA_LISTA_PUBLICACIONES, mav.getViewName());
+    }*/
+
     @Test
     public void alBuscarUnaPublicacionInexistenteDeberiaDevolvermeMensajeDeError() throws PublicacionNoEncontrada {
-        when(servicioPublicaciones.buscarPublicacion(datosBusqueda.getTipoAccion(),
-                datosBusqueda.getTipoPropiedad(),
-                datosBusqueda.getUbicacion())).thenThrow(new PublicacionNoEncontrada());
+
+        dadoQuenoExitePublicacionesLanzaExcepcion();
 
         ModelAndView mav = cuandoBuscoUnaPublicacion(datosBusqueda);
 
         entoncesMeLLevaALaVista(VISTA_LISTA_PUBLICACIONES, mav.getViewName());
-        entoncesSeRecibeMensaje(MENSAJE_TIPO_INVALIDO, mav.getModel());
+        entoncesSeRecibeMensajeError(MENSAJE_TIPO_INVALIDO, mav.getModel());
    }
 
-   @Test
+
+    @Test
    public void alSeleccionarVerDetalleMeTraeLaVistaDetalle(){
 
         dadoQueExisteUnaPropiedad();
@@ -65,11 +84,47 @@ public class ControladorPublicacionesTest {
         ModelAndView mav = cuandoSeleccionoVerDetalle();
 
         entoncesMeLLevaALaVista(VISTA_VER_DETALLE, mav.getViewName());
-
    }
 
-    private ModelAndView cuandoSeleccionoVerDetalle() {
-        return controladorPublicacion.verDetallePublicacion(PROPIEDAD_ID);
+     @Test
+    public void alEnviarUnMailDeUnaPublicacionEnDetalleDeberiaEnviarMensajeDeExito(){
+        dadoQueExisteUnaPropiedad();
+        ModelAndView mav= CuandoQuiereEnviarElMail();
+        entoncesMeLLevaALaVista(VISTA_VER_DETALLE, mav.getViewName());
+        entoncesSeRecibeMensajeExito("Mensaje_Enviado_Correctamente", mav.getModel());
+
+    }
+
+    @Test
+    public void alEnviarUnMailDeunaPublicacionEnDetalleAUsuarioInactivoDeberiaLanzarError() throws UsuarioInexistente {
+        dadoQueExisteUnaPropiedadConUsuarioInactivo();
+        EnviarElMailLanzaExcepcion();
+        ModelAndView mav= CuandoQuiereEnviarElMail();
+        entoncesMeLLevaALaVista(VISTA_VER_DETALLE, mav.getViewName());
+        entoncesSeRecibeMensajeError("Propietario inexistente", mav.getModel());
+    }
+
+    private  void EnviarElMailLanzaExcepcion() throws UsuarioInexistente{
+        when(servicioEmail.enviarConsultaPrivada( datosConsulta.getEmail(),
+                datosConsulta.getTelefono(),
+                datosConsulta.getMensaje(),
+                PROPIEDAD_ID
+        )).thenThrow( new UsuarioInexistente());
+    }
+
+    private void dadoQueExisteUnaPropiedadConUsuarioInactivo() {
+       /* Usuario propietario= new Usuario();
+        propietario.setActivo(false);*/
+        Publicacion detalle = new Publicacion();
+       /* detalle.getPropiedad().setPropietario(propietario);*/
+        when(servicioPublicaciones.verDetallePublicacion(PROPIEDAD_ID)).thenReturn(detalle);
+    }
+
+    private void dadoQuenoExitePublicacionesLanzaExcepcion() throws PublicacionNoEncontrada {
+        when(servicioPublicaciones.buscarPublicacion(datosBusqueda.getTipoAccion(),
+                datosBusqueda.getTipoPropiedad(),
+                datosBusqueda.getUbicacion()
+        )).thenThrow(new PublicacionNoEncontrada());
     }
 
     private void dadoQueExisteUnaPropiedad() {
@@ -87,11 +142,21 @@ public class ControladorPublicacionesTest {
                 datosBusqueda.getUbicacion())).thenReturn(lista);
     }
 
+
+    private ModelAndView CuandoQuiereEnviarElMail() {
+        return controladorPublicacion.enviarConsulta(datosConsulta,PROPIEDAD_ID);
+    }
+
+    private ModelAndView cuandoSeleccionoVerDetalle() {
+        return controladorPublicacion.verDetallePublicacion(PROPIEDAD_ID);
+    }
+
+
     private ModelAndView cuandoBuscoUnaPublicacion(DatosBusqueda datosBusqueda) {
         return controladorPublicacion.buscar(datosBusqueda);
     }
 
-    private void entoncesSeRecibeMensaje(String mensaje, Map<String, Object> model) {
+    private void entoncesSeRecibeMensajeError(String mensaje, Map<String, Object> model) {
         assertThat(model.get("msg-error")).isEqualTo(mensaje);
     }
 
@@ -102,5 +167,9 @@ public class ControladorPublicacionesTest {
     private void entoncesEncuentro(ModelAndView mav, int cantidadEsperada) {
         List<Publicacion> lista = (List<Publicacion>) mav.getModel().get("publicaciones");
         assertThat(lista).hasSize(cantidadEsperada);
+    }
+
+    private void entoncesSeRecibeMensajeExito(String mensaje, Map<String, Object> model) {
+        assertThat(model.get("msg")).isEqualTo(mensaje);
     }
 }

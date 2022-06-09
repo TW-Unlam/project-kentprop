@@ -13,7 +13,11 @@ public class Propiedad {
     private Double metrosCuadrados; //Propiedad
     private Boolean cochera; //Propiedad
     private Integer cantidadAmbientes; //Propiedad
+
     private TipoPropiedad tipoPropiedad;
+
+    @ManyToOne @JoinColumn(name = "propietario_id")
+    private Usuario propietario;
 
     public Propiedad(Ubicacion ubicacion, Integer id,
                      TipoPropiedad tipoPropiedad, Integer cantidadAmbientes,
@@ -24,6 +28,24 @@ public class Propiedad {
         this.metrosCuadrados=metrosCuadrados;
         this.cantidadAmbientes = cantidadAmbientes;
         this.cochera=cochera;
+    }
+
+    public Propiedad(Integer id, Ubicacion ubicacion, Double metrosCuadrados, Boolean cochera, Integer cantidadAmbientes, TipoPropiedad tipoPropiedad, Usuario propietario) {
+        this.id = id;
+        this.ubicacion = ubicacion;
+        this.metrosCuadrados = metrosCuadrados;
+        this.cochera = cochera;
+        this.cantidadAmbientes = cantidadAmbientes;
+        this.tipoPropiedad = tipoPropiedad;
+        this.propietario = propietario;
+    }
+
+    public Usuario getPropietario() {
+        return propietario;
+    }
+
+    public void setPropietario(Usuario propietario) {
+        this.propietario = propietario;
     }
 
     public Propiedad(){

@@ -5,3 +5,12 @@ body {
 *{
     box-sizing: border-box;
 }
+
+.bg-container{
+    height: 100%;
+    background: url("../images/home-bg.png") #adc7de;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

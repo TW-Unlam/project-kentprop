@@ -2,7 +2,7 @@ package ar.edu.unlam.tallerweb1.modelo;
 
 import javax.persistence.*;
 
-@Entity @Table(name = "TABLA_UBICACION")
+@Entity
 public class Ubicacion {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

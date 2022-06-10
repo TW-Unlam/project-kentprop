@@ -35,7 +35,7 @@
                 <c:forEach var="publi" items="${publicaciones}" >
                     <div class="thumbnail">
                         <a href="detalle-publicacion?id=${publi.propiedad.id}">
-                        <img src="..." alt="...">
+                        <img src="images/PropiedadTipoCasa.jpg" alt="...">
                         <div class="caption">
                             <div class="publicacion-top">
                                 <div>

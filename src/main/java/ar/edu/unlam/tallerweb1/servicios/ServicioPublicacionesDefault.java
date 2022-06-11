@@ -23,13 +23,9 @@ public class ServicioPublicacionesDefault implements ServicioPublicaciones {
     }
 
     @Override
-    public List<Publicacion> buscarPublicacion(Accion accion, TipoPropiedad tipo, String descripcion) throws PublicacionNoEncontrada {
+    public List<Publicacion> buscarPublicacion(Accion accion, TipoPropiedad tipo, String descripcion){
         List<Publicacion> lista = repositorioPublicaciones.buscarPublicaciones(accion, tipo, descripcion);
-        if(lista.isEmpty()){
-            throw new PublicacionNoEncontrada();
-        }else{
-            return lista;
-        }
+        return lista;
     }
 
     @Override

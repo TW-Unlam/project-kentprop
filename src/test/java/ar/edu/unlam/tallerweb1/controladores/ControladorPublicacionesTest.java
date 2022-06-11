@@ -41,7 +41,7 @@ public class ControladorPublicacionesTest {
     }
 
     @Test
-    public void alBuscarUnaPublicacionDeberiaDevolvermeUnaListaPublicaciones() throws PublicacionNoEncontrada {
+    public void alBuscarUnaPublicacionDeberiaDevolvermeUnaListaPublicaciones(){
         //Preparacion
         dadoQueTenemosUnaListaDePublicaciones(10);
 
@@ -52,22 +52,10 @@ public class ControladorPublicacionesTest {
         entoncesMeLLevaALaVista(VISTA_LISTA_PUBLICACIONES, mav.getViewName());
     }
 
-   /* @Test
-    public void alBuscarUnaPublicacionConFiltrosDeberiaDevolvermeUnaListaPublicaciones() throws PublicacionNoEncontrada {
-        //Preparacion
-        dadoQueTenemosUnaListaDePublicaciones(10);
-
-        //Ejecucion
-        ModelAndView mav = cuandoBuscoUnaPublicacion(datosBusqueda);
-
-        entoncesEncuentro(mav, 10);
-        entoncesMeLLevaALaVista(VISTA_LISTA_PUBLICACIONES, mav.getViewName());
-    }*/
-
     @Test
-    public void alBuscarUnaPublicacionInexistenteDeberiaDevolvermeMensajeDeError() throws PublicacionNoEncontrada {
+    public void alBuscarUnaPublicacionInexistenteDeberiaDevolvermeMensajeDeError(){
 
-        dadoQuenoExitePublicacionesLanzaExcepcion();
+        dadoQueNoExistePublicaciones();
 
         ModelAndView mav = cuandoBuscoUnaPublicacion(datosBusqueda);
 
@@ -120,11 +108,12 @@ public class ControladorPublicacionesTest {
         when(servicioPublicaciones.verDetallePublicacion(PROPIEDAD_ID)).thenReturn(detalle);
     }
 
-    private void dadoQuenoExitePublicacionesLanzaExcepcion() throws PublicacionNoEncontrada {
+    private void dadoQueNoExistePublicaciones(){
+        List<Publicacion> lista = new LinkedList<>();
         when(servicioPublicaciones.buscarPublicacion(datosBusqueda.getTipoAccion(),
                 datosBusqueda.getTipoPropiedad(),
                 datosBusqueda.getUbicacion()
-        )).thenThrow(new PublicacionNoEncontrada());
+        )).thenReturn(lista);
     }
 
     private void dadoQueExisteUnaPropiedad() {
@@ -132,7 +121,7 @@ public class ControladorPublicacionesTest {
        when(servicioPublicaciones.verDetallePublicacion(PROPIEDAD_ID)).thenReturn(detalle);
     }
 
-    private void dadoQueTenemosUnaListaDePublicaciones(int cantidad) throws PublicacionNoEncontrada {
+    private void dadoQueTenemosUnaListaDePublicaciones(int cantidad){
         List<Publicacion> lista = new LinkedList<>();
         for(int i = 0 ; i < cantidad; i++){
             lista.add(new Publicacion());

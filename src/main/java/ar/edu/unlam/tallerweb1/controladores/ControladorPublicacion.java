@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -40,16 +41,15 @@ public class ControladorPublicacion {
     @RequestMapping(path="/buscar-publicaciones", method = RequestMethod.POST)
     public ModelAndView buscar(@ModelAttribute("datosBusqueda") DatosBusqueda datosBusqueda) {
         ModelMap modelo = new ModelMap();
-        List<Publicacion> resultado = null;
-        try{
-            resultado = servicioPublicacion.buscarPublicacion(datosBusqueda.getTipoAccion(),
+        List<Publicacion> resultado;
+        resultado = servicioPublicacion.buscarPublicacion(datosBusqueda.getTipoAccion(),
                     datosBusqueda.getTipoPropiedad(),
                     datosBusqueda.getUbicacion());
-        } catch(Exception e) {
+        if(resultado.isEmpty()){
             modelo.put("msg_error", "No se encontraron publicaciones con estos datos");
+        }else{
+            modelo.put("publicaciones", resultado);
         }
-        modelo.put("publicaciones", resultado);
-
         return new ModelAndView("lista-publicaciones", modelo);
     }
     @RequestMapping(path = "/detalle-publicacion",method = RequestMethod.GET)

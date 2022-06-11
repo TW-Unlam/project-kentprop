@@ -1,7 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.controladores.DatosBusqueda;
-import ar.edu.unlam.tallerweb1.excepciones.PublicacionNoEncontrada;
+
 import ar.edu.unlam.tallerweb1.modelo.Accion;
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
 import ar.edu.unlam.tallerweb1.modelo.TipoPropiedad;

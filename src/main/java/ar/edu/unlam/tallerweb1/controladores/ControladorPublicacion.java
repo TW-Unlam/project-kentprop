@@ -41,12 +41,12 @@ public class ControladorPublicacion {
     @RequestMapping(path="/buscar-publicaciones", method = RequestMethod.POST)
     public ModelAndView buscar(@ModelAttribute("datosBusqueda") DatosBusqueda datosBusqueda) {
         ModelMap modelo = new ModelMap();
-        List<Publicacion> resultado;
+        List<Publicacion> resultado = null;
         resultado = servicioPublicacion.buscarPublicacion(datosBusqueda.getTipoAccion(),
                     datosBusqueda.getTipoPropiedad(),
                     datosBusqueda.getUbicacion());
         if(resultado.isEmpty()){
-            modelo.put("msg_error", "No se encontraron publicaciones con estos datos");
+            modelo.put("msg-error", "No se encontraron publicaciones con estos datos");
         }else{
             modelo.put("publicaciones", resultado);
         }

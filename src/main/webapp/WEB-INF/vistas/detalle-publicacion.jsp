@@ -20,6 +20,7 @@
 </c:if>
 
 <c:if test="${not empty detalle}">
+    <h4>${detalle.id}</h4>
 <h4>${detalle.descripcion}</h4>
     <h4>   ${detalle.fechaPublicacion}</h4>
         <h4>  ${detalle.propiedad.metrosCuadrados}</h4>

@@ -1,6 +1,5 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
-import ar.edu.unlam.tallerweb1.excepciones.PublicacionNoEncontrada;
 import ar.edu.unlam.tallerweb1.excepciones.UsuarioInexistente;
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEmail;
@@ -26,7 +25,6 @@ public class ControladorPublicacionesTest {
     public static  DatosBusqueda datosBusqueda;
     private ControladorPublicacion controladorPublicacion;
     private ServicioPublicaciones servicioPublicaciones;
-
     private ServicioEmail servicioEmail;
     private DatosConsulta datosConsulta;
 

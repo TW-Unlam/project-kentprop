@@ -1,6 +1,4 @@
 package ar.edu.unlam.tallerweb1.servicios;
-
-import ar.edu.unlam.tallerweb1.excepciones.PublicacionNoEncontrada;
 import ar.edu.unlam.tallerweb1.excepciones.UsuarioInexistente;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import org.springframework.stereotype.Service;

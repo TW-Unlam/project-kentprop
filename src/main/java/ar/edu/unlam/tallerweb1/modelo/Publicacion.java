@@ -19,6 +19,7 @@ public class Publicacion {
 
     private Estatus estatus;
 
+
     @OneToOne
     @JoinColumn(name = "propiedad_id")
     private Propiedad propiedad;

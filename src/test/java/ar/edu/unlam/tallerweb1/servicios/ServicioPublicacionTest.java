@@ -1,6 +1,5 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
-import ar.edu.unlam.tallerweb1.excepciones.PublicacionNoEncontrada;
 import ar.edu.unlam.tallerweb1.modelo.Accion;
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
 import ar.edu.unlam.tallerweb1.modelo.TipoPropiedad;
@@ -31,7 +30,7 @@ public class ServicioPublicacionTest {
     }
 
     @Test
-    public void queAlBuscarUnaPublicacionDeberaTraermeLaListaDePropiedades() throws PublicacionNoEncontrada {
+    public void queAlBuscarUnaPublicacionDeberaTraermeLaListaDePropiedades(){
         dadoQueExisteUnaListaDePublicaciones(3);
 
         List<Publicacion> busqueda = cuandoBuscoUnaPublicacion();
@@ -40,11 +39,14 @@ public class ServicioPublicacionTest {
 
     }
 
-    @Test(expected = PublicacionNoEncontrada.class)
-    public void queAlBuscarUnaPublicacionDeberaTraermeUnaExcepcion() throws PublicacionNoEncontrada {
 
+    @Test
+    public void queAlBuscarUnaPublicacionDeberaTraermeUnaListaVacia() {
         dadoQueNoExisteUnaListaDePublicaciones();
-        cuandoBuscoUnaPublicacion();
+
+        List<Publicacion> busqueda = cuandoBuscoUnaPublicacion();
+
+        entoncesSeObtieneLasPublicaciones(busqueda,0);
 
     }
     
@@ -60,6 +62,8 @@ public class ServicioPublicacionTest {
     }
 
     private void dadoQueNoExisteUnaListaDePublicaciones() {
+        List<Publicacion> lista = new LinkedList<>();
+        when(repositorio.buscarPublicaciones(ACCION, TIPO, descripcion)).thenReturn(lista);
     }
 
     private List<Publicacion> givenExistenPropiedades(int cantidad){
@@ -90,7 +94,7 @@ public class ServicioPublicacionTest {
 
     }
 
-    private List<Publicacion> cuandoBuscoUnaPublicacion() throws PublicacionNoEncontrada {
+    private List<Publicacion> cuandoBuscoUnaPublicacion() {
         return servicioPublicaciones.buscarPublicacion(ACCION, TIPO, descripcion);
     }
 

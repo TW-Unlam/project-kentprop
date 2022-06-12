@@ -23,6 +23,7 @@ public class RepositorioPublicacionesTest extends SpringTest {
     @Autowired
     private RepositorioPublicaciones repositorioPublicaciones;
 
+
     @Test @Transactional @Rollback
     public void busquedaPublicacionesConDevolucion(){
 
@@ -70,6 +71,72 @@ public class RepositorioPublicacionesTest extends SpringTest {
 
         entoncesMeDevuelveElDetalleDeLaPropiedadConId(propiedades.get(0).getId(), resultado.getId());
     }
+
+    @Test @Transactional @Rollback
+    public void obtenerElPropietarioDEUnaPropiedadEnDetalles(){
+        dadoQueExisteUnaListaDePropiedadesConPropietarios();
+
+        List<Publicacion> propiedades = repositorioPublicaciones.buscarPublicaciones(ACCION_EXISTENTE, TIPO_EXISTENTE, DESCRIPCION_EXISTENTE);
+        Publicacion resultado = repositorioPublicaciones.buscarDetallePublicacion(propiedades.get(0).getId());
+        Propiedad propietario = repositorioPublicaciones.buscarPrpiedadConPropietario(resultado.getPropiedad().getId());
+
+        entoncesMeDevuelveLosDatosDelUsuarioPropietarioDELaPropiedad( propietario.getPropietario().getEmail());
+        entoncesMeDevuelveLosDatosDelUsuarioAEnviar( propietario.getPropietario().getEmail(),"sullca@gmail");
+    }
+
+    private void entoncesMeDevuelveLosDatosDelUsuarioAEnviar(String email, String esperado) {
+        assertThat(email).isEqualTo(esperado);
+    }
+
+    private void entoncesMeDevuelveLosDatosDelUsuarioPropietarioDELaPropiedad( String obtenido) {
+        assertThat(obtenido).isNotEmpty();
+    }
+
+    private void dadoQueExisteUnaListaDePropiedadesConPropietarios() {
+        Publicacion publicacionUno = new Publicacion();
+        Publicacion publicacionDos = new Publicacion();
+
+        Propiedad propiedadUno = new Propiedad();
+        Propiedad propiedadDos = new Propiedad();
+
+        Ubicacion ubicacionUno = new Ubicacion();
+        ubicacionUno.setProvincia("Buenos Aires");
+        ubicacionUno.setLocalidad("Ramos Mejia");
+
+        Ubicacion ubicacionDos = new Ubicacion();
+        ubicacionDos.setProvincia("Buenos Aires");
+        ubicacionDos.setLocalidad("Ramos Mejia");
+
+
+        Usuario propietario1=new Usuario();
+        propietario1.setEmail("sullca@gmail");
+
+        Usuario propietario2=new Usuario();
+        propietario2.setEmail("sullca2@gmail");
+
+        propiedadUno.setUbicacion(ubicacionUno);
+        propiedadUno.setTipoPropiedad(TipoPropiedad.DEPARTAMENTO);
+        propiedadUno.setPropietario(propietario1);
+        publicacionUno.setTipoAccion(ACCION_EXISTENTE);
+        publicacionUno.setPropiedad(propiedadUno);
+
+        propiedadDos.setUbicacion(ubicacionDos);
+        propiedadDos.setTipoPropiedad(TipoPropiedad.CASA);
+        propiedadDos.setPropietario(propietario2);
+        publicacionDos.setTipoAccion(ACCION_EXISTENTE);
+        publicacionDos.setPropiedad(propiedadDos);
+
+
+        session().save(propietario1);
+        session().save(propietario2);
+        session().save(ubicacionUno);
+        session().save(ubicacionDos);
+        session().save(propiedadUno);
+        session().save(propiedadDos);
+        session().save(publicacionUno);
+        session().save(publicacionDos);
+    }
+
 
     private void entoncesMeDevuelveElDetalleDeLaPropiedadConId(Integer idPropiedad, Integer idDetalle) {
         assertThat(idPropiedad).isEqualTo(idDetalle);

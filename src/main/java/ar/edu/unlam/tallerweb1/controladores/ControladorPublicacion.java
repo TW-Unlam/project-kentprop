@@ -77,6 +77,7 @@ public class ControladorPublicacion {
         try{
             resultado = servicioEmail.enviarConsultaPrivada(
                     datosConsulta.getEmail(),
+                    datosConsulta.getNombre(),
                     datosConsulta.getTelefono(),
                     datosConsulta.getMensaje(),
                     propiedadId);

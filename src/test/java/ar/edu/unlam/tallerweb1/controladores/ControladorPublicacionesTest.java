@@ -106,7 +106,7 @@ public class ControladorPublicacionesTest {
 
     private  void EnviarElMailLanzaExcepcion() throws UsuarioInexistente{
         when(servicioEmail.enviarConsultaPrivada( datosConsulta.getEmail(),
-                datosConsulta.getTelefono(),
+                datosConsulta.getNombre(), datosConsulta.getTelefono(),
                 datosConsulta.getMensaje(),
                 PROPIEDAD_ID
         )).thenThrow( new UsuarioInexistente());

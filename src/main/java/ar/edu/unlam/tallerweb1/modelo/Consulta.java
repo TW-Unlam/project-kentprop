@@ -34,6 +34,12 @@ public class Consulta {
         this.publicacion = publicacion;
     }
 
+    public Consulta(String pregunta, Publicacion publicacion) {
+        this.pregunta = pregunta;
+
+        this.publicacion = publicacion;
+    }
+
     public Consulta() {
 
     }

@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.excepciones.UsuarioInexistente;
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
+import ar.edu.unlam.tallerweb1.servicios.ServicioConsulta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEmail;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
 import org.junit.Before;
@@ -26,16 +27,19 @@ public class ControladorPublicacionesTest {
     private ControladorPublicacion controladorPublicacion;
     private ServicioPublicaciones servicioPublicaciones;
     private ServicioEmail servicioEmail;
-    private DatosConsulta datosConsulta;
+    private DatosConsultaPrivada datosConsultaPrivada;
+
+    private ServicioConsulta servicioConsulta;
 
 
     @Before
     public void init(){
         datosBusqueda = mock(DatosBusqueda.class);
-        datosConsulta=mock(DatosConsulta.class);
+        datosConsultaPrivada =mock(DatosConsultaPrivada.class);
         servicioPublicaciones = mock(ServicioPublicaciones.class);
         servicioEmail=mock(ServicioEmail.class);
-        controladorPublicacion = new ControladorPublicacion(servicioPublicaciones,servicioEmail);
+        servicioConsulta = mock(ServicioConsulta.class);
+        controladorPublicacion = new ControladorPublicacion(servicioPublicaciones,servicioEmail,servicioConsulta);
     }
 
     @Test
@@ -91,9 +95,9 @@ public class ControladorPublicacionesTest {
     }
 
     private  void EnviarElMailLanzaExcepcion() throws UsuarioInexistente{
-        when(servicioEmail.enviarConsultaPrivada( datosConsulta.getEmail(),
-                datosConsulta.getTelefono(),
-                datosConsulta.getMensaje(),
+        when(servicioEmail.enviarConsultaPrivada( datosConsultaPrivada.getEmail(),
+                datosConsultaPrivada.getTelefono(),
+                datosConsultaPrivada.getMensaje(),
                 PROPIEDAD_ID
         )).thenThrow( new UsuarioInexistente());
     }
@@ -131,7 +135,7 @@ public class ControladorPublicacionesTest {
 
 
     private ModelAndView CuandoQuiereEnviarElMail() {
-        return controladorPublicacion.enviarConsulta(datosConsulta,PROPIEDAD_ID);
+        return controladorPublicacion.enviarConsulta(datosConsultaPrivada,PROPIEDAD_ID);
     }
 
     private ModelAndView cuandoSeleccionoVerDetalle() {

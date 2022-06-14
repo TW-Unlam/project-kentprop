@@ -1,12 +1,12 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
-public class DatosConsulta {
+public class DatosConsultaPrivada {
     private String email;
     private String nombre;
     private Integer Telefono;
     private String mensaje;
 
-    public DatosConsulta(String email, String nombre, Integer telefono, String mensaje) {
+    public DatosConsultaPrivada(String email, String nombre, Integer telefono, String mensaje) {
         this.email = email;
         this.nombre = nombre;
         this.Telefono = telefono;

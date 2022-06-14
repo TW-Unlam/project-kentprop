@@ -28,6 +28,12 @@ public class Consulta {
         this.publicacion = publicacion;
     }
 
+    public Consulta(String pregunta, Usuario usuario, Publicacion publicacion) {
+        this.pregunta = pregunta;
+        this.usuario = usuario;
+        this.publicacion = publicacion;
+    }
+
     public Consulta() {
 
     }

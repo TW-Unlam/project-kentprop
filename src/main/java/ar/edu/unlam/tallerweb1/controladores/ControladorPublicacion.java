@@ -1,9 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
-import ar.edu.unlam.tallerweb1.modelo.Accion;
-import ar.edu.unlam.tallerweb1.modelo.Publicacion;
-import ar.edu.unlam.tallerweb1.modelo.TipoPropiedad;
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.*;
+import ar.edu.unlam.tallerweb1.servicios.ServicioConsulta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEmail;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +10,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -23,10 +21,13 @@ public class ControladorPublicacion {
     private ServicioPublicaciones servicioPublicacion;
     private ServicioEmail servicioEmail;
 
+    private ServicioConsulta servicioConsultas;
+
     @Autowired
-    public ControladorPublicacion(ServicioPublicaciones servicioPublicacion, ServicioEmail servicioEmail){
+    public ControladorPublicacion(ServicioPublicaciones servicioPublicacion, ServicioEmail servicioEmail, ServicioConsulta servicioConsulta){
         this.servicioPublicacion = servicioPublicacion;
         this.servicioEmail=servicioEmail;
+        this.servicioConsultas = servicioConsulta;
     }
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public ModelAndView irAHome()
@@ -55,14 +56,33 @@ public class ControladorPublicacion {
     @RequestMapping(path = "/detalle-publicacion",method = RequestMethod.GET)
     public ModelAndView verDetallePublicacion(Integer id) {
         ModelMap modelo = new ModelMap();
-        Publicacion resultado = null;
-        try{
-            resultado = servicioPublicacion.verDetallePublicacion(id);
-        }catch(Exception e){
+        Publicacion publicaciones = null;
+        List<Consulta> consultasHechas = null;
+
+        publicaciones = servicioPublicacion.verDetallePublicacion(id);
+        consultasHechas = servicioConsultas.buscarConsultasDePublicacion(id);
+
+
+        if(publicaciones != null){
+            modelo.put("detalle", publicaciones);
+        }else{
             modelo.put("msg-error", "Pagina inexistente");
         }
-        modelo.put("detalle", resultado);
         return new ModelAndView("detalle-publicacion", modelo);
+    }
+
+    @RequestMapping(value = "/hacer-pregunta-publicacion/", method = RequestMethod.GET)
+    public ModelAndView hacerPregunta(@RequestParam("publicacionId") Integer publicacionId){
+        Integer publicacionId2 = 2;
+        ModelMap modelo = new ModelMap();
+        Consulta resultado = null;
+
+        //Usuario usuario = servicioConsultas.buscarUsuarioPorId(usuarioId);
+        //Publicacion publicacion = servicioConsultas.buscarPublicacionPorId(publicacionId);
+        //servicioConsultas.hacerPregunta(new Consulta(descripcion,usuario,publicacion));
+
+        modelo.put("preguntas","Hola");
+        return new ModelAndView("redirect:/detalle-publicacion?id=publicacionId2",modelo);
     }
 
     @RequestMapping(path = "/lista-publicaciones")
@@ -71,14 +91,14 @@ public class ControladorPublicacion {
         return new ModelAndView("lista-publicaciones");
     }
     @RequestMapping(path = "/enviar-consulta-privada",method = RequestMethod.POST)
-    public ModelAndView enviarConsulta(DatosConsulta datosConsulta, Integer propiedadId) {
+    public ModelAndView enviarConsulta(DatosConsultaPrivada datosConsultaPrivada, Integer propiedadId) {
         ModelMap modelo = new ModelMap();
         Usuario resultado = null;
         try{
             resultado = servicioEmail.enviarConsultaPrivada(
-                    datosConsulta.getEmail(),
-                    datosConsulta.getTelefono(),
-                    datosConsulta.getMensaje(),
+                    datosConsultaPrivada.getEmail(),
+                    datosConsultaPrivada.getTelefono(),
+                    datosConsultaPrivada.getMensaje(),
                     propiedadId);
         }catch(Exception e){
             modelo.put("msg-error", "Propietario inexistente");

@@ -25,6 +25,7 @@
     <h4>   ${detalle.fechaPublicacion}</h4>
         <h4>  ${detalle.propiedad.metrosCuadrados}</h4>
         <h4>  ${detalle.propiedad.ubicacion.localidad}</h4>
+
     <br>
 </c:if>
 

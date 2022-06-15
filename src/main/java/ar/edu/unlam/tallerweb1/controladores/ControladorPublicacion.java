@@ -58,7 +58,7 @@ public class ControladorPublicacion {
         }catch(Exception e){
             modelo.put("msg-error", "Pagina inexistente");
         }
-        modelo.put("datosConsulta", new DatosConsulta());
+     /*   modelo.put("datosConsulta", new DatosConsulta());*/
         modelo.put("detalle", resultado);
         return new ModelAndView("detalle-publicacion", modelo);
     }
@@ -68,7 +68,7 @@ public class ControladorPublicacion {
 
         return new ModelAndView("lista-publicaciones");
     }
-    @RequestMapping(path = "/enviar-consulta-privada",method = RequestMethod.POST)
+   /* @RequestMapping(path = "/enviar-consulta-privada",method = RequestMethod.POST)
     public ModelAndView enviarConsulta(@ModelAttribute("datosConsulta") DatosConsulta datosConsulta) {
         ModelMap modelo = new ModelMap();
         Usuario resultado = null;
@@ -87,16 +87,16 @@ public class ControladorPublicacion {
         modelo.put("usuario", resultado);
 
         return new ModelAndView("redirect:/detalle-publicacion?id="+datosConsulta.getPropiedadId(),modelo);
-    }
-    @RequestMapping(path = "/enviar-consulta",method = RequestMethod.GET)
+    }*/
+   /* @RequestMapping(path = "/enviar-consulta",method = RequestMethod.GET)
     public ModelAndView irAFormConsulta( Integer propiedadId) {
         ModelMap modelo = new ModelMap();
         modelo.put("datosConsulta", new DatosConsulta());
         modelo.put("idPropiedad",propiedadId);
           return new ModelAndView("consultaPrivada",modelo);
     }
-
-    @RequestMapping(value = "/hacer-pregunta-publicacion", method = RequestMethod.GET)
+*/
+  /*  @RequestMapping(value = "/hacer-pregunta-publicacion", method = RequestMethod.GET)
     public ModelAndView hacerPregunta(Integer publicacionId){
 //http://localhost:8080/project_kentprop_war_exploded/hacer-pregunta-publicacion?publicacionId=2
         //Integer publicacionId2 = 2;
@@ -109,5 +109,5 @@ public class ControladorPublicacion {
 
         modelo.put("Cualquiercosa quele quieras pasar",publicacionId);
         return new ModelAndView("redirect:/detalle-publicacion?id="+publicacionId,modelo);
-    }
+    }*/
 }

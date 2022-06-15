@@ -30,6 +30,9 @@
     <h4>  ${detalle.propiedad.id}</h4>
     <h4>  ${detalle.propiedad.metrosCuadrados}</h4>
     <h4>  ${detalle.propiedad.ubicacion.localidad}</h4>
+        <a href="enviar-consulta?propiedadId=${detalle.propiedad.id}">Realizar Consultas</a>
+    <%--Bloque que es visible si el elemento error no esta vacio	--%>
+    </div>
 
 
 
@@ -37,7 +40,7 @@
 
 
 
-    <a href="enviar-pregunta?propiedadId=${detalle.propiedad.id}">Realizar Consultas</a>
+
 </c:if>
 ${msg}
 ${msg-error}

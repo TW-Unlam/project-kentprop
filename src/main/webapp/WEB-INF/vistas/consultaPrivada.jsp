@@ -21,7 +21,7 @@
             <%--Definicion de un form asociado a la accion /validar-login por POST. Se indica ademas que el model attribute se--%>
             <%--debe referenciar con el nombre usuario, spring mapea los elementos de la vista con los atributos de dicho objeto--%>
             <%--para eso debe coincidir el valor del elemento path de cada input con el nombre de un atributo del objeto --%>
-            <form:form action="enviar-pregunta-privada" method="POST" modelAttribute="datosConsulta">
+            <form:form action="enviar-consulta-privada" method="POST" modelAttribute="datosConsulta">
                 <h3 class="form-signin-heading">Deje Su Consulta Al Propietario de la Publicacion</h3>
                 <hr class="colorgraph"><br>
                 <%--Elementos de entrada de datos, el elemento path debe indicar en que atributo del objeto usuario se guardan los datos ingresados--%>

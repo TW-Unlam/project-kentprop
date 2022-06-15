@@ -62,7 +62,8 @@ public class ControladorDetallePublicacion {
             modelo.put("pregunta_hecha", seHizo);
 
             return new ModelAndView("redirect:/detalle-publicacion?id=" + datosPregunta.getId(), modelo);
+        }else{
+            return new ModelAndView("redirect:/loginConId?id="+datosPregunta.getId());
         }
-        return new ModelAndView("redirect:/loginConId?id="+datosPregunta.getId());
     }
 }

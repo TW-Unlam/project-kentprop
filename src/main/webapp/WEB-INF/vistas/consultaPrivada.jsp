@@ -10,7 +10,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Consulta Privada Al Publicante</title>
 </head>
 <body>
 <div id="FormConsulta" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
@@ -22,14 +22,14 @@
             <%--debe referenciar con el nombre usuario, spring mapea los elementos de la vista con los atributos de dicho objeto--%>
             <%--para eso debe coincidir el valor del elemento path de cada input con el nombre de un atributo del objeto --%>
             <form:form action="enviar-consulta-privada" method="POST" modelAttribute="datosConsulta">
-                <h3 class="form-signin-heading">Taller Web I</h3>
+                <h3 class="form-signin-heading">Deje Su Consulta Al Propietario de la Publicacion</h3>
                 <hr class="colorgraph"><br>
                 <%--Elementos de entrada de datos, el elemento path debe indicar en que atributo del objeto usuario se guardan los datos ingresados--%>
-                <form:input required="required" path="email" placeholder="Buscar por provincio o localidad" id="ubicacion" type="text" class="form-control" />
-                <form:input required="required" path="nombre" placeholder="Buscar por provincio o localidad" id="ubicacion" type="text" class="form-control" />
-                <form:input required="required" path="telefono" placeholder="Buscar por provincio o localidad" id="ubicacion" type="text" class="form-control" />
-                <form:input required="required" path="mensaje" placeholder="Buscar por provincio o localidad" id="ubicacion" type="text" class="form-control" />
-                <form:input required="required" path="propiedadId" placeholder="Buscar por provincio o localidad" id="idPropiedad" type="text" class="form-control" value="${detalle.propiedad.id}" />
+                <form:input required="required" path="email" placeholder="email" id="ubicacion" type="text" class="form-control" />
+                <form:input required="required" path="nombre" placeholder="nombre" id="ubicacion" type="text" class="form-control" />
+                <form:input required="required" path="telefono" placeholder="telefono" id="ubicacion" type="text" class="form-control" />
+                <form:input required="required" path="mensaje" placeholder="mensaje" id="ubicacion" type="text" class="form-control" />
+                <form:input required="required" path="propiedadId" placeholder="mensaje" id="idPropiedad" type="text" class="form-control" value="${detalle.propiedad.id}" />
                 <button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Consultar</button>
             </form:form>
             <%-- <a href="registrar-usuario"	>Registrarme</a>--%>

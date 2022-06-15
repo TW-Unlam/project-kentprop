@@ -1,7 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.*;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,23 @@ public class RepositorioPublicacionesImpl implements RepositorioPublicaciones {
               return sessionFactory.getCurrentSession()
                 .createCriteria(Publicacion.class)
                 .createAlias("propiedad", "prop")
+                .createAlias("prop.ubicacion", "ubi")
+                .add(Restrictions.or(
+                        Restrictions.like("ubi.localidad", "%" + descripcion + "%"),
+                        Restrictions.like("ubi.provincia", "%" + descripcion +"%" ))
+                )
+                .add(Restrictions.eq("prop.tipoPropiedad", tipo))
+                .add(Restrictions.eq("tipoAccion", accion))
+                .list();
+
+    }
+
+    @Override
+    public List<Publicacion> buscarImagensPublicaciones(Accion accion, TipoPropiedad tipo, String descripcion) {
+        return sessionFactory.getCurrentSession()
+                .createCriteria(Imagen.class)
+                .createAlias("publicacion", "publ")
+                .createAlias("publ.propiedad", "prop")
                 .createAlias("prop.ubicacion", "ubi")
                 .add(Restrictions.or(
                         Restrictions.like("ubi.localidad", "%" + descripcion + "%"),

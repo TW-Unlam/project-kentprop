@@ -24,7 +24,7 @@ public class ServicioEmailDefault implements ServicioEmail {
     @Transactional
     public Usuario enviarConsultaPrivada(String email, String nombre, Integer telefono, String mensaje, Integer propiedadId) throws UsuarioInexistente {
         Propiedad propiedad=  repositorioDePublicaciones.buscarPropiedadConPropietario(propiedadId);
-       if(propiedad.getId()==null)
+       if(propiedad==null)
        {
            throw new UsuarioInexistente();
        }

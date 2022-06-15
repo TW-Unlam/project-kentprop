@@ -40,6 +40,7 @@ public class ServicioConsultasTest {
 
     }
     @Test
+            (expected = UsuarioInexistente.class)
     public void alEnviarConsultaDeEmailDevuelveElUsuarioPropietarioNoexiste() throws UsuarioInexistente {
         dadoQueExisteUnaPublicacion();
 

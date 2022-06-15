@@ -46,4 +46,15 @@ public class Imagen {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    @ManyToOne(optional = false)
+    private Publicacion publicacions;
+
+    public Publicacion getPublicacions() {
+        return publicacions;
+    }
+
+    public void setPublicacions(Publicacion publicacions) {
+        this.publicacions = publicacions;
+    }
 }

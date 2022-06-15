@@ -23,7 +23,7 @@ public class Publicacion {
     @JoinColumn(name = "propiedad_id")
     private Propiedad propiedad;
 
-    public Publicacion(Double precio, String descripcion, LocalDate fechaPublicacion, Propiedad propiedad) {
+    public Publicacion(Double precio, String descripcion, LocalDate fechaPublicacion, Propiedad propiedad, Imagen proImagen) {
         this.precio = precio;
         this.descripcion = descripcion;
         this.fechaPublicacion = fechaPublicacion;

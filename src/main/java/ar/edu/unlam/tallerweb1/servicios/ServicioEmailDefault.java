@@ -20,11 +20,18 @@ public class ServicioEmailDefault implements ServicioEmail {
     private RepositorioPublicaciones repositorioDePublicaciones;
     private RepositorioUsuario repositorioDeUsuarios;
 
+    private final String passwordOrg = "";
+    private final String organizacionEmail = "sullcafernando18@gmail.com";
+    private String PropietarioEmail = "sullcafernando18@gmail.com";
+    private String MensajeIngresada = "Este Es un Email Informativo Sobre las Preguntas sobre su Publicaciones";
+    private String EmailIngresado = "sullcafernando18@gmail.com";
+    private Integer TelefonoIngresado;
+    private String NombreIngresada;
     Email email = EmailBuilder.startingBlank()
-            .from("EscabiARG", "sullcafernando18@gmail.com")
-            .to("cliente", "sullcafernando18@gmail.com")
+            .from("KentProp", organizacionEmail)
+            .to("cliente", PropietarioEmail)
             .withSubject("Gracias por elegirnos")
-            .withPlainText("Usted Compro un Whisky Jack Daniels")
+            .withPlainText(MensajeIngresada)
             .buildEmail();
 
     @Autowired
@@ -36,7 +43,7 @@ public class ServicioEmailDefault implements ServicioEmail {
     @Override
     @Transactional
     public Usuario enviarConsultaPrivada(String email, String nombre, Integer telefono, String mensaje, Integer propiedadId) throws UsuarioInexistente {
-        Propiedad propiedad=  repositorioDePublicaciones.buscarPropiedadConPropietario(propiedadId);
+        Propiedad propiedad=  repositorioDePublicaciones.buscarPropiedad(propiedadId);
        if(propiedad==null)
        {
            throw new UsuarioInexistente();
@@ -45,9 +52,15 @@ public class ServicioEmailDefault implements ServicioEmail {
            /////Operacionde mensajeria
            //String email, String nombre, Integer telefono, String mensaje propiedad.getPropietario().getEmail()
            //retorna los datos del propietario a moo de informacion extra
-           /*return  repositorioDeUsuarios.obterneUsuario(propiedad.getPropietario().getId());*/
-//           senMail();
+           this.EmailIngresado=email;
+           this.NombreIngresada=nombre;
+           this.TelefonoIngresado=telefono;
+           this.MensajeIngresada=mensaje;
+           this.PropietarioEmail=propiedad.getPropietario().getEmail();
+//         senMail();
            return  propiedad.getPropietario();
+//         return  repositorioDeUsuarios.obterneUsuario(propiedad.getPropietario().getId());
+//         return  repositorioDePublicaciones.buscarPropietarioDeLaPropiedad(propiedadId);
        }
     }
 
@@ -55,7 +68,7 @@ public class ServicioEmailDefault implements ServicioEmail {
     public Mailer getmailer() {
         try {
             MailerRegularBuilder mb = MailerBuilder
-                    .withSMTPServer("smtp.gmail.com", 465, "sullcafernando18@gmail.com", "")
+                    .withSMTPServer("smtp.gmail.com", 465, organizacionEmail, passwordOrg)
                     .withTransportStrategy(TransportStrategy.SMTPS);
             Mailer mailer = mb.buildMailer();
             return mailer;

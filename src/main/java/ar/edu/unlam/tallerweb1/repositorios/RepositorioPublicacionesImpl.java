@@ -56,8 +56,19 @@ public class RepositorioPublicacionesImpl implements RepositorioPublicaciones {
     }
 
     @Override
-    public Propiedad buscarPropiedadConPropietario(Integer id_propiedad) {
+    public Propiedad buscarPropiedad(Integer id_propiedad) {
         return sessionFactory.getCurrentSession().get(Propiedad.class, id_propiedad);
+    }
+/**
+ * No se logro mandar/select una parte del join para que devuelva el usuario
+ * por lo tanto se utiliza la funcion anterior*/
+    @Override
+    public Usuario buscarPropietarioDeLaPropiedad(Integer id_propiedad) {
+        return (Usuario) sessionFactory.getCurrentSession()
+                .createCriteria(Propiedad.class)
+                .createAlias("propietario", "usuario")
+                .add(Restrictions.eq("id", id_propiedad))
+                .uniqueResult();
     }
 
 }

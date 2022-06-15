@@ -78,7 +78,7 @@ public class RepositorioPublicacionesTest extends SpringTest {
 
         List<Publicacion> propiedades = repositorioPublicaciones.buscarPublicaciones(ACCION_EXISTENTE, TIPO_EXISTENTE, DESCRIPCION_EXISTENTE);
         Publicacion resultado = repositorioPublicaciones.buscarDetallePublicacion(propiedades.get(0).getId());
-        Propiedad propietario = (Propiedad) repositorioPublicaciones.buscarPropiedadConPropietario(resultado.getPropiedad().getId());
+        Propiedad propietario = (Propiedad) repositorioPublicaciones.buscarPropiedad(resultado.getPropiedad().getId());
 
         entoncesMeDevuelveLosDatosDelUsuarioPropietarioDELaPropiedad( propietario.getPropietario());
         entoncesMeDevuelveLosDatosDelUsuarioAEnviar( propietario.getPropietario().getEmail(),"sullca@gmail");

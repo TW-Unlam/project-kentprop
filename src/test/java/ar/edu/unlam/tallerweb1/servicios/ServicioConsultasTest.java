@@ -68,7 +68,7 @@ public class ServicioConsultasTest {
         detalle.setPropiedad(new Propiedad());
         detalle.getPropiedad().setPropietario(new Usuario());
         detalle.getPropiedad().getPropietario().setEmail("sullca@gmail.com");
-        when(repositorioPublicaciones.buscarPropiedadConPropietario(propiedadId)).thenReturn( detalle.getPropiedad());
+        when(repositorioPublicaciones.buscarPropiedad(propiedadId)).thenReturn( detalle.getPropiedad());
     }
 
     private List<Publicacion> givenExistenPropiedades(int cantidad){

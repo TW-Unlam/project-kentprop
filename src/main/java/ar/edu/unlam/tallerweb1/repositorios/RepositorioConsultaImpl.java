@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Consulta;
+import ar.edu.unlam.tallerweb1.modelo.Publicacion;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +29,21 @@ public class RepositorioConsultaImpl implements RepositorioConsulta{
 
     @Override
     public List<Consulta> buscarConsultasDeUsuario(long idUsuario) {
-
         return sessionFactory.getCurrentSession()
                 .createCriteria(Consulta.class)
-                .createAlias("publicacion", "publ")
+                .createAlias("publicacion", "publ") //Chequear
                 .createAlias("usuario", "usu")
                 .add(Restrictions.eq("usu.id", idUsuario))
                 .list();
     }
 
     @Override
-    public void GuardarConsulta(Consulta consulta) {
-                sessionFactory.getCurrentSession().save(consulta);
+    public void guardarConsulta(Consulta consulta) {
+        sessionFactory.getCurrentSession().save(consulta);
+    }
+
+    @Override
+    public Publicacion buscarPublicacionPorId(Integer publicacionId) {
+        return sessionFactory.getCurrentSession().get(Publicacion.class, publicacionId);
     }
 }

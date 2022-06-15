@@ -22,21 +22,21 @@ public class RepositorioConsultasTest extends SpringTest {
     
     @Test
     @Transactional @Rollback
-    public void alGuardarConsutaldelUsuarioParaUnaPublicacionExistente(){
+    public void alGuardarConsutalDelUsuarioParaUnaPublicacionExistente(){
         Consulta consulta = dadoQueExisteUnaPublicacionYUsuarioLogueado();
 
-        repositorioDeConsultas.GuardarConsulta(consulta);
+        repositorioDeConsultas.guardarConsulta(consulta);
 
         entoncesSeEstableceElIDDelGuardado(consulta);
     }
 
-
     @Test
     @Transactional @Rollback
-    public void alBuscarlaConsultaDeUsuarioDEvuelvelaExistente(){
+    public void alBuscarLaConsultaDeUsuarioDevuelvelaExistente(){ //Lo mismo
         Usuario usuario=dadoQueExisteUnaConsultaDeUnUsuario();
 
         List<Consulta> consulta1Busqueda=repositorioDeConsultas.buscarConsultasDeUsuario(usuario.getId());
+
         assertThat(consulta1Busqueda).hasSize(1);
 
     }
@@ -52,7 +52,7 @@ public class RepositorioConsultasTest extends SpringTest {
 
     @Test
     @Transactional @Rollback
-    public void alBuscarlasConsultaDeUanPublicacionExistenteDevuelveLALista(){
+    public void alBuscarlasConsultaDeUnaPublicacionExistenteDevuelveLaLista(){
         Publicacion publicacion = dadoQueExistelistaConsultaDeUnaPublicacion();
 
         List<Consulta> consulta1Busqueda=repositorioDeConsultas.buscarConsultasDePublicacion(publicacion.getId());

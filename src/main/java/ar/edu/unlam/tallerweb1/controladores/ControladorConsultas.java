@@ -45,9 +45,7 @@ public class ControladorConsultas {
             modelo.put("msg-error", "Propietario inexistente");
         }
         modelo.put("msg","mensaje enviado exitosamente");
-        modelo.put("msg-2",datosConsulta.getEmail());
         modelo.put("usuario", resultado);
-
         return new ModelAndView("redirect:/detalle-publicacion?id="+datosConsulta.getPropiedadId(),modelo);
     }
 }

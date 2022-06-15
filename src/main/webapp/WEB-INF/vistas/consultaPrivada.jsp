@@ -29,7 +29,7 @@
                 <form:input required="required" path="nombre" placeholder="nombre" id="ubicacion" type="text" class="form-control" />
                 <form:input required="required" path="telefono" placeholder="telefono" id="ubicacion" type="text" class="form-control" />
                 <form:input required="required" path="mensaje" placeholder="mensaje" id="ubicacion" type="text" class="form-control" />
-                <form:input required="required" path="propiedadId" placeholder="mensaje" id="idPropiedad" type="text" class="form-control" value="${detalle.propiedad.id}" />
+                <form:input required="required" path="propiedadId" id="idPropiedad" type="hidden" class="form-control" value="${idPropiedad}" />
                 <button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Consultar</button>
             </form:form>
             <%-- <a href="registrar-usuario"	>Registrarme</a>--%>

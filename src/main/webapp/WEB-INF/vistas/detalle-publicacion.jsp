@@ -1,6 +1,9 @@
 <%@ page import="java.lang.reflect.Array" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="ar.edu.unlam.tallerweb1.modelo.Publicacion" %><%--
+<%@ page import="ar.edu.unlam.tallerweb1.modelo.Publicacion" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
 <%--
   Created by IntelliJ IDEA.
   User: sullc
@@ -25,9 +28,22 @@
     <h4>   ${detalle.fechaPublicacion}</h4>
         <h4>  ${detalle.propiedad.metrosCuadrados}</h4>
         <h4>  ${detalle.propiedad.ubicacion.localidad}</h4>
-
+    <c:if test="${not empty preguntas_hechas}">
+        <c:forEach var="preguntas_h" items="${preguntas_hechas}" >
+            <h5>${preguntas_h.id}</h5>
+            <h5>${preguntas_h.pregunta}</h5>
+            <h5>${preguntas_h.usuario}</h5>
+        </c:forEach>
+    </c:if>
     <br>
 </c:if>
+
+<form:form action="hacer-pregunta-publicacion" modelAttribute="datosPregunta" method="POST" class="search_form">
+    <form:input required="required" path="id" placeholder="" id="id" type="hidden" class="form-control" value="${detalle.id} "/>
+    <form:input required="required" path="descripcion" placeholder="Ingrese una pregunta" id="descripcion" type="text" class="form-control"/>
+
+    <button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Buscar</button>
+</form:form>
 
 
 </body>

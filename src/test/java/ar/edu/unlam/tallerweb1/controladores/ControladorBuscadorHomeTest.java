@@ -88,49 +88,4 @@ public class ControladorBuscadorHomeTest {
                 datosBusqueda.getUbicacion())).thenReturn(lista);
     }
 
-    /*
-    @Test
-    public void alEnviarUnMailDeUnaPublicacionEnDetalleDeberiaEnviarMensajeDeExito(){
-        dadoQueExisteUnaPropiedad();
-        ModelAndView mav= CuandoQuiereEnviarElMail();
-        entoncesMeLLevaALaVista(VISTA_VER_DETALLE, mav.getViewName());
-        entoncesSeRecibeMensajeExito("Mensaje_Enviado_Correctamente", mav.getModel());
-
-    }
-
-    @Test
-    public void alEnviarUnMailDeunaPublicacionEnDetalleAUsuarioInactivoDeberiaLanzarError() throws UsuarioInexistente {
-        dadoQueExisteUnaPropiedadConUsuarioInactivo();
-        EnviarElMailLanzaExcepcion();
-        ModelAndView mav= CuandoQuiereEnviarElMail();
-        entoncesMeLLevaALaVista(VISTA_VER_DETALLE, mav.getViewName());
-        entoncesSeRecibeMensajeError("Propietario inexistente", mav.getModel());
-    }
-
-    private  void EnviarElMailLanzaExcepcion() throws UsuarioInexistente{
-        when(servicioEmail.enviarConsultaPrivada( datosConsultaPrivada.getEmail(),
-                datosConsultaPrivada.getTelefono(),
-                datosConsultaPrivada.getMensaje(),
-                PROPIEDAD_ID
-        )).thenThrow( new UsuarioInexistente());
-    }
-
-    private void dadoQueExisteUnaPropiedadConUsuarioInactivo() {
-       /* Usuario propietario= new Usuario();
-        propietario.setActivo(false);*/
-        //Publicacion detalle = new Publicacion();
-        /* detalle.getPropiedad().setPropietario(propietario);*/
-        /*when(servicioPublicaciones.verDetallePublicacion(PROPIEDAD_ID)).thenReturn(detalle);
-    }
-
-
-
-   /* private ModelAndView CuandoQuiereEnviarElMail() {
-        return controladorPublicacion.enviarConsulta(datosConsultaPrivada,PROPIEDAD_ID);
-    }
-
-    private void entoncesSeRecibeMensajeExito(String mensaje, Map<String, Object> model) {
-        assertThat(model.get("msg")).isEqualTo(mensaje);
-    }
-    */
 }

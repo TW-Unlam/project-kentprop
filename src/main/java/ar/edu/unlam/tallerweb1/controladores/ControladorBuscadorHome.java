@@ -54,22 +54,5 @@ public class ControladorBuscadorHome {
         return new ModelAndView("lista-publicaciones");
     }
 
-    /*@RequestMapping(path = "/enviar-consulta-privada",method = RequestMethod.POST)
-    public ModelAndView enviarConsulta(DatosConsultaPrivada datosConsultaPrivada, Integer propiedadId) {
-        ModelMap modelo = new ModelMap();
-        Usuario resultado = null;
-        try{
-            resultado = servicioEmail.enviarConsultaPrivada(
-                    datosConsultaPrivada.getEmail(),
-                    datosConsultaPrivada.getTelefono(),
-                    datosConsultaPrivada.getMensaje(),
-                    propiedadId);
-        }catch(Exception e){
-            modelo.put("msg_error", "Propietario inexistente");
-        }
-        modelo.put("msg", "Mensaje_Enviado_Correctamente");
-        modelo.put("usuario", resultado);
 
-        return new ModelAndView("detalle-publicacion",modelo);
-    }*/
 }

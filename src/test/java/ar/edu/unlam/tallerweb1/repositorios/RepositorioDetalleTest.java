@@ -15,28 +15,28 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 
-public class RepositorioConsultasTest extends SpringTest {
+public class RepositorioDetalleTest extends SpringTest {
    /* private final Session session= session();*/
     @Autowired
     private RepositorioPregunta repositorioDeConsultas;
     
     @Test
     @Transactional @Rollback
-    public void alGuardarConsutaldelUsuarioParaUnaPublicacionExistente(){
-        Pregunta pregunta = dadoQueExisteUnaPublicacionPropiedadYUsuarioLogueado();
+    public void alGuardarConsutalDelUsuarioParaUnaPublicacionExistente(){
+        Pregunta pregunta = dadoQueExisteUnaPublicacionYUsuarioLogueado();
 
         repositorioDeConsultas.guardarConsulta(pregunta);
 
         entoncesSeEstableceElIDDelGuardado(pregunta);
     }
 
-
     @Test
     @Transactional @Rollback
-    public void alBuscarlaConsultaDeUsuarioDEvuelvelaExistente(){
+    public void alBuscarLaConsultaDeUsuarioDevuelvelaExistente(){ //Lo mismo
         Usuario usuario=dadoQueExisteUnaConsultaDeUnUsuario();
 
         List<Pregunta> pregunta1Busqueda =repositorioDeConsultas.buscarConsultasDeUsuario(usuario.getId());
+
         assertThat(pregunta1Busqueda).hasSize(1);
 
     }
@@ -52,7 +52,7 @@ public class RepositorioConsultasTest extends SpringTest {
 
     @Test
     @Transactional @Rollback
-    public void alBuscarlasConsultaDeUnaPublicacionExistenteDevuelveLALista(){
+    public void alBuscarlasConsultaDeUnaPublicacionExistenteDevuelveLaLista(){
         Publicacion publicacion = dadoQueExistelistaConsultaDeUnaPublicacion();
 
         List<Pregunta> pregunta1Busqueda =repositorioDeConsultas.buscarConsultasDePublicacion(publicacion.getId());
@@ -60,12 +60,11 @@ public class RepositorioConsultasTest extends SpringTest {
 
     }
 
-
     private void entoncesSeEstableceElIDDelGuardado(Pregunta pregunta) {
         assertThat(pregunta.getId()).isNotNull();
     }
 
-    private Pregunta dadoQueExisteUnaPublicacionPropiedadYUsuarioLogueado() {
+    private Pregunta dadoQueExisteUnaPublicacionYUsuarioLogueado() {
         Pregunta pregunta =new Pregunta();
         pregunta.setPregunta("Tiempo de Aquiler minimo?");
         Usuario usuario=new Usuario();

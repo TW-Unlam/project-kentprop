@@ -1,7 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.*;
-import ar.edu.unlam.tallerweb1.servicios.ServicioEmail;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,15 +13,13 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-public class ControladorPublicacion {
+public class ControladorBuscadorHome {
 
     private ServicioPublicaciones servicioPublicacion;
-    private ServicioEmail servicioEmail;
 
     @Autowired
-    public ControladorPublicacion(ServicioPublicaciones servicioPublicacion, ServicioEmail servicioEmail){
+    public ControladorBuscadorHome(ServicioPublicaciones servicioPublicacion){
         this.servicioPublicacion = servicioPublicacion;
-        this.servicioEmail=servicioEmail;
     }
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public ModelAndView irAHome()
@@ -38,29 +35,15 @@ public class ControladorPublicacion {
     public ModelAndView buscar(@ModelAttribute("datosBusqueda") DatosBusqueda datosBusqueda) {
         ModelMap modelo = new ModelMap();
         List<Publicacion> resultado = null;
-        try{
-            resultado = servicioPublicacion.buscarPublicacion(datosBusqueda.getTipoAccion(),
+        resultado = servicioPublicacion.buscarPublicacion(datosBusqueda.getTipoAccion(),
                     datosBusqueda.getTipoPropiedad(),
                     datosBusqueda.getUbicacion());
-        } catch(Exception e) {
+        if(resultado.isEmpty()){
             modelo.put("msg_error", "No se encontraron publicaciones con estos datos");
+        }else{
+            modelo.put("publicaciones", resultado);
         }
-        modelo.put("publicaciones", resultado);
-
         return new ModelAndView("lista-publicaciones", modelo);
-    }
-    @RequestMapping(path = "/detalle-publicacion",method = RequestMethod.GET)
-    public ModelAndView verDetallePublicacion(Integer id) {
-        ModelMap modelo = new ModelMap();
-        Publicacion resultado = null;
-        try{
-            resultado = servicioPublicacion.verDetallePublicacion(id);
-        }catch(Exception e){
-            modelo.put("msg-error", "Pagina inexistente");
-        }
-     /*   modelo.put("datosConsulta", new DatosConsulta());*/
-        modelo.put("detalle", resultado);
-        return new ModelAndView("detalle-publicacion", modelo);
     }
 
     @RequestMapping(path = "/lista-publicaciones")
@@ -68,5 +51,6 @@ public class ControladorPublicacion {
 
         return new ModelAndView("lista-publicaciones");
     }
+
 
 }

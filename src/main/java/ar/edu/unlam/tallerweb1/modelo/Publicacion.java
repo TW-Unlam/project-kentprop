@@ -16,9 +16,7 @@ public class Publicacion {
     private LocalDate fechaPublicacion;
     private boolean isActivo;
     private Accion tipoAccion;
-
     private Estatus estatus;
-
     @OneToOne
     @JoinColumn(name = "propiedad_id")
     private Propiedad propiedad;

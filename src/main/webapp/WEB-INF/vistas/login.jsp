@@ -19,6 +19,7 @@
 					<hr class="colorgraph"><br>
 
 					<%--Elementos de entrada de datos, el elemento path debe indicar en que atributo del objeto usuario se guardan los datos ingresados--%>
+					<form:input path="idPublicacion" id="idPublicacion" type="hidden" class="form-control" value="${idp}"/>
 					<form:input path="email" id="email" type="email" class="form-control" />
 					<form:input path="password" type="password" id="password" class="form-control"/>     		  
 					

@@ -1,6 +1,5 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
-import ar.edu.unlam.tallerweb1.excepciones.PublicacionNoEncontrada;
 import ar.edu.unlam.tallerweb1.modelo.Accion;
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
 import ar.edu.unlam.tallerweb1.modelo.TipoPropiedad;
@@ -8,7 +7,7 @@ import ar.edu.unlam.tallerweb1.modelo.TipoPropiedad;
 import java.util.List;
 
 public interface ServicioPublicaciones {
-    List<Publicacion> buscarPublicacion(Accion accion, TipoPropiedad tipo, String descripcion) throws PublicacionNoEncontrada;
+    List<Publicacion> buscarPublicacion(Accion accion, TipoPropiedad tipo, String descripcion);
 
     Publicacion verDetallePublicacion(Integer id);
 }

@@ -1,7 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.controladores.DatosBusqueda;
-import ar.edu.unlam.tallerweb1.excepciones.PublicacionNoEncontrada;
+
 import ar.edu.unlam.tallerweb1.modelo.Accion;
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
 import ar.edu.unlam.tallerweb1.modelo.TipoPropiedad;
@@ -23,13 +23,9 @@ public class ServicioPublicacionesDefault implements ServicioPublicaciones {
     }
 
     @Override
-    public List<Publicacion> buscarPublicacion(Accion accion, TipoPropiedad tipo, String descripcion) throws PublicacionNoEncontrada {
+    public List<Publicacion> buscarPublicacion(Accion accion, TipoPropiedad tipo, String descripcion){
         List<Publicacion> lista = repositorioPublicaciones.buscarPublicaciones(accion, tipo, descripcion);
-        if(lista.isEmpty()){
-            throw new PublicacionNoEncontrada();
-        }else{
-            return lista;
-        }
+        return lista;
     }
 
     @Override

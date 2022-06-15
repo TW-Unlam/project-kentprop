@@ -28,6 +28,18 @@ public class Pregunta {
         this.publicacion = publicacion;
     }
 
+    public Pregunta(String pregunta, Usuario usuario, Publicacion publicacion) {
+        this.pregunta = pregunta;
+        this.usuario = usuario;
+        this.publicacion = publicacion;
+    }
+
+    public Pregunta(String pregunta, Publicacion publicacion) {
+        this.pregunta = pregunta;
+
+        this.publicacion = publicacion;
+    }
+
     public Pregunta() {
 
     }

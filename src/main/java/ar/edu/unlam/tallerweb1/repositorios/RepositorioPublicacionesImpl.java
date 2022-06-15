@@ -39,10 +39,10 @@ public class RepositorioPublicacionesImpl implements RepositorioPublicaciones {
     }
 
     @Override
-    public Propiedad buscarPrpiedadConPropietario(Integer id_propietario) {
+    public Propiedad buscarPropiedadConPropietario(Integer id_propietario) {
         return (Propiedad) sessionFactory.getCurrentSession()
                 .createCriteria(Propiedad.class)
-                .createAlias("propietario","prop")
+                .createAlias("propietario","usuario")
                 .add(Restrictions.eq("id", id_propietario)).uniqueResult();
     }
 

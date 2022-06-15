@@ -144,7 +144,7 @@ public class ControladorPublicacionesTest {
 
 
     private ModelAndView CuandoQuiereEnviarElMail() {
-        return controladorPublicacion.enviarConsulta(datosConsulta,PROPIEDAD_ID);
+        return controladorPublicacion.enviarConsulta(datosConsulta);
     }
 
     private ModelAndView cuandoSeleccionoVerDetalle() {

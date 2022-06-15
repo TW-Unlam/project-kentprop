@@ -5,12 +5,26 @@ public class DatosConsulta {
     private String nombre;
     private Integer Telefono;
     private String mensaje;
+    private Integer propiedadId;
 
-    public DatosConsulta(String email, String nombre, Integer telefono, String mensaje) {
+    public DatosConsulta(String email, String nombre, Integer telefono, String mensaje, Integer propiedadId) {
         this.email = email;
         this.nombre = nombre;
-        this.Telefono = telefono;
+        Telefono = telefono;
         this.mensaje = mensaje;
+        this.propiedadId = propiedadId;
+    }
+
+    public Integer getPropiedadId() {
+        return propiedadId;
+    }
+
+    public void setPropiedadId(Integer propiedadId) {
+        this.propiedadId = propiedadId;
+    }
+
+    public DatosConsulta() {
+
     }
 
     public String getEmail() {

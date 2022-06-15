@@ -5,19 +5,27 @@ import ar.edu.unlam.tallerweb1.modelo.Propiedad;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPublicaciones;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ServicioEmailDefault implements ServicioEmail {
     private RepositorioPublicaciones repositorioDePublicaciones;
     private RepositorioUsuario repositorioDeUsuarios;
+
+    @Autowired
+    public ServicioEmailDefault(RepositorioPublicaciones repositorioPublicaciones, RepositorioUsuario repositorioUsuarios) {
+        repositorioDePublicaciones=repositorioPublicaciones;
+        repositorioUsuarios=repositorioUsuarios;
+    }
+
     @Override
     public Usuario enviarConsultaPrivada(String email, String nombre, Integer telefono, String mensaje, Integer propiedadId) throws UsuarioInexistente {
-        Propiedad propiedad= repositorioDePublicaciones.buscarPrpiedadConPropietario(propiedadId);
+        Propiedad propiedad= repositorioDePublicaciones.buscarPropiedadConPropietario(propiedadId);
 
        if(propiedad==null)
        {
-           return null;
+           throw new UsuarioInexistente();
        }
        else{
            /////Operacionde mensajeria

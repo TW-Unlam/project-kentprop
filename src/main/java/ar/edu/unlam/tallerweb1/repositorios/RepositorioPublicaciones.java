@@ -10,6 +10,6 @@ public interface RepositorioPublicaciones {
 
     Publicacion buscarDetallePublicacion(Integer id);
 
-    Propiedad buscarPrpiedadConPropietario(Integer id_propietario);
+    Propiedad buscarPropiedadConPropietario(Integer id_propietario);
 
 }

@@ -1,9 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
-import ar.edu.unlam.tallerweb1.modelo.Accion;
-import ar.edu.unlam.tallerweb1.modelo.Publicacion;
-import ar.edu.unlam.tallerweb1.modelo.TipoPropiedad;
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.*;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEmail;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +58,7 @@ public class ControladorPublicacion {
         }catch(Exception e){
             modelo.put("msg-error", "Pagina inexistente");
         }
+        modelo.put("datosConsulta", new DatosConsulta());
         modelo.put("detalle", resultado);
         return new ModelAndView("detalle-publicacion", modelo);
     }
@@ -71,7 +69,7 @@ public class ControladorPublicacion {
         return new ModelAndView("lista-publicaciones");
     }
     @RequestMapping(path = "/enviar-consulta-privada",method = RequestMethod.POST)
-    public ModelAndView enviarConsulta(DatosConsulta datosConsulta, Integer propiedadId) {
+    public ModelAndView enviarConsulta(@ModelAttribute("datosConsulta") DatosConsulta datosConsulta) {
         ModelMap modelo = new ModelMap();
         Usuario resultado = null;
         try{
@@ -80,13 +78,40 @@ public class ControladorPublicacion {
                     datosConsulta.getNombre(),
                     datosConsulta.getTelefono(),
                     datosConsulta.getMensaje(),
-                    propiedadId);
+                    datosConsulta.getPropiedadId());
         }catch(Exception e){
             modelo.put("msg-error", "Propietario inexistente");
         }
-        modelo.put("msg", "Mensaje_Enviado_Correctamente");
+        modelo.put("msg",resultado);
         modelo.put("usuario", resultado);
 
-        return new ModelAndView("detalle-publicacion",modelo);
+        return new ModelAndView("redirect:/detalle-publicacion?id="+datosConsulta.getPropiedadId(),modelo);
+    }
+    @RequestMapping(path = "/enviar-consulta",method = RequestMethod.GET)
+    public ModelAndView irAFormConsulta( Integer propiedadId) {
+        ModelMap modelo = new ModelMap();
+        // Se agrega al modelo un objeto con key 'datosLogin' para que el mismo sea asociado
+        // al model attribute del form que esta definido en la vista 'login'
+        modelo.put("datosConsulta", new DatosConsulta());
+        modelo.put("idPropiedad",propiedadId);
+        // Se va a la vista login (el nombre completo de la lista se resuelve utilizando el view resolver definido en el archivo spring-servlet.xml)
+        // y se envian los datos a la misma  dentro del modelo
+
+        return new ModelAndView("consultaPrivada",modelo);
+    }
+
+    @RequestMapping(value = "/hacer-pregunta-publicacion", method = RequestMethod.GET)
+    public ModelAndView hacerPregunta(Integer publicacionId){
+//http://localhost:8080/project_kentprop_war_exploded/hacer-pregunta-publicacion?publicacionId=2
+        //Integer publicacionId2 = 2;
+        ModelMap modelo = new ModelMap();
+        Consulta resultado = null;
+
+        //Usuario usuario = servicioConsultas.buscarUsuarioPorId(usuarioId);
+        //Publicacion publicacion = servicioConsultas.buscarPublicacionPorId(publicacionId);
+        //servicioConsultas.hacerPregunta(new Consulta(descripcion,usuario,publicacion));
+
+        modelo.put("Cualquiercosa quele quieras pasar",publicacionId);
+        return new ModelAndView("redirect:/detalle-publicacion?id="+publicacionId,modelo);
     }
 }

@@ -4,6 +4,7 @@ import ar.edu.unlam.tallerweb1.modelo.Consulta;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEmail;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,7 +17,7 @@ public class ControladorConsultas {
 
     private ServicioPublicaciones servicioPublicacion;
     private ServicioEmail servicioEmail;
-
+    @Autowired
     public ControladorConsultas(ServicioPublicaciones servicioPublicacion, ServicioEmail servicioEmail) {
         this.servicioPublicacion = servicioPublicacion;
         this.servicioEmail = servicioEmail;

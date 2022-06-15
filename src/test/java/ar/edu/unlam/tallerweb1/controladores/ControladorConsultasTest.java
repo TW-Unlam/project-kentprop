@@ -20,7 +20,6 @@ public class ControladorConsultasTest {
      private static final Integer PROPIEDAD_ID = 1;
     private DatosConsulta datosConsulta;
     private ControladorConsultas controladorConsultas;
-    private ControladorPublicacion ControladorPublicaciones;
     private ServicioPublicaciones servicioPublicaciones;
     private ServicioEmail servicioEmail;
 

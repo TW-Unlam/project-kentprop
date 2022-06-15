@@ -145,7 +145,7 @@ INSERT INTO imagen VALUES ('images/PropiedadTipoCasa.jpg', 2),
 ('images/PropiedadTipoOficina02.jpg', '7'),
 ('images/PropiedadTipoOficina03.jpg', '4');
 
-CREATE TABLE `consulta` (
+CREATE TABLE `pregunta` (
          `id` int NOT NULL AUTO_INCREMENT,
          `pregunta` varchar(255) DEFAULT NULL,
          `respuesta` varchar(255) DEFAULT NULL,
@@ -158,9 +158,9 @@ CREATE TABLE `consulta` (
          CONSTRAINT FOREIGN KEY (`Usuario_id`) REFERENCES `usuario` (`id`)
 );
 
-INSERT INTO consulta (`pregunta`, `publicacionConsultada_id`, `Usuario_id`) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', '1', '12');
-INSERT INTO consulta (`pregunta`, `publicacionConsultada_id`, `Usuario_id`) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', '1', '13');
-INSERT INTO consulta (`pregunta`, `publicacionConsultada_id`, `Usuario_id`) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', '1', '14');
+INSERT INTO pregunta (`pregunta`, `publicacionConsultada_id`, `Usuario_id`) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', '1', '12');
+INSERT INTO pregunta (`pregunta`, `publicacionConsultada_id`, `Usuario_id`) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', '1', '13');
+INSERT INTO pregunta (`pregunta`, `publicacionConsultada_id`, `Usuario_id`) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', '1', '14');
 
 
 

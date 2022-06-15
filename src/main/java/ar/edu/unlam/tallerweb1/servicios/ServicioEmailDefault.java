@@ -66,7 +66,7 @@ public class ServicioEmailDefault implements ServicioEmail {
     }
 
     @Override
-    public void senMail() {
+    public void sendMail() {
         Mailer m =  getmailer();
         m.sendMail(email);
     }

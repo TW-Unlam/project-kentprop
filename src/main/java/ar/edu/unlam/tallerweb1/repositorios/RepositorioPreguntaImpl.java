@@ -1,6 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
-import ar.edu.unlam.tallerweb1.modelo.Consulta;
+import ar.edu.unlam.tallerweb1.modelo.Pregunta;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,29 +8,29 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public class RepositorioConsultaImpl implements RepositorioConsulta{
+public class RepositorioPreguntaImpl implements RepositorioPregunta {
 
     private final SessionFactory sessionFactory;
 
     @Autowired
-    public RepositorioConsultaImpl(SessionFactory sessionFactory) {
+    public RepositorioPreguntaImpl(SessionFactory sessionFactory) {
         this.sessionFactory=sessionFactory;
     }
 
     @Override
-    public List<Consulta> buscarConsultasDePublicacion(Integer idPublicacion) {
+    public List<Pregunta> buscarConsultasDePublicacion(Integer idPublicacion) {
         return sessionFactory.getCurrentSession()
-                .createCriteria(Consulta.class)
+                .createCriteria(Pregunta.class)
                 .createAlias("publicacion", "publ")
                 .add(Restrictions.eq("publ.id", idPublicacion))
                 .list();
     }
 
     @Override
-    public List<Consulta> buscarConsultasDeUsuario(long idUsuario) {
+    public List<Pregunta> buscarConsultasDeUsuario(long idUsuario) {
 
         return sessionFactory.getCurrentSession()
-                .createCriteria(Consulta.class)
+                .createCriteria(Pregunta.class)
                 .createAlias("publicacion", "publ")
                 .createAlias("usuario", "usu")
                 .add(Restrictions.eq("usu.id", idUsuario))
@@ -38,7 +38,7 @@ public class RepositorioConsultaImpl implements RepositorioConsulta{
     }
 
     @Override
-    public void GuardarConsulta(Consulta consulta) {
-                sessionFactory.getCurrentSession().save(consulta);
+    public void guardarConsulta(Pregunta pregunta) {
+                sessionFactory.getCurrentSession().save(pregunta);
     }
 }

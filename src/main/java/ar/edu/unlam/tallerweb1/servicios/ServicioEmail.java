@@ -10,7 +10,7 @@ public interface ServicioEmail {
 
 	Usuario enviarConsultaPrivada(String email, String nombre, Integer telefono, String mensaje, Integer propiedadId) throws UsuarioInexistente;
 
-	public void senMail();
+	public void sendMail();
 
 	public Mailer getmailer();
 }

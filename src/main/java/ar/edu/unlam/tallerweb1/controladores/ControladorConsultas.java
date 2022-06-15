@@ -1,6 +1,5 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
-import ar.edu.unlam.tallerweb1.modelo.Consulta;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEmail;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
@@ -29,21 +28,6 @@ public class ControladorConsultas {
         modelo.put("datosConsulta", new DatosConsulta());
         modelo.put("idPropiedad",propiedadId);
         return new ModelAndView("consultaPrivada",modelo);
-    }
-
-    @RequestMapping(value = "/hacer-pregunta-publicacion", method = RequestMethod.GET)
-    public ModelAndView hacerPregunta(Integer publicacionId){
-//http://localhost:8080/project_kentprop_war_exploded/hacer-pregunta-publicacion?publicacionId=2
-        //Integer publicacionId2 = 2;
-        ModelMap modelo = new ModelMap();
-        Consulta resultado = null;
-
-        //Usuario usuario = servicioConsultas.buscarUsuarioPorId(usuarioId);
-        //Publicacion publicacion = servicioConsultas.buscarPublicacionPorId(publicacionId);
-        //servicioConsultas.hacerPregunta(new Consulta(descripcion,usuario,publicacion));
-
-        modelo.put("Cualquiercosa quele quieras pasar",publicacionId);
-        return new ModelAndView("redirect:/detalle-publicacion?id="+publicacionId,modelo);
     }
 
     @RequestMapping(path = "/enviar-consulta-privada",method = RequestMethod.POST)

@@ -3,7 +3,7 @@ package ar.edu.unlam.tallerweb1.modelo;
 import javax.persistence.*;
 
 @Entity
-public class Consulta {
+public class Pregunta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -20,7 +20,7 @@ public class Consulta {
     @JoinColumn(name = "publicacionConsultada_id")
     private Publicacion publicacion;
 
-    public Consulta(Integer id, String pregunta, String respuesta, Usuario usuario, Publicacion publicacion) {
+    public Pregunta(Integer id, String pregunta, String respuesta, Usuario usuario, Publicacion publicacion) {
         this.id = id;
         this.pregunta = pregunta;
         this.respuesta = respuesta;
@@ -28,7 +28,7 @@ public class Consulta {
         this.publicacion = publicacion;
     }
 
-    public Consulta() {
+    public Pregunta() {
 
     }
 

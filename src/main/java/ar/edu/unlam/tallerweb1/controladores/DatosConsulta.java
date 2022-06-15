@@ -3,14 +3,14 @@ package ar.edu.unlam.tallerweb1.controladores;
 public class DatosConsulta {
     private String email;
     private String nombre;
-    private Integer Telefono;
+    private Integer telefono;
     private String mensaje;
     private Integer propiedadId;
 
     public DatosConsulta(String email, String nombre, Integer telefono, String mensaje, Integer propiedadId) {
         this.email = email;
         this.nombre = nombre;
-        Telefono = telefono;
+        this.telefono = telefono;
         this.mensaje = mensaje;
         this.propiedadId = propiedadId;
     }
@@ -44,11 +44,11 @@ public class DatosConsulta {
     }
 
     public Integer getTelefono() {
-        return Telefono;
+        return this.telefono;
     }
 
     public void setTelefono(Integer telefono) {
-        Telefono = telefono;
+        this.telefono = telefono;
     }
 
     public String getMensaje() {

@@ -7,7 +7,6 @@ public class Imagen {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String urlImagen;
     @ManyToOne
     @JoinColumn(name = "publicacion_id")
@@ -47,14 +46,4 @@ public class Imagen {
         this.id = id;
     }
 
-    @ManyToOne(optional = false)
-    private Publicacion publicacions;
-
-    public Publicacion getPublicacions() {
-        return publicacions;
-    }
-
-    public void setPublicacions(Publicacion publicacions) {
-        this.publicacions = publicacions;
-    }
 }

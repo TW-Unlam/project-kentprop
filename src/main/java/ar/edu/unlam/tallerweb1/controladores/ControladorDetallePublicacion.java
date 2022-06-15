@@ -1,7 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.*;
-import ar.edu.unlam.tallerweb1.servicios.ServicioConsulta;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPregunta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,12 +16,12 @@ import java.util.List;
 @Controller
 public class ControladorDetallePublicacion {
 
-    private ServicioConsulta servicioConsultas;
+    private ServicioPregunta servicioConsultas;
     private ServicioPublicaciones servicioPublicaciones;
 
     @Autowired
-    public ControladorDetallePublicacion(ServicioConsulta servicioConsulta, ServicioPublicaciones servicioPublicaciones) {
-        this.servicioConsultas = servicioConsulta;
+    public ControladorDetallePublicacion(ServicioPregunta servicioPregunta, ServicioPublicaciones servicioPublicaciones) {
+        this.servicioConsultas = servicioPregunta;
         this.servicioPublicaciones = servicioPublicaciones;
     }
 
@@ -29,7 +29,7 @@ public class ControladorDetallePublicacion {
     public ModelAndView verDetallePublicacion(Integer id) {
         ModelMap modelo = new ModelMap();
         Publicacion publicaciones = null;
-        List<Consulta> consultasHechas = null;
+        List<Pregunta> consultasHechas = null;
 
         publicaciones = servicioPublicaciones.verDetallePublicacion(id);
         consultasHechas = servicioConsultas.buscarConsultasDePublicacion(id);
@@ -57,7 +57,7 @@ public class ControladorDetallePublicacion {
             Boolean seHizo = false;
 
             Publicacion publicacion = servicioConsultas.buscarPublicacionPorId(datosPregunta.getId());
-            seHizo = servicioConsultas.hacerPregunta(new Consulta(datosPregunta.getDescripcion(), publicacion));
+            seHizo = servicioConsultas.hacerPregunta(new Pregunta(datosPregunta.getDescripcion(), publicacion));
 
             modelo.put("pregunta_hecha", seHizo);
 

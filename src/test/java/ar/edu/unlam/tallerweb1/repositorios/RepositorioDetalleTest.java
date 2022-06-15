@@ -2,7 +2,7 @@ package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.SpringTest;
 import ar.edu.unlam.tallerweb1.modelo.Accion;
-import ar.edu.unlam.tallerweb1.modelo.Consulta;
+import ar.edu.unlam.tallerweb1.modelo.Pregunta;
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import org.junit.Test;
@@ -15,19 +15,19 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 
-public class RepositorioConsultasTest extends SpringTest {
+public class RepositorioDetalleTest extends SpringTest {
    /* private final Session session= session();*/
     @Autowired
-    private RepositorioConsulta repositorioDeConsultas;
+    private RepositorioPregunta repositorioDeConsultas;
     
     @Test
     @Transactional @Rollback
     public void alGuardarConsutalDelUsuarioParaUnaPublicacionExistente(){
-        Consulta consulta = dadoQueExisteUnaPublicacionYUsuarioLogueado();
+        Pregunta pregunta = dadoQueExisteUnaPublicacionYUsuarioLogueado();
 
-        repositorioDeConsultas.guardarConsulta(consulta);
+        repositorioDeConsultas.guardarConsulta(pregunta);
 
-        entoncesSeEstableceElIDDelGuardado(consulta);
+        entoncesSeEstableceElIDDelGuardado(pregunta);
     }
 
     @Test
@@ -35,9 +35,9 @@ public class RepositorioConsultasTest extends SpringTest {
     public void alBuscarLaConsultaDeUsuarioDevuelvelaExistente(){ //Lo mismo
         Usuario usuario=dadoQueExisteUnaConsultaDeUnUsuario();
 
-        List<Consulta> consulta1Busqueda=repositorioDeConsultas.buscarConsultasDeUsuario(usuario.getId());
+        List<Pregunta> pregunta1Busqueda =repositorioDeConsultas.buscarConsultasDeUsuario(usuario.getId());
 
-        assertThat(consulta1Busqueda).hasSize(1);
+        assertThat(pregunta1Busqueda).hasSize(1);
 
     }
     @Test
@@ -45,8 +45,8 @@ public class RepositorioConsultasTest extends SpringTest {
     public void alBuscarConsultaDeUsuarioDarQueNoexisten(){
         Usuario usuario=dadoQueExisteUnaConsultaDeUnUsuario();
 
-        List<Consulta> consulta1Busqueda=repositorioDeConsultas.buscarConsultasDeUsuario(usuario.getId()+1);
-        assertThat(consulta1Busqueda).hasSize(0);
+        List<Pregunta> pregunta1Busqueda =repositorioDeConsultas.buscarConsultasDeUsuario(usuario.getId()+1);
+        assertThat(pregunta1Busqueda).hasSize(0);
 
     }
 
@@ -55,79 +55,79 @@ public class RepositorioConsultasTest extends SpringTest {
     public void alBuscarlasConsultaDeUnaPublicacionExistenteDevuelveLaLista(){
         Publicacion publicacion = dadoQueExistelistaConsultaDeUnaPublicacion();
 
-        List<Consulta> consulta1Busqueda=repositorioDeConsultas.buscarConsultasDePublicacion(publicacion.getId());
-        assertThat(consulta1Busqueda).hasSize(3);
+        List<Pregunta> pregunta1Busqueda =repositorioDeConsultas.buscarConsultasDePublicacion(publicacion.getId());
+        assertThat(pregunta1Busqueda).hasSize(3);
 
     }
 
-    private void entoncesSeEstableceElIDDelGuardado(Consulta consulta) {
-        assertThat(consulta.getId()).isNotNull();
+    private void entoncesSeEstableceElIDDelGuardado(Pregunta pregunta) {
+        assertThat(pregunta.getId()).isNotNull();
     }
 
-    private Consulta dadoQueExisteUnaPublicacionYUsuarioLogueado() {
-        Consulta consulta=new Consulta();
-        consulta.setPregunta("Tiempo de Aquiler minimo?");
+    private Pregunta dadoQueExisteUnaPublicacionYUsuarioLogueado() {
+        Pregunta pregunta =new Pregunta();
+        pregunta.setPregunta("Tiempo de Aquiler minimo?");
         Usuario usuario=new Usuario();
         usuario.setEmail("sullca@gmail.com");
         usuario.setId(1L);
         Publicacion publicacion=new Publicacion();
         publicacion.setTipoAccion(Accion.ALQUILAR);
-        consulta.setUsuario(usuario);
-        consulta.setPublicacion(publicacion);
+        pregunta.setUsuario(usuario);
+        pregunta.setPublicacion(publicacion);
         session().save(usuario);
         session().save(publicacion);
-        return consulta;
+        return pregunta;
     }
 
     private Usuario dadoQueExisteUnaConsultaDeUnUsuario() {
-        Consulta consulta=new Consulta();
-        consulta.setPregunta("Tiempo de Aquiler minimo?");
+        Pregunta pregunta =new Pregunta();
+        pregunta.setPregunta("Tiempo de Aquiler minimo?");
         Usuario usuario=new Usuario();
         usuario.setEmail("sullca@gmail.com");
         usuario.setId(1L);
         Publicacion publicacion=new Publicacion();
         publicacion.setTipoAccion(Accion.ALQUILAR);
-        consulta.setUsuario(usuario);
-        consulta.setPublicacion(publicacion);
+        pregunta.setUsuario(usuario);
+        pregunta.setPublicacion(publicacion);
         session().save(usuario);
         session().save(publicacion);
-        session().save(consulta);
+        session().save(pregunta);
         return usuario;
     }
 
     private Publicacion dadoQueExistelistaConsultaDeUnaPublicacion() {
-        Consulta consulta1=new Consulta();
-        consulta1.setPregunta("Tiempo de Aquiler minimo?");
+        Pregunta pregunta1 =new Pregunta();
+        pregunta1.setPregunta("Tiempo de Aquiler minimo?");
         Usuario usuario1=new Usuario();
         usuario1.setEmail("sullca@gmail.com");
         usuario1.setId(1L);
-        Consulta consulta2=new Consulta();
-        consulta2.setPregunta("Tiempo de Aquiler minimo?");
+        Pregunta pregunta2 =new Pregunta();
+        pregunta2.setPregunta("Tiempo de Aquiler minimo?");
         Usuario usuario2=new Usuario();
         usuario2.setEmail("sullca@gmail.com");
         usuario2.setId(2L);
-        Consulta consulta3=new Consulta();
-        consulta3.setPregunta("Tiempo de Aquiler minimo?");
+        Pregunta pregunta3 =new Pregunta();
+        pregunta3.setPregunta("Tiempo de Aquiler minimo?");
         Usuario usuario3=new Usuario();
         usuario3.setEmail("sullca@gmail.com");
         usuario3.setId(3L);
         Publicacion publicacion=new Publicacion();
         publicacion.setTipoAccion(Accion.ALQUILAR);
 
-        consulta1.setUsuario(usuario1);
-        consulta2.setUsuario(usuario1);
-        consulta3.setUsuario(usuario1);
-        consulta1.setPublicacion(publicacion);
-        consulta2.setPublicacion(publicacion);
-        consulta3.setPublicacion(publicacion);
+        pregunta1.setUsuario(usuario1);
+        pregunta2.setUsuario(usuario1);
+        pregunta3.setUsuario(usuario1);
+        pregunta1.setPublicacion(publicacion);
+        pregunta2.setPublicacion(publicacion);
+        pregunta3.setPublicacion(publicacion);
 
         session().save(usuario1);
         session().save(usuario2);
         session().save(usuario3);
         session().save(publicacion);
-        session().save(consulta1);
-        session().save(consulta2);
-        session().save(consulta3);
+        session().save(pregunta1);
+        session().save(pregunta2);
+        session().save(pregunta3);
         return publicacion;
     }
 }

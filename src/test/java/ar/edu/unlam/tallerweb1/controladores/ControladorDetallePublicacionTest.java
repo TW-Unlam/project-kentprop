@@ -1,12 +1,11 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
-import ar.edu.unlam.tallerweb1.modelo.Consulta;
+import ar.edu.unlam.tallerweb1.modelo.Pregunta;
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
-import ar.edu.unlam.tallerweb1.servicios.ServicioConsulta;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPregunta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.LinkedList;
@@ -24,13 +23,13 @@ public class ControladorDetallePublicacionTest {
     private static final String PREGUNTA_HECHA = "Descripcion random";
     private ControladorDetallePublicacion controladorDetallePublicacion;
     private ServicioPublicaciones servicioPublicaciones;
-    private ServicioConsulta servicioConsulta;
+    private ServicioPregunta servicioPregunta;
 
     @Before
     public void init(){
-        servicioConsulta = mock(ServicioConsulta.class);
+        servicioPregunta = mock(ServicioPregunta.class);
         servicioPublicaciones = mock(ServicioPublicaciones.class);
-        controladorDetallePublicacion = new ControladorDetallePublicacion(servicioConsulta, servicioPublicaciones);
+        controladorDetallePublicacion = new ControladorDetallePublicacion(servicioPregunta, servicioPublicaciones);
 
     }
 
@@ -74,21 +73,21 @@ public class ControladorDetallePublicacionTest {
     }
 
     private void alRealizarUnaPregunta() {
-        Consulta consulta = new Consulta();
-        when(servicioConsulta.hacerPregunta(consulta)).thenReturn(true);
+        Pregunta pregunta = new Pregunta();
+        when(servicioPregunta.hacerPregunta(pregunta)).thenReturn(true);
     }
 
     private void yMeCarganLasPreguntasYaHechas(int cantidadEsperada, ModelAndView mav) {
-        List<Consulta> lista = (List<Consulta>) mav.getModel().get("preguntas_hechas");
+        List<Pregunta> lista = (List<Pregunta>) mav.getModel().get("preguntas_hechas");
         assertThat(lista).hasSize(cantidadEsperada);
     }
 
     private void dadoQueExistenPreguntasEnUnaPublicacion(int cantidadPreguntas) {
-        List<Consulta> consultasHechas = new LinkedList<Consulta>();
+        List<Pregunta> consultasHechas = new LinkedList<Pregunta>();
         for(int i = 0 ; i < cantidadPreguntas; i++){
-            consultasHechas.add(new Consulta());
+            consultasHechas.add(new Pregunta());
         }
-        when(servicioConsulta.buscarConsultasDePublicacion(PROPIEDAD_ID)).thenReturn(consultasHechas);
+        when(servicioPregunta.buscarConsultasDePublicacion(PROPIEDAD_ID)).thenReturn(consultasHechas);
     }
 
     private void dadoQueExisteUnaPropiedad() {

@@ -23,7 +23,7 @@ public class RepositorioConsultasTest extends SpringTest {
     @Test
     @Transactional @Rollback
     public void alGuardarConsutaldelUsuarioParaUnaPublicacionExistente(){
-        Consulta consulta = dadoQueExisteUnaPublicacionYUsuarioLogueado();
+        Consulta consulta = dadoQueExisteUnaPublicacionPropiedadYUsuarioLogueado();
 
         repositorioDeConsultas.GuardarConsulta(consulta);
 
@@ -52,7 +52,7 @@ public class RepositorioConsultasTest extends SpringTest {
 
     @Test
     @Transactional @Rollback
-    public void alBuscarlasConsultaDeUanPublicacionExistenteDevuelveLALista(){
+    public void alBuscarlasConsultaDeUnaPublicacionExistenteDevuelveLALista(){
         Publicacion publicacion = dadoQueExistelistaConsultaDeUnaPublicacion();
 
         List<Consulta> consulta1Busqueda=repositorioDeConsultas.buscarConsultasDePublicacion(publicacion.getId());
@@ -64,7 +64,7 @@ public class RepositorioConsultasTest extends SpringTest {
         assertThat(consulta.getId()).isNotNull();
     }
 
-    private Consulta dadoQueExisteUnaPublicacionYUsuarioLogueado() {
+    private Consulta dadoQueExisteUnaPublicacionPropiedadYUsuarioLogueado() {
         Consulta consulta=new Consulta();
         consulta.setPregunta("Tiempo de Aquiler minimo?");
         Usuario usuario=new Usuario();

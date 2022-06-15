@@ -82,7 +82,8 @@ public class ControladorPublicacion {
         }catch(Exception e){
             modelo.put("msg-error", "Propietario inexistente");
         }
-        modelo.put("msg",resultado);
+        modelo.put("msg","mensaje enviado exitosamente");
+        modelo.put("msg-2",datosConsulta.getEmail());
         modelo.put("usuario", resultado);
 
         return new ModelAndView("redirect:/detalle-publicacion?id="+datosConsulta.getPropiedadId(),modelo);
@@ -90,14 +91,9 @@ public class ControladorPublicacion {
     @RequestMapping(path = "/enviar-consulta",method = RequestMethod.GET)
     public ModelAndView irAFormConsulta( Integer propiedadId) {
         ModelMap modelo = new ModelMap();
-        // Se agrega al modelo un objeto con key 'datosLogin' para que el mismo sea asociado
-        // al model attribute del form que esta definido en la vista 'login'
         modelo.put("datosConsulta", new DatosConsulta());
         modelo.put("idPropiedad",propiedadId);
-        // Se va a la vista login (el nombre completo de la lista se resuelve utilizando el view resolver definido en el archivo spring-servlet.xml)
-        // y se envian los datos a la misma  dentro del modelo
-
-        return new ModelAndView("consultaPrivada",modelo);
+          return new ModelAndView("consultaPrivada",modelo);
     }
 
     @RequestMapping(value = "/hacer-pregunta-publicacion", method = RequestMethod.GET)

@@ -33,9 +33,6 @@
 
           <a href="enviar-consulta?propiedadId=${detalle.propiedad.id}">Realizar Consultas</a>
             <%--Bloque que es visible si el elemento error no esta vacio	--%>
-
-
-
     </div>
 </c:if>
 

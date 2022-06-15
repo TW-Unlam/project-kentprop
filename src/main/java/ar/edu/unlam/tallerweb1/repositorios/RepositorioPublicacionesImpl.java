@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.*;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,11 +40,8 @@ public class RepositorioPublicacionesImpl implements RepositorioPublicaciones {
     }
 
     @Override
-    public Propiedad buscarPropiedadConPropietario(Integer id_propietario) {
-        return (Propiedad) sessionFactory.getCurrentSession()
-                .createCriteria(Propiedad.class)
-                .createAlias("propietario","usuario")
-                .add(Restrictions.eq("id", id_propietario)).uniqueResult();
+    public Propiedad buscarPropiedadConPropietario(Integer id_propiedad) {
+        return sessionFactory.getCurrentSession().get(Propiedad.class, id_propiedad);
     }
 
 }

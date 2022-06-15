@@ -78,9 +78,9 @@ public class RepositorioPublicacionesTest extends SpringTest {
 
         List<Publicacion> propiedades = repositorioPublicaciones.buscarPublicaciones(ACCION_EXISTENTE, TIPO_EXISTENTE, DESCRIPCION_EXISTENTE);
         Publicacion resultado = repositorioPublicaciones.buscarDetallePublicacion(propiedades.get(0).getId());
-        Propiedad propietario = repositorioPublicaciones.buscarPropiedadConPropietario(resultado.getPropiedad().getId());
+        Propiedad propietario = (Propiedad) repositorioPublicaciones.buscarPropiedadConPropietario(resultado.getPropiedad().getId());
 
-        entoncesMeDevuelveLosDatosDelUsuarioPropietarioDELaPropiedad( propietario.getPropietario().getEmail());
+        entoncesMeDevuelveLosDatosDelUsuarioPropietarioDELaPropiedad( propietario.getPropietario());
         entoncesMeDevuelveLosDatosDelUsuarioAEnviar( propietario.getPropietario().getEmail(),"sullca@gmail");
     }
 
@@ -88,8 +88,8 @@ public class RepositorioPublicacionesTest extends SpringTest {
         assertThat(email).isEqualTo(esperado);
     }
 
-    private void entoncesMeDevuelveLosDatosDelUsuarioPropietarioDELaPropiedad( String obtenido) {
-        assertThat(obtenido).isNotEmpty();
+    private void entoncesMeDevuelveLosDatosDelUsuarioPropietarioDELaPropiedad( Usuario obtenido) {
+        assertThat(obtenido).isNotNull();
     }
 
     private void dadoQueExisteUnaListaDePropiedadesConPropietarios() {

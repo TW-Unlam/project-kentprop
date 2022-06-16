@@ -27,7 +27,7 @@
                     <h2>Publicaciones encontradas</h2>
                 </c:when>
                 <c:otherwise>
-                    <h4>${msg_error}</h4>
+                    <h4><i class="fa-solid fa-circle-exclamation"></i> ${msg_error}</h4>
                 </c:otherwise>
             </c:choose>
 

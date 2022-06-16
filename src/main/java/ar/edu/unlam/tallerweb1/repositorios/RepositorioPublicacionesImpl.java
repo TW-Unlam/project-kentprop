@@ -35,8 +35,12 @@ public class RepositorioPublicacionesImpl implements RepositorioPublicaciones {
     }
 
     @Override
-    public List<Imagen> buscarImagensPublicaciones() {
-        return null;
+    public List<Imagen> buscarImagenesDeLaPublicacion(Integer publicacion_id) {
+        return sessionFactory.getCurrentSession()
+                .createCriteria(Imagen.class)
+                .createAlias("publicacion", "publ")
+                .add(Restrictions.eq("publ.id",  publicacion_id))
+                .list();
     }
 
     @Override

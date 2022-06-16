@@ -1,8 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
-import ar.edu.unlam.tallerweb1.controladores.DatosBusqueda;
-
 import ar.edu.unlam.tallerweb1.modelo.Accion;
+import ar.edu.unlam.tallerweb1.modelo.Imagen;
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
 import ar.edu.unlam.tallerweb1.modelo.TipoPropiedad;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPublicaciones;
@@ -32,5 +31,11 @@ public class ServicioPublicacionesDefault implements ServicioPublicaciones {
     public Publicacion verDetallePublicacion(Integer id) {
         Publicacion resultado = repositorioPublicaciones.buscarDetallePublicacion(id);
         return resultado;
+    }
+
+    @Override
+    public List<Imagen> traerImagenesPorId(Integer publicacion_id) {
+        List<Imagen> lista = repositorioPublicaciones.buscarImagenesDeLaPublicacion(publicacion_id);
+        return lista;
     }
 }

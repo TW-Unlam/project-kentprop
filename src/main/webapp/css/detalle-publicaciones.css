@@ -6,15 +6,20 @@
     padding: 30px 30px 50px 30px
 }
 
-.lista-container h2 {
-    margin-bottom: 40px;
+.preguntar_form button {
+    font-size: 16px;
+    color: white;
+    background-color: #1b6d85;
+    background-image: none;
 }
 
-.lista-publicaciones {
+.navbar-brand img{
+    width: 50px;
+}
+
+.preguntas{
     display: flex;
     flex-wrap: wrap;
-    overflow: scroll;
-    height: 82%;
 }
 
 .thumbnail {
@@ -29,10 +34,6 @@
 
 .thumbnail a:hover{
     text-decoration: none;
-}
-
-.publicacion-top {
-    display: flex;
 }
 
 .publicacion-top div:nth-child(1){
@@ -75,4 +76,9 @@
 .publicacion-data i {
     color: gray;
     margin-right: 5px;
+}
+
+.imagenes_publicacion{
+    display: flex;
+    flex-wrap: wrap;
 }

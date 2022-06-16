@@ -2,40 +2,6 @@ DROP SCHEMA IF EXISTS bd_;
 CREATE SCHEMA bd_;
 USE bd_;
 
-
-CREATE TABLE ubicacion (
-  id int NOT NULL AUTO_INCREMENT,
-  localidad varchar(255) DEFAULT NULL,
-  provincia varchar(255) DEFAULT NULL,
-  PRIMARY KEY (id)
-);
-
-CREATE TABLE propiedad (
-  id int NOT NULL AUTO_INCREMENT,
-  cantidadAmbientes int DEFAULT NULL,
-  cochera boolean DEFAULT NULL,
-  metrosCuadrados double DEFAULT NULL,
-  tipoPropiedad int DEFAULT NULL,
-  ubicacion_id int DEFAULT NULL,
-  propietario_id int DEFAULT NULL,
-  PRIMARY KEY (id),
-  CONSTRAINT  FOREIGN KEY (ubicacion_id) REFERENCES ubicacion (id),
-  CONSTRAINT  FOREIGN KEY (propietario_id) REFERENCES usuario (id)
-);
-
-CREATE TABLE publicacion (
-  id int NOT NULL AUTO_INCREMENT,
-  descripcion varchar(255) DEFAULT NULL,
-  estatus int DEFAULT NULL,
-  fechaPublicacion date DEFAULT NULL,
-  isActivo BOOLEAN NOT NULL,
-  precio double DEFAULT NULL,
-  tipoAccion int DEFAULT NULL,
-  propiedad_id int DEFAULT NULL,
-  PRIMARY KEY (id),
-  CONSTRAINT  FOREIGN KEY (propiedad_id) REFERENCES propiedad (id)
-);
-
 INSERT INTO ubicacion (id,localidad,provincia) VALUES
 (1,'Agronomía','Buenos Aires'),
 (2,'Almagro','Buenos Aires'),
@@ -50,9 +16,20 @@ INSERT INTO ubicacion (id,localidad,provincia) VALUES
 (11,'Irineo Portela','Salta'),
 (12,'San Justo','Buenos Aires');
 
+
+select *
+from ubicacion;
+
+INSERT INTO usuario VALUES 
+(1,1,'kentprop@mail','1234','ADMIN'),
+(2,1,'sullca@mail','1234','PROPIETARIO'),
+(3,1,'emiliano@mail','1234','PROPIETARIO'),
+(4,1,'valPardo@mail','1234','PROPIETARIO'),
+(5,1,'Santy@mail','1234','PROPIETARIO');
+
 INSERT INTO propiedad (id,cantidadAmbientes,cochera,metrosCuadrados, tipoPropiedad,ubicacion_id,propietario_id) VALUES
 (1,2,0,53,1,1,2),
-(2,2,1,49,5,0,2),
+(2,2,1,49,5,1,2),
 (3,3,1,62,1,3,2),
 (4,1,0,80,5,4,4),
 (5,2,0,55,0,5,4),
@@ -87,33 +64,8 @@ from publicacion pu
 join propiedad po on pu.propiedad_id=po.id
 join ubicacion u on u.id=po.ubicacion_id;
 
-CREATE TABLE usuario (
-  id bigint NOT NULL AUTO_INCREMENT,
-  activo bit(1) DEFAULT NULL,
-  email varchar(255) DEFAULT NULL,
-  password varchar(255) DEFAULT NULL,
-  rol varchar(255) DEFAULT NULL,
-  PRIMARY KEY (id)
-);
-
-
-INSERT INTO usuario VALUES 
-(1,'kentprop@mail','1234',1,'ADMIN'),
-(1,'sullca@mail','1234',1,'PROPIETARIO'),
-(1,'emiliano@mail','1234',1,'PROPIETARIO'),
-(1,'valPardo@mail','1234',1,'PROPIETARIO'),
-(1,'Santy@mail','1234',1,'PROPIETARIO');
-
-CREATE TABLE `imagen`
-(
-    `id` int NOT NULL AUTO_INCREMENT,
-    `urlImagen` varchar(255) DEFAULT NULL,
-    `publicacion_id` int DEFAULT NULL,
-    PRIMARY KEY (`id`),
-    CONSTRAINT FOREIGN KEY (`publicacion_id`) REFERENCES `publicacion` (`id`)
-);
-
-INSERT INTO imagen VALUES ('images/PropiedadTipoCasa.jpg', 2),
+INSERT INTO imagen(urlImagen, publicacion_id)
+VALUES ('images/PropiedadTipoCasa.jpg', 2),
  ('images/PropiedadTipoCasa.jpg',5),
  ('images/PropiedadTipoCasa.jpg', 6),
  ('images/PropiedadTipoCasa.jpg', 7),
@@ -145,22 +97,13 @@ INSERT INTO imagen VALUES ('images/PropiedadTipoCasa.jpg', 2),
 ('images/PropiedadTipoOficina02.jpg', '7'),
 ('images/PropiedadTipoOficina03.jpg', '4');
 
-CREATE TABLE `pregunta` (
-         `id` int NOT NULL AUTO_INCREMENT,
-         `pregunta` varchar(255) DEFAULT NULL,
-         `respuesta` varchar(255) DEFAULT NULL,
-         `publicacionConsultada_id` int DEFAULT NULL,
-         `Usuario_id` bigint DEFAULT NULL,
-        PRIMARY KEY (`id`),
-        KEY  (`publicacionConsultada_id`),
-        KEY  (`Usuario_id`),
-        CONSTRAINT  FOREIGN KEY (`publicacionConsultada_id`) REFERENCES `publicacion` (`id`),
-         CONSTRAINT FOREIGN KEY (`Usuario_id`) REFERENCES `usuario` (`id`)
-);
+INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', 12, 1);
+INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', 13, 1);
+INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', 14, 1);
 
-INSERT INTO pregunta (`pregunta`, `publicacionConsultada_id`, `Usuario_id`) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', '1', '12');
-INSERT INTO pregunta (`pregunta`, `publicacionConsultada_id`, `Usuario_id`) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', '1', '13');
-INSERT INTO pregunta (`pregunta`, `publicacionConsultada_id`, `Usuario_id`) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', '1', '14');
+INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', 12, 2);
+INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', 13, 2);
+INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', 14, 2);
 
 
 

@@ -8,7 +8,7 @@ public interface RepositorioPublicaciones {
 
     List<Publicacion> buscarPublicaciones(Accion accion, TipoPropiedad tipo, String descripcion);
 
-    List<Publicacion> buscarImagensPublicaciones(Accion accion, TipoPropiedad tipo, String descripcion);
+    List<Imagen> buscarImagenesDeLaPublicacion(Integer publicacion_id);
 
     Publicacion buscarDetallePublicacion(Integer id);
 

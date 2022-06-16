@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.modelo.Accion;
+import ar.edu.unlam.tallerweb1.modelo.Imagen;
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
 import ar.edu.unlam.tallerweb1.modelo.TipoPropiedad;
 
@@ -10,6 +11,8 @@ public interface ServicioPublicaciones {
     List<Publicacion> buscarPublicacion(Accion accion, TipoPropiedad tipo, String descripcion);
 
     Publicacion verDetallePublicacion(Integer id);
+
+    List<Imagen> traerImagenesPorId(Integer publicacion_id);
 }
 
 // Vamos a usar test doubles con un mock, para hacer pruebas de un controlador que dependen de un servicio

@@ -30,10 +30,13 @@ public class ControladorDetallePublicacion {
         ModelMap modelo = new ModelMap();
         Publicacion publicaciones = null;
         List<Pregunta> consultasHechas = null;
+        List<Imagen> imagenes = null;
 
         publicaciones = servicioPublicaciones.verDetallePublicacion(id);
         consultasHechas = servicioConsultas.buscarConsultasDePublicacion(id);
+        imagenes = servicioPublicaciones.traerImagenesPorId(id);
 
+        modelo.put("imagenes", imagenes);
         modelo.put("datosPregunta", new DatosPregunta());
 
         if(consultasHechas.isEmpty()){

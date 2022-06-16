@@ -35,18 +35,11 @@ public class RepositorioPublicacionesImpl implements RepositorioPublicaciones {
     }
 
     @Override
-    public List<Publicacion> buscarImagensPublicaciones(Accion accion, TipoPropiedad tipo, String descripcion) {
+    public List<Imagen> buscarImagenesDeLaPublicacion(Integer publicacion_id) {
         return sessionFactory.getCurrentSession()
                 .createCriteria(Imagen.class)
                 .createAlias("publicacion", "publ")
-                .createAlias("publ.propiedad", "prop")
-                .createAlias("prop.ubicacion", "ubi")
-                .add(Restrictions.or(
-                        Restrictions.like("ubi.localidad", "%" + descripcion + "%"),
-                        Restrictions.like("ubi.provincia", "%" + descripcion +"%" ))
-                )
-                .add(Restrictions.eq("prop.tipoPropiedad", tipo))
-                .add(Restrictions.eq("tipoAccion", accion))
+                .add(Restrictions.eq("publ.id",  publicacion_id))
                 .list();
     }
 

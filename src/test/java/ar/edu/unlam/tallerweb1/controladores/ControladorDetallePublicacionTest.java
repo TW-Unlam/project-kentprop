@@ -8,6 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,19 +20,37 @@ import static org.mockito.Mockito.when;
 public class ControladorDetallePublicacionTest {
     private static final String VISTA_VER_DETALLE = "detalle-publicacion";
     private static final Integer PROPIEDAD_ID = 1;
-    private static final String VISTA_REDIRECCION = "redirect:/detalle-publicacion?id=1";
-
-    private static final String PREGUNTA_HECHA = "Descripcion random";
+    private static final String VISTA_REDIRECCION_LOGUEADO = "redirect:/detalle-publicacion?id=1";
+    private static final String VISTA_REDIRECCION_SIN_LOGUEO = "redirect:/loginConId?id=1";
+    private static final Integer ID_USUARIO = 1;
     private ControladorDetallePublicacion controladorDetallePublicacion;
     private ServicioPublicaciones servicioPublicaciones;
     private ServicioPregunta servicioPregunta;
+    private HttpServletRequest request;
+    private HttpSession session;
+    private DatosPregunta datosPregunta;
 
     @Before
     public void init(){
+        datosPregunta = mock(DatosPregunta.class);
+        request = mock(HttpServletRequest.class);
+        session = mock(HttpSession.class);
         servicioPregunta = mock(ServicioPregunta.class);
         servicioPublicaciones = mock(ServicioPublicaciones.class);
         controladorDetallePublicacion = new ControladorDetallePublicacion(servicioPregunta, servicioPublicaciones);
 
+    }
+
+    private HttpServletRequest givenExisteUnUsuarioConId(Integer id) {
+        when(request.getSession()).thenReturn(session);
+        when(request.getSession().getAttribute("id")).thenReturn(id);
+        return request;
+    }
+
+    private HttpServletRequest givenNoExisteUnUsuarioLogueado() {
+        when(request.getSession()).thenReturn(session);
+        when(request.getSession().getAttribute("id")).thenReturn(null);
+        return request;
     }
 
     @Test
@@ -55,26 +75,39 @@ public class ControladorDetallePublicacionTest {
     }
 
     @Test
-    public void queAlCargarUnaPreguntaMeRedireccioneALaPaginaVerDetalle(){
+    public void queAlCargarUnaPreguntaSinEstarLogeadoMeRedireccioneALaPaginaLoginConId(){
+        request = givenNoExisteUnUsuarioLogueado();
         alRealizarUnaPregunta();
 
-        ModelAndView mav = cuandoEnvioLaPregunta();
+        ModelAndView mav = cuandoEnvioLaPregunta(datosPregunta,request);
 
-        entoncesMeRedirecciona(VISTA_REDIRECCION, mav.getViewName());
+        entoncesMeRedirecciona(VISTA_REDIRECCION_SIN_LOGUEO, mav.getViewName());
+    }
+
+
+
+    @Test
+    public void queAlCargarUnaPreguntaAlEstarLogeadoMeRedireccioneALaPaginaVerDetalle(){
+        request = givenExisteUnUsuarioConId(ID_USUARIO);
+        alRealizarUnaPregunta();
+
+        ModelAndView mav = cuandoEnvioLaPregunta(datosPregunta,request);
+
+        entoncesMeRedirecciona(VISTA_REDIRECCION_LOGUEADO, mav.getViewName());
     }
 
     private void entoncesMeRedirecciona(String vistaRedireccion, String viewName) {
         assertThat(vistaRedireccion).isEqualTo(viewName);
     }
 
-    private ModelAndView cuandoEnvioLaPregunta() {
-        //return controladorDetallePublicacion.hacerPregunta(PROPIEDAD_ID, PREGUNTA_HECHA);
-        return null;
+    private ModelAndView cuandoEnvioLaPregunta(DatosPregunta datosPregunta, HttpServletRequest request) {
+        return controladorDetallePublicacion.hacerPregunta(datosPregunta, request);
     }
 
     private void alRealizarUnaPregunta() {
         Pregunta pregunta = new Pregunta();
         when(servicioPregunta.hacerPregunta(pregunta)).thenReturn(true);
+        when(datosPregunta.getId()).thenReturn(1);
     }
 
     private void yMeCarganLasPreguntasYaHechas(int cantidadEsperada, ModelAndView mav) {

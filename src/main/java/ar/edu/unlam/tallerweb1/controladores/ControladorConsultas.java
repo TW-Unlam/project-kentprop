@@ -43,6 +43,7 @@ public class ControladorConsultas {
                     datosConsulta.getPropiedadId());
         }catch(Exception e){
             modelo.put("msg-error", "Propietario inexistente");
+            return new ModelAndView("redirect:/detalle-publicacion?id="+datosConsulta.getPropiedadId(),modelo);
         }
         modelo.put("msg","mensaje enviado exitosamente");
         modelo.put("usuario", resultado);

@@ -13,6 +13,7 @@ public class Propiedad {
     private Double metrosCuadrados; //Propiedad
     private Boolean cochera; //Propiedad
     private Integer cantidadAmbientes; //Propiedad
+    private String coordenadas;
 
     private TipoPropiedad tipoPropiedad;
 

@@ -1,4 +1,4 @@
-.search-container {
+.search-container{
     width: 70%;
     position: relative;
     background: white;
@@ -12,7 +12,7 @@
     justify-content: center;
 }
 
-.search-container_img {
+.search-container_img{
     height: 150px;
     left: 45%;
     top: -42%;
@@ -24,7 +24,7 @@
     align-items: center;
 }
 
-.search-container_img img {
+.search-container_img img{
     height: 100%;
 }
 

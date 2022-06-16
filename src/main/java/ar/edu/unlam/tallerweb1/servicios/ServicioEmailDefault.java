@@ -54,7 +54,7 @@ public class ServicioEmailDefault implements ServicioEmail {
            this.MensajeIngresada=mensaje;
            this.PropietarioEmail=propiedad.getPropietario().getEmail();
 //           sendMail();
-           enviarMailDeConsultaPrivadasEnPublicacion();
+//           enviarMailDeConsultaPrivadasEnPublicacion();
            return  propiedad.getPropietario();
 //         return  repositorioDeUsuarios.obterneUsuario(propiedad.getPropietario().getId());
 //         return  repositorioDePublicaciones.buscarPropietarioDeLaPropiedad(propiedadId);

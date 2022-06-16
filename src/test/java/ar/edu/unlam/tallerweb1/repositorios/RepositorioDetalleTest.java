@@ -53,7 +53,8 @@ public class RepositorioDetalleTest extends SpringTest {
     @Test
     @Transactional @Rollback
     public void alBuscarlasConsultaDeUnaPublicacionExistenteDevuelveLaLista(){
-        Publicacion publicacion = dadoQueExistelistaConsultaDeUnaPublicacion();
+        ///Cantida
+        Publicacion publicacion = dadoQueExisteUnaPublicacionConPreguntas(3);
 
         List<Pregunta> pregunta1Busqueda =repositorioDeConsultas.buscarConsultasDePublicacion(publicacion.getId());
         assertThat(pregunta1Busqueda).hasSize(3);
@@ -95,39 +96,23 @@ public class RepositorioDetalleTest extends SpringTest {
         return usuario;
     }
 
-    private Publicacion dadoQueExistelistaConsultaDeUnaPublicacion() {
-        Pregunta pregunta1 =new Pregunta();
-        pregunta1.setPregunta("Tiempo de Aquiler minimo?");
-        Usuario usuario1=new Usuario();
-        usuario1.setEmail("sullca@gmail.com");
-        usuario1.setId(1L);
-        Pregunta pregunta2 =new Pregunta();
-        pregunta2.setPregunta("Tiempo de Aquiler minimo?");
-        Usuario usuario2=new Usuario();
-        usuario2.setEmail("sullca@gmail.com");
-        usuario2.setId(2L);
-        Pregunta pregunta3 =new Pregunta();
-        pregunta3.setPregunta("Tiempo de Aquiler minimo?");
-        Usuario usuario3=new Usuario();
-        usuario3.setEmail("sullca@gmail.com");
-        usuario3.setId(3L);
+    private Publicacion dadoQueExisteUnaPublicacionConPreguntas(int cantidadDePreguntas ) {
         Publicacion publicacion=new Publicacion();
         publicacion.setTipoAccion(Accion.ALQUILAR);
 
-        pregunta1.setUsuario(usuario1);
-        pregunta2.setUsuario(usuario1);
-        pregunta3.setUsuario(usuario1);
-        pregunta1.setPublicacion(publicacion);
-        pregunta2.setPublicacion(publicacion);
-        pregunta3.setPublicacion(publicacion);
+        for (int i=0;i<cantidadDePreguntas;i++){
+            Pregunta pregunta1 =new Pregunta();
+            pregunta1.setPregunta("Tiempo de Aquiler minimo?");
+            Usuario usuario1=new Usuario();
+            usuario1.setEmail("sullca@gmail.com");
 
-        session().save(usuario1);
-        session().save(usuario2);
-        session().save(usuario3);
-        session().save(publicacion);
-        session().save(pregunta1);
-        session().save(pregunta2);
-        session().save(pregunta3);
+            pregunta1.setUsuario(usuario1);
+            pregunta1.setPublicacion(publicacion);
+            session().save(usuario1);
+            session().save(pregunta1);
+        }
+            session().save(publicacion);
+
         return publicacion;
     }
 }

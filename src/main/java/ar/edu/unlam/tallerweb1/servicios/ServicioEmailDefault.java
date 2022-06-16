@@ -102,16 +102,16 @@ public class ServicioEmailDefault implements ServicioEmail {
     }
 
     @Override
-    public void enviarMailDeConsultaPrivadasEnPublicacion() {
+    public void enviarMailDeConsultaPrivadasEnPublicacion(String emailConsultante, String nombreConsultante, Integer telefonoConsultante, String mensajeConsultante,String emailPropietario) {
         String asunto="Consulta Sobre Su publicacion en ";
         String mensaje= "<h2>¡Gracias Por Usar Nuestros Servicios. Tiene Nuevas Consultas!</h2>\n"
                 + "<p>------------------------</p>\n"
-                + "<h4>-"+this.MensajeIngresada+"-</h4><br>"
+                + "<h4>-"+mensajeConsultante+"-</h4><br>"
                 + "<p>------------------------</p>\n"
                 +"<p>Datos de Contacto del interesado</p><br>"
-                +"<p>email: "+this.EmailIngresado+"</p><br> <br>"
-                +"<p>nombre: "+this.NombreIngresada+"</p><br> <br>"
-                +"<p>telefono: "+this.TelefonoIngresado+"</p><br> <br>"
+                +"<p>email: "+emailConsultante+"</p><br> <br>"
+                +"<p>nombre: "+nombreConsultante+"</p><br> <br>"
+                +"<p>telefono: "+telefonoConsultante+"</p><br> <br>"
                 +"<p>: Puede volver a ver su publicacion desde el siguiente enlace</p><br> <br>"
 //                +"<a href='http://localhost:8080/project-kenprop_war_exploded/detalle-de-publicacion?id="+propiedadId+" >IR A Publicacion</a>"
                 +"<br>";
@@ -149,9 +149,5 @@ public class ServicioEmailDefault implements ServicioEmail {
          m.sendMail(email);
      }
  */
-    ////////////****************************//////////////////
-
-
-
-
+    ////////////****************************/////////////////
 }

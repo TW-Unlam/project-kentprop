@@ -15,51 +15,79 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link href="css/bootstrap.min.css" rel="stylesheet" >
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="css/general.css" rel="stylesheet">
+    <link href="css/detalle-publicaciones.css" rel="stylesheet">
     <title>Detalle De La publicacion</title>
 </head>
 <body>
-<c:if test="${not empty msg_error}">
-    <h4><span>${msg_error}</span></h4>
-    <br>
-</c:if>
 
-<c:if test="${not empty detalle}">
-    <h4>${detalle.id}</h4>
-    <h4>${detalle.descripcion}</h4>
-    <h4>  ${detalle.fechaPublicacion}</h4>
-    <h4>  ${detalle.propiedad.id}</h4>
-    <h4>  ${detalle.propiedad.metrosCuadrados}</h4>
-    <h4>  ${detalle.propiedad.ubicacion.localidad}</h4>
-        <a href="enviar-consulta?propiedadId=${detalle.propiedad.id}">Realizar Consultas</a>
-    <%--Bloque que es visible si el elemento error no esta vacio	--%>
+<div class="lista-container">
+
+    <h2 class="ml-2">Detalle de la publicación</h2>
+
+    <div class="lista-publicaciones">
+        <div class="imagenes_publicacion">
+            <img src="images/PropiedadTipoCasa.jpg" alt="...">
+            <img src="images/PropiedadTipoCasa.jpg" alt="...">
+            <img src="images/PropiedadTipoCasa.jpg" alt="...">
+        </div>
+
+        <div class="caption">
+            <div class="publicacion-top">
+                <div>
+                    <p>Precio: <h3>$ <c:out value="${publi.precio}"/></h3></p>
+                </div>
+
+                <p>Descripción de la propiedad: <h4>${detalle.descripcion}</h4></p>
+                <p>Fecha de publicación: <h4>   ${detalle.fechaPublicacion}</h4></p>
+                <p>Cantidad de ambientes:<h4>  ${detalle.propiedad.cantidadAmbientes}</h4>
+                <p>Metros cuadrados: <h4>  ${detalle.propiedad.metrosCuadrados}</h4></p>
+                <p>Localidad: <h4>  ${detalle.propiedad.ubicacion.localidad}</h4></p>
+
+            </div>
+        </div>
+
+        <div class="preguntas">
+            <p>¿Tenés alguna pregunta sobre la propiedad?</p>
+            <form:form action="hacer-pregunta-publicacion" modelAttribute="datosPregunta" method="POST" class="search_form">
+                <form:input path="id" placeholder="" id="id" type="hidden" class="form-control" value="${detalle.id} "/>
+                <form:input path="descripcion" placeholder="Escribila acá" id="descripcion" type="text" class="form-control"/>
+
+                <button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Enviar</button>
+            </form:form>
+
+        </div>
+
+        <div class="pregunta-privada">
+            <p>¿Tenés alguna otra pregunta? Dejanos tus datos y consultas:</p>
+        <a href="enviar-consulta?propiedadId=${detalle.propiedad.id}">Realizar Consulta</a>
+
+
+        <div class="preguntas-hechas">
+
+            <p>Preguntas realizadas por otros usuarios:</p>
+
+            <c:if test="${not empty preguntas_hechas}">
+                <c:forEach var="preguntas_h" items="${preguntas_hechas}" >
+                    <h5>${preguntas_h.id}</h5>
+                    <h5>${preguntas_h.pregunta}</h5>
+                    <h5>${preguntas_h.usuario}</h5>
+                </c:forEach>
+            </c:if>
+        </div>
+
+        <%--
+                <div class="ubicacion-propiedad">
+                <iframe src="${detalle.propiedad.coordenadas}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+         --%>
+
     </div>
-</c:if>
-${msg}
-${msg-error}
-    <c:if test="${not empty preguntas_hechas}">
-        <c:forEach var="preguntas_h" items="${preguntas_hechas}" >
-            <h5>${preguntas_h.id}</h5>
-            <h5>${preguntas_h.pregunta}</h5>
-            <h5>${preguntas_h.usuario}</h5>
-        </c:forEach>
-    </c:if>
-    <br>
+</div>
 
-<form:form action="hacer-pregunta-publicacion" modelAttribute="datosPregunta" method="POST" class="search_form">
-    <form:input required="required" path="id" placeholder="" id="id" type="hidden" class="form-control" value="${detalle.id} "/>
-    <form:input required="required" path="descripcion" placeholder="Ingrese una pregunta" id="descripcion" type="text" class="form-control"/>
-
-    <button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Buscar</button>
-</form:form>
-
-
-
-
-
-
-
-
-
-<br>
 </body>
 </html>

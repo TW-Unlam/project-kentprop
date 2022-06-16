@@ -35,8 +35,26 @@
                 <c:forEach var="publi" items="${publicaciones}" >
                     <div class="thumbnail">
                         <a href="detalle-publicacion?id=${publi.propiedad.id}">
-                        <img src="images/PropiedadTipoCasa.jpg" alt="...">
-                        <div class="caption">
+
+                            <c:choose>
+                                <c:when test="${empty listaDeImagenDePublicaciones}">
+                                    <img src="images/PropiedadDefault.jpg" alt="Imagen de Propiedad No Disponible">
+                                </c:when>
+                                <c:otherwise>
+                                    <c:forEach var="imagen" items="${listaDeImagenDePublicaciones}" >
+                                        <c:if test="${imagen.publicacion.id eq publi.id}">
+                                        <img src="${imagen.urlImagen}" alt="Imagen de Propiedad">
+                                            <%--//Bandera o algo que indique que la imagen fue colocada exit o algo parecido
+                                            //para quue al apricvar colocar por defecto no aplique a todas las ya asignadas--%>
+                                        </c:if>
+
+                                    </c:forEach>
+                                </c:otherwise>
+                            </c:choose>
+
+
+
+                            <div class="caption">
                             <div class="publicacion-top">
                                 <div>
                                     <h3>$ <c:out value="${publi.precio}"/></h3>

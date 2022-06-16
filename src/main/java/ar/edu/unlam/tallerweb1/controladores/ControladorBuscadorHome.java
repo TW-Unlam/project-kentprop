@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -42,6 +43,20 @@ public class ControladorBuscadorHome {
             modelo.put("msg_error", "No se encontraron publicaciones con estos datos");
         }else{
             modelo.put("publicaciones", resultado);
+            List<Imagen> listaImagenes=new LinkedList<>();
+            List<Imagen> imagenesBusqueda=null;
+            for (Publicacion publicacionUni :resultado)
+            {
+               imagenesBusqueda=servicioPublicacion.traerImagenesPorId(publicacionUni.getId());
+//                System.out.println(imagenesBusqueda);
+
+               if(imagenesBusqueda.size()>0){
+//                   System.out.println(imagenesBusqueda.get(0));
+                    listaImagenes.add(imagenesBusqueda.get(0));
+                }
+
+            }
+            modelo.put("listaDeImagenDePublicaciones",  listaImagenes);
         }
         return new ModelAndView("lista-publicaciones", modelo);
     }

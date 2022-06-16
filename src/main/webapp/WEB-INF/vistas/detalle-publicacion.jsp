@@ -31,9 +31,22 @@
 
     <div class="lista-publicaciones">
         <div class="imagenes_publicacion">
-            <img src="images/PropiedadTipoCasa.jpg" alt="...">
-            <img src="images/PropiedadTipoCasa.jpg" alt="...">
-            <img src="images/PropiedadTipoCasa.jpg" alt="...">
+
+            <c:choose>
+                <c:when test="${empty imagenes}">
+                    <img src="images/PropiedadDefault.jpg" alt="Imagen de Propiedad No Disponible">
+                </c:when>
+                <c:otherwise>
+
+                    <c:forEach var="imag" items="${imagenes}" >
+                        <%--                      <c:if test="${imag.publicacion.id}==${detalle.id}">--%>
+                        <img src="${imag.urlImagen}" alt="...">
+                        <%--                      </c:if>--%>
+                    </c:forEach>
+
+                </c:otherwise>
+            </c:choose>
+
         </div>
 
         <div class="caption">
@@ -66,8 +79,8 @@
             <p>¿Tenés alguna otra pregunta? Dejanos tus datos y consultas:</p>
         <a href="enviar-consulta?propiedadId=${detalle.propiedad.id}">Realizar Consulta</a>
 
-
-        <div class="preguntas-hechas">
+        </div>
+            <div class="preguntas-hechas">
 
             <p>Preguntas realizadas por otros usuarios:</p>
 
@@ -80,14 +93,12 @@
             </c:if>
         </div>
 
-        <%--
-                <div class="ubicacion-propiedad">
+        <%--    <div class="ubicacion-propiedad">
                 <iframe src="${detalle.propiedad.coordenadas}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
          --%>
-
     </div>
-</div>
 
+</div>
 </body>
 </html>

@@ -27,7 +27,7 @@ public class ControladorConsultas {
         ModelMap modelo = new ModelMap();
         modelo.put("datosConsulta", new DatosConsulta());
         modelo.put("idPropiedad",propiedadId);
-        return new ModelAndView("consultaPrivada",modelo);
+        return new ModelAndView("consulta-privada",modelo);
     }
 
     @RequestMapping(path = "/enviar-consulta-privada",method = RequestMethod.POST)

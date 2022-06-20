@@ -1,0 +1,31 @@
+.private-question-container {
+    background-color: white;
+    height: 66vh;
+    width: 40%;
+    border-radius: 8px;
+    padding: 46px 45px 40px 45px;
+}
+
+.private-question-container h3 {
+    margin-bottom: 30px;
+}
+
+.private-question-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.private-question-container .form-control {
+    margin-bottom: 25px;
+}
+
+.private-question-container form .btn {
+    margin-top: 10px;
+    width: 100px;
+    background-color: #1b6d85;
+    border: none;
+}
+
+.private-question-container form .btn:hover {
+    background-color: #175a6e;
+}

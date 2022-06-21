@@ -23,6 +23,7 @@ public class RepositorioPreguntaImpl implements RepositorioPregunta {
         return sessionFactory.getCurrentSession()
                 .createCriteria(Pregunta.class)
                 .createAlias("publicacion", "publ")
+                .createAlias("usuario", "usu")
                 .add(Restrictions.eq("publ.id", idPublicacion))
                 .list();
     }

@@ -25,12 +25,14 @@ public class ControladorPropietarioTest {
     private final String VISTA_MIS_PROPIEDADES="mis-publicaciones";
 
     private static final String VISTA_REDIRECCION_SIN_LOGUEO = "redirect:/login";
-    private final int PROPIETARIO_ID_VALIDO=1;
+    private final Long PROPIETARIO_ID_VALIDO = Long.valueOf(1);
     private ServicioPropietario servicioPropietario;
     private ServicioPublicaciones servicioPublicaciones;
     private ControladorPropietario controladorPropietario;
     private HttpServletRequest request;
     private HttpSession session;
+    private String VISTA_HOME = "/";;
+    private String VISTA_REDIRECCION_HOME="redirect:/";
 
     @Before
     public void init(){
@@ -50,6 +52,18 @@ public class ControladorPropietarioTest {
 
         entoncesMeLLevaALaVista(VISTA_REDIRECCION_SIN_LOGUEO, mav.getViewName());
     }
+
+    @Test
+    public void queAlIrAMisPublicacionesLogeadoSinSerPropietarioMeRedireccioneALaPaginaHome(){
+        request = dadoQueNoExisteUnUsuarioLogueadoPropietario();
+        alintentarIrAMisPublicaciones();
+
+        ModelAndView mav = cuandoBuscolasPublicacionDelPropietario(PROPIETARIO_ID_VALIDO,request);
+
+        entoncesMeLLevaALaVista(VISTA_REDIRECCION_HOME, mav.getViewName());
+    }
+
+
 
     @Test
     public void AlPedirLasPublicacionesDeLPropietarioMeDevuelveLAListaDePublicaciones(){
@@ -79,7 +93,8 @@ public class ControladorPropietarioTest {
         request = dadoQueExisteUnUsuarioLogueado();
         DadoQueExisteUnaListaDePublicacionesConSuPropietarioeImagenes(10);
         //Ejecucion
-        ModelAndView mav = cuandoBuscolasPublicacionDelPropietario(PROPIETARIO_ID_VALIDO,request);
+        ModelAndView mav = cuandoBuscolasPublicacionDelPropietario((Long) request.getSession().getAttribute("id"),request);
+//        ModelAndView mav = cuandoBuscolasPublicacionDelPropietario(PROPIETARIO_ID_VALIDO,request);
         //Validacion
         entoncesEncuentroPublicaciones(mav, 10);
         entoncesEncuentroImagenes(mav, 10);
@@ -93,9 +108,17 @@ public class ControladorPropietarioTest {
         return request;
     }
 
+    private HttpServletRequest dadoQueNoExisteUnUsuarioLogueadoPropietario() {
+        when(request.getSession()).thenReturn(session);
+        when(request.getSession().getAttribute("id")).thenReturn(PROPIETARIO_ID_VALIDO);
+        when(request.getSession().getAttribute("ROL")).thenReturn("Visitante");
+        return request;
+    }
+
     private HttpServletRequest dadoQueExisteUnUsuarioLogueado() {
         when(request.getSession()).thenReturn(session);
         when(request.getSession().getAttribute("id")).thenReturn(PROPIETARIO_ID_VALIDO);
+        when(request.getSession().getAttribute("ROL")).thenReturn("Propietario");
         return request;
     }
 
@@ -132,7 +155,7 @@ public class ControladorPropietarioTest {
         when(servicioPropietario.obtenePublicacionesDelPropietario(PROPIETARIO_ID_VALIDO)).thenReturn(lista);
     }
 
-    private ModelAndView cuandoBuscolasPublicacionDelPropietario(int propietario_id_valido, HttpServletRequest request) {
+    private ModelAndView cuandoBuscolasPublicacionDelPropietario(Long propietario_id_valido, HttpServletRequest request) {
         return controladorPropietario.verPublicacionDelPropietario(propietario_id_valido, request);
     }
 

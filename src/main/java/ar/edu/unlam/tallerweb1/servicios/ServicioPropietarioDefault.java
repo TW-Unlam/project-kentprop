@@ -2,7 +2,6 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPropietario;
-import ar.edu.unlam.tallerweb1.repositorios.RepositorioPropietarioImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +18,7 @@ public class ServicioPropietarioDefault implements ServicioPropietario {
     }
 
     @Override
-    public List<Publicacion> obtenePublicacionesDelPropietario(Integer PropietarioId) {
+    public List<Publicacion> obtenePublicacionesDelPropietario(Long PropietarioId) {
         return repositorioPropietario.obtenePublicacionesDelPropietario(PropietarioId);
     }
 

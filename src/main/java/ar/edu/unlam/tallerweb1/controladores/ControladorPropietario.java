@@ -29,33 +29,32 @@ public class ControladorPropietario {
     }
 
     @RequestMapping(path = "/mis-publicaciones",method = RequestMethod.GET)
-    public ModelAndView verPublicacionDelPropietario(Integer id, HttpServletRequest request) {
+    public ModelAndView verPublicacionDelPropietario(Long id, HttpServletRequest request) {
         ModelMap modelo = new ModelMap();
         if(request.getSession().getAttribute("id")==null) {
             return new ModelAndView("redirect:/login");
         }
 
-        List<Publicacion> publicaciones=servicioPropietario.obtenePublicacionesDelPropietario(id);
+        if(request.getSession().getAttribute("ROL")!="Propietario") {
+            return new ModelAndView("redirect:/");
+        }
+
+        List<Publicacion> publicaciones=servicioPropietario.obtenePublicacionesDelPropietario((Long) request.getSession().getAttribute("id"));
 
         if(publicaciones.isEmpty()){
             modelo.put("msg_vacio","No tiene Propiedades publicadas...");
         }else{
             modelo.put("publicaciones",publicaciones);
-            ////////////////
             List<Imagen> listaImagenes=new LinkedList<>();
             List<Imagen> imagenesBusqueda=null;
             for (Publicacion publicacionUni :publicaciones)
             {
                 imagenesBusqueda=servicioPublicaciones.traerImagenesPorId(publicacionUni.getId());
-
                 if(imagenesBusqueda.size()>0){
-
                     listaImagenes.add(imagenesBusqueda.get(0));
                 }
-
             }
             modelo.put("listaDeImagenDePublicaciones",  listaImagenes);
-            ///////////////
         }
 
         return new ModelAndView("mis-publicaciones", modelo);

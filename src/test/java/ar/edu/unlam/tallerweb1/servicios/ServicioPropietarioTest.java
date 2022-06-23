@@ -18,7 +18,7 @@ public class ServicioPropietarioTest {
     private RepositorioPropietario repositorioPropietarios;
     private ServicioPropietarioDefault servicioPropietarios;
 
-    private final int PROPIETARIO_ID_VALIDO=1;
+    private final long PROPIETARIO_ID_VALIDO=1;
     private final static int CANTIDAD_PUBLICACIONES = 10;
 
     @Before

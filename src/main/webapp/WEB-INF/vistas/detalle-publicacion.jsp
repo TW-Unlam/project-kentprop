@@ -71,6 +71,7 @@
                         <h5>¿Tenés alguna pregunta sobre la propiedad?</h5>
                         <form:form action="hacer-pregunta-publicacion" modelAttribute="datosPregunta" method="POST" class="search_form">
                             <form:input path="id" placeholder="" id="id" type="hidden" class="form-control" value="${detalle.id} "/>
+                            <form:input path="id_usuario" placeholder="" id="id" type="hidden" class="form-control" value="${detalle.id} "/>
                             <form:input path="descripcion" placeholder="Escribila acá" id="descripcion" type="text" class="form-control"/>
 
                             <button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Enviar</button>
@@ -79,19 +80,20 @@
                     <div class="public-questions-asked">
                         <hr/>
                         <h5>Preguntas realizadas por otros usuarios:</h5>
-                        <c:if test="${not empty preguntas_hechas}">
-                            <c:forEach var="preguntas_h" items="${preguntas_hechas}" >
-                                <div class="question">
-                                    <p>${preguntas_h.pregunta}</p>
-                                    <p class="question-user">- ${preguntas_h.usuario.email} -</p>
-                                </div>
 
-                            </c:forEach>
-                            <div class="question">
-                                <p>esto es una pregunta?</p>
-                                <p class="question-user">- Valeria Pardo -</p>
-                            </div>
-                        </c:if>
+                        <c:choose>
+                            <c:when test="${not empty preguntas_hechas}">
+                                <c:forEach var="preguntas_h" items="${preguntas_hechas}" >
+                                    <div class="question">
+                                        <p>${preguntas_h.pregunta}</p>
+                                        <p class="question-user">- ${preguntas_h.usuario.email} -</p>
+                                    </div>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <p>${msg_sin_preguntas}</p>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
                 <div class="private-question">

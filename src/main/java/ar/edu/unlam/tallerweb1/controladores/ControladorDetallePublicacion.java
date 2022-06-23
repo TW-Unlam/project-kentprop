@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.*;
+import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPregunta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,13 @@ public class ControladorDetallePublicacion {
 
     private ServicioPregunta servicioConsultas;
     private ServicioPublicaciones servicioPublicaciones;
+    private ServicioLogin servicioLogin;
 
     @Autowired
-    public ControladorDetallePublicacion(ServicioPregunta servicioPregunta, ServicioPublicaciones servicioPublicaciones) {
+    public ControladorDetallePublicacion(ServicioPregunta servicioPregunta, ServicioPublicaciones servicioPublicaciones, ServicioLogin servicioLogin) {
         this.servicioConsultas = servicioPregunta;
         this.servicioPublicaciones = servicioPublicaciones;
+        this.servicioLogin = servicioLogin;
     }
 
     @RequestMapping(path = "/detalle-publicacion",method = RequestMethod.GET)
@@ -40,7 +43,7 @@ public class ControladorDetallePublicacion {
         modelo.put("datosPregunta", new DatosPregunta());
 
         if(consultasHechas.isEmpty()){
-            modelo.put("msg_vacio","Todavia no hay preguntas hechas, se el primero en hacer una!");
+            modelo.put("msg_sin_preguntas","Por el momento no se realizaron preguntas ¡Sé el primero!");
         }else{
             modelo.put("preguntas_hechas",consultasHechas);
         }
@@ -53,14 +56,14 @@ public class ControladorDetallePublicacion {
     }
 
     @RequestMapping(value = "hacer-pregunta-publicacion", method = RequestMethod.POST)
-    public ModelAndView hacerPregunta(@ModelAttribute("datosPregunta") DatosPregunta datosPregunta ,
-                                      HttpServletRequest request){
+    public ModelAndView hacerPregunta(@ModelAttribute("datosPregunta") DatosPregunta datosPregunta , HttpServletRequest request){
         ModelMap modelo = new ModelMap();
         if(request.getSession().getAttribute("id")!=null) {
             Boolean seHizo = false;
 
             Publicacion publicacion = servicioConsultas.buscarPublicacionPorId(datosPregunta.getId());
-            seHizo = servicioConsultas.hacerPregunta(new Pregunta(datosPregunta.getDescripcion(), publicacion));
+            Usuario usuario = servicioLogin.obtenerUsuario(datosPregunta.getId_usuario());
+            seHizo = servicioConsultas.hacerPregunta(new Pregunta(datosPregunta.getDescripcion(), publicacion, usuario));
 
             modelo.put("pregunta_hecha", seHizo);
 

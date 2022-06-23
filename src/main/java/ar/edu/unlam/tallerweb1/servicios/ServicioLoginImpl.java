@@ -29,4 +29,8 @@ public class ServicioLoginImpl implements ServicioLogin {
 		return servicioLoginDao.buscarUsuario(email, password);
 	}
 
+	public Usuario consultarUsuario (String email, String password) {
+		return servicioLoginDao.buscarUsuario(email, password);
+	}
+
 }

@@ -64,6 +64,10 @@ from publicacion pu
 join propiedad po on pu.propiedad_id=po.id
 join ubicacion u on u.id=po.ubicacion_id;
 
+
+select *
+from imagen;
+
 INSERT INTO imagen(urlImagen, publicacion_id)
 VALUES ('images/PropiedadTipoCasa.jpg', 2),
  ('images/PropiedadTipoCasa.jpg',5),
@@ -74,29 +78,18 @@ VALUES ('images/PropiedadTipoCasa.jpg', 2),
  ('images/PropiedadTipoCasa02.jpg', 7),
  ('images/PropiedadTipoCasa03.jpg', 7),
  ('images/PropiedadTipoCasa03.jpg', 10),
- ('images/PropiedadTipoDepartamento.jpg', '1'),
- ('images/PropiedadTipoDepartamento.jpg', '3'),
- ('images/PropiedadTipoDepartamento.jpg', '8'),
- ('images/PropiedadTipoDepartamento.jpg', '9'),
- ('images/PropiedadTipoDepartamento.jpg', '12'),
- ('images/PropiedadTipoDepartamento.jpg', '13'),
- ('images/PropiedadTipoDepartamento.jpg', '14'),
- ('images/PropiedadTipoDepartamento02.jpg', '3'),
- ('images/PropiedadTipoDepartamento02.jpg', '8'),
- ('images/PropiedadTipoDepartamento02.jpg', '9'),
- ('images/PropiedadTipoDepartamento02.jpg', '12'),
- ('images/PropiedadTipoDepartamento02.jpg', '13'),
- ('images/PropiedadTipoDepartamento02.jpg', '14'),
-('images/PropiedadTipoDepartamento03.jpg', '8'),
-('images/PropiedadTipoDepartamento03.jpg', '9'),
-('images/PropiedadTipoDepartamento03.jpg', '12'),
-('images/PropiedadTipoDepartamento03.jpg', '13'),
-('images/PropiedadTipoOficina.jpg', '4'),
-('images/PropiedadTipoOficina.jpg', '7'),
-('images/PropiedadTipoOficina02.jpg', '4'),
-('images/PropiedadTipoOficina02.jpg', '7'),
-('images/PropiedadTipoOficina03.jpg', '4');
+ ('images/PropiedadTipoDepartamento.jpg', 1),
+ ('images/PropiedadTipoDepartamento.jpg', 3),
+ ('images/PropiedadTipoDepartamento.jpg', 8),
+ ('images/PropiedadTipoDepartamento.jpg', 9),
+ ('images/PropiedadTipoDepartamento.jpg', 12),
+ ('images/PropiedadTipoDepartamento.jpg', 13);
 
+
+select *
+from usuario;
+
+DELETE FROM imagen;
 INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', 12, 1);
 INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', 13, 1);
 INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', 14, 1);
@@ -105,7 +98,10 @@ INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id) VALUES ('�
 INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', 13, 2);
 INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', 14, 2);
 
-
+INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id)
+VALUES ('¿Se aceptan mascotas?',1, 4),
+('¿Tiene cocina a gas?',1, 3),
+('¿Cual es el valor de las expensas?', 1, 1);
 
 
 

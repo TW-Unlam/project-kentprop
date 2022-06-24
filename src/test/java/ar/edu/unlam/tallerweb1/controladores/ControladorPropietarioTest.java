@@ -94,7 +94,7 @@ public class ControladorPropietarioTest {
         DadoQueExisteUnaListaDePublicacionesConSuPropietarioeImagenes(10);
         //Ejecucion
         ModelAndView mav = cuandoBuscolasPublicacionDelPropietario((Long) request.getSession().getAttribute("id"),request);
-//        ModelAndView mav = cuandoBuscolasPublicacionDelPropietario(PROPIETARIO_ID_VALIDO,request);
+        //ModelAndView mav = cuandoBuscolasPublicacionDelPropietario(PROPIETARIO_ID_VALIDO,request);
         //Validacion
         entoncesEncuentroPublicaciones(mav, 10);
         entoncesEncuentroImagenes(mav, 10);

@@ -14,6 +14,7 @@
 	<body>
 		<div class="bg-container">
 			<div class="search-container">
+				<a href="mis-publicaciones">VER MIS PUBLICACIONES</a>
 				<div class="search-container_img">
 					<img src="images/kentprop-logo.png" alt="KentProp logo">
 				</div>
@@ -32,6 +33,7 @@
 					</form:form>
 				</div>
 			</div>
+
 		</div>
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>

@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public class RepositorioPropietarioImpl implements RepositorioPropietario{
 
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     @Autowired
     public RepositorioPropietarioImpl(SessionFactory sessionFactory) {

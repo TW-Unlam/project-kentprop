@@ -31,11 +31,13 @@ public class ControladorPropietario {
     @RequestMapping(path = "/mis-publicaciones",method = RequestMethod.GET)
     public ModelAndView verPublicacionDelPropietario(Long id, HttpServletRequest request) {
         ModelMap modelo = new ModelMap();
+        System.out.println(request.getSession().getAttribute("id"));
+        System.out.println(request.getSession().getAttribute("ROL"));
         if(request.getSession().getAttribute("id")==null) {
             return new ModelAndView("redirect:/login");
         }
 
-        if(request.getSession().getAttribute("ROL")!="Propietario") {
+        if(!request.getSession().getAttribute("ROL").equals("Propietario")) {
             return new ModelAndView("redirect:/");
         }
 

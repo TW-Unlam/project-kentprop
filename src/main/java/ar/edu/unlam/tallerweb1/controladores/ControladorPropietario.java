@@ -56,6 +56,11 @@ public class ControladorPropietario {
                 if(imagenesBusqueda.size()>0){
                     listaImagenes.add(imagenesBusqueda.get(0));
                     System.out.println(imagenesBusqueda.get(0).getUrlImagen());
+                }else {
+                    Imagen tmp=new Imagen();
+                    tmp.setUrlImagen("images/PropiedadDefault.jpg");
+                    tmp.setPublicacion(publicacionUni);
+                    listaImagenes.add(tmp);
                 }
             }
             System.out.println(listaImagenes);

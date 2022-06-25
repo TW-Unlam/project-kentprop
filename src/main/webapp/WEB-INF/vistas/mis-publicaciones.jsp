@@ -35,16 +35,16 @@
             <h2>Publicaciones encontradas</h2>
 
             <div class="lista-publicaciones">
-                <c:forEach var="publi" items="${listaDepublicaciones}" >
+                <c:forEach var="publicacion" items="${listaDepublicaciones}" >
                     <div class="thumbnail">
-                        <a href="detalle-publicacion?id=${publi.propiedad.id}">
+                        <a href="detalle-publicacion?id=${publicacion.propiedad.id}">
                             <c:choose>
                                 <c:when test="${empty listaDeImagenesDePublicaciones}">
                                     <img src="images/PropiedadDefault.jpg" alt="Imagen de Propiedad No Disponible">
                                 </c:when>
                                 <c:otherwise>
                                     <c:forEach var="imagen" items="${listaDeImagenesDePublicaciones}" >
-                                        <c:if test="${imagen.publicacion.id eq publi.id}">
+                                        <c:if test="${imagen.publicacion.id eq publicacion.id}">
                                             <img src="${imagen.urlImagen}" alt="Imagen de Propiedad">
                                             <%--//Bandera o algo que indique que la imagen fue colocada exit o algo parecido
                                             //para quue al apricvar colocar por defecto no aplique a todas las ya asignadas--%>
@@ -57,22 +57,22 @@
                             <div class="caption">
                                 <div class="publicacion-top">
                                     <div>
-                                        <h3>$ <c:out value="${publi.precio}"/></h3>
-                                        <span class="label label-primary"><c:out value="${publi.tipoAccion.name()}"/></span></div>
+                                        <h3>$ <c:out value="${publicacion.precio}"/></h3>
+                                        <span class="label label-primary"><c:out value="${publicacion.tipoAccion.name()}"/></span></div>
                                     <div>
-                                        <h3><c:out value="${publi.propiedad.ubicacion.provincia}"/></h3>
-                                        <p><c:out value="${publi.propiedad.ubicacion.localidad}"/></p>
+                                        <h3><c:out value="${publicacion.propiedad.ubicacion.provincia}"/></h3>
+                                        <p><c:out value="${publicacion.propiedad.ubicacion.localidad}"/></p>
                                     </div>
                                 </div>
                                 <div class="publicacion-data">
-                                    <p><i class="fa-solid fa-ruler-vertical"></i><c:out value="${publi.propiedad.metrosCuadrados}"/> m<sup>2</sup>.</p>
-                                    <p><i class="fa-solid fa-door-open"></i></span><c:out value="${publi.propiedad.cantidadAmbientes}"/> amb.</p>
-                                    <p><i class="fa-solid fa-house"></i><c:out value="${publi.propiedad.tipoPropiedad.name()}"/> </p>
-                                    <c:if test="${publi.propiedad.cochera}">
+                                    <p><i class="fa-solid fa-ruler-vertical"></i><c:out value="${publicacion.propiedad.metrosCuadrados}"/> m<sup>2</sup>.</p>
+                                    <p><i class="fa-solid fa-door-open"></i></span><c:out value="${publicacion.propiedad.cantidadAmbientes}"/> amb.</p>
+                                    <p><i class="fa-solid fa-house"></i><c:out value="${publicacion.propiedad.tipoPropiedad.name()}"/> </p>
+                                    <c:if test="${publicacion.propiedad.cochera}">
                                         <p><i class="fa-solid fa-warehouse"></i> 1 coch. </p>
                                     </c:if>
                                 </div>
-                                <span class="publicacion-descripcion"><c:out value="${publi.descripcion}"/></span>
+                                <span class="publicacion-descripcion"><c:out value="${publicacion.descripcion}"/></span>
                             </div>
                         </a>
                     </div>

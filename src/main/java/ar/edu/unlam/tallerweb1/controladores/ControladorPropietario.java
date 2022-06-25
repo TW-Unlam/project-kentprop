@@ -41,24 +41,26 @@ public class ControladorPropietario {
             return new ModelAndView("redirect:/");
         }
 
-        List<Publicacion> publicaciones=servicioPropietario.obtenePublicacionesDelPropietario((Long) request.getSession().getAttribute("id"));
-
+        List<Publicacion> publicaciones=null;
+        publicaciones= servicioPropietario.obtenePublicacionesDelPropietario((Long) request.getSession().getAttribute("id"));
+        System.out.println(publicaciones);
         if(publicaciones.isEmpty()){
             modelo.put("msg_vacio","No tiene Propiedades publicadas...");
         }else{
-            modelo.put("publicaciones",publicaciones);
+            modelo.put("listaDepublicaciones",publicaciones);
             List<Imagen> listaImagenes=new LinkedList<>();
             List<Imagen> imagenesBusqueda=null;
             for (Publicacion publicacionUni :publicaciones)
-            {
+            {System.out.println(publicacionUni.getId());
                 imagenesBusqueda=servicioPublicaciones.traerImagenesPorId(publicacionUni.getId());
                 if(imagenesBusqueda.size()>0){
                     listaImagenes.add(imagenesBusqueda.get(0));
+                    System.out.println(imagenesBusqueda.get(0).getUrlImagen());
                 }
             }
-            modelo.put("listaDeImagenDePublicaciones",  listaImagenes);
+            System.out.println(listaImagenes);
+            modelo.put("listaDeImagenesDePublicaciones",  listaImagenes);
         }
-
         return new ModelAndView("mis-publicaciones", modelo);
     }
 }

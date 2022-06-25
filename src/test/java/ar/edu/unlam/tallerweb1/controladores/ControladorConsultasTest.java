@@ -16,7 +16,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ControladorConsultasTest {
-    private static final String VISTA_VER_DETALLE = "detalle-publicacion";
+    private static final String VISTA_VER_DETALLE = "redirect:/detalle-publicacion";
      private static final Integer PROPIEDAD_ID = 1;
     private DatosConsulta datosConsulta;
     private ControladorConsultas controladorConsultas;

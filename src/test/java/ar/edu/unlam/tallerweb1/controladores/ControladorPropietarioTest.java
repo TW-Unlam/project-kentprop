@@ -160,12 +160,12 @@ public class ControladorPropietarioTest {
     }
 
     private void entoncesEncuentroImagenes(ModelAndView mav, int cantidadEsperada) {
-        List<Imagen> lista = (List<Imagen>) mav.getModel().get("listaDeImagenDePublicaciones");
+        List<Imagen> lista = (List<Imagen>) mav.getModel().get("listaDeImagenesDePublicaciones");
         assertThat(lista).hasSize(cantidadEsperada);
     }
 
     private void entoncesEncuentroPublicaciones(ModelAndView mav, int cantidadEsperada) {
-        List<Publicacion> lista = (List<Publicacion>) mav.getModel().get("publicaciones");
+        List<Publicacion> lista = (List<Publicacion>) mav.getModel().get("listaDepublicaciones");
         assertThat(lista).hasSize(cantidadEsperada);
     }
 

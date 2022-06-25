@@ -8,8 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
-@Transactional
+@Service @Transactional
 public class ServicioPropietarioDefault implements ServicioPropietario {
 
     private final RepositorioPropietario repositorioPropietario;
@@ -21,7 +20,8 @@ public class ServicioPropietarioDefault implements ServicioPropietario {
 
     @Override
     public List<Publicacion> obtenePublicacionesDelPropietario(Long PropietarioId) {
-        return repositorioPropietario.obtenePublicacionesDelPropietario(PropietarioId);
+        List<Publicacion> lista =repositorioPropietario.obtenePublicacionesDelPropietario(PropietarioId);
+    return lista;
     }
 
 }

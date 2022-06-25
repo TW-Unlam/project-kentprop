@@ -52,7 +52,7 @@
         <div class="caption">
             <div class="publicacion-top">
                 <div>
-                    <p>Precio: <h3>$ <c:out value="${publi.precio}"/></h3></p>
+                    <p>Precio: <h3>$ <c:out value="${detalle.precio}"/></h3></p>
                 </div>
 
                 <p>Descripción de la propiedad: <h4>${detalle.descripcion}</h4></p>

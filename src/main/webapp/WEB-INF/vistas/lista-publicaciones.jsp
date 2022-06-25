@@ -34,7 +34,7 @@
             <div class="lista-publicaciones">
                 <c:forEach var="publicacion" items="${publicaciones}" >
                     <div class="thumbnail">
-                        <a href="detalle-publicacion?id=${publicaciones.propiedad.id}">
+                        <a href="detalle-publicacion?id=${publicacion.propiedad.id}">
 
                             <c:choose>
                                 <c:when test="${empty listaDeImagenDePublicaciones}">
@@ -42,7 +42,7 @@
                                 </c:when>
                                 <c:otherwise>
                                     <c:forEach var="imagen" items="${listaDeImagenDePublicaciones}" >
-                                        <c:if test="${imagen.publicacion.id eq publicaciones.id}">
+                                        <c:if test="${imagen.publicacion.id eq publicacion.id}">
                                         <img src="${imagen.urlImagen}" alt="Imagen de Propiedad">
                                             <%--//Bandera o algo que indique que la imagen fue colocada exit o algo parecido
                                             //para quue al apricvar colocar por defecto no aplique a todas las ya asignadas--%>
@@ -57,22 +57,22 @@
                             <div class="caption">
                             <div class="publicacion-top">
                                 <div>
-                                    <h3>$ <c:out value="${publicaciones.precio}"/></h3>
-                                    <span class="label label-primary"><c:out value="${publicaciones.tipoAccion.name()}"/></span></div>
+                                    <h3>$ <c:out value="${publicacion.precio}"/></h3>
+                                    <span class="label label-primary"><c:out value="${publicacion.tipoAccion.name()}"/></span></div>
                                 <div>
-                                    <h3><c:out value="${publicaciones.propiedad.ubicacion.provincia}"/></h3>
-                                    <p><c:out value="${publicaciones.propiedad.ubicacion.localidad}"/></p>
+                                    <h3><c:out value="${publicacion.propiedad.ubicacion.provincia}"/></h3>
+                                    <p><c:out value="${publicacion.propiedad.ubicacion.localidad}"/></p>
                                 </div>
                             </div>
                             <div class="publicacion-data">
-                                <p><i class="fa-solid fa-ruler-vertical"></i><c:out value="${publicaciones.propiedad.metrosCuadrados}"/> m<sup>2</sup>.</p>
-                                <p><i class="fa-solid fa-door-open"></i></span><c:out value="${publicaciones.propiedad.cantidadAmbientes}"/> amb.</p>
-                                <p><i class="fa-solid fa-house"></i><c:out value="${publicaciones.propiedad.tipoPropiedad.name()}"/> </p>
-                                <c:if test="${publicaciones.propiedad.cochera}">
-                                    <p><i class="fa-solid fa-warehouse"></i> 1 coch. </p>
+                                <p><i class="fa-solid fa-ruler-vertical"></i><c:out value="${publicacion.propiedad.metrosCuadrados}"/> m<sup>2</sup>.</p>
+                                <p><i class="fa-solid fa-door-open"></i></span><c:out value="${publicacion.propiedad.cantidadAmbientes}"/> amb.</p>
+                                <p><i class="fa-solid fa-house"></i><c:out value="${publicacion.propiedad.tipoPropiedad.name()}"/> </p>
+                                <c:if test="${publicacion.propiedad.cochera}">
+                                    <p><i class="fa-solid fa-warehouse"></i>1-coch. </p>
                                 </c:if>
                             </div>
-                            <span class="publicacion-descripcion"><c:out value="${publicaciones.descripcion}"/></span>
+                            <span class="publicacion-descripcion"><c:out value="${publicacion.descripcion}"/></span>
                         </div>
                         </a>
                     </div>

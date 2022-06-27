@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Pregunta;
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
+import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPregunta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
 import org.junit.Before;
@@ -26,6 +27,8 @@ public class ControladorDetallePublicacionTest {
     private ControladorDetallePublicacion controladorDetallePublicacion;
     private ServicioPublicaciones servicioPublicaciones;
     private ServicioPregunta servicioPregunta;
+
+    private ServicioLogin servicioLogin;
     private HttpServletRequest request;
     private HttpSession session;
     private DatosPregunta datosPregunta;

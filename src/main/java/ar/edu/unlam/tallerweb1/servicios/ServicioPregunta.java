@@ -12,4 +12,5 @@ public interface ServicioPregunta {
      Boolean hacerPregunta(Pregunta pregunta);
 
      Publicacion buscarPublicacionPorId(Integer publicacionId);
+
 }

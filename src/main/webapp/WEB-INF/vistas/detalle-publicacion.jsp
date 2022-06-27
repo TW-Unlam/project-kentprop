@@ -91,6 +91,14 @@
                     <h5>${preguntas_h.usuario}</h5>
                 </c:forEach>
             </c:if>
+                <c:if test="${sessionScope.ROL.equals('Propietario')}">
+                    <form:form action="hacer-pregunta-publicacion" modelAttribute="datosPregunta" method="POST" class="search_form">
+                        <form:input path="id" placeholder="" id="id2" type="hidden" class="form-control" value="${detalle.id} "/>
+                        <form:input path="descripcion" placeholder="Escribila acá" id="descripcion2" type="text" class="form-control"/>
+
+                        <button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Enviar</button>
+                    </form:form>
+                </c:if>
         </div>
 
         <%--    <div class="ubicacion-propiedad">

@@ -13,6 +13,7 @@
 	</head>
 	<body>
 		<div class="bg-container">
+
 			<div class="search-container">
 				<a href="mis-publicaciones">VER MIS PUBLICACIONES</a>
 				<div class="search-container_img">

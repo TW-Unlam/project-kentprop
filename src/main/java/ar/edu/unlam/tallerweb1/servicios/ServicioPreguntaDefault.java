@@ -16,6 +16,7 @@ public class ServicioPreguntaDefault implements ServicioPregunta {
     @Autowired
     public ServicioPreguntaDefault(RepositorioPregunta repositorioPregunta) {
         this.repositorioPregunta = repositorioPregunta;
+
     }
 
     @Override

@@ -36,4 +36,14 @@ public class ServicioPreguntaDefault implements ServicioPregunta {
         Publicacion publicacion = repositorioPregunta.buscarPublicacionPorId(publicacionId);
         return publicacion;
     }
+
+    @Override
+    public void responderPregunta(Pregunta respuestar) {
+        repositorioPregunta.guardarRespuesta(respuestar);
+    }
+
+    @Override
+    public Pregunta buscarLaPregunta(Integer id) {
+        return null;
+    }
 }

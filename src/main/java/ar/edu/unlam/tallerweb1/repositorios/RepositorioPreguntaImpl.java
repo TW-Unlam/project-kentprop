@@ -46,4 +46,15 @@ public class RepositorioPreguntaImpl implements RepositorioPregunta {
     public Publicacion buscarPublicacionPorId(Integer publicacionId) {
         return sessionFactory.getCurrentSession().get(Publicacion.class, publicacionId);
     }
+
+    @Override
+    public void guardarRespuesta(Pregunta respuesta) {
+        sessionFactory.getCurrentSession().update( respuesta);
+
+    }
+
+    @Override
+    public Pregunta ObtenerPregunta(Integer id_pregunta) {
+        return sessionFactory.getCurrentSession().get(Pregunta.class, id_pregunta);
+    }
 }

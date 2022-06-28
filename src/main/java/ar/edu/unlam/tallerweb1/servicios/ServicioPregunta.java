@@ -13,4 +13,7 @@ public interface ServicioPregunta {
 
      Publicacion buscarPublicacionPorId(Integer publicacionId);
 
+     void responderPregunta(Pregunta respuesta);
+
+     Pregunta buscarLaPregunta(Integer id);
 }

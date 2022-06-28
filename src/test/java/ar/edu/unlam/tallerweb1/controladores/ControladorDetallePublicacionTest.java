@@ -115,7 +115,7 @@ public class ControladorDetallePublicacionTest {
         Publicacion publicacion=new Publicacion();
         publicacion.setId(datosPregunta.getId());
         pregunta.setPublicacion(publicacion);
-        when(datosPregunta.getDescripcion()).thenReturn("5 Meses");
+        //when(datosPregunta.getDescripcion()).thenReturn("5 Meses");
         when(servicioPregunta.buscarLaPregunta(datosPregunta.getId())).thenReturn(pregunta);
     }
 

@@ -10,8 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class ServicioPreguntaTest {
 
@@ -42,6 +41,42 @@ public class ServicioPreguntaTest {
 
         entoncesObtengoLasConsultas(0, preguntas);
 
+    }
+    @Test
+    public void queAlResponderLaPreguntaTraigaLosDatosParaPoderActualizarla(){
+        dadoQueExisteLaConsulteEnLaPublicacion();
+        Pregunta preguntas = entoncesMeTraeLasConsultaConId(1);
+        entoncesObtengoLaConsulta( preguntas);
+    }
+    @Test
+    public void alActualizarLaPregunta(){
+        dadoQueExisteLaConsulteEnLaPublicacion();
+        Pregunta preguntas = entoncesMeTraeLasConsultaConId(1);
+        cuandoGuardaLaPregunta(preguntas);
+        entoncesSeACtualizaLasDatos(preguntas);
+
+    }
+
+    private void cuandoGuardaLaPregunta(Pregunta preguntas) {
+        servicioPregunta.responderPregunta(preguntas);
+    }
+
+    private void entoncesSeACtualizaLasDatos(Pregunta preguntas) {
+        verify(repositorioPregunta,times(1)).guardarRespuesta(preguntas);
+    }
+
+    private void dadoQueExisteLaConsulteEnLaPublicacion() {
+        Pregunta pregunta = new Pregunta();
+        when(repositorioPregunta.ObtenerPregunta(1)).thenReturn(pregunta);
+
+    }
+
+    private void entoncesObtengoLaConsulta( Pregunta preguntas) {
+        assertThat(preguntas).isNotNull();
+    }
+
+    private Pregunta entoncesMeTraeLasConsultaConId(Integer IdPregunta) {
+        return servicioPregunta.buscarLaPregunta(1);
     }
 
     private List<Pregunta> entoncesMeTraeLasConsultasDeLaPublicacionConId(Integer publicacionId) {

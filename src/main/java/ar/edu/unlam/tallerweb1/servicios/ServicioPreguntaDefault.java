@@ -44,6 +44,6 @@ public class ServicioPreguntaDefault implements ServicioPregunta {
 
     @Override
     public Pregunta buscarLaPregunta(Integer id) {
-        return null;
+        return repositorioPregunta.ObtenerPregunta(id);
     }
 }

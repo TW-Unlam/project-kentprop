@@ -1,16 +1,20 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
-import ar.edu.unlam.tallerweb1.excepciones.PublicacionNoEncontrada;
 import ar.edu.unlam.tallerweb1.modelo.Accion;
+import ar.edu.unlam.tallerweb1.modelo.Imagen;
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
 import ar.edu.unlam.tallerweb1.modelo.TipoPropiedad;
 
 import java.util.List;
 
 public interface ServicioPublicaciones {
-    List<Publicacion> buscarPublicacion(Accion accion, TipoPropiedad tipo, String descripcion) throws PublicacionNoEncontrada;
+    List<Publicacion> buscarPublicacion(Accion accion, TipoPropiedad tipo, String descripcion);
 
     Publicacion verDetallePublicacion(Integer id);
+
+    List<Imagen> traerImagenesPorId(Integer publicacion_id);
+
+    List<Publicacion> obtenerPublicacionesDestacadas();
 }
 
 // Vamos a usar test doubles con un mock, para hacer pruebas de un controlador que dependen de un servicio

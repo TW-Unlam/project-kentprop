@@ -1,10 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
-import ar.edu.unlam.tallerweb1.controladores.DatosBusqueda;
-import ar.edu.unlam.tallerweb1.modelo.Accion;
-import ar.edu.unlam.tallerweb1.modelo.Propiedad;
-import ar.edu.unlam.tallerweb1.modelo.Publicacion;
-import ar.edu.unlam.tallerweb1.modelo.TipoPropiedad;
+import ar.edu.unlam.tallerweb1.modelo.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +31,46 @@ public class RepositorioPublicacionesImpl implements RepositorioPublicaciones {
                 .add(Restrictions.eq("prop.tipoPropiedad", tipo))
                 .add(Restrictions.eq("tipoAccion", accion))
                 .list();
+
+    }
+
+    @Override
+    public List<Imagen> buscarImagenesDeLaPublicacion(Integer publicacion_id) {
+        return sessionFactory.getCurrentSession()
+                .createCriteria(Imagen.class)
+                .createAlias("publicacion", "publ")
+                .add(Restrictions.eq("publ.id",  publicacion_id))
+                .list();
     }
 
     @Override
     public Publicacion buscarDetallePublicacion(Integer id) {
         return sessionFactory.getCurrentSession().get(Publicacion.class, id);
+    }
+
+    @Override
+    public Propiedad buscarPropiedad(Integer id_propiedad) {
+        return sessionFactory.getCurrentSession().get(Propiedad.class, id_propiedad);
+    }
+
+/** No se logro mandar/select una parte del join para que devuelva el usuario
+ * por lo tanto se utiliza la funcion anterior
+ * **/
+    @Override
+    public Usuario buscarPropietarioDeLaPropiedad(Integer id_propiedad) {
+        return (Usuario) sessionFactory.getCurrentSession()
+                .createCriteria(Propiedad.class)
+                .createAlias("propietario", "usuario")
+                .add(Restrictions.eq("id", id_propiedad))
+                .uniqueResult();
+    }
+
+    @Override
+    public List<Publicacion> buscarPublicacionesDestacadas() {
+        return sessionFactory.getCurrentSession()
+                .createCriteria(Publicacion.class)
+                .add(Restrictions.eq("destacada", true))
+                .list();
     }
 
 }

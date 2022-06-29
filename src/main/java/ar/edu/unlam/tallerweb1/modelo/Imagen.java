@@ -7,7 +7,6 @@ public class Imagen {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String urlImagen;
     @ManyToOne
     @JoinColumn(name = "publicacion_id")
@@ -46,4 +45,5 @@ public class Imagen {
     public void setId(Integer id) {
         this.id = id;
     }
+
 }

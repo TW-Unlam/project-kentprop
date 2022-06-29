@@ -23,6 +23,7 @@ public class RepositorioPublicacionesTest extends SpringTest {
     @Autowired
     private RepositorioPublicaciones repositorioPublicaciones;
 
+
     @Test @Transactional @Rollback
     public void busquedaPublicacionesConDevolucion(){
 
@@ -71,6 +72,85 @@ public class RepositorioPublicacionesTest extends SpringTest {
         entoncesMeDevuelveElDetalleDeLaPropiedadConId(propiedades.get(0).getId(), resultado.getId());
     }
 
+    @Test @Transactional @Rollback
+    public void obtenerElPropietarioDEUnaPropiedadEnDetalles(){
+        dadoQueExisteUnaListaDePropiedadesConPropietarios();
+
+        List<Publicacion> propiedades = repositorioPublicaciones.buscarPublicaciones(ACCION_EXISTENTE, TIPO_EXISTENTE, DESCRIPCION_EXISTENTE);
+        Publicacion resultado = repositorioPublicaciones.buscarDetallePublicacion(propiedades.get(0).getId());
+        Propiedad propietario = (Propiedad) repositorioPublicaciones.buscarPropiedad(resultado.getPropiedad().getId());
+
+        entoncesMeDevuelveLosDatosDelUsuarioPropietarioDELaPropiedad( propietario.getPropietario());
+        entoncesMeDevuelveLosDatosDelUsuarioAEnviar( propietario.getPropietario().getEmail(),"sullca@gmail");
+    }
+
+    @Test @Transactional @Rollback
+    public void obtenerPublicacionesDestacadas(){
+        dadoQueExisteUnaListaDePublicaciones();
+        
+        List<Publicacion> destacadas = repositorioPublicaciones.buscarPublicacionesDestacadas();
+        
+        entoncesMeDevuelveLasPublicacionesDestacadas(destacadas, 2);
+    }
+
+    private void entoncesMeDevuelveLasPublicacionesDestacadas(List<Publicacion> destacadas, int cantidad) {
+        assertThat(destacadas).hasSize(cantidad);
+    }
+
+    private void entoncesMeDevuelveLosDatosDelUsuarioAEnviar(String email, String esperado) {
+        assertThat(email).isEqualTo(esperado);
+    }
+
+    private void entoncesMeDevuelveLosDatosDelUsuarioPropietarioDELaPropiedad( Usuario obtenido) {
+        assertThat(obtenido).isNotNull();
+    }
+
+    private void dadoQueExisteUnaListaDePropiedadesConPropietarios() {
+        Publicacion publicacionUno = new Publicacion();
+        Publicacion publicacionDos = new Publicacion();
+
+        Propiedad propiedadUno = new Propiedad();
+        Propiedad propiedadDos = new Propiedad();
+
+        Ubicacion ubicacionUno = new Ubicacion();
+        ubicacionUno.setProvincia("Buenos Aires");
+        ubicacionUno.setLocalidad("Ramos Mejia");
+
+        Ubicacion ubicacionDos = new Ubicacion();
+        ubicacionDos.setProvincia("Buenos Aires");
+        ubicacionDos.setLocalidad("Ramos Mejia");
+
+
+        Usuario propietario1=new Usuario();
+        propietario1.setEmail("sullca@gmail");
+
+        Usuario propietario2=new Usuario();
+        propietario2.setEmail("sullca2@gmail");
+
+        propiedadUno.setUbicacion(ubicacionUno);
+        propiedadUno.setTipoPropiedad(TipoPropiedad.DEPARTAMENTO);
+        propiedadUno.setPropietario(propietario1);
+        publicacionUno.setTipoAccion(ACCION_EXISTENTE);
+        publicacionUno.setPropiedad(propiedadUno);
+
+        propiedadDos.setUbicacion(ubicacionDos);
+        propiedadDos.setTipoPropiedad(TipoPropiedad.CASA);
+        propiedadDos.setPropietario(propietario2);
+        publicacionDos.setTipoAccion(ACCION_EXISTENTE);
+        publicacionDos.setPropiedad(propiedadDos);
+
+
+        session().save(propietario1);
+        session().save(propietario2);
+        session().save(ubicacionUno);
+        session().save(ubicacionDos);
+        session().save(propiedadUno);
+        session().save(propiedadDos);
+        session().save(publicacionUno);
+        session().save(publicacionDos);
+    }
+
+
     private void entoncesMeDevuelveElDetalleDeLaPropiedadConId(Integer idPropiedad, Integer idDetalle) {
         assertThat(idPropiedad).isEqualTo(idDetalle);
     }
@@ -90,6 +170,9 @@ public class RepositorioPublicacionesTest extends SpringTest {
 
         Publicacion publicacionUno = new Publicacion();
         Publicacion publicacionDos = new Publicacion();
+
+        publicacionUno.setDestacada(true);
+        publicacionDos.setDestacada(true);
 
         Propiedad propiedadUno = new Propiedad();
         Propiedad propiedadDos = new Propiedad();
@@ -118,10 +201,6 @@ public class RepositorioPublicacionesTest extends SpringTest {
         session().save(propiedadDos);
         session().save(publicacionUno);
         session().save(publicacionDos);
-
-
-
-
 
     }
 

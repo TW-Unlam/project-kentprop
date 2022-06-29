@@ -1,8 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
-import ar.edu.unlam.tallerweb1.controladores.DatosBusqueda;
-import ar.edu.unlam.tallerweb1.excepciones.PublicacionNoEncontrada;
 import ar.edu.unlam.tallerweb1.modelo.Accion;
+import ar.edu.unlam.tallerweb1.modelo.Imagen;
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
 import ar.edu.unlam.tallerweb1.modelo.TipoPropiedad;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPublicaciones;
@@ -23,18 +22,26 @@ public class ServicioPublicacionesDefault implements ServicioPublicaciones {
     }
 
     @Override
-    public List<Publicacion> buscarPublicacion(Accion accion, TipoPropiedad tipo, String descripcion) throws PublicacionNoEncontrada {
+    public List<Publicacion> buscarPublicacion(Accion accion, TipoPropiedad tipo, String descripcion){
         List<Publicacion> lista = repositorioPublicaciones.buscarPublicaciones(accion, tipo, descripcion);
-        if(lista.isEmpty()){
-            throw new PublicacionNoEncontrada();
-        }else{
-            return lista;
-        }
+        return lista;
     }
 
     @Override
     public Publicacion verDetallePublicacion(Integer id) {
         Publicacion resultado = repositorioPublicaciones.buscarDetallePublicacion(id);
         return resultado;
+    }
+
+    @Override
+    public List<Imagen> traerImagenesPorId(Integer publicacion_id) {
+        List<Imagen> lista = repositorioPublicaciones.buscarImagenesDeLaPublicacion(publicacion_id);
+        return lista;
+    }
+
+    @Override
+    public List<Publicacion> obtenerPublicacionesDestacadas() {
+        List<Publicacion> destacadas = repositorioPublicaciones.buscarPublicacionesDestacadas();
+        return destacadas;
     }
 }

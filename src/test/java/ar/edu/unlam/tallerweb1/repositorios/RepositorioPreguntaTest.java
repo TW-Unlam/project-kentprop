@@ -31,6 +31,8 @@ public class RepositorioPreguntaTest extends SpringTest {
         entoncesMeDevuelveUnaListaDePreguntas(preguntas);
     }
 
+    @Test
+    @Transactional @Rollback
     public void alBuscarPorIdDePublicacionInexistenteNoMeDevuelvePreguntas(){
         Integer idPublicacionExistente = 10;
         Integer idPublicacionInexistente = 2;
@@ -44,6 +46,8 @@ public class RepositorioPreguntaTest extends SpringTest {
     }
 
     // buscarConsultasDeUsuario
+    @Test
+    @Transactional @Rollback
     public void alBuscarPorIdDeUsuarioExistenteMeDevuelveSusPreguntas(){
         Integer idPublicacion = 10;
         Integer idUsuario = 10;
@@ -55,6 +59,8 @@ public class RepositorioPreguntaTest extends SpringTest {
         entoncesMeDevuelveUnaListaDePreguntas(preguntas);
     }
 
+    @Test
+    @Transactional @Rollback
     public void alBuscarPorIdDeUsuarioInexistenteNoMeDevuelvePreguntas(){
         Integer idPublicacion = 10;
         Integer idUsuarioExistente = 2;
@@ -66,6 +72,7 @@ public class RepositorioPreguntaTest extends SpringTest {
 
         entoncesMeDevuelveUnaListaDePreguntasVacia(preguntas);
     }
+
     private void dadoQueExistenPreguntasParaLaPublicacionDeIdyUsuarioDeId(Integer idPublicacion, Integer idUsuario) {
         Pregunta pregunta1 = new Pregunta();
         pregunta1.setPregunta("¿Cuantos años de antiguedad tiene?");

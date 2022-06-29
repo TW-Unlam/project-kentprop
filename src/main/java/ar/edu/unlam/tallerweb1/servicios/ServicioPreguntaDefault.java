@@ -16,6 +16,7 @@ public class ServicioPreguntaDefault implements ServicioPregunta {
     @Autowired
     public ServicioPreguntaDefault(RepositorioPregunta repositorioPregunta) {
         this.repositorioPregunta = repositorioPregunta;
+
     }
 
     @Override
@@ -34,5 +35,15 @@ public class ServicioPreguntaDefault implements ServicioPregunta {
     public Publicacion buscarPublicacionPorId(Integer publicacionId) {
         Publicacion publicacion = repositorioPregunta.buscarPublicacionPorId(publicacionId);
         return publicacion;
+    }
+
+    @Override
+    public void responderPregunta(Pregunta respuestar) {
+        repositorioPregunta.guardarRespuesta(respuestar);
+    }
+
+    @Override
+    public Pregunta buscarLaPregunta(Integer id) {
+        return repositorioPregunta.ObtenerPregunta(id);
     }
 }

@@ -86,6 +86,8 @@ public class ControladorDetallePublicacionTest {
         entoncesMeRedirecciona(VISTA_REDIRECCION_SIN_LOGUEO, mav.getViewName());
     }
 
+
+
     @Test
     public void queAlCargarUnaPreguntaAlEstarLogeadoMeRedireccioneALaPaginaVerDetalle(){
         request = givenExisteUnUsuarioConId(ID_USUARIO);
@@ -109,6 +111,7 @@ public class ControladorDetallePublicacionTest {
         when(servicioPregunta.hacerPregunta(pregunta)).thenReturn(true);
         when(datosPregunta.getPublicacionId()).thenReturn(1);
     }
+
     private void yMeCarganLasPreguntasYaHechas(int cantidadEsperada, ModelAndView mav) {
         List<Pregunta> lista = (List<Pregunta>) mav.getModel().get("preguntas_hechas");
         assertThat(lista).hasSize(cantidadEsperada);

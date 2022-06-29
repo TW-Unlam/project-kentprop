@@ -61,6 +61,52 @@ public class RepositorioDetalleTest extends SpringTest {
 
     }
 
+
+    @Test
+    @Transactional @Rollback
+    public void alBuscarlasConsultaPorIdTeLoTraelaExistente(){
+        ///Cantida
+       Pregunta pregunta = dadoQueExisteUnaConsultaDeLaPublicacion();
+
+        Pregunta pregunta1Busqueda =repositorioDeConsultas.ObtenerPregunta(pregunta.getId());
+        assertThat(pregunta1Busqueda).isNotNull();
+
+    }
+
+    @Test
+    @Transactional @Rollback
+    public void alGuardarLaRespuestaAConsultaPorId(){
+        ///Cantida
+        Pregunta pregunta = dadoQueExisteUnaConsultaDeLaPublicacion();
+        Pregunta pregunta1Busqueda =repositorioDeConsultas.ObtenerPregunta(pregunta.getId());
+        pregunta1Busqueda.setRespuesta("RespuestaEstandar");
+        repositorioDeConsultas.guardarRespuesta(pregunta1Busqueda);
+
+        Pregunta preguntaBusquedaDeNuevo =repositorioDeConsultas.ObtenerPregunta(pregunta.getId());
+        assertThat(preguntaBusquedaDeNuevo).isNotNull();
+        assertThat(preguntaBusquedaDeNuevo.getRespuesta()).isNotNull();
+        assertThat(preguntaBusquedaDeNuevo.getRespuesta()).isEqualTo("RespuestaEstandar");
+
+    }
+
+    private Pregunta dadoQueExisteUnaConsultaDeLaPublicacion() {
+        Publicacion publicacion=new Publicacion();
+        publicacion.setTipoAccion(Accion.ALQUILAR);
+            Pregunta pregunta1 =new Pregunta();
+            pregunta1.setPregunta("Tiempo de Aquiler minimo?");
+            Usuario usuario1=new Usuario();
+            usuario1.setEmail("sullca@gmail.com");
+
+            pregunta1.setUsuario(usuario1);
+            pregunta1.setPublicacion(publicacion);
+            session().save(usuario1);
+            session().save(pregunta1);
+
+        session().save(publicacion);
+
+        return  pregunta1;
+    }
+
     private void entoncesSeEstableceElIDDelGuardado(Pregunta pregunta) {
         assertThat(pregunta.getId()).isNotNull();
     }

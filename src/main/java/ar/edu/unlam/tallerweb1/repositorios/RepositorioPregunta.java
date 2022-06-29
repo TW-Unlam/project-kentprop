@@ -14,4 +14,8 @@ public interface RepositorioPregunta {
     void guardarConsulta(Pregunta pregunta);
 
     Publicacion buscarPublicacionPorId(Integer publicacionId);
+
+    void guardarRespuesta(Pregunta respuestar);
+
+    Pregunta ObtenerPregunta(Integer id_pregunta);
 }

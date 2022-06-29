@@ -88,6 +88,13 @@
                                         <p>${preguntas_h.pregunta}</p>
                                         <p class="question-user">- ${preguntas_h.usuario.email} -</p>
                                     </div>
+                                    <c:if test="${sessionScope.ROL.equals('PROPIETARIO')}">
+                                        <form:form action="responder-pregunta-publicacion" modelAttribute="datosPregunta" method="POST" class="search_form">
+                                            <form:input path="publicacionId" placeholder="" id="idResp" type="hidden" class="form-control" value="${preguntas_h.id} "/>
+                                            <form:input path="descripcion" placeholder="Escribila acá" id="descripcionRes" type="text" class="form-control"/>
+                                            <button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Enviar</button>
+                                        </form:form>
+                                    </c:if>
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
@@ -106,7 +113,6 @@
                     <iframe src="${detalle.propiedad.coordenadas}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
              --%>
-        </div>
         </div>
     </div>
     <script src="https://kit.fontawesome.com/39a92c78bd.js" crossorigin="anonymous"></script>

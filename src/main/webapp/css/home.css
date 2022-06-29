@@ -10,6 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .search-container_img {
@@ -77,4 +78,8 @@
 .search_form select:active
 {
     border: none
+}
+
+.search-container a {
+    margin-top: 20px;
 }

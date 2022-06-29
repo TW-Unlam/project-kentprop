@@ -11,6 +11,7 @@
 	</head>
 	<body>
 		<div class="bg-container">
+
 			<div class="search-container">
 				<div class="search-container_img">
 					<img src="images/kentprop-logo.png" alt="KentProp logo">
@@ -29,7 +30,9 @@
 						<button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Buscar</button>
 					</form:form>
 				</div>
+				<a href="mis-publicaciones">VER MIS PUBLICACIONES</a>
 			</div>
+
 		</div>
 		<script src="js/bootstrap.min.js" type="text/javascript"></script>
 	</body>

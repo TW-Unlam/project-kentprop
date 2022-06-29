@@ -6,8 +6,6 @@
 		<title>Home</title>
 		<!-- Bootstrap core CSS -->
 	    <link href="css/bootstrap.min.css" rel="stylesheet" >
-	    <!-- Bootstrap theme -->
-	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 		<link href="css/general.css" rel="stylesheet">
 		<link href="css/home.css" rel="stylesheet">
 	</head>
@@ -15,7 +13,6 @@
 		<div class="bg-container">
 
 			<div class="search-container">
-				<a href="mis-publicaciones">VER MIS PUBLICACIONES</a>
 				<div class="search-container_img">
 					<img src="images/kentprop-logo.png" alt="KentProp logo">
 				</div>
@@ -33,12 +30,10 @@
 						<button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Buscar</button>
 					</form:form>
 				</div>
+				<a href="mis-publicaciones">VER MIS PUBLICACIONES</a>
 			</div>
 
 		</div>
-		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
-		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 		<script src="js/bootstrap.min.js" type="text/javascript"></script>
 	</body>
 </html>

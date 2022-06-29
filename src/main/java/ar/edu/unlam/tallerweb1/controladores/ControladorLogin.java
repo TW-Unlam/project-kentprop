@@ -50,6 +50,7 @@ public class ControladorLogin {
 			request.getSession().setAttribute("id", usuarioBuscado.getId());
 			return new ModelAndView("redirect:/detalle-publicacion?id="+datosLogin.getIdPublicacion());
 		}
+
 		if(usuarioBuscado != null) {
 			request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
 			request.getSession().setAttribute("id", usuarioBuscado.getId());

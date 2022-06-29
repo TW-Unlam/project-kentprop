@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class RepositorioPropietarioTest extends SpringTest {
 
-    private final long PROPIETARIO_ID_VALIDO=1;
+    private final Integer PROPIETARIO_ID_VALIDO=1;
 
     @Autowired
     private RepositorioPropietario repositorioPropietario;
@@ -23,18 +23,18 @@ public class RepositorioPropietarioTest extends SpringTest {
     @Transactional @Rollback
     public void ALBuscarLasPublicacionesDevuelveListaNula(){
 
-        Usuario Propietario=dadoQueNoExisteUnaListaDePublicaciones();
+        Usuario propietario=dadoQueNoExisteUnaListaDePublicaciones();
 
-        List<Publicacion> publicaciones = repositorioPropietario.obtenePublicacionesDelPropietario(Propietario.getId());
+        List<Publicacion> publicaciones = repositorioPropietario.obtenePublicacionesDelPropietario(propietario.getId());
 
         entoncesMeDevuelveUnaListaDePublicacionesVacia(publicaciones);
 
     }
 
     private Usuario dadoQueNoExisteUnaListaDePublicaciones() {
-        Usuario Propietario=new Usuario();
-        session().save(Propietario);
-        return  Propietario;
+        Usuario propietario=new Usuario();
+        session().save(propietario);
+        return  propietario;
     }
 
     private void entoncesMeDevuelveUnaListaDePublicacionesVacia(List<Publicacion> publicaciones) {
@@ -47,9 +47,9 @@ public class RepositorioPropietarioTest extends SpringTest {
     @Transactional @Rollback
     public void ALBuscarLasPublicacionesDevuelveLista(){
 
-        Usuario Propietario=dadoQueExisteUnaListaDePublicaciones(10);
+        Usuario propietario=dadoQueExisteUnaListaDePublicaciones(10);
 
-        List<Publicacion> publicaciones = repositorioPropietario.obtenePublicacionesDelPropietario(Propietario.getId());
+        List<Publicacion> publicaciones = repositorioPropietario.obtenePublicacionesDelPropietario(propietario.getId());
 
         entoncesMeDevuelveUnaListaDePublicacionesQueCoinciden(publicaciones);
         entoncesMeDevuelveUnaListaDePublicaciones(10,publicaciones);
@@ -64,12 +64,12 @@ public class RepositorioPropietarioTest extends SpringTest {
     }
 
     private Usuario dadoQueExisteUnaListaDePublicaciones(int cantidad) {
-        Usuario Propietario=new Usuario();
+        Usuario propietario=new Usuario();
 
         for (int i=0;i<cantidad;i++){
 
             Propiedad propiedad=new Propiedad();
-            propiedad.setPropietario(Propietario);
+            propiedad.setPropietario(propietario);
 
             Publicacion publicacionN = new Publicacion();
 
@@ -79,8 +79,8 @@ public class RepositorioPropietarioTest extends SpringTest {
             session().save(publicacionN);
         }
 
-        session().save(Propietario);
-        return  Propietario;
+        session().save(propietario);
+        return  propietario;
     }
 
 

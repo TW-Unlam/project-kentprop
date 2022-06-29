@@ -12,5 +12,5 @@ public interface RepositorioUsuario {
     Usuario buscar(String email);
 	void modificar(Usuario usuario);
 
-    Usuario obterneUsuario(Long id);
+    Usuario obterneUsuario(Integer id);
 }

@@ -19,7 +19,7 @@ public class RepositorioPropietarioImpl implements RepositorioPropietario{
     }
 
     @Override
-    public List<Publicacion> obtenePublicacionesDelPropietario(Long propietarioId) {
+    public List<Publicacion> obtenePublicacionesDelPropietario(Integer propietarioId) {
         return sessionFactory.getCurrentSession()
                 .createCriteria(Publicacion.class)
                 .createAlias("propiedad", "prop")

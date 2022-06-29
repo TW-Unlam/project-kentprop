@@ -27,7 +27,6 @@ public class ControladorDetallePublicacionTest {
     private ControladorDetallePublicacion controladorDetallePublicacion;
     private ServicioPublicaciones servicioPublicaciones;
     private ServicioPregunta servicioPregunta;
-
     private ServicioLogin servicioLogin;
     private HttpServletRequest request;
     private HttpSession session;
@@ -40,8 +39,8 @@ public class ControladorDetallePublicacionTest {
         session = mock(HttpSession.class);
         servicioPregunta = mock(ServicioPregunta.class);
         servicioPublicaciones = mock(ServicioPublicaciones.class);
-        controladorDetallePublicacion = new ControladorDetallePublicacion(servicioPregunta, servicioPublicaciones);
-
+        servicioLogin = mock(ServicioLogin.class);
+        controladorDetallePublicacion = new ControladorDetallePublicacion(servicioPregunta, servicioPublicaciones, servicioLogin);
     }
 
     private HttpServletRequest givenExisteUnUsuarioConId(Integer id) {
@@ -87,6 +86,8 @@ public class ControladorDetallePublicacionTest {
         entoncesMeRedirecciona(VISTA_REDIRECCION_SIN_LOGUEO, mav.getViewName());
     }
 
+
+
     @Test
     public void queAlCargarUnaPreguntaAlEstarLogeadoMeRedireccioneALaPaginaVerDetalle(){
         request = givenExisteUnUsuarioConId(ID_USUARIO);
@@ -95,28 +96,6 @@ public class ControladorDetallePublicacionTest {
         ModelAndView mav = cuandoEnvioLaPregunta(datosPregunta,request);
 
         entoncesMeRedirecciona(VISTA_REDIRECCION_LOGUEADO, mav.getViewName());
-    }
-
-    @Test
-    public  void queAlResponderUnaPreguntaMeDirreecionAlDetalleDeLaPublicacion(){
-       alrealizarUnaRespuesta();
-       ModelAndView mav=cuandoEnvioLaRespuesta(datosPregunta);
-       entoncesMeRedirecciona(VISTA_REDIRECCION_LOGUEADO, mav.getViewName());
-        
-    }
-
-    private ModelAndView cuandoEnvioLaRespuesta(DatosPregunta datosPregunta) {
-        return controladorDetallePublicacion.responderPregunta(datosPregunta);
-    }
-
-    private void alrealizarUnaRespuesta() {
-        when(datosPregunta.getId()).thenReturn(1);
-        Pregunta pregunta = new Pregunta();
-        Publicacion publicacion=new Publicacion();
-        publicacion.setId(datosPregunta.getId());
-        pregunta.setPublicacion(publicacion);
-        //when(datosPregunta.getDescripcion()).thenReturn("5 Meses");
-        when(servicioPregunta.buscarLaPregunta(datosPregunta.getId())).thenReturn(pregunta);
     }
 
     private void entoncesMeRedirecciona(String vistaRedireccion, String viewName) {
@@ -130,7 +109,7 @@ public class ControladorDetallePublicacionTest {
     private void alRealizarUnaPregunta() {
         Pregunta pregunta = new Pregunta();
         when(servicioPregunta.hacerPregunta(pregunta)).thenReturn(true);
-        when(datosPregunta.getId()).thenReturn(1);
+        when(datosPregunta.getPublicacionId()).thenReturn(1);
     }
 
     private void yMeCarganLasPreguntasYaHechas(int cantidadEsperada, ModelAndView mav) {

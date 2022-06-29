@@ -36,34 +36,28 @@
 
             <div class="lista-publicaciones">
                 <c:forEach var="publicacion" items="${listaDepublicaciones}" >
-                    <div class="thumbnail">
+                    <div class="card">
                         <a href="detalle-publicacion?id=${publicacion.propiedad.id}">
-                            <c:choose>
-                                <c:when test="${empty listaDeImagenesDePublicaciones}">
-                                    <img src="images/PropiedadDefault.jpg" alt="Imagen de Propiedad No Disponible">
-                                </c:when>
-                                <c:otherwise>
-                                    <c:forEach var="imagen" items="${listaDeImagenesDePublicaciones}" >
-                                        <c:if test="${imagen.publicacion.id eq publicacion.id}">
-                                            <img src="${imagen.urlImagen}" alt="Imagen de Propiedad">
-                                            <%--//Bandera o algo que indique que la imagen fue colocada exit o algo parecido
-                                            //para quue al apricvar colocar por defecto no aplique a todas las ya asignadas--%>
-                                        </c:if>
 
-                                    </c:forEach>
-                                </c:otherwise>
-                            </c:choose>
+                            <c:forEach var="imagen" items="${listaDeImagenesDePublicaciones}" >
+                                <c:if test="${imagen.publicacion.id eq publicacion.id}">
+                                    <img src="${imagen.urlImagen}" class="card-img-top" alt="Imagen de Propiedad">
+                                </c:if>
+                            </c:forEach>
 
-                            <div class="caption">
+                            <div class="card-body">
                                 <div class="publicacion-top">
                                     <div>
-                                        <h3>$ <c:out value="${publicacion.precio}"/></h3>
-                                        <span class="label label-primary"><c:out value="${publicacion.tipoAccion.name()}"/></span></div>
+                                        <h5>$ <c:out value="${publicacion.precio}"/></h5>
+                                        <span class="badge text-bg-primary"><c:out value="${publicacion.tipoAccion.name()}"/></span>
+                                    </div>
+                                    <div class="separador"> </div>
                                     <div>
                                         <h3><c:out value="${publicacion.propiedad.ubicacion.provincia}"/></h3>
                                         <p><c:out value="${publicacion.propiedad.ubicacion.localidad}"/></p>
                                     </div>
                                 </div>
+
                                 <div class="publicacion-data">
                                     <p><i class="fa-solid fa-ruler-vertical"></i><c:out value="${publicacion.propiedad.metrosCuadrados}"/> m<sup>2</sup>.</p>
                                     <p><i class="fa-solid fa-door-open"></i></span><c:out value="${publicacion.propiedad.cantidadAmbientes}"/> amb.</p>

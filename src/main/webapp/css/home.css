@@ -10,11 +10,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .search-container_img {
     height: 150px;
-    left: 45%;
+    left: 43%;
     top: -42%;
     position: absolute;
     width: 150px;
@@ -56,11 +57,17 @@
     color: white;
     background-color: #1b6d85;
     background-image: none;
+    border: none;
+}
+
+.search_form button:hover {
+    background-color: #175a6e;
 }
 
 .search_form select {
     border: none;
     padding: 0 10px;
+    font-size: 14px;
 }
 
 .search_form select:nth-child(1){
@@ -71,4 +78,8 @@
 .search_form select:active
 {
     border: none
+}
+
+.search-container a {
+    margin-top: 20px;
 }

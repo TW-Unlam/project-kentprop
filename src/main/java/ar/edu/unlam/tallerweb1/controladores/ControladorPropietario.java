@@ -29,7 +29,7 @@ public class ControladorPropietario {
     }
 
     @RequestMapping(path = "/mis-publicaciones",method = RequestMethod.GET)
-    public ModelAndView verPublicacionDelPropietario(Long id, HttpServletRequest request) {
+    public ModelAndView verPublicacionDelPropietario(Integer id, HttpServletRequest request) {
         ModelMap modelo = new ModelMap();
         System.out.println(request.getSession().getAttribute("id"));
         System.out.println(request.getSession().getAttribute("ROL"));
@@ -37,12 +37,12 @@ public class ControladorPropietario {
             return new ModelAndView("redirect:/login");
         }
 
-        if(!request.getSession().getAttribute("ROL").equals("Propietario")) {
+        if(!request.getSession().getAttribute("ROL").equals("PROPIETARIO")) {
             return new ModelAndView("redirect:/");
         }
 
         List<Publicacion> publicaciones=null;
-        publicaciones= servicioPropietario.obtenePublicacionesDelPropietario((Long) request.getSession().getAttribute("id"));
+        publicaciones= servicioPropietario.obtenePublicacionesDelPropietario((Integer) request.getSession().getAttribute("id"));
         System.out.println(publicaciones);
         if(publicaciones.isEmpty()){
             modelo.put("msg_vacio","No tiene Propiedades publicadas...");

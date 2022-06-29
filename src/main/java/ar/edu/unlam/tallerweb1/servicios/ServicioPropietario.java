@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 public interface ServicioPropietario {
-     List<Publicacion> obtenePublicacionesDelPropietario(Long PropietarioId);
+     List<Publicacion> obtenePublicacionesDelPropietario(Integer PropietarioId);
 
 }

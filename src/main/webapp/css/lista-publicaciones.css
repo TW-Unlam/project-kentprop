@@ -1,9 +1,18 @@
 .lista-container {
     background-color: white;
-    height: 80vh;
-    width: 80%;
+    height: 88vh;
+    width: 84%;
     border-radius: 8px;
     padding: 30px 30px 50px 30px
+}
+
+.lista-container a {
+    text-decoration: none;
+    color: #333;
+}
+
+.lista-container a:hover {
+    color:#333;
 }
 
 .lista-container h2 {
@@ -13,39 +22,32 @@
 .lista-publicaciones {
     display: flex;
     flex-wrap: wrap;
-    overflow: scroll;
-    height: 82%;
+    overflow-y: scroll;
+    height: 90%;
 }
 
-.thumbnail {
-    margin: 0 20px 15px 20px;
-    width: 46%;
-}
-
-.thumbnail:hover {
-    transform: scale(1.01);
-    transition: 0.5s ease-out;
-}
-
-.thumbnail a:hover{
-    text-decoration: none;
+.lista-publicaciones .card {
+    margin: 0 20px 25px 20px;
+    max-width: 28.3%;
+    max-height: 470px;
 }
 
 .publicacion-top {
     display: flex;
+    justify-content: space-between;
 }
 
-.publicacion-top div:nth-child(1){
-    padding-right: 24%;
-    margin-right: 16px;
-    border-right: 1px solid #ddd;
+.separador {
+    width: 1px;
+    height: 56px;
+    background: #ddd;
 }
 
-.publicacion-top div:nth-child(1) h3 {
+.publicacion-top div:nth-child(1) h5 {
     margin-bottom: 16px;
 }
 
-.publicacion-top div:nth-child(2) h3 {
+.publicacion-top div:nth-child(2) h5 {
     margin-bottom: 4px;
 }
 
@@ -55,8 +57,8 @@
 
 .publicacion-data {
     display: flex;
-    margin-top: 25px;
-    width: 80%;
+    flex-wrap: wrap;
+    margin-top: 15px;
 }
 
 .publicacion-descripcion{
@@ -66,10 +68,14 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    margin-top: 15px;
 }
 
 .publicacion-data p {
-    margin-right: 15px;
+    margin-right: 8px;
+    font-size: 14px;
+    margin-bottom: 10px;
+
 }
 
 .publicacion-data i {

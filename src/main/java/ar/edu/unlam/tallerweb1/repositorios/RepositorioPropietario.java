@@ -6,5 +6,5 @@ import java.util.List;
 
 
 public interface RepositorioPropietario {
-    List<Publicacion> obtenePublicacionesDelPropietario(Long propietarioId);
+    List<Publicacion> obtenePublicacionesDelPropietario(Integer propietarioId);
 }

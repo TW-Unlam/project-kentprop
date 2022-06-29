@@ -19,7 +19,7 @@ public class ServicioPropietarioDefault implements ServicioPropietario {
     }
 
     @Override
-    public List<Publicacion> obtenePublicacionesDelPropietario(Long PropietarioId) {
+    public List<Publicacion> obtenePublicacionesDelPropietario(Integer PropietarioId) {
         List<Publicacion> lista =repositorioPropietario.obtenePublicacionesDelPropietario(PropietarioId);
     return lista;
     }

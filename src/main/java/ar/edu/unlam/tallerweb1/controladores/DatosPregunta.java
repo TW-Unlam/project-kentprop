@@ -1,13 +1,12 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 public class DatosPregunta {
-
-    private Integer id;
+    private Integer publicacionId;
 
     private String descripcion;
 
-    public DatosPregunta(Integer id, String descripcion) {
-        this.id = id;
+    public DatosPregunta(Integer publicacionId, String descripcion) {
+        this.publicacionId = publicacionId;
         this.descripcion = descripcion;
     }
 
@@ -15,12 +14,12 @@ public class DatosPregunta {
 
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getPublicacionId() {
+        return publicacionId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setPublicacionId(Integer publicacionId) {
+        this.publicacionId = publicacionId;
     }
 
     public String getDescripcion() {

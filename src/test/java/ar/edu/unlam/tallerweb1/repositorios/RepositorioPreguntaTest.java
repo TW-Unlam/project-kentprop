@@ -14,19 +14,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 
 public class RepositorioPreguntaTest extends SpringTest {
+    private final Integer ID_PUBLICACION_INEXISTENTE = -1;
+    private final Integer ID_USUARIO_INEXISTENTE = -1;
     @Autowired
     private RepositorioPregunta repositorioPregunta;
 
     // buscarConsultasDePublicacion
+
     @Test
     @Transactional @Rollback
     public void alBuscarPorIdDePublicacionExistenteMeDevuelveSusPreguntas(){
-        Integer idPublicacion = 10;
-        Integer idUsuario = 2;
+        Publicacion publicacionBusq= dadoQueExistenPreguntasParaLaPublicacionDeIdyUsuarioDeId();
 
-        dadoQueExistenPreguntasParaLaPublicacionDeIdyUsuarioDeId(idPublicacion, idUsuario);
-
-        List<Pregunta> preguntas = repositorioPregunta.buscarConsultasDePublicacion(idPublicacion);
+        List<Pregunta> preguntas = repositorioPregunta.buscarConsultasDePublicacion(publicacionBusq.getId());
 
         entoncesMeDevuelveUnaListaDePreguntas(preguntas);
     }
@@ -34,27 +34,21 @@ public class RepositorioPreguntaTest extends SpringTest {
     @Test
     @Transactional @Rollback
     public void alBuscarPorIdDePublicacionInexistenteNoMeDevuelvePreguntas(){
-        Integer idPublicacionExistente = 10;
-        Integer idPublicacionInexistente = 2;
-        Integer idUsuario = 2;
 
-        dadoQueExistenPreguntasParaLaPublicacionDeIdyUsuarioDeId(idPublicacionExistente, idUsuario);
+        dadoQueExistenPreguntasParaLaPublicacionDeIdyUsuarioDeId();
 
-        List<Pregunta> preguntas = repositorioPregunta.buscarConsultasDePublicacion(idPublicacionInexistente);
+        List<Pregunta> preguntas = repositorioPregunta.buscarConsultasDePublicacion(ID_PUBLICACION_INEXISTENTE);
 
         entoncesMeDevuelveUnaListaDePreguntasVacia(preguntas);
     }
 
-    // buscarConsultasDeUsuario
     @Test
     @Transactional @Rollback
     public void alBuscarPorIdDeUsuarioExistenteMeDevuelveSusPreguntas(){
-        Integer idPublicacion = 10;
-        Integer idUsuario = 10;
 
-        dadoQueExistenPreguntasParaLaPublicacionDeIdyUsuarioDeId(idPublicacion,idUsuario);
+        Usuario usuarioBusq = dadoQueExistenPreguntasParaLaPublicacionDeIdyUsuarioDeIdUsuario();
 
-        List<Pregunta> preguntas = repositorioPregunta.buscarConsultasDeUsuario(idUsuario);
+        List<Pregunta> preguntas = repositorioPregunta.buscarConsultasDeUsuario(usuarioBusq.getId());
 
         entoncesMeDevuelveUnaListaDePreguntas(preguntas);
     }
@@ -62,33 +56,21 @@ public class RepositorioPreguntaTest extends SpringTest {
     @Test
     @Transactional @Rollback
     public void alBuscarPorIdDeUsuarioInexistenteNoMeDevuelvePreguntas(){
-        Integer idPublicacion = 10;
-        Integer idUsuarioExistente = 2;
-        Integer idUsuarioInexistente = 3;
 
-        dadoQueExistenPreguntasParaLaPublicacionDeIdyUsuarioDeId(idPublicacion, idUsuarioExistente);
+        dadoQueExistenPreguntasParaLaPublicacionDeIdyUsuarioDeId();
 
-        List<Pregunta> preguntas = repositorioPregunta.buscarConsultasDePublicacion(idUsuarioInexistente);
+        List<Pregunta> preguntas = repositorioPregunta.buscarConsultasDePublicacion(ID_USUARIO_INEXISTENTE);
 
         entoncesMeDevuelveUnaListaDePreguntasVacia(preguntas);
     }
 
-    private void dadoQueExistenPreguntasParaLaPublicacionDeIdyUsuarioDeId(Integer idPublicacion, Integer idUsuario) {
+    private Publicacion dadoQueExistenPreguntasParaLaPublicacionDeIdyUsuarioDeId() {
         Pregunta pregunta1 = new Pregunta();
-        pregunta1.setPregunta("¿Cuantos años de antiguedad tiene?");
-
         Pregunta pregunta2 = new Pregunta();
-        pregunta2.setPregunta("¿Se aceptan mascotas?");
 
         Usuario usuario = new Usuario();
-        usuario.setEmail("valPardo@mail");
-        usuario.setPassword("1234");
-        usuario.setRol("PROPIETARIO");
-        usuario.setId(idUsuario);
 
         Publicacion publicacion = new Publicacion();
-        publicacion.setTipoAccion(Accion.ALQUILAR);
-        publicacion.setId(idPublicacion);
 
         pregunta1.setPublicacion(publicacion);
         pregunta1.setUsuario(usuario);
@@ -99,6 +81,29 @@ public class RepositorioPreguntaTest extends SpringTest {
         session().save(publicacion);
         session().save(pregunta1);
         session().save(pregunta2);
+
+        return publicacion;
+    }
+
+    private Usuario dadoQueExistenPreguntasParaLaPublicacionDeIdyUsuarioDeIdUsuario() {
+        Pregunta pregunta1 = new Pregunta();
+        Pregunta pregunta2 = new Pregunta();
+
+        Usuario usuario = new Usuario();
+
+        Publicacion publicacion = new Publicacion();
+
+        pregunta1.setPublicacion(publicacion);
+        pregunta1.setUsuario(usuario);
+        pregunta2.setPublicacion(publicacion);
+        pregunta2.setUsuario(usuario);
+
+        session().save(usuario);
+        session().save(publicacion);
+        session().save(pregunta1);
+        session().save(pregunta2);
+
+        return usuario;
     }
 
     private void entoncesMeDevuelveUnaListaDePreguntasVacia(List<Pregunta> preguntas) {

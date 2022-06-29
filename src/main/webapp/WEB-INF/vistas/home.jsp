@@ -30,7 +30,9 @@
 						<button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Buscar</button>
 					</form:form>
 				</div>
-				<a href="mis-publicaciones">VER MIS PUBLICACIONES</a>
+				<c:if test="${sessionScope.ROL.equals('PROPIETARIO')}">
+					<a href="mis-publicaciones">VER MIS PUBLICACIONES</a>
+				</c:if>
 			</div>
 
 		</div>

@@ -15,4 +15,5 @@ public interface RepositorioPublicaciones {
     Propiedad buscarPropiedad(Integer id_propiedad);
     Usuario buscarPropietarioDeLaPropiedad(Integer id_propiedad);
 
+    List<Publicacion> buscarPublicacionesDestacadas();
 }

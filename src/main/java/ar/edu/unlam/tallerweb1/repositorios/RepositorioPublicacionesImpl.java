@@ -65,4 +65,12 @@ public class RepositorioPublicacionesImpl implements RepositorioPublicaciones {
                 .uniqueResult();
     }
 
+    @Override
+    public List<Publicacion> buscarPublicacionesDestacadas() {
+        return sessionFactory.getCurrentSession()
+                .createCriteria(Publicacion.class)
+                .add(Restrictions.eq("destacada", true))
+                .list();
+    }
+
 }

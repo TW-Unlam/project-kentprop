@@ -67,5 +67,16 @@ public class ControladorBuscadorHome {
         return new ModelAndView("lista-publicaciones");
     }
 
+    @RequestMapping(path = "/buscar-destacadas")
+    public ModelAndView obtenerPublicacionesDestacadas(){
+        ModelMap modelo = new ModelMap();
+        List<Publicacion> resultado = null;
+
+        resultado = servicioPublicacion.obtenerPublicacionesDestacadas();
+
+        modelo.put("destacadas", resultado);
+        return new ModelAndView("lista-publicaciones", modelo);
+    }
+
 
 }

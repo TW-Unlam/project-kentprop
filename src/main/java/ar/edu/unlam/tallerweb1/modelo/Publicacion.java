@@ -17,6 +17,8 @@ public class Publicacion {
     private boolean isActivo;
     private Accion tipoAccion;
     private Estatus estatus;
+
+    private Boolean destacada;
     @OneToOne
     @JoinColumn(name = "propiedad_id")
     private Propiedad propiedad;
@@ -32,6 +34,13 @@ public class Publicacion {
 
     }
 
+    public Boolean getDestacada() {
+        return destacada;
+    }
+
+    public void setDestacada(Boolean destacada) {
+        this.destacada = destacada;
+    }
     public Integer getId() {
         return id;
     }

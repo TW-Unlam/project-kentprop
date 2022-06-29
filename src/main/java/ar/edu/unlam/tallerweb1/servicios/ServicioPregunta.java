@@ -9,7 +9,7 @@ import java.util.List;
 public interface ServicioPregunta {
      List<Pregunta> buscarConsultasDePublicacion(Integer publicacionId);
 
-     Boolean hacerPregunta(Pregunta pregunta);
+     void hacerPregunta(Pregunta pregunta);
 
      Publicacion buscarPublicacionPorId(Integer publicacionId);
 

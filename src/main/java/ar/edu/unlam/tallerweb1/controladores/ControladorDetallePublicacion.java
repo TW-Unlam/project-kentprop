@@ -62,13 +62,10 @@ public class ControladorDetallePublicacion {
         Object usuarioId = request.getSession().getAttribute("id");
 
         if(usuarioId!=null) {
-            Boolean seHizo = false;
 
            Publicacion publicacion = servicioConsultas.buscarPublicacionPorId(datosPregunta.getPublicacionId());
            Usuario usuario = servicioUsuario.obterneUsuario((Integer) usuarioId);
-           seHizo = servicioConsultas.hacerPregunta(new Pregunta(datosPregunta.getDescripcion(), publicacion, usuario));
 
-            modelo.put("pregunta_hecha", seHizo);
 
             return new ModelAndView("redirect:/detalle-publicacion?id=" + datosPregunta.getPublicacionId(), modelo);
         }else{

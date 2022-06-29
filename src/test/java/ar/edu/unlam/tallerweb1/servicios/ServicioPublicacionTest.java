@@ -61,6 +61,28 @@ public class ServicioPublicacionTest {
         
     }
 
+    @Test
+    public void obtenerPublicacionesDestacadas(){
+        dadoQueExisteUnaListaDePublicacionesDestacadas(3);
+
+        List<Publicacion> busqueda = cargoLasPublicacionesDestacadas();
+        
+        entoncesObtengoLaCantidadDePublicacionesDeseadas(busqueda, 3);
+    }
+
+    private void entoncesObtengoLaCantidadDePublicacionesDeseadas(List<Publicacion>busqueda, int cantidadEsperada) {
+        assertThat(busqueda).hasSize(cantidadEsperada);
+    }
+
+    private List<Publicacion> cargoLasPublicacionesDestacadas() {
+        return servicioPublicaciones.obtenerPublicacionesDestacadas();
+    }
+
+    private void dadoQueExisteUnaListaDePublicacionesDestacadas(int cantidad) {
+        List<Publicacion> destacadas = givenExistenPropiedades(cantidad);
+        when(repositorio.buscarPublicacionesDestacadas()).thenReturn(destacadas);
+    }
+
     private void dadoQueNoExisteUnaListaDePublicaciones() {
         List<Publicacion> lista = new LinkedList<>();
         when(repositorio.buscarPublicaciones(ACCION, TIPO, descripcion)).thenReturn(lista);

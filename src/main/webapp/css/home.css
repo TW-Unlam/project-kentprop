@@ -1,4 +1,4 @@
-.search-container {
+.search-container{
     width: 70%;
     position: relative;
     background: white;
@@ -13,7 +13,7 @@
     flex-direction: column;
 }
 
-.search-container_img {
+.search-container_img{
     height: 150px;
     left: 43%;
     top: -42%;
@@ -25,7 +25,7 @@
     align-items: center;
 }
 
-.search-container_img img {
+.search-container_img img{
     height: 100%;
 }
 

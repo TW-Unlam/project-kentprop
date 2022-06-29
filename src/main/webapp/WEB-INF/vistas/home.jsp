@@ -25,7 +25,7 @@
 							<form:options items="${tipoAcciones}"></form:options>
 						</form:select>
 
-						<form:input required="required" path="ubicacion" placeholder="Buscar por provincio o localidad" id="ubicacion" type="text" class="form-control" />
+				<form:input required="required" path="ubicacion" placeholder="Buscar por provincio o localidad" id="ubicacion" type="text" class="form-control" />
 
 						<button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Buscar</button>
 					</form:form>

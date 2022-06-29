@@ -65,7 +65,7 @@ public class ControladorDetallePublicacion {
 
            Publicacion publicacion = servicioConsultas.buscarPublicacionPorId(datosPregunta.getPublicacionId());
            Usuario usuario = servicioUsuario.obterneUsuario((Integer) usuarioId);
-
+           servicioConsultas.hacerPregunta(new Pregunta(datosPregunta.getDescripcion(), publicacion, usuario));
 
             return new ModelAndView("redirect:/detalle-publicacion?id=" + datosPregunta.getPublicacionId(), modelo);
         }else{

@@ -87,6 +87,10 @@
                                     <div class="question">
                                         <p>${preguntas_h.pregunta}</p>
                                         <p class="question-user">- ${preguntas_h.usuario.email} -</p>
+
+                                        <c:if test="${not empty preguntas_h.respuesta}">
+                                            <p class="response-user"><b>Respuesta: </b>${preguntas_h.respuesta}</p>
+                                        </c:if>
                                     </div>
                                     <c:if test="${sessionScope.ROL.equals('PROPIETARIO')}">
                                         <form:form action="responder-pregunta-publicacion" modelAttribute="datosPregunta" method="POST" class="search_form">

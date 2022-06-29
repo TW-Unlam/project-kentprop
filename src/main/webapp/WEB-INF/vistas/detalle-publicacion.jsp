@@ -7,6 +7,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <link href="css/bootstrap.min.css" rel="stylesheet" >
     <link href="css/general.css" rel="stylesheet">
     <link href="css/detalle-publicacion.css" rel="stylesheet">
@@ -70,8 +71,7 @@
                     <div class="questions">
                         <h5>¿Tenés alguna pregunta sobre la propiedad?</h5>
                         <form:form action="hacer-pregunta-publicacion" modelAttribute="datosPregunta" method="POST" class="search_form">
-                            <form:input path="id" placeholder="" id="id" type="hidden" class="form-control" value="${detalle.id} "/>
-                            <form:input path="id_usuario" placeholder="" id="id" type="hidden" class="form-control" value="${detalle.id} "/>
+                            <form:input path="publicacionId" placeholder="" id="publicacionId" type="hidden" class="form-control" value="${detalle.id} "/>
                             <form:input path="descripcion" placeholder="Escribila acá" id="descripcion" type="text" class="form-control"/>
 
                             <button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Enviar</button>

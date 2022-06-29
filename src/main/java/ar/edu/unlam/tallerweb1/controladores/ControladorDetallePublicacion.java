@@ -19,13 +19,14 @@ public class ControladorDetallePublicacion {
 
     private ServicioPregunta servicioConsultas;
     private ServicioPublicaciones servicioPublicaciones;
-    private ServicioLogin servicioLogin;
+
+    private ServicioLogin servicioUsuario;
 
     @Autowired
-    public ControladorDetallePublicacion(ServicioPregunta servicioPregunta, ServicioPublicaciones servicioPublicaciones, ServicioLogin servicioLogin) {
+    public ControladorDetallePublicacion(ServicioPregunta servicioPregunta, ServicioPublicaciones servicioPublicaciones, ServicioLogin servicioUsuario) {
         this.servicioConsultas = servicioPregunta;
         this.servicioPublicaciones = servicioPublicaciones;
-        this.servicioLogin = servicioLogin;
+        this.servicioUsuario = servicioUsuario;
     }
 
     @RequestMapping(path = "/detalle-publicacion",method = RequestMethod.GET)
@@ -58,18 +59,20 @@ public class ControladorDetallePublicacion {
     @RequestMapping(value = "hacer-pregunta-publicacion", method = RequestMethod.POST)
     public ModelAndView hacerPregunta(@ModelAttribute("datosPregunta") DatosPregunta datosPregunta , HttpServletRequest request){
         ModelMap modelo = new ModelMap();
-        if(request.getSession().getAttribute("id")!=null) {
+        Object usuarioId = request.getSession().getAttribute("id");
+
+        if(usuarioId!=null) {
             Boolean seHizo = false;
 
-            Publicacion publicacion = servicioConsultas.buscarPublicacionPorId(datosPregunta.getId());
-            Usuario usuario = servicioLogin.obtenerUsuario(datosPregunta.getId_usuario());
-            seHizo = servicioConsultas.hacerPregunta(new Pregunta(datosPregunta.getDescripcion(), publicacion, usuario));
+           Publicacion publicacion = servicioConsultas.buscarPublicacionPorId(datosPregunta.getPublicacionId());
+           Usuario usuario = servicioUsuario.obterneUsuario((Integer) usuarioId);
+           seHizo = servicioConsultas.hacerPregunta(new Pregunta(datosPregunta.getDescripcion(), publicacion, usuario));
 
             modelo.put("pregunta_hecha", seHizo);
 
-            return new ModelAndView("redirect:/detalle-publicacion?id=" + datosPregunta.getId(), modelo);
+            return new ModelAndView("redirect:/detalle-publicacion?id=" + datosPregunta.getPublicacionId(), modelo);
         }else{
-            return new ModelAndView("redirect:/loginConId?id="+datosPregunta.getId());
+            return new ModelAndView("redirect:/loginConId?id="+datosPregunta.getPublicacionId());
         }
     }
 }

@@ -29,7 +29,7 @@ public class RepositorioPreguntaImpl implements RepositorioPregunta {
     }
 
     @Override
-    public List<Pregunta> buscarConsultasDeUsuario(long idUsuario) {
+    public List<Pregunta> buscarConsultasDeUsuario(Integer idUsuario) {
         return sessionFactory.getCurrentSession()
                 .createCriteria(Pregunta.class)
                 .createAlias("publicacion", "publ") //Chequear

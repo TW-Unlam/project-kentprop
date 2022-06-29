@@ -28,10 +28,10 @@ public class Pregunta {
         this.publicacion = publicacion;
     }
 
-    public Pregunta(String pregunta, Usuario usuario, Publicacion publicacion) {
+    public Pregunta(String pregunta, Publicacion publicacion, Usuario usuario) {
         this.pregunta = pregunta;
-        this.usuario = usuario;
         this.publicacion = publicacion;
+        this.usuario = usuario;
     }
 
     public Pregunta(String pregunta, Publicacion publicacion) {

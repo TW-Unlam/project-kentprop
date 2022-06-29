@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Pregunta;
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
+import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPregunta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
 import org.junit.Before;
@@ -26,6 +27,7 @@ public class ControladorDetallePublicacionTest {
     private ControladorDetallePublicacion controladorDetallePublicacion;
     private ServicioPublicaciones servicioPublicaciones;
     private ServicioPregunta servicioPregunta;
+    private ServicioLogin servicioLogin;
     private HttpServletRequest request;
     private HttpSession session;
     private DatosPregunta datosPregunta;
@@ -37,8 +39,8 @@ public class ControladorDetallePublicacionTest {
         session = mock(HttpSession.class);
         servicioPregunta = mock(ServicioPregunta.class);
         servicioPublicaciones = mock(ServicioPublicaciones.class);
-        controladorDetallePublicacion = new ControladorDetallePublicacion(servicioPregunta, servicioPublicaciones);
-
+        servicioLogin = mock(ServicioLogin.class);
+        controladorDetallePublicacion = new ControladorDetallePublicacion(servicioPregunta, servicioPublicaciones, servicioLogin);
     }
 
     private HttpServletRequest givenExisteUnUsuarioConId(Integer id) {
@@ -84,8 +86,6 @@ public class ControladorDetallePublicacionTest {
         entoncesMeRedirecciona(VISTA_REDIRECCION_SIN_LOGUEO, mav.getViewName());
     }
 
-
-
     @Test
     public void queAlCargarUnaPreguntaAlEstarLogeadoMeRedireccioneALaPaginaVerDetalle(){
         request = givenExisteUnUsuarioConId(ID_USUARIO);
@@ -107,9 +107,8 @@ public class ControladorDetallePublicacionTest {
     private void alRealizarUnaPregunta() {
         Pregunta pregunta = new Pregunta();
         when(servicioPregunta.hacerPregunta(pregunta)).thenReturn(true);
-        when(datosPregunta.getId()).thenReturn(1);
+        when(datosPregunta.getPublicacionId()).thenReturn(1);
     }
-
     private void yMeCarganLasPreguntasYaHechas(int cantidadEsperada, ModelAndView mav) {
         List<Pregunta> lista = (List<Pregunta>) mav.getModel().get("preguntas_hechas");
         assertThat(lista).hasSize(cantidadEsperada);

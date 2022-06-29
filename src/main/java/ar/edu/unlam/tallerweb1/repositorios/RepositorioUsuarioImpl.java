@@ -54,7 +54,7 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 	}
 
 	@Override
-	public Usuario obterneUsuario(Long id) {
+	public Usuario obterneUsuario(Integer id) {
 		return sessionFactory.getCurrentSession().get(Usuario.class, id);
 	}
 

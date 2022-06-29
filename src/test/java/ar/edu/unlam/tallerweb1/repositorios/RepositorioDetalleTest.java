@@ -70,7 +70,7 @@ public class RepositorioDetalleTest extends SpringTest {
         pregunta.setPregunta("Tiempo de Aquiler minimo?");
         Usuario usuario=new Usuario();
         usuario.setEmail("sullca@gmail.com");
-        usuario.setId(1L);
+        usuario.setId(1);
         Publicacion publicacion=new Publicacion();
         publicacion.setTipoAccion(Accion.ALQUILAR);
         pregunta.setUsuario(usuario);
@@ -85,7 +85,7 @@ public class RepositorioDetalleTest extends SpringTest {
         pregunta.setPregunta("Tiempo de Aquiler minimo?");
         Usuario usuario=new Usuario();
         usuario.setEmail("sullca@gmail.com");
-        usuario.setId(1L);
+        usuario.setId(1);
         Publicacion publicacion=new Publicacion();
         publicacion.setTipoAccion(Accion.ALQUILAR);
         pregunta.setUsuario(usuario);

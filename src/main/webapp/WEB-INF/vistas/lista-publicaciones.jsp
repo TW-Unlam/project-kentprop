@@ -1,6 +1,7 @@
 <%@ page import="java.lang.reflect.Array" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="ar.edu.unlam.tallerweb1.modelo.Publicacion" %><%--
+<%@ page import="ar.edu.unlam.tallerweb1.modelo.Publicacion" %>
+<%@ page contentType="text/html; charset=UTF-8" %><%--
   Created by IntelliJ IDEA.
   User: vpardo
   Date: 31/05/2022

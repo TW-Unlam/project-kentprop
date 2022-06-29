@@ -9,7 +9,7 @@ public interface RepositorioPregunta {
 
     List<Pregunta> buscarConsultasDePublicacion(Integer idPublicacion);
 
-    List<Pregunta> buscarConsultasDeUsuario(long idUsuario);
+    List<Pregunta> buscarConsultasDeUsuario(Integer idUsuario);
 
     void guardarConsulta(Pregunta pregunta);
 

@@ -107,8 +107,6 @@ public class ControladorDetallePublicacionTest {
     }
 
     private void alRealizarUnaPregunta() {
-        Pregunta pregunta = new Pregunta();
-        when(servicioPregunta.hacerPregunta(pregunta)).thenReturn(true);
         when(datosPregunta.getPublicacionId()).thenReturn(1);
     }
 

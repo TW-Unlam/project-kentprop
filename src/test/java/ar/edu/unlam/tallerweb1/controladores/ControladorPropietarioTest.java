@@ -118,7 +118,7 @@ public class ControladorPropietarioTest {
     private HttpServletRequest dadoQueExisteUnUsuarioLogueado() {
         when(request.getSession()).thenReturn(session);
         when(request.getSession().getAttribute("id")).thenReturn(PROPIETARIO_ID_VALIDO);
-        when(request.getSession().getAttribute("ROL")).thenReturn("Propietario");
+        when(request.getSession().getAttribute("ROL")).thenReturn("PROPIETARIO");
         return request;
     }
 

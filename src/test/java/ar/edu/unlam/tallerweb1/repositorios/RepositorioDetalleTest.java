@@ -86,7 +86,6 @@ public class RepositorioDetalleTest extends SpringTest {
         assertThat(preguntaBusquedaDeNuevo).isNotNull();
         assertThat(preguntaBusquedaDeNuevo.getRespuesta()).isNotNull();
         assertThat(preguntaBusquedaDeNuevo.getRespuesta()).isEqualTo("RespuestaEstandar");
-
     }
 
     private Pregunta dadoQueExisteUnaConsultaDeLaPublicacion() {

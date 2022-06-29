@@ -84,6 +84,19 @@ public class RepositorioPublicacionesTest extends SpringTest {
         entoncesMeDevuelveLosDatosDelUsuarioAEnviar( propietario.getPropietario().getEmail(),"sullca@gmail");
     }
 
+    @Test @Transactional @Rollback
+    public void obtenerPublicacionesDestacadas(){
+        dadoQueExisteUnaListaDePublicaciones();
+        
+        List<Publicacion> destacadas = repositorioPublicaciones.buscarPublicacionesDestacadas();
+        
+        entoncesMeDevuelveLasPublicacionesDestacadas(destacadas, 2);
+    }
+
+    private void entoncesMeDevuelveLasPublicacionesDestacadas(List<Publicacion> destacadas, int cantidad) {
+        assertThat(destacadas).hasSize(cantidad);
+    }
+
     private void entoncesMeDevuelveLosDatosDelUsuarioAEnviar(String email, String esperado) {
         assertThat(email).isEqualTo(esperado);
     }
@@ -157,6 +170,9 @@ public class RepositorioPublicacionesTest extends SpringTest {
 
         Publicacion publicacionUno = new Publicacion();
         Publicacion publicacionDos = new Publicacion();
+
+        publicacionUno.setDestacada(true);
+        publicacionDos.setDestacada(true);
 
         Propiedad propiedadUno = new Propiedad();
         Propiedad propiedadDos = new Propiedad();

@@ -18,7 +18,6 @@ public class ControladorBuscadorHomeTest {
 
     public static final String VISTA_LISTA_PUBLICACIONES = "lista-publicaciones";
     public static final String MENSAJE_TIPO_INVALIDO = "No se encontraron publicaciones con estos datos";
-
     public static  DatosBusqueda datosBusqueda;
     private ControladorBuscadorHome controladorBuscadorHome;
     private ServicioPublicaciones servicioPublicaciones;
@@ -52,6 +51,36 @@ public class ControladorBuscadorHomeTest {
         entoncesMeLLevaALaVista(VISTA_LISTA_PUBLICACIONES, mav.getViewName());
         entoncesSeRecibeMensajeError(MENSAJE_TIPO_INVALIDO, mav.getModel());
    }
+
+   @Test
+   public void alBuscarPublicacionDeberanAparecerLasPublicacionesDestacadas(){
+       dadoQueTenemosUnaListaDePublicacionesDestacadas(3);
+
+       ModelAndView mav = cuandoObtengoLasPublicacionesDestacadas();
+
+       entoncesMeLLevaALaVista(VISTA_LISTA_PUBLICACIONES, mav.getViewName());
+       entoncesEncuentroDestacadas(mav, 3);
+
+
+   }
+
+    private void entoncesEncuentroDestacadas(ModelAndView mav, int cantidadEsperada) {
+        List<Publicacion> lista = (List<Publicacion>) mav.getModel().get("destacadas");
+        assertThat(lista).hasSize(cantidadEsperada);
+    }
+
+    private ModelAndView cuandoObtengoLasPublicacionesDestacadas() {
+       return controladorBuscadorHome.obtenerPublicacionesDestacadas();
+    }
+
+    private void dadoQueTenemosUnaListaDePublicacionesDestacadas(int cantidad) {
+        List<Publicacion> lista = new LinkedList<>();
+        for(int i = 0 ; i < cantidad; i++){
+            lista.add(new Publicacion());
+        }
+
+        when(servicioPublicaciones.obtenerPublicacionesDestacadas()).thenReturn(lista);
+    }
 
     private void entoncesMeLLevaALaVista(String vistaEsperada, String vistaRecibida) {
         assertThat(vistaRecibida).isEqualTo(vistaEsperada);

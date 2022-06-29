@@ -38,4 +38,10 @@ public class ServicioPublicacionesDefault implements ServicioPublicaciones {
         List<Imagen> lista = repositorioPublicaciones.buscarImagenesDeLaPublicacion(publicacion_id);
         return lista;
     }
+
+    @Override
+    public List<Publicacion> obtenerPublicacionesDestacadas() {
+        List<Publicacion> destacadas = repositorioPublicaciones.buscarPublicacionesDestacadas();
+        return destacadas;
+    }
 }

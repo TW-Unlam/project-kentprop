@@ -57,16 +57,14 @@ public class ControladorDetallePublicacion {
                                       HttpServletRequest request){
         ModelMap modelo = new ModelMap();
         if(request.getSession().getAttribute("id")!=null) {
-            Boolean seHizo = false;
 
             Publicacion publicacion = servicioConsultas.buscarPublicacionPorId(datosPregunta.getId());
-            seHizo = servicioConsultas.hacerPregunta(new Pregunta(datosPregunta.getDescripcion(), publicacion));
-
-            modelo.put("pregunta_hecha", seHizo);
+            servicioConsultas.hacerPregunta(new Pregunta(datosPregunta.getDescripcion(), publicacion));
 
             return new ModelAndView("redirect:/detalle-publicacion?id=" + datosPregunta.getId(), modelo);
         }else{
             return new ModelAndView("redirect:/loginConId?id="+datosPregunta.getId());
         }
     }
+    
 }

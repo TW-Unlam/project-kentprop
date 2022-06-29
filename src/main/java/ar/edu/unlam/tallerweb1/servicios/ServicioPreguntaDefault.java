@@ -25,9 +25,8 @@ public class ServicioPreguntaDefault implements ServicioPregunta {
     }
 
     @Override
-    public Boolean hacerPregunta(Pregunta pregunta) {
+    public void hacerPregunta(Pregunta pregunta) {
         repositorioPregunta.guardarConsulta(pregunta);
-        return true;
     }
 
     @Override

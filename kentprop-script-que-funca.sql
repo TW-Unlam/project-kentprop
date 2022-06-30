@@ -39,7 +39,7 @@ INSERT INTO propiedad (id,cantidadAmbientes,cochera,metrosCuadrados, tipoPropied
 (9,1,0,49.3,1,2,4),
 (10,5,1,80,4,1,5),
 (11,2,1,50,4,2,5),
-(12,3,1,60.4,1,2,5),
+(12,3,1,60.4,4,2,5),
 (13,3,1,60.5,1,12,2),
 (14,3,1,60.5,1,12,3);
 

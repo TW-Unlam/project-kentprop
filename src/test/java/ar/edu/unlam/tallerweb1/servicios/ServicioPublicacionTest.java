@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.modelo.Accion;
+import ar.edu.unlam.tallerweb1.modelo.Imagen;
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
 import ar.edu.unlam.tallerweb1.modelo.TipoPropiedad;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPublicaciones;
@@ -38,8 +39,6 @@ public class ServicioPublicacionTest {
         entoncesSeObtieneLasPublicaciones(busqueda,3);
 
     }
-
-
     @Test
     public void queAlBuscarUnaPublicacionDeberaTraermeUnaListaVacia() {
         dadoQueNoExisteUnaListaDePublicaciones();
@@ -49,7 +48,6 @@ public class ServicioPublicacionTest {
         entoncesSeObtieneLasPublicaciones(busqueda,0);
 
     }
-    
     @Test
     public void solicitarDetalleDePropiedadMedianteNumeroId(){
         
@@ -68,6 +66,40 @@ public class ServicioPublicacionTest {
         List<Publicacion> busqueda = cargoLasPublicacionesDestacadas();
         
         entoncesObtengoLaCantidadDePublicacionesDeseadas(busqueda, 3);
+    }
+
+    @Test
+    public void obtenerImagenesDePublicaciones(){
+        Publicacion publicacion = dadoQueExisteUnaListaDeImagenesEnUnaPublicacion(3);
+
+        List<Imagen> busqueda = cuandoBuscoUnaImagen(publicacion);
+
+        entoncesObtengoLaCantidadDeImagenesDeseadas(busqueda,3);
+    }
+
+    private void entoncesObtengoLaCantidadDeImagenesDeseadas(List<Imagen> busqueda, int cantidadEsperada) {
+        assertThat(busqueda).hasSize(cantidadEsperada);
+    }
+
+    private List<Imagen> cuandoBuscoUnaImagen(Publicacion publicacion) {
+        return repositorio.buscarImagenesDeLaPublicacion(publicacion.getId());
+    }
+
+    private Publicacion dadoQueExisteUnaListaDeImagenesEnUnaPublicacion(int cantidad) {
+        List<Imagen> imagenes = givenExistenImagenes(cantidad);
+        Publicacion publicacion = new Publicacion(1);
+
+        when(repositorio.buscarImagenesDeLaPublicacion(publicacion.getId())).thenReturn(imagenes);
+
+        return publicacion;
+    }
+
+    private List<Imagen> givenExistenImagenes(int cantidad) {
+        List<Imagen> imagenes = new LinkedList<>();
+        for(int i = 0 ; i < cantidad; i++) {
+            imagenes.add(new Imagen());
+        }
+        return imagenes;
     }
 
     private void entoncesObtengoLaCantidadDePublicacionesDeseadas(List<Publicacion>busqueda, int cantidadEsperada) {

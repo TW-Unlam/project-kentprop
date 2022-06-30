@@ -122,13 +122,13 @@ select *
 from usuario;
 
 DELETE FROM imagen;
-INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', 12, 1);
-INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', 13, 1);
-INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', 14, 1);
+INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', 2, 3);
+INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', 3, 3);
+INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', 4, 3);
 
-INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', 12, 2);
-INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', 13, 2);
-INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', 14, 2);
+INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', 2, 2);
+INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', 3, 2);
+INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id) VALUES ('¿cual es el  tiempo de uso del ultimo inclino', 4, 2);
 
 INSERT INTO pregunta (pregunta, publicacionConsultada_id, Usuario_id)
 VALUES ('¿Se aceptan mascotas?',1, 4),

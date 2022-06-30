@@ -92,13 +92,18 @@
                                             <p class="response-user"><b>Respuesta: </b>${preguntas_h.respuesta}</p>
                                         </c:if>
                                     </div>
-                                    <c:if test="${sessionScope.ROL.equals('PROPIETARIO')}">
+                                    <c:if test="${empty preguntas_h.respuesta}">
+<%--                                        <p class="response-user"><b>Respuesta: </b>${preguntas_h.respuesta}</p> --%>
+                                        <c:if test="${sessionScope.ROL.equals('PROPIETARIO')}">
                                         <form:form action="responder-pregunta-publicacion" modelAttribute="datosPregunta" method="POST" class="search_form">
                                             <form:input path="publicacionId" placeholder="" id="idResp" type="hidden" class="form-control" value="${preguntas_h.id} "/>
-                                            <form:input path="descripcion" placeholder="Escribila acá" id="descripcionRes" type="text" class="form-control"/>
+                                            <form:input path="descripcion" placeholder="Escribila acá la respuesta" id="descripcionRes" type="text" class="form-control"/>
                                             <button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Enviar</button>
                                         </form:form>
+                                        </c:if>
+
                                     </c:if>
+
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>

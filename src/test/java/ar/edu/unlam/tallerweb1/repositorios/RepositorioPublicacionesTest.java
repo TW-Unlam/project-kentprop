@@ -93,6 +93,29 @@ public class RepositorioPublicacionesTest extends SpringTest {
         entoncesMeDevuelveLasPublicacionesDestacadas(destacadas, 2);
     }
 
+    //--------------------------------
+    @Test @Transactional @Rollback
+    public void ObtenerLasCoordenasDeLaPropiedad() {
+        dadoQueExisteUnaListaDePublicaciones();
+
+        List<Publicacion> propiedades = repositorioPublicaciones.buscarPublicaciones(ACCION_EXISTENTE, TIPO_EXISTENTE, DESCRIPCION_EXISTENTE);
+        Publicacion resultado = repositorioPublicaciones.buscarDetallePublicacion(propiedades.get(0).getId());
+
+        entoncesMeDevuelveLaLatitudDelAPropiedad((Double)resultado.getPropiedad().getUbicacion().getLatitud());
+        entoncesMeDevuelveLaLongitudDelAPropiedad((Double)resultado.getPropiedad().getUbicacion().getLongitud());
+    }
+
+    private void entoncesMeDevuelveLaLatitudDelAPropiedad(Double latitudBuscada) {
+        Double latitudEncontrada = -34.67006934350658;
+        assertThat(latitudEncontrada).isEqualTo(latitudBuscada);
+    }
+
+    private void entoncesMeDevuelveLaLongitudDelAPropiedad(Double longitudBuscada) {
+        Double longitudEncontrada = -58.563277268754504;
+        assertThat(longitudEncontrada).isEqualTo(longitudBuscada);
+    }
+
+
     private void entoncesMeDevuelveLasPublicacionesDestacadas(List<Publicacion> destacadas, int cantidad) {
         assertThat(destacadas).hasSize(cantidad);
     }
@@ -180,10 +203,14 @@ public class RepositorioPublicacionesTest extends SpringTest {
         Ubicacion ubicacionDos = new Ubicacion();
         ubicacionDos.setProvincia("Buenos Aires");
         ubicacionDos.setLocalidad("Ramos Mejia");
+        ubicacionDos.setLatitud(-34.67006934350658);
+        ubicacionDos.setLongitud(-58.563277268754504);
 
         Ubicacion ubicacionUno = new Ubicacion();
         ubicacionUno.setProvincia("Buenos Aires");
         ubicacionUno.setLocalidad("Ramos Mejia");
+        ubicacionUno.setLatitud(-34.67006934350658);
+        ubicacionUno.setLongitud(-58.563277268754504);
 
         propiedadUno.setUbicacion(ubicacionDos);
         propiedadUno.setTipoPropiedad(TipoPropiedad.CASA);

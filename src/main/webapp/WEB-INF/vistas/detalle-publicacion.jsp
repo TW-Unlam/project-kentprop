@@ -113,13 +113,73 @@
                     <a href="enviar-consulta?propiedadId=${detalle.propiedad.id}"><i class="fa-solid fa-arrow-right"></i> Realizar Consulta</a>
                 </div>
             </div>
-            <%--    <div class="ubicacion-propiedad">
-                    <iframe src="${detalle.propiedad.coordenadas}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-             --%>
+
+
+            <h5>Ubicación de la propiedad:</h5>
+
+            <div id="mapa">
+
+                <%-- <iframe src="${detalle.propiedad.coordenadas}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    --%>
+            </div>
+
         </div>
     </div>
     <script src="https://kit.fontawesome.com/39a92c78bd.js" crossorigin="anonymous"></script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
+
+
+        <%-- CONFIGURACION DE LA API DE MAPS --%>
+        <script async
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBm4u_d68qcskUzbwl0Gzn8-PvthYwicNY&callback=initMap">
+        </script>
+
+        <script type="text/javascript">
+
+            function initMap(){
+
+                const ubicacion = new Localizacion(()=>{
+
+                    const options = {
+                        center: {
+                            lat: ubicacion.latitude,
+                            lng: ubicacion.longitude
+                        },
+                        zoom: 17
+                    }
+
+                    var map = document.getElementById('mapa');
+
+                    const mapa = new google.maps.Map(map, options);
+
+                });
+
+            }
+        </script>
+        <script type="text/javascript">
+            class Localizacion{
+
+                constructor(callback) {
+
+                    if (navigator.geolocation){
+                        //obtenemos la ubicación
+                        navigator.geolocation.getCurrentPosition((position) =>{
+                            this.latitude = ${detalle.propiedad.ubicacion.latitud};
+                            this.longitude = ${detalle.propiedad.ubicacion.longitud};
+
+                            callback();
+                        });
+
+                    }else{
+                        alert("navegador no soporta geolocalización");
+                    }
+                }
+
+            }
+        </script>
+
+
 </body>
+
+
 </html>

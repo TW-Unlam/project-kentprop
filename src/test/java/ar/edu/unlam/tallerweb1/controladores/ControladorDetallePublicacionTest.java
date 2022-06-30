@@ -31,6 +31,7 @@ public class ControladorDetallePublicacionTest {
     private HttpServletRequest request;
     private HttpSession session;
     private DatosPregunta datosPregunta;
+    private static final String PREGUNTAS_VACIAS = "Por el momento no se realizaron preguntas ¡Sé el primero!";
 
     @Before
     public void init(){
@@ -76,6 +77,18 @@ public class ControladorDetallePublicacionTest {
         yMeCarganLasPreguntasYaHechas(10, mav);
     }
 
+    // --------------------------------------------
+    @Test
+    public void alEntrarEnVerDetalleSiLaSeccionPreguntasEstaVaciaArrojarMensaje(){
+        dadoQueExisteUnaPropiedad();
+        dadoQueNoExistenPreguntasEnUnaPublicacion();
+
+        ModelAndView mav = cuandoSeleccionoVerDetalle();
+
+        entoncesMeLLevaALaVista(VISTA_VER_DETALLE, mav.getViewName());
+        yMeDevuelveElMensajeDePreguntasVacias(PREGUNTAS_VACIAS, mav);
+    }
+
     @Test
     public void queAlCargarUnaPreguntaSinEstarLogeadoMeRedireccioneALaPaginaLoginConId(){
         request = givenNoExisteUnUsuarioLogueado();
@@ -85,7 +98,6 @@ public class ControladorDetallePublicacionTest {
 
         entoncesMeRedirecciona(VISTA_REDIRECCION_SIN_LOGUEO, mav.getViewName());
     }
-
 
 
     @Test
@@ -115,11 +127,22 @@ public class ControladorDetallePublicacionTest {
         assertThat(lista).hasSize(cantidadEsperada);
     }
 
+    private void yMeDevuelveElMensajeDePreguntasVacias(String i, ModelAndView mav) {
+        String mensaje = (String) mav.getModel().get("msg_sin_preguntas");
+        assertThat(mensaje).isEqualTo(i);
+    }
+
     private void dadoQueExistenPreguntasEnUnaPublicacion(int cantidadPreguntas) {
         List<Pregunta> consultasHechas = new LinkedList<Pregunta>();
         for(int i = 0 ; i < cantidadPreguntas; i++){
             consultasHechas.add(new Pregunta());
         }
+        when(servicioPregunta.buscarConsultasDePublicacion(PROPIEDAD_ID)).thenReturn(consultasHechas);
+    }
+
+    private void dadoQueNoExistenPreguntasEnUnaPublicacion() {
+        List<Pregunta> consultasHechas = new LinkedList<Pregunta>();
+
         when(servicioPregunta.buscarConsultasDePublicacion(PROPIEDAD_ID)).thenReturn(consultasHechas);
     }
 

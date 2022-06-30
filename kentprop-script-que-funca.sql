@@ -1,25 +1,6 @@
 DROP SCHEMA IF EXISTS bd_;
 CREATE SCHEMA bd_;
 USE bd_;
-
-INSERT INTO ubicacion (id,localidad,provincia) VALUES
-(1,'Agronomía','Buenos Aires'),
-(2,'Almagro','Buenos Aires'),
-(3,'Balvanera','Jujuy'),
-(4,'Juan E. Barra','Buenos Aires'),
-(5,'Napaleofú','Buenos Aires'),
-(6,'Ramos Otero','Formosa'),
-(7,'San Agustín','Buenos Aires'),
-(8,'Vásquez','Salta'),
-(9,'Baradero','Entre Rios'),
-(10,'Benito Juárez','Neuquen'),
-(11,'Irineo Portela','Salta'),
-(12,'San Justo','Buenos Aires');
-
-
-select *
-from ubicacion;
-
 INSERT INTO usuario VALUES 
 (1,1,'kentprop@mail','1234','ADMIN'),
 (2,1,'sullca@mail','1234','PROPIETARIO'),
@@ -27,21 +8,40 @@ INSERT INTO usuario VALUES
 (4,1,'valPardo@mail','1234','PROPIETARIO'),
 (5,1,'Santy@mail','1234','PROPIETARIO');
 
+INSERT INTO ubicacion (`id`, `latitud`, `localidad`, `longitud`, `provincia`) 
+VALUES 
+(1,-34.59330330674339,'Agronomía',-58.48538487189992,'Buenos Aires'),
+(2,-34.60592951874363,'Almagro', -58.41888062037303,'Buenos Aires'),
+(3,-24.191748796490856,'Barrio Cuyaya',-65.31037667253626,'Jujuy'),
+(4, -37.821598117601674,'Juan E. Barra', -60.48257712539345,'Buenos Aires'),
+(5,-37.62273879983981,'Napaleofú', -58.7468275356217,'Buenos Aires'),
+(6,-23.889864569906866,'Ingeniero Juarez',-61.85473820859059,'Formosa'),
+(7,-31.97783433860174,'San Agustín',-64.37543410744013,'Cordoba'),
+(8,-24.762394585166284,'Tres Cerritos',-65.39772880171193,'Salta'),
+(9,-33.007986263943074,'Gualeguaychú', -58.52437556195882,'Entre Rios'),
+(10,-38.828130699085655,'Centenario',-68.14342972845226,'Neuquen'),
+(11,-24.84148756056162,'Gral.Alvarado', -65.4605786427529,'Salta'),
+(12, -34.67016429597653,'San Justo', -58.56286451927776,'Buenos Aires');
+
+select *
+from ubicacion;
+
+
 INSERT INTO propiedad (id,cantidadAmbientes,cochera,metrosCuadrados, tipoPropiedad,ubicacion_id,propietario_id) VALUES
 (1,2,0,53,1,1,2),
-(2,2,1,49,5,1,2),
-(3,3,1,62,1,3,2),
-(4,1,0,80,5,4,4),
-(5,2,0,55,0,5,4),
-(6,3,0,61,0,6,3),
-(7,5,1,91.5,0,7,3),
-(8,4,1,80,1,8,3),
-(9,1,0,49.5,1,9,4),
-(10,5,1,80,0,10,4),
-(11,2,1,50,5,11,4),
-(12,3,1,60.5,1,12,4),
-(13,3,1,60.5,1,12,4),
-(14,3,1,60.5,1,12,4);
+(2,2,1,49,1,2,2),
+(3,3,1,62,1,2,2),
+(4,1,0,80,2,1,3),
+(5,2,0,55,2,2,3),
+(6,3,0,61,2,2,3),
+(7,5,1,91.3,1,7,4),
+(8,4,1,80,3,2,4),
+(9,1,0,49.3,1,2,4),
+(10,5,1,80,4,1,5),
+(11,2,1,50,4,2,5),
+(12,3,1,60.4,1,2,5),
+(13,3,1,60.5,1,12,2),
+(14,3,1,60.5,1,12,3);
 
 INSERT INTO publicacion (id,descripcion,estatus,fechaPublicacion,isActivo,precio,tipoAccion,propiedad_id) VALUES 
 (1,'Departamento 1',0,'2022-05-05',1,45000,0,1),

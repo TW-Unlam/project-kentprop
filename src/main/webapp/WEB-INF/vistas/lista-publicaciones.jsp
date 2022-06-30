@@ -21,6 +21,45 @@
 <body>
     <div class="bg-container">
         <div class="lista-container">
+            <c:if test="${not empty destacadas}">
+                <h3>Publicaciones destacadas</h3>
+                <div class="lista-destacadas">
+                    <c:forEach var="publiDestacada" items="${destacadas}">
+                        <div class="card">
+                            <a href="detalle-publicacion?id=${publiDestacada.propiedad.id}">
+                                <c:forEach var="imagen" items="${listaDeImagenDePublicacionesDestacadas}" >
+                                    <c:if test="${imagen.publicacion.id eq publiDestacada.id}">
+                                        <img src="${imagen.urlImagen}" class="card-img-top" alt="Imagen de Propiedad">
+                                    </c:if>
+                                </c:forEach>
+                                <div class="card-body">
+                                    <div class="publicacion-top">
+                                        <div>
+                                            <h5>$ <c:out value="${publiDestacada.precio}"/></h5>
+                                            <span class="badge text-bg-primary"><c:out value="${publiDestacada.tipoAccion.name()}"/></span>
+                                        </div>
+                                        <div class="separador"> </div>
+                                        <div>
+                                            <h5><c:out value="${publiDestacada.propiedad.ubicacion.provincia}"/></h5>
+                                            <p><c:out value="${publiDestacada.propiedad.ubicacion.localidad}"/></p>
+                                        </div>
+                                    </div>
+                                    <div class="publicacion-data">
+                                        <p><i class="fa-solid fa-ruler-vertical"></i><c:out value="${publiDestacada.propiedad.metrosCuadrados}"/> m<sup>2</sup>.</p>
+                                        <p><i class="fa-solid fa-door-open"></i></span><c:out value="${publiDestacada.propiedad.cantidadAmbientes}"/> amb.</p>
+                                        <p><i class="fa-solid fa-house"></i><c:out value="${publiDestacada.propiedad.tipoPropiedad.name()}"/> </p>
+                                        <c:if test="${publiDestacada.propiedad.cochera}">
+                                            <p><i class="fa-solid fa-warehouse"></i> 1 coch. </p>
+                                        </c:if>
+                                    </div>
+                                    <span class="publicacion-descripcion"><c:out value="${publiDestacada.descripcion}"/></span>
+                                </div>
+                            </a>
+                        </div>
+                    </c:forEach>
+                </div>
+            </c:if>
+
             <c:choose>
                 <c:when test="${empty msg_error}">
                     <h2>Publicaciones encontradas</h2>

@@ -39,12 +39,18 @@ public class ControladorBuscadorHome {
         resultado = servicioPublicacion.buscarPublicacion(datosBusqueda.getTipoAccion(),
                     datosBusqueda.getTipoPropiedad(),
                     datosBusqueda.getUbicacion());
+
         if(resultado.isEmpty()){
             modelo.put("msg_error", "No se encontraron publicaciones con estos datos");
         }else{
             modelo.put("publicaciones", resultado);
             List<Imagen> listaImagenes=new LinkedList<>();
+            List<Imagen> listaImagenesDestacadas=new LinkedList<>();
             List<Imagen> imagenesBusqueda=null;
+            List<Publicacion> resultadoDestacadas = null;
+
+            resultadoDestacadas = servicioPublicacion.obtenerPublicacionesDestacadas();
+
             for (Publicacion publicacionUni :resultado)
             {
                imagenesBusqueda=servicioPublicacion.traerImagenesPorId(publicacionUni.getId());
@@ -56,6 +62,23 @@ public class ControladorBuscadorHome {
                 }
 
             }
+
+            if(!resultadoDestacadas.isEmpty()){
+                modelo.put("destacadas", resultadoDestacadas);
+                for (Publicacion publicacionUni :resultadoDestacadas)
+                {
+                    imagenesBusqueda=servicioPublicacion.traerImagenesPorId(publicacionUni.getId());
+
+
+                    if(imagenesBusqueda.size()>0){
+                        listaImagenesDestacadas.add(imagenesBusqueda.get(0));
+                    }
+
+                }
+
+            }
+
+            modelo.put("listaDeImagenDePublicacionesDestacadas", listaImagenesDestacadas);
             modelo.put("listaDeImagenDePublicaciones",  listaImagenes);
         }
         return new ModelAndView("lista-publicaciones", modelo);
@@ -77,6 +100,4 @@ public class ControladorBuscadorHome {
         modelo.put("destacadas", resultado);
         return new ModelAndView("lista-publicaciones", modelo);
     }
-
-
 }

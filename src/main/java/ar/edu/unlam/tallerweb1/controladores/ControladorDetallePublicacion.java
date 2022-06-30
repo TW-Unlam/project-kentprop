@@ -49,6 +49,12 @@ public class ControladorDetallePublicacion {
             modelo.put("preguntas_hechas",consultasHechas);
         }
 
+        if(publicaciones != null){
+            modelo.put("detalle", publicaciones);
+        }else{
+            modelo.put("msg_error", "Pagina inexistente");
+        }
+
         return new ModelAndView("detalle-publicacion", modelo);
     }
 

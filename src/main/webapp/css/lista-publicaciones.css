@@ -3,7 +3,8 @@
     height: 88vh;
     width: 84%;
     border-radius: 8px;
-    padding: 30px 30px 50px 30px
+    padding: 30px 30px 50px 30px;
+    overflow-y: scroll;
 }
 
 .lista-container a {
@@ -22,8 +23,6 @@
 .lista-publicaciones {
     display: flex;
     flex-wrap: wrap;
-    overflow-y: scroll;
-    height: 90%;
 }
 
 .lista-publicaciones .card {
@@ -81,4 +80,16 @@
 .publicacion-data i {
     color: gray;
     margin-right: 5px;
+}
+
+.lista-destacadas {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 40px;
+    justify-content: space-between;
+}
+
+.lista-destacadas .card {
+    width: 32%;
+    background-color: #e6f6ff;
 }

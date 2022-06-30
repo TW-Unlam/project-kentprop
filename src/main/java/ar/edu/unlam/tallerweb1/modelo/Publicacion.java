@@ -18,7 +18,7 @@ public class Publicacion {
     private Accion tipoAccion;
     private Estatus estatus;
 
-    private Boolean destacada;
+    private boolean destacada;
     @OneToOne
     @JoinColumn(name = "propiedad_id")
     private Propiedad propiedad;

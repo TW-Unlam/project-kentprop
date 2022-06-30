@@ -51,33 +51,21 @@ public class ControladorBuscadorHome {
 
             resultadoDestacadas = servicioPublicacion.obtenerPublicacionesDestacadas();
 
-            for (Publicacion publicacionUni :resultado)
-            {
+            for (Publicacion publicacionUni :resultado) {
                imagenesBusqueda=servicioPublicacion.traerImagenesPorId(publicacionUni.getId());
-//                System.out.println(imagenesBusqueda);
-
                if(imagenesBusqueda.size()>0){
-//                   System.out.println(imagenesBusqueda.get(0));
                     listaImagenes.add(imagenesBusqueda.get(0));
                 }
-
             }
-
             if(!resultadoDestacadas.isEmpty()){
                 modelo.put("destacadas", resultadoDestacadas);
-                for (Publicacion publicacionUni :resultadoDestacadas)
-                {
+                for (Publicacion publicacionUni :resultadoDestacadas) {
                     imagenesBusqueda=servicioPublicacion.traerImagenesPorId(publicacionUni.getId());
-
-
                     if(imagenesBusqueda.size()>0){
                         listaImagenesDestacadas.add(imagenesBusqueda.get(0));
                     }
-
                 }
-
             }
-
             modelo.put("listaDeImagenDePublicacionesDestacadas", listaImagenesDestacadas);
             modelo.put("listaDeImagenDePublicaciones",  listaImagenes);
         }
@@ -90,14 +78,4 @@ public class ControladorBuscadorHome {
         return new ModelAndView("lista-publicaciones");
     }
 
-    @RequestMapping(path = "/buscar-destacadas")
-    public ModelAndView obtenerPublicacionesDestacadas(){
-        ModelMap modelo = new ModelMap();
-        List<Publicacion> resultado = null;
-
-        resultado = servicioPublicacion.obtenerPublicacionesDestacadas();
-
-        modelo.put("destacadas", resultado);
-        return new ModelAndView("lista-publicaciones", modelo);
-    }
 }

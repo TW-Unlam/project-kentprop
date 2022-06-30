@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.Imagen;
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
 import org.junit.Before;
@@ -54,32 +55,66 @@ public class ControladorBuscadorHomeTest {
 
    @Test
    public void alBuscarPublicacionDeberanAparecerLasPublicacionesDestacadas(){
-       dadoQueTenemosUnaListaDePublicacionesDestacadas(3);
+       dadoQueTenemosUnaListaDePublicacionesDestacadas(3,10);
 
-       ModelAndView mav = cuandoObtengoLasPublicacionesDestacadas();
+       ModelAndView mav = cuandoBuscoUnaPublicacion(datosBusqueda);
 
        entoncesMeLLevaALaVista(VISTA_LISTA_PUBLICACIONES, mav.getViewName());
        entoncesEncuentroDestacadas(mav, 3);
-
-
    }
+
+   @Test
+   public void alBuscarPublicacionesMeDeberaTraerLaImagenAsignadaPorPublicacion(){
+       dadoQueTenemosUnaListaDePublicacionesConImagenes(10);
+
+       ModelAndView mav = cuandoBuscoUnaPublicacion(datosBusqueda);
+
+       entoncesMeTraeLasImagenesAsignadasAcadaPublicacion(mav,10);
+   }
+
+    private void entoncesMeTraeLasImagenesAsignadasAcadaPublicacion(ModelAndView mav, int cantidadEsperada) {
+        List<Publicacion> lista = (List<Publicacion>) mav.getModel().get("listaDeImagenDePublicaciones");
+        assertThat(lista).hasSize(cantidadEsperada);
+    }
+
+    private void dadoQueTenemosUnaListaDePublicacionesConImagenes(int cantidadImagenes) {
+        List<Publicacion> publicaciones = new LinkedList<>();
+        List<Imagen> imagenes = new LinkedList<>();
+        Integer x = 1;
+        for(int i = 0 ; i < cantidadImagenes; i++){
+            publicaciones.add(new Publicacion(x++));
+        }
+        for(int i = 0 ; i < cantidadImagenes; i++){
+            imagenes.add(new Imagen());
+        }
+        when(servicioPublicaciones.buscarPublicacion(datosBusqueda.getTipoAccion(),
+                datosBusqueda.getTipoPropiedad(),
+                datosBusqueda.getUbicacion()
+        )).thenReturn(publicaciones);
+        for(Publicacion publicacion: publicaciones){
+            when(servicioPublicaciones.traerImagenesPorId(publicacion.getId())).thenReturn(imagenes);
+        }
+    }
 
     private void entoncesEncuentroDestacadas(ModelAndView mav, int cantidadEsperada) {
         List<Publicacion> lista = (List<Publicacion>) mav.getModel().get("destacadas");
         assertThat(lista).hasSize(cantidadEsperada);
     }
 
-    private ModelAndView cuandoObtengoLasPublicacionesDestacadas() {
-       return controladorBuscadorHome.obtenerPublicacionesDestacadas();
-    }
-
-    private void dadoQueTenemosUnaListaDePublicacionesDestacadas(int cantidad) {
-        List<Publicacion> lista = new LinkedList<>();
-        for(int i = 0 ; i < cantidad; i++){
-            lista.add(new Publicacion());
+    private void dadoQueTenemosUnaListaDePublicacionesDestacadas(int cantidadDestacadas, int cantidadPublicaciones) {
+        List<Publicacion> listaDestacadas = new LinkedList<>();
+        List<Publicacion> listaPublicaciones = new LinkedList<>();
+        for(int i = 0 ; i < cantidadDestacadas; i++){
+            listaDestacadas.add(new Publicacion());
         }
-
-        when(servicioPublicaciones.obtenerPublicacionesDestacadas()).thenReturn(lista);
+        for(int i = 0 ; i < cantidadPublicaciones; i++){
+            listaPublicaciones.add(new Publicacion());
+        }
+        when(servicioPublicaciones.buscarPublicacion(datosBusqueda.getTipoAccion(),
+                datosBusqueda.getTipoPropiedad(),
+                datosBusqueda.getUbicacion()
+        )).thenReturn(listaPublicaciones);
+        when(servicioPublicaciones.obtenerPublicacionesDestacadas()).thenReturn(listaDestacadas);
     }
 
     private void entoncesMeLLevaALaVista(String vistaEsperada, String vistaRecibida) {

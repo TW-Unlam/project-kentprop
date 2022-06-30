@@ -95,7 +95,7 @@ public class RepositorioPublicacionesTest extends SpringTest {
 
     //--------------------------------
     @Test @Transactional @Rollback
-    public void ObtenerLasCoordenasDeLaPropiedad() {
+    public void obtenerLasCoordenasDeLaPropiedad() {
         dadoQueExisteUnaListaDePublicaciones();
 
         List<Publicacion> propiedades = repositorioPublicaciones.buscarPublicaciones(ACCION_EXISTENTE, TIPO_EXISTENTE, DESCRIPCION_EXISTENTE);
@@ -103,6 +103,41 @@ public class RepositorioPublicacionesTest extends SpringTest {
 
         entoncesMeDevuelveLaLatitudDelAPropiedad((Double)resultado.getPropiedad().getUbicacion().getLatitud());
         entoncesMeDevuelveLaLongitudDelAPropiedad((Double)resultado.getPropiedad().getUbicacion().getLongitud());
+    }
+
+    @Test @Transactional @Rollback
+    public void obtenerImagenesDeUnaPublicacion(){
+        Publicacion publicacion = dadoQueExisteUnaListaDePublicacionesConImagenes();
+
+        List<Imagen>imagenes = repositorioPublicaciones.buscarImagenesDeLaPublicacion(publicacion.getId());
+
+        entoncesMeDevuelveLaListaDeImagenesCorrespondienteAlaPublicacion(imagenes, 4);
+    }
+
+    private void entoncesMeDevuelveLaListaDeImagenesCorrespondienteAlaPublicacion(List<Imagen> imagenes, int cantidadImagenes) {
+        assertThat(imagenes).hasSize(cantidadImagenes);
+    }
+
+
+    private Publicacion dadoQueExisteUnaListaDePublicacionesConImagenes() {
+        Publicacion publicacion = new Publicacion();
+        Imagen imagen = new Imagen();
+        Imagen imagen2 = new Imagen();
+        Imagen imagen3 = new Imagen();
+        Imagen imagen4 = new Imagen();
+
+        imagen.setPublicacion(publicacion);
+        imagen2.setPublicacion(publicacion);
+        imagen3.setPublicacion(publicacion);
+        imagen4.setPublicacion(publicacion);
+
+        session().save(imagen);
+        session().save(imagen2);
+        session().save(imagen3);
+        session().save(imagen4);
+        session().save(publicacion);
+
+        return publicacion;
     }
 
     private void entoncesMeDevuelveLaLatitudDelAPropiedad(Double latitudBuscada) {

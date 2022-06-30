@@ -17,7 +17,6 @@ public class Publicacion {
     private boolean isActivo;
     private Accion tipoAccion;
     private Estatus estatus;
-
     private boolean destacada;
     @OneToOne
     @JoinColumn(name = "propiedad_id")
@@ -33,6 +32,10 @@ public class Publicacion {
     public Publicacion() {
 
     }
+    public Publicacion(Integer id) {
+        this.id = id;
+    }
+
 
     public Boolean getDestacada() {
         return destacada;

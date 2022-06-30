@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.excepciones.UsuarioInexistente;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEmail;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
@@ -41,7 +42,7 @@ public class ControladorConsultas {
                     datosConsulta.getTelefono(),
                     datosConsulta.getMensaje(),
                     datosConsulta.getPropiedadId());
-        }catch(Exception e){
+        }catch(UsuarioInexistente u){
             modelo.put("msg-error", "Propietario inexistente");
             return new ModelAndView("redirect:/detalle-publicacion?id="+datosConsulta.getPropiedadId(),modelo);
         }

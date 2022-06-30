@@ -43,21 +43,21 @@ INSERT INTO propiedad (id,cantidadAmbientes,cochera,metrosCuadrados, tipoPropied
 (13,3,1,60.5,1,12,2),
 (14,3,1,60.5,1,12,3);
 
-INSERT INTO publicacion (id,descripcion,estatus,fechaPublicacion,isActivo,precio,tipoAccion,propiedad_id) VALUES 
-(1,'Departamento 1',0,'2022-05-05',1,45000,0,1),
-(2,'Casa 1',0,'2022-06-20',1,50000,0,2),
-(3,'Departamento 2',0,'2022-01-10',1,60000,0,3),
-(4,'Oficina 1',1,'2022-02-27',1,35000,0,4),
-(5,'Casa 2',2,'2022-06-03',1,2000000,1,5),
-(6,'Casa 3',0,'2022-04-10',1,70000,0,6),
-(7,'Casa 4',0,'2022-03-12',1,9000000,1,7),
-(8,'Departamento 3',1,'2022-01-28',1,8550000,1,8),
-(9,'Departamento 4',0,'2022-03-15',1,2000000,2,9),
-(10,'Casa 4',0,'2022-05-01',1,8200000,1,10),
-(11,'Oficina 2',0,'2022-03-22',1,2500000,1,11),
-(12,'Departament 5',2,'2022-04-10',1,75000,0,12),
-(13,'Departament 6',0,'2022-04-10',1,75000,0,13),
-(14,'Departament 7',0,'2022-04-10',1,75000,0,14);
+INSERT INTO publicacion (id,descripcion,estatus,fechaPublicacion,isActivo,precio,tipoAccion,propiedad_id,destacada) VALUES
+                               (1,'Departamento 1',0,'2022-05-05',1,45000,0,1,0),
+                                (2,'Departamento 2',0,'2022-06-20',1,50000,0,2,0),
+                                         (3,'Departamento 3',0,'2022-01-10',1,60000,0,3,0),
+                          (4,'Quinta 1',1,'2022-02-27',1,35000,0,4,1),
+                    (5,'Quinta 3',2,'2022-06-03',1,200000,1,5,0),
+                    (6,'Quinta 3',0,'2022-04-10',1,70000,1,6,0
+                        (7,'Terreno 1',0,'2022-03-12',1,900000,1,7,0),
+          (8,'Terreno 2',1,'2022-01-28',1,855000,1,8,1),
+              (9,'Terreno 3',0,'2022-03-15',1,200000,2,9,0),
+                        (10,'Local',0,'2022-05-01',1,820000,1,10,0),
+                   (11,'Local 2',0,'2022-03-22',1,250000,1,11,0),
+                  (12,'Local 3',2,'2022-04-10',1,75000,0,12,0),
+                    (13,'Oficina 1',0,'2022-04-10',1,75000,0,13,1),
+                                  (14,'Oficina 2',0,'2022-04-10',1,75000,0,14,0);
 
 select pu.tipoAccion,po.id,po.tipoPropiedad ,u.*
 from publicacion pu
@@ -69,21 +69,53 @@ select *
 from imagen;
 
 INSERT INTO imagen(urlImagen, publicacion_id)
-VALUES ('images/PropiedadTipoCasa.jpg', 2),
- ('images/PropiedadTipoCasa.jpg',5),
- ('images/PropiedadTipoCasa.jpg', 6),
- ('images/PropiedadTipoCasa.jpg', 7),
- ('images/PropiedadTipoCasa02.jpg', 5),
- ('images/PropiedadTipoCasa02.jpg', 6),
- ('images/PropiedadTipoCasa02.jpg', 7),
- ('images/PropiedadTipoCasa03.jpg', 7),
- ('images/PropiedadTipoCasa03.jpg', 10),
- ('images/PropiedadTipoDepartamento.jpg', 1),
- ('images/PropiedadTipoDepartamento.jpg', 3),
- ('images/PropiedadTipoDepartamento.jpg', 8),
- ('images/PropiedadTipoDepartamento.jpg', 9),
- ('images/PropiedadTipoDepartamento.jpg', 12),
- ('images/PropiedadTipoDepartamento.jpg', 13);
+VALUES
+    ('images/PropiedadTipoDepartamento.jpg', 1),
+    ('images/PropiedadTipoDepartamento.jpg', 2),
+    ('images/PropiedadTipoDepartamento.jpg', 3),
+    ('images/PropiedadTipoDepartamento02.jpg', 1),
+    ('images/PropiedadTipoDepartamento02.jpg', 2),
+    ('images/PropiedadTipoDepartamento03.jpg', 3),
+    ('images/PropiedadTipoDepartamento03.jpg', 1),
+    ('images/PropiedadTipoDepartamento03.jpg', 2),
+    ('images/PropiedadTipoDepartamento03.jpg', 3),
+
+    ('images/PropiedadTipoQuinta.jpg', 4),
+    ('images/PropiedadTipoQuinta.jpg', 5),
+    ('images/PropiedadTipoQuinta.jpg', 6),
+    ('images/PropiedadTipoQuinta02.jpg', 4),
+    ('images/PropiedadTipoQuinta02.jpg', 5),
+    ('images/PropiedadTipoQuinta02.jpg', 6),
+    ('images/PropiedadTipoQuinta03.jpg', 4),
+    ('images/PropiedadTipoQuinta03.jpg', 5),
+    ('images/PropiedadTipoQuinta03.jpg', 6),
+
+    ('images/PropiedadTipoTerreno.png', 7),
+    ('images/PropiedadTipoTerreno.png', 8),
+    ('images/PropiedadTipoTerreno.png',9),
+    ('images/PropiedadTipoTerreno02.png', 7),
+    ('images/PropiedadTipoTerreno02.png', 8),
+    ('images/PropiedadTipoTerreno02.png', 9),
+    ('images/PropiedadTipoTerreno03.png', 7),
+    ('images/PropiedadTipoTerreno03.png', 8),
+    ('images/PropiedadTipoTerreno03.png', 9),
+
+    ('images/PropiedadTipoLocal.png', 10),
+    ('images/PropiedadTipoLocal.png', 11),
+    ('images/PropiedadTipoLocal.png', 12),
+    ('images/PropiedadTipoLocal02.png', 10),
+    ('images/PropiedadTipoLocal02.png', 11),
+    ('images/PropiedadTipoLocal02.png', 12),
+    ('images/PropiedadTipoLocal03.png', 10),
+    ('images/PropiedadTipoLocal03.png', 11),
+    ('images/PropiedadTipoLocal03.png', 12),
+
+    ('images/PropiedadTipoOficina.jpg', 13),
+    ('images/PropiedadTipoOficina.jpg', 14),
+    ('images/PropiedadTipoTerreno02.jpg', 14),
+    ('images/PropiedadTipoOficina02.jpg', 13),
+    ('images/PropiedadTipoOficina03.jpg', 14),
+    ('images/PropiedadTipoTerreno03.jpg', 13);
 
 
 select *

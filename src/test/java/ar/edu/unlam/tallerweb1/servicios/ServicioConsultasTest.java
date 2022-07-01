@@ -39,8 +39,7 @@ public class ServicioConsultasTest {
         entoncesSeObtieneUnUsuarioValido(busqueda);
 
     }
-    @Test
-            (expected = UsuarioInexistente.class)
+    @Test (expected = UsuarioInexistente.class)
     public void alEnviarConsultaDeEmailDevuelveElUsuarioPropietarioNoexiste() throws UsuarioInexistente {
         dadoQueExisteUnaPublicacion();
 

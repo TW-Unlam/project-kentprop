@@ -31,8 +31,7 @@ public class ControladorPropietario {
     @RequestMapping(path = "/mis-publicaciones",method = RequestMethod.GET)
     public ModelAndView verPublicacionDelPropietario(Integer id, HttpServletRequest request) {
         ModelMap modelo = new ModelMap();
-        System.out.println(request.getSession().getAttribute("id"));
-        System.out.println(request.getSession().getAttribute("ROL"));
+
         if(request.getSession().getAttribute("id")==null) {
             return new ModelAndView("redirect:/login");
         }
@@ -43,7 +42,7 @@ public class ControladorPropietario {
 
         List<Publicacion> publicaciones=null;
         publicaciones= servicioPropietario.obtenePublicacionesDelPropietario((Integer) request.getSession().getAttribute("id"));
-        System.out.println(publicaciones);
+
         if(publicaciones.isEmpty()){
             modelo.put("msg_vacio","No tiene Propiedades publicadas...");
         }else{
@@ -51,11 +50,11 @@ public class ControladorPropietario {
             List<Imagen> listaImagenes=new LinkedList<>();
             List<Imagen> imagenesBusqueda=null;
             for (Publicacion publicacionUni :publicaciones)
-            {System.out.println(publicacionUni.getId());
+            {
                 imagenesBusqueda=servicioPublicaciones.traerImagenesPorId(publicacionUni.getId());
                 if(imagenesBusqueda.size()>0){
                     listaImagenes.add(imagenesBusqueda.get(0));
-                    System.out.println(imagenesBusqueda.get(0).getUrlImagen());
+
                 }else {
                     Imagen tmp=new Imagen();
                     tmp.setUrlImagen("images/PropiedadDefault.jpg");
@@ -63,7 +62,7 @@ public class ControladorPropietario {
                     listaImagenes.add(tmp);
                 }
             }
-            System.out.println(listaImagenes);
+
             modelo.put("listaDeImagenesDePublicaciones",  listaImagenes);
         }
         return new ModelAndView("mis-publicaciones", modelo);

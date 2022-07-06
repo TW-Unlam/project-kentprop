@@ -1,9 +1,11 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.excepciones.MailNoEnviado;
 import ar.edu.unlam.tallerweb1.excepciones.UsuarioInexistente;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEmail;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
+//import org.simplejavamail.api.email.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -45,7 +47,10 @@ public class ControladorConsultas {
         }catch(UsuarioInexistente u){
             modelo.put("msg-error", "Propietario inexistente");
             return new ModelAndView("redirect:/detalle-publicacion?id="+datosConsulta.getPropiedadId(),modelo);
-        }
+        }/*catch(MailNoEnviado E){
+            modelo.put("msg-error", "El-Mail , no fue posible ser enviado");
+            return new ModelAndView("redirect:/detalle-publicacion?id="+datosConsulta.getPropiedadId(),modelo);
+        }*/
         modelo.put("msg","Mensaje Enviado Exitosamente");
         modelo.put("usuario", resultado);
         return new ModelAndView("redirect:/detalle-publicacion?id="+datosConsulta.getPropiedadId(),modelo);

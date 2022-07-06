@@ -10,19 +10,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
+////Imports del servicio de Email
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.util.Properties;
+////Imports del servicio de Email
+import java.time.LocalDate;
 
-@Service("ServicioEmail") @Transactional
+@Service("ServicioEmail")
+@Transactional
 public class ServicioEmailDefault implements ServicioEmail {
     private final RepositorioPublicaciones repositorioDePublicaciones;
     private final RepositorioUsuario repositorioDeUsuarios;
-
 
     private String PropietarioEmail = "sullcafernando18@gmail.com";
     private String MensajeIngresada = "Este Es un Email Informativo Sobre las Preguntas sobre su Publicaciones";
@@ -37,7 +39,6 @@ public class ServicioEmailDefault implements ServicioEmail {
     }
 
     @Override
-    @Transactional
     public Usuario enviarConsultaPrivada(String email, String nombre, Integer telefono, String mensaje, Integer propiedadId) throws UsuarioInexistente {
         Propiedad propiedad=  repositorioDePublicaciones.buscarPropiedad(propiedadId);
        if(propiedad==null)
@@ -46,59 +47,18 @@ public class ServicioEmailDefault implements ServicioEmail {
        }
        else{
            /////Operacionde mensajeria
-           //String email, String nombre, Integer telefono, String mensaje propiedad.getPropietario().getEmail()
+           //String emailDelPropietarioreceptor, String nombre, Integer telefono, String mensajeConsultaArmado propiedad.getPropietario().getEmail()
            //retorna los datos del propietario a moo de informacion extra
            this.EmailIngresado=email;
            this.NombreIngresada=nombre;
            this.TelefonoIngresado=telefono;
            this.MensajeIngresada=mensaje;
            this.PropietarioEmail=propiedad.getPropietario().getEmail();
-//           sendMail();
-//           enviarMailDeConsultaPrivadasEnPublicacion();
+           enviarMailDeConsultaPrivadasEnPublicacion(email,nombre,telefono,mensaje,propiedad.getPropietario().getEmail());
            return  propiedad.getPropietario();
 //         return  repositorioDeUsuarios.obterneUsuario(propiedad.getPropietario().getId());
 //         return  repositorioDePublicaciones.buscarPropietarioDeLaPropiedad(propiedadId);
        }
-    }
-
-
-    public void enviarMail(String mensaje,String asunto, String email) {
-        String username="Kent-Propiedades";
-        String password="Aa123456.";
-
-        String emailOrg = "sullcafernando18";
-        String passwordOrg = "37841788";
-        Properties props =new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.auth", "true");
-//        props.put("mail.smtp.port", "587");//465
-        props.put("mail.smtp.port", "465");//465
-//        props.put("mail.smtp.user",username);
-        props.put("mail.smtp.user", emailOrg);
-//        props.put("mail.smtp.password",password);
-        props.put("mail.smtp.password", passwordOrg);
-        props.put("mail.smtp.starttls.enable", "true");
-//        props.put("mail.smtp.mail.sender",username+"@gmail.com");
-        props.put("mail.smtp.mail.sender", emailOrg+"@gmail.com");
-        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-
-
-        try {
-            Session session =Session.getDefaultInstance(props);
-            MimeMessage msj=new MimeMessage(session);
-//          msj.setFrom(new InternetAddress(username));
-            msj.setFrom(new InternetAddress(emailOrg));
-            msj.addRecipient(Message.RecipientType.TO,new InternetAddress(email));
-            msj.setSubject(asunto);
-            msj.setContent(mensaje, "text/html");
-            Transport transport=session.getTransport("smtp");
-            transport.connect("smtp.gmail.com",emailOrg,passwordOrg);
-            transport.sendMessage(msj,msj.getAllRecipients());
-            transport.close();
-        } catch (MessagingException e) {
-            throw new MailNoEnviado();
-        }
-
     }
 
     @Override
@@ -109,20 +69,114 @@ public class ServicioEmailDefault implements ServicioEmail {
                 + "<h4>-"+mensajeConsultante+"-</h4><br>"
                 + "<p>------------------------</p>\n"
                 +"<p>Datos de Contacto del interesado</p><br>"
-                +"<p>email: "+emailConsultante+"</p><br> <br>"
+                +"<p>emailDelPropietarioreceptor: "+emailConsultante+"</p><br> <br>"
                 +"<p>nombre: "+nombreConsultante+"</p><br> <br>"
                 +"<p>telefono: "+telefonoConsultante+"</p><br> <br>"
                 +"<p>: Puede volver a ver su publicacion desde el siguiente enlace</p><br> <br>"
 //                +"<a href='http://localhost:8080/project-kenprop_war_exploded/detalle-de-publicacion?id="+propiedadId+" >IR A Publicacion</a>"
                 +"<br>";
-//        enviarMail(mensaje,asunto,this.PropietarioEmail);
+//        enviarMail(mensajeConsultaArmado,asuntoParaELConsultanteArmada,this.PropietarioEmail);
         enviarMail(mensaje,asunto,"sullcafernando18@gmail.com");
+    }
+
+    public void enviarMail(String mensajeConsultaArmado, String asuntoParaELConsultanteArmada, String emailDelPropietarioreceptor) {
+        String username="Kent-Propiedades";
+        String password="37841788";
+
+        String emailOrg = "sullcafernando18";
+        String passwordOrg = "hvqsnyjfcoodywai";
+        Properties props =new Properties();
+        /////////Verificar si era esto/////
+        // props.put("mail.smtp.ssl.protocols", "TLSv1.3 TLSv1.2");
+        // props.setProperty("mail.smtp.debug","true");
+        /////////////////
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");//587///465
+        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+        ////////////////
+        Session session = Session.getInstance(props, new Authenticator() {
+                   @Override
+                   protected PasswordAuthentication getPasswordAuthentication() {
+                       return new PasswordAuthentication(emailOrg+"@gmail.com", passwordOrg);
+                   }
+        });
+
+       /* props.put("mail.smtp.user", emailOrg);
+//      props.put("mail.smtp.password",password);
+        props.put("mail.smtp.password", passwordOrg);
+//       props.put("mail.smtp.mail.sender",username+"@gmail.com");
+        props.put("mail.smtp.mail.sender", emailOrg+"@gmail.com");
+*/
+
+        /*try {
+            Session session =Session.getDefaultInstance(props);
+            MimeMessage msj=new MimeMessage(session);
+//          msj.setFrom(new InternetAddress(username));
+            msj.setFrom(new InternetAddress(emailOrg));
+            msj.addRecipient(Message.RecipientType.TO,new InternetAddress(emailDelPropietarioreceptor));
+            msj.setSubject(asuntoParaELConsultanteArmada);
+            msj.setContent(mensajeConsultaArmado, "text/html");
+            Transport transport=session.getTransport("smtp");
+            transport.connect("smtp.gmail.com",emailOrg,passwordOrg);
+            transport.sendMessage(msj,msj.getAllRecipients());
+            transport.close();
+        } catch (MessagingException e) {
+            throw new MailNoEnviado();
+        }*/
+
+        Message message = new MimeMessage(session);
+        try {
+            message.setFrom(new InternetAddress(emailOrg+"@gmail.com"));
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            message.setRecipients(
+                    Message.RecipientType.TO, InternetAddress.parse(emailDelPropietarioreceptor));
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            message.setSubject("Mail Subject");
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+
+        String msg = "This is my first email using JavaMailer";
+
+        MimeBodyPart mimeBodyPart = new MimeBodyPart();
+        try {
+            mimeBodyPart.setContent(msg, "text/html; charset=utf-8");
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+
+        Multipart multipart = new MimeMultipart();
+        try {
+            multipart.addBodyPart(mimeBodyPart);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            message.setContent(multipart);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            Transport.send(message);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
 ////////////////***************************************///////////////////////////
 
-    /* Email email = EmailBuilder.startingBlank()
+    /* Email emailDelPropietarioreceptor = EmailBuilder.startingBlank()
              .from("KentProp", organizacionEmail)
              .to("cliente", PropietarioEmail)
              .withSubject("Gracias por elegirnos")
@@ -140,13 +194,11 @@ public class ServicioEmailDefault implements ServicioEmail {
          } catch (Exception e) {
              throw e;
          }
-
      }
-
      @Override
      public void sendMail() {
          Mailer m =  getmailer();
-         m.sendMail(email);
+         m.sendMail(emailDelPropietarioreceptor);
      }
  */
     ////////////****************************/////////////////

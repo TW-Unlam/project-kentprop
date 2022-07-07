@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.mail.MessagingException;
+
 @Controller
 public class ControladorConsultas {
 
@@ -45,12 +47,9 @@ public class ControladorConsultas {
                     datosConsulta.getMensaje(),
                     datosConsulta.getPropiedadId());
         }catch(UsuarioInexistente u){
-            modelo.put("msg-error", "Propietario inexistente");
+            modelo.put("msg-error", "Propietario inexistente .El-Mail , no fue posible ser enviado");
             return new ModelAndView("redirect:/detalle-publicacion?id="+datosConsulta.getPropiedadId(),modelo);
-        }/*catch(MailNoEnviado E){
-            modelo.put("msg-error", "El-Mail , no fue posible ser enviado");
-            return new ModelAndView("redirect:/detalle-publicacion?id="+datosConsulta.getPropiedadId(),modelo);
-        }*/
+        }
         modelo.put("msg","Mensaje Enviado Exitosamente");
         modelo.put("usuario", resultado);
         return new ModelAndView("redirect:/detalle-publicacion?id="+datosConsulta.getPropiedadId(),modelo);

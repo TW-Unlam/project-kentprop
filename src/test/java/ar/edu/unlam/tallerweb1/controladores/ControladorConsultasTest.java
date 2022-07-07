@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.mail.MessagingException;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,7 +46,7 @@ public class ControladorConsultasTest {
 
     }
 
-    private void dadoquetengoPropietarioRegistrado() throws UsuarioInexistente {
+    private void dadoquetengoPropietarioRegistrado() throws UsuarioInexistente{
         Usuario propietario=new Usuario();
         when(servicioEmail.enviarConsultaPrivada(datosConsulta.getEmail(),datosConsulta.getNombre(),datosConsulta.getTelefono(), datosConsulta.getMensaje(), datosConsulta.getPropiedadId())).thenReturn(propietario);}
 
@@ -53,12 +54,12 @@ public class ControladorConsultasTest {
 
 //@Test(expected = UsuarioInexistente.class)
 @Test
-        public void alEnviarUnMailDeunaPublicacionEnDetalleAUsuarioInactivoDeberiaLanzarError() throws UsuarioInexistente {
+        public void alEnviarUnMailDeunaPublicacionEnDetalleAUsuarioInactivoDeberiaLanzarError() throws UsuarioInexistente{
         dadoQueExisteUnaPropiedadConUsuarioInactivo();
         EnviarElMailLanzaExcepcion();
         ModelAndView mav= CuandoQuiereEnviarElMail();
         entoncesMeLLevaALaVista(VISTA_REDIRRECCION_VER_DETALLE, mav.getViewName());
-        entoncesSeRecibeMensajeError("Propietario inexistente", mav.getModel());
+        entoncesSeRecibeMensajeError("Propietario inexistente .El-Mail , no fue posible ser enviado", mav.getModel());
     }
     private void entoncesSeRecibeMensajeExito(String mensaje, Map<String, Object> model) {
         assertThat(model.get("msg")).isEqualTo(mensaje);
@@ -77,7 +78,7 @@ public class ControladorConsultasTest {
         when(datosConsulta.getPropiedadId()).thenReturn(PROPIEDAD_ID);
     }
 
-    private  void EnviarElMailLanzaExcepcion() throws UsuarioInexistente{
+    private  void EnviarElMailLanzaExcepcion() throws UsuarioInexistente {
 
         when(servicioEmail.enviarConsultaPrivada( datosConsulta.getEmail(),
                 datosConsulta.getNombre(), datosConsulta.getTelefono(),

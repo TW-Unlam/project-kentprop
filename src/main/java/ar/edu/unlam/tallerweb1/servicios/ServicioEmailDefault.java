@@ -26,11 +26,7 @@ public class ServicioEmailDefault implements ServicioEmail {
     private final RepositorioPublicaciones repositorioDePublicaciones;
     private final RepositorioUsuario repositorioDeUsuarios;
 
-    private String PropietarioEmail = "sullcafernando18@gmail.com";
     private String MensajeIngresada = "Este Es un Email Informativo Sobre las Preguntas sobre su Publicaciones";
-    private String EmailIngresado = "sullcafernando18@gmail.com";
-    private Integer TelefonoIngresado;
-    private String NombreIngresada;
 
     @Autowired
     public ServicioEmailDefault(RepositorioPublicaciones repositorioPublicaciones, RepositorioUsuario repositorioUsuarios) {
@@ -49,11 +45,6 @@ public class ServicioEmailDefault implements ServicioEmail {
            /////Operacionde mensajeria
            //String emailDelPropietarioreceptor, String nombre, Integer telefono, String mensajeConsultaArmado propiedad.getPropietario().getEmail()
            //retorna los datos del propietario a moo de informacion extra
-           this.EmailIngresado=email;
-           this.NombreIngresada=nombre;
-           this.TelefonoIngresado=telefono;
-           this.MensajeIngresada=mensaje;
-           this.PropietarioEmail=propiedad.getPropietario().getEmail();
            enviarMailDeConsultaPrivadasEnPublicacion(email,nombre,telefono,mensaje,propiedad.getPropietario().getEmail());
            return  propiedad.getPropietario();
 //         return  repositorioDeUsuarios.obterneUsuario(propiedad.getPropietario().getId());
@@ -63,8 +54,8 @@ public class ServicioEmailDefault implements ServicioEmail {
 
     @Override
     public void enviarMailDeConsultaPrivadasEnPublicacion(String emailConsultante, String nombreConsultante, Integer telefonoConsultante, String mensajeConsultante,String emailPropietario) {
-        String asunto="Consulta Sobre Su publicacion en ";
-        String mensaje= "<h2>¡Gracias Por Usar Nuestros Servicios. Tiene Nuevas Consultas!</h2>\n"
+        String asuntoParaELConsultanteArmada="Consulta Sobre Su publicacion en ";
+        String mensajeConsultaArmado= "<h2>¡Gracias Por Usar Nuestros Servicios. Tiene Nuevas Consultas!</h2>\n"
                 + "<p>------------------------</p>\n"
                 + "<h4>-"+mensajeConsultante+"-</h4><br>"
                 + "<p>------------------------</p>\n"
@@ -75,8 +66,8 @@ public class ServicioEmailDefault implements ServicioEmail {
                 +"<p>: Puede volver a ver su publicacion desde el siguiente enlace</p> <br>"
                 +"<a href='http://localhost:8080/project_kentprop_war_exploded/mis-publicaciones'>IR A Mis Publicaciones</a>"
                 +"<br>";
-//        enviarMail(mensajeConsultaArmado,asuntoParaELConsultanteArmada,this.PropietarioEmail);
-        enviarMail(mensaje,asunto,"sullcafernando18@gmail.com");
+        enviarMail(mensajeConsultaArmado,asuntoParaELConsultanteArmada,emailPropietario);
+//        enviarMail(mensaje,asunto,"sullcafernando18@gmail.com");
     }
 
     public void enviarMail(String mensajeConsultaArmado, String asuntoParaELConsultanteArmada, String emailDelPropietarioreceptor) {
@@ -86,8 +77,8 @@ public class ServicioEmailDefault implements ServicioEmail {
         String emailOrg = "sullcafernando18";
         String passwordOrg = "hvqsnyjfcoodywai";
         Properties props =new Properties();
-        /////////Verificar si era esto/////
-        // props.put("mail.smtp.ssl.protocols", "TLSv1.3 TLSv1.2");
+        /////////Verificar si era esto en test inicial/////
+         props.put("mail.smtp.ssl.protocols", "TLSv1.3 TLSv1.2");
         // props.setProperty("mail.smtp.debug","true");
         /////////////////
         props.put("mail.smtp.auth", "true");
@@ -103,12 +94,12 @@ public class ServicioEmailDefault implements ServicioEmail {
                    }
         });
 
-     props.put("mail.smtp.user", emailOrg);
+     /*   props.put("mail.smtp.user", emailOrg);
 //      props.put("mail.smtp.password",password);
         props.put("mail.smtp.password", passwordOrg);
 //       props.put("mail.smtp.mail.sender",username+"@gmail.com");
         props.put("mail.smtp.mail.sender", emailOrg+"@gmail.com");
-
+*/
 
         Message message = new MimeMessage(session);
         try {
@@ -154,7 +145,6 @@ public class ServicioEmailDefault implements ServicioEmail {
             throw new RuntimeException(e);
         }
     }
-
 
 ////////////////***************************************///////////////////////////
 

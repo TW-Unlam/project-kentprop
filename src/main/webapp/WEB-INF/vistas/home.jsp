@@ -10,7 +10,7 @@
 		<link href="css/home.css" rel="stylesheet">
 	</head>
 	<body>
-
+<%--Botonera Estilo Nav Bar Horizontal--%>
 	<div class="   bg-secondary  dropdowndropdown">
 		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 			KENK-PROP
@@ -21,7 +21,7 @@
 			<li><a class="dropdown-item" href="#">Ver Mis Preguntas Realizadas</a></li>
 		</ul>
 	</div>
-
+<%--Botonera Estilo Nav Bar Horizontal--%>
 		<div class="bg-container">
 
 			<div class="search-container">

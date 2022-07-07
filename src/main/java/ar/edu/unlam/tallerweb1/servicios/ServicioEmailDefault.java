@@ -69,11 +69,11 @@ public class ServicioEmailDefault implements ServicioEmail {
                 + "<h4>-"+mensajeConsultante+"-</h4><br>"
                 + "<p>------------------------</p>\n"
                 +"<p>Datos de Contacto del interesado</p><br>"
-                +"<p>emailDelPropietarioreceptor: "+emailConsultante+"</p><br> <br>"
-                +"<p>nombre: "+nombreConsultante+"</p><br> <br>"
-                +"<p>telefono: "+telefonoConsultante+"</p><br> <br>"
-                +"<p>: Puede volver a ver su publicacion desde el siguiente enlace</p><br> <br>"
-//                +"<a href='http://localhost:8080/project-kenprop_war_exploded/detalle-de-publicacion?id="+propiedadId+" >IR A Publicacion</a>"
+                +"<p>email : "+emailConsultante+"</p> <br>"
+                +"<p>nombre: "+nombreConsultante+"</p> <br>"
+                +"<p>telefono: "+telefonoConsultante+"</p> <br>"
+                +"<p>: Puede volver a ver su publicacion desde el siguiente enlace</p> <br>"
+                +"<a href='http://localhost:8080/project_kentprop_war_exploded/mis-publicaciones'>IR A Mis Publicaciones</a>"
                 +"<br>";
 //        enviarMail(mensajeConsultaArmado,asuntoParaELConsultanteArmada,this.PropietarioEmail);
         enviarMail(mensaje,asunto,"sullcafernando18@gmail.com");
@@ -103,28 +103,12 @@ public class ServicioEmailDefault implements ServicioEmail {
                    }
         });
 
-       /* props.put("mail.smtp.user", emailOrg);
+     props.put("mail.smtp.user", emailOrg);
 //      props.put("mail.smtp.password",password);
         props.put("mail.smtp.password", passwordOrg);
 //       props.put("mail.smtp.mail.sender",username+"@gmail.com");
         props.put("mail.smtp.mail.sender", emailOrg+"@gmail.com");
-*/
 
-        /*try {
-            Session session =Session.getDefaultInstance(props);
-            MimeMessage msj=new MimeMessage(session);
-//          msj.setFrom(new InternetAddress(username));
-            msj.setFrom(new InternetAddress(emailOrg));
-            msj.addRecipient(Message.RecipientType.TO,new InternetAddress(emailDelPropietarioreceptor));
-            msj.setSubject(asuntoParaELConsultanteArmada);
-            msj.setContent(mensajeConsultaArmado, "text/html");
-            Transport transport=session.getTransport("smtp");
-            transport.connect("smtp.gmail.com",emailOrg,passwordOrg);
-            transport.sendMessage(msj,msj.getAllRecipients());
-            transport.close();
-        } catch (MessagingException e) {
-            throw new MailNoEnviado();
-        }*/
 
         Message message = new MimeMessage(session);
         try {
@@ -139,16 +123,14 @@ public class ServicioEmailDefault implements ServicioEmail {
             throw new RuntimeException(e);
         }
         try {
-            message.setSubject("Mail Subject");
+            message.setSubject(asuntoParaELConsultanteArmada);
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
 
-        String msg = "This is my first email using JavaMailer";
-
         MimeBodyPart mimeBodyPart = new MimeBodyPart();
         try {
-            mimeBodyPart.setContent(msg, "text/html; charset=utf-8");
+            mimeBodyPart.setContent(mensajeConsultaArmado, "text/html; charset=utf-8");
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }

@@ -10,8 +10,8 @@
 		<link href="css/home.css" rel="stylesheet">
 	</head>
 	<body>
-
-	<div class="bg-secondary  dropdowndropdown">
+<%--Botonera Estilo Nav Bar Horizontal--%>
+	<div class="   bg-secondary  dropdowndropdown">
 		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 			KENT-PROP
 		</button>

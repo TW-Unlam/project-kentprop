@@ -18,7 +18,6 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.util.Properties;
 ////Imports del servicio de Email
-import java.time.LocalDate;
 
 @Service("ServicioEmail")
 @Transactional
@@ -43,12 +42,12 @@ public class ServicioEmailDefault implements ServicioEmail {
        }
        else{
            /////Operacionde mensajeria
-           //String emailDelPropietarioreceptor, String nombre, Integer telefono, String mensajeConsultaArmado propiedad.getPropietario().getEmail()
-           //retorna los datos del propietario a moo de informacion extra
-           enviarMailDeConsultaPrivadasEnPublicacion(email,nombre,telefono,mensaje,propiedad.getPropietario().getEmail());
+
+              enviarMailDeConsultaPrivadasEnPublicacion(email,nombre,telefono,mensaje,propiedad.getPropietario().getEmail());
+
+          //retorna los datos del propietario a moo de informacion extra
            return  propiedad.getPropietario();
-//         return  repositorioDeUsuarios.obterneUsuario(propiedad.getPropietario().getId());
-//         return  repositorioDePublicaciones.buscarPropietarioDeLaPropiedad(propiedadId);
+
        }
     }
 
@@ -66,19 +65,18 @@ public class ServicioEmailDefault implements ServicioEmail {
                 +"<p>: Puede volver a ver su publicacion desde el siguiente enlace</p> <br>"
                 +"<a href='http://localhost:8080/project_kentprop_war_exploded/mis-publicaciones'>IR A Mis Publicaciones</a>"
                 +"<br>";
-        enviarMail(mensajeConsultaArmado,asuntoParaELConsultanteArmada,emailPropietario);
-//        enviarMail(mensaje,asunto,"sullcafernando18@gmail.com");
+            enviarMail(mensajeConsultaArmado,asuntoParaELConsultanteArmada,emailPropietario);
     }
 
-    public void enviarMail(String mensajeConsultaArmado, String asuntoParaELConsultanteArmada, String emailDelPropietarioreceptor) {
-        String username="Kent-Propiedades";
-        String password="37841788";
+    public void enviarMail(String mensajeConsultaArmado, String asuntoParaELConsultanteArmada, String emailDelPropietarioreceptor){
+        /*String username="Kent-Propiedades";
+        String password="37841788";*/
 
         String emailOrg = "sullcafernando18";
         String passwordOrg = "hvqsnyjfcoodywai";
         Properties props =new Properties();
         /////////Verificar si era esto en test inicial/////
-         props.put("mail.smtp.ssl.protocols", "TLSv1.3 TLSv1.2");
+        props.put("mail.smtp.ssl.protocols", "TLSv1.3 TLSv1.2");
         // props.setProperty("mail.smtp.debug","true");
         /////////////////
         props.put("mail.smtp.auth", "true");
@@ -94,57 +92,28 @@ public class ServicioEmailDefault implements ServicioEmail {
                    }
         });
 
-     /*   props.put("mail.smtp.user", emailOrg);
+     /* props.put("mail.smtp.user", emailOrg);
 //      props.put("mail.smtp.password",password);
         props.put("mail.smtp.password", passwordOrg);
 //       props.put("mail.smtp.mail.sender",username+"@gmail.com");
-        props.put("mail.smtp.mail.sender", emailOrg+"@gmail.com");
-*/
+        props.put("mail.smtp.mail.sender", emailOrg+"@gmail.com");*/
 
         Message message = new MimeMessage(session);
         try {
-            message.setFrom(new InternetAddress(emailOrg+"@gmail.com"));
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            message.setRecipients(
-                    Message.RecipientType.TO, InternetAddress.parse(emailDelPropietarioreceptor));
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            message.setSubject(asuntoParaELConsultanteArmada);
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
-
+        message.setFrom(new InternetAddress(emailOrg+"@gmail.com"));
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailDelPropietarioreceptor));
+        message.setSubject(asuntoParaELConsultanteArmada);
         MimeBodyPart mimeBodyPart = new MimeBodyPart();
-        try {
-            mimeBodyPart.setContent(mensajeConsultaArmado, "text/html; charset=utf-8");
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
-
+        mimeBodyPart.setContent(mensajeConsultaArmado, "text/html; charset=utf-8");
         Multipart multipart = new MimeMultipart();
-        try {
-            multipart.addBodyPart(mimeBodyPart);
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
-            message.setContent(multipart);
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
-            Transport.send(message);
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
+        multipart.addBodyPart(mimeBodyPart);
+        message.setContent(multipart);
+        Transport.send(message);
+        } catch (MessagingException ex) {
+                throw new RuntimeException(ex);
         }
     }
+
 
 ////////////////***************************************///////////////////////////
 

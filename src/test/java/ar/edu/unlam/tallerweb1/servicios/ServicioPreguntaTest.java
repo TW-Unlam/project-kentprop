@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.servicios;
 import ar.edu.unlam.tallerweb1.modelo.Pregunta;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPregunta;
 
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,12 +17,16 @@ public class ServicioPreguntaTest {
 
     private static final Integer PUBLICACION_ID = 1;
     private RepositorioPregunta repositorioPregunta;
+    private RepositorioUsuario repositorioUsuario;
+    private ServicioLogin servicioUsuario;
     private ServicioPregunta servicioPregunta;
 
     @Before
     public void init(){
         repositorioPregunta = mock(RepositorioPregunta.class);
-        servicioPregunta = new ServicioPreguntaDefault(repositorioPregunta);
+        repositorioUsuario = mock(RepositorioUsuario.class);
+        servicioUsuario = new ServicioLoginDefault(repositorioUsuario);
+        servicioPregunta = new ServicioPreguntaDefault(repositorioPregunta, servicioUsuario);
     }
 
     @Test

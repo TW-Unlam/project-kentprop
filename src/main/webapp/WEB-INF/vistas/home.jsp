@@ -11,9 +11,9 @@
 	</head>
 	<body>
 
-	<div class="   bg-secondary  dropdowndropdown">
+	<div class="bg-secondary  dropdowndropdown">
 		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-			KENK-PROP
+			KENT-PROP
 		</button>
 		<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 			<li><a class="dropdown-item" href="login">Login</a></li>

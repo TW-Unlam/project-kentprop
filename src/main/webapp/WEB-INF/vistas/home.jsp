@@ -21,6 +21,7 @@
 			<li><a class="dropdown-item" href="#">Ver Mis Preguntas Realizadas</a></li>
 		</ul>
 	</div>
+<%--Botonera Estilo Nav Bar Horizontal--%>
 
 		<div class="bg-container">
 

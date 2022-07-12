@@ -18,7 +18,19 @@
     <title>Consulta Privada Al Publicante</title>
 </head>
 <body>
-
+<%--Botonera Estilo Nav Bar Horizontal--%>
+<div class="   bg-secondary  dropdowndropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        KENT-PROP
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item" href="/">Home</a></li>
+        <li><a class="dropdown-item" href="login">Login</a></li>
+        <li><a class="dropdown-item" href="mis-publicaciones">Ver Mis Publicaciones</a></li>
+        <li><a class="dropdown-item" href="#">Ver Mis Preguntas Realizadas</a></li>
+    </ul>
+</div>
+<%--Botonera Estilo Nav Bar Horizontal--%>
 <div class="bg-container">
     <div class="private-question-container">
         <h3>Deje su consulta al propietario de la publicación</h3>

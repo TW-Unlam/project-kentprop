@@ -20,13 +20,10 @@ public class ControladorDetallePublicacion {
     private ServicioPregunta servicioConsultas;
     private ServicioPublicaciones servicioPublicaciones;
 
-    private ServicioLogin servicioUsuario;
-
     @Autowired
-    public ControladorDetallePublicacion(ServicioPregunta servicioPregunta, ServicioPublicaciones servicioPublicaciones, ServicioLogin servicioUsuario) {
+    public ControladorDetallePublicacion(ServicioPregunta servicioPregunta, ServicioPublicaciones servicioPublicaciones) {
         this.servicioConsultas = servicioPregunta;
         this.servicioPublicaciones = servicioPublicaciones;
-        this.servicioUsuario = servicioUsuario;
     }
 
     @RequestMapping(path = "/detalle-publicacion",method = RequestMethod.GET)
@@ -64,10 +61,7 @@ public class ControladorDetallePublicacion {
         Object usuarioId = request.getSession().getAttribute("id");
 
         if(usuarioId!=null) {
-
-           Publicacion publicacion = servicioConsultas.buscarPublicacionPorId(datosPregunta.getPublicacionId());
-           Usuario usuario = servicioUsuario.obterneUsuario((Integer) usuarioId);
-           servicioConsultas.hacerPregunta(new Pregunta(datosPregunta.getDescripcion(), publicacion, usuario));
+           servicioConsultas.hacerPregunta(datosPregunta.getDescripcion(), datosPregunta.getPublicacionId(),(Integer) usuarioId);
 
             return new ModelAndView("redirect:/detalle-publicacion?id=" + datosPregunta.getPublicacionId(), modelo);
         }else{

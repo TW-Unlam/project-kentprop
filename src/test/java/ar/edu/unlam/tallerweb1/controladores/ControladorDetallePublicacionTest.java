@@ -27,7 +27,6 @@ public class ControladorDetallePublicacionTest {
     private ControladorDetallePublicacion controladorDetallePublicacion;
     private ServicioPublicaciones servicioPublicaciones;
     private ServicioPregunta servicioPregunta;
-    private ServicioLogin servicioLogin;
     private HttpServletRequest request;
     private HttpSession session;
     private DatosPregunta datosPregunta;
@@ -40,8 +39,7 @@ public class ControladorDetallePublicacionTest {
         session = mock(HttpSession.class);
         servicioPregunta = mock(ServicioPregunta.class);
         servicioPublicaciones = mock(ServicioPublicaciones.class);
-        servicioLogin = mock(ServicioLogin.class);
-        controladorDetallePublicacion = new ControladorDetallePublicacion(servicioPregunta, servicioPublicaciones, servicioLogin);
+        controladorDetallePublicacion = new ControladorDetallePublicacion(servicioPregunta, servicioPublicaciones);
     }
 
     private HttpServletRequest givenExisteUnUsuarioConId(Integer id) {

@@ -3,6 +3,8 @@ package ar.edu.unlam.tallerweb1.controladores;
 public class DatosPregunta {
     private Integer publicacionId;
 
+    private Integer preguntaId;
+
     private String descripcion;
 
     public DatosPregunta(Integer publicacionId, String descripcion) {

@@ -7,23 +7,20 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioEmail;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.mail.MessagingException;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ControladorConsultasTest {
+public class ControladorConsultasPrivadasTest {
     private static final String VISTA_VER_DETALLE = "redirect:/detalle-publicacion";
     private static final String VISTA_REDIRRECCION_VER_DETALLE = "redirect:/detalle-publicacion?id=0";
     private static final Integer PROPIEDAD_ID = 0;
     private DatosConsulta datosConsulta;
-    private ControladorConsultas controladorConsultas;
+    private ControladorConsultasPrivadas controladorConsultas;
     private ServicioPublicaciones servicioPublicaciones;
     private ServicioEmail servicioEmail;
 
@@ -33,7 +30,7 @@ public class ControladorConsultasTest {
         servicioPublicaciones = mock(ServicioPublicaciones.class);
         servicioEmail=mock(ServicioEmail.class);
 //      controladorPublicacion = new ControladorPublicacion(servicioPublicaciones,servicioEmail);
-        controladorConsultas = new ControladorConsultas(servicioPublicaciones,servicioEmail);
+        controladorConsultas = new ControladorConsultasPrivadas(servicioPublicaciones,servicioEmail);
     }
 
     @Test

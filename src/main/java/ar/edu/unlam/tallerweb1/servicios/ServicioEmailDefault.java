@@ -72,8 +72,8 @@ public class ServicioEmailDefault implements ServicioEmail {
         /*String username="Kent-Propiedades";
         String password="37841788";*/
 
-        String emailOrg = "sullcafernando18";
-        String passwordOrg = "hvqsnyjfcoodywai";
+        String emailOrg = " KentBeckPropiedades";
+        String passwordOrg = "bfdkrqmrnxjbonxq";
         Properties props =new Properties();
         /////////Verificar si era esto en test inicial/////
         props.put("mail.smtp.ssl.protocols", "TLSv1.3 TLSv1.2");
@@ -92,11 +92,11 @@ public class ServicioEmailDefault implements ServicioEmail {
                    }
         });
 
-     /* props.put("mail.smtp.user", emailOrg);
-//      props.put("mail.smtp.password",password);
+     /*
+        props.put("mail.smtp.user", emailOrg);
         props.put("mail.smtp.password", passwordOrg);
-//       props.put("mail.smtp.mail.sender",username+"@gmail.com");
-        props.put("mail.smtp.mail.sender", emailOrg+"@gmail.com");*/
+        props.put("mail.smtp.mail.sender", emailOrg+"@gmail.com");
+        */
 
         Message message = new MimeMessage(session);
         try {

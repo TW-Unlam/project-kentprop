@@ -1,6 +1,5 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
-import ar.edu.unlam.tallerweb1.excepciones.MailNoEnviado;
 import ar.edu.unlam.tallerweb1.excepciones.UsuarioInexistente;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEmail;
@@ -14,15 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.mail.MessagingException;
-
 @Controller
-public class ControladorConsultas {
+public class ControladorConsultasPrivadas {
 
     private ServicioPublicaciones servicioPublicacion;
     private ServicioEmail servicioEmail;
     @Autowired
-    public ControladorConsultas(ServicioPublicaciones servicioPublicacion, ServicioEmail servicioEmail) {
+    public ControladorConsultasPrivadas(ServicioPublicaciones servicioPublicacion, ServicioEmail servicioEmail) {
         this.servicioPublicacion = servicioPublicacion;
         this.servicioEmail = servicioEmail;
     }

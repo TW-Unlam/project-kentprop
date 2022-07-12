@@ -72,10 +72,10 @@ public class ControladorDetallePublicacion {
     @RequestMapping(value = "responder-pregunta-publicacion", method = RequestMethod.POST)
     public ModelAndView responderPregunta(@ModelAttribute("datosPregunta") DatosPregunta datosPregunta){
             ModelMap modelo = new ModelMap();
-            Pregunta preguntaAresponder=servicioConsultas.buscarLaPregunta(datosPregunta.getPublicacionId());
-            preguntaAresponder.setRespuesta(datosPregunta.getDescripcion());
-            servicioConsultas.responderPregunta(preguntaAresponder);
-            return new ModelAndView("redirect:/detalle-publicacion?id=" + preguntaAresponder.getPublicacion().getId());
+
+            int idPublicacion=servicioConsultas.responderPregunta(datosPregunta.getPreguntaId(),datosPregunta.getDescripcion());
+
+            return new ModelAndView("redirect:/detalle-publicacion?id=" +idPublicacion);
         }
 
     }

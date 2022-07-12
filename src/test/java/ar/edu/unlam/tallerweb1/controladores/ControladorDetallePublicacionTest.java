@@ -97,6 +97,30 @@ public class ControladorDetallePublicacionTest {
         entoncesMeRedirecciona(VISTA_REDIRECCION_SIN_LOGUEO, mav.getViewName());
     }
 
+    @Test
+    public  void queAlResponderUnaPreguntaMeDirreecionAlDetalleDeLaPublicacion(){
+        alrealizarUnaRespuesta();
+        ModelAndView mav=cuandoEnvioLaRespuesta(datosPregunta);
+        entoncesMeRedirecciona(VISTA_REDIRECCION_LOGUEADO, mav.getViewName());
+
+    }
+
+    private ModelAndView cuandoEnvioLaRespuesta(DatosPregunta datosPregunta) {
+        return controladorDetallePublicacion.responderPregunta(datosPregunta);
+    }
+
+    private void alrealizarUnaRespuesta() {
+        when(datosPregunta.getPublicacionId()).thenReturn(1);
+        when(datosPregunta.getPublicacionId()).thenReturn(1);
+        Pregunta pregunta = new Pregunta();
+        Publicacion publicacion=new Publicacion();
+        publicacion.setId(datosPregunta.getPublicacionId());
+        pregunta.setPublicacion(publicacion);
+        when(datosPregunta.getDescripcion()).thenReturn("5 Meses");
+
+        when(servicioPregunta.responderPregunta(datosPregunta.getPreguntaId(),datosPregunta.getDescripcion())).thenReturn(pregunta.getPublicacion().getId());
+    }
+
 
     @Test
     public void queAlCargarUnaPreguntaAlEstarLogeadoMeRedireccioneALaPaginaVerDetalle(){

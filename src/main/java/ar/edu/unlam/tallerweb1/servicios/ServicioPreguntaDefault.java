@@ -47,6 +47,14 @@ public class ServicioPreguntaDefault implements ServicioPregunta {
     }
 
     @Override
+    public Integer responderPregunta(Integer preguntaId, String descripcion) {
+        Pregunta preguntaAresponder=buscarLaPregunta(preguntaId);
+        preguntaAresponder.setRespuesta(descripcion);
+        repositorioPregunta.guardarRespuesta(preguntaAresponder);
+        return preguntaAresponder.getPublicacion().getId();
+    }
+
+    @Override
     public Pregunta buscarLaPregunta(Integer id) {
         return repositorioPregunta.ObtenerPregunta(id);
     }

@@ -5,6 +5,12 @@ public class DatosPregunta {
 
     private Integer preguntaId;
 
+    public DatosPregunta(Integer publicacionId, String descripcion, Integer preguntaId ) {
+        this.publicacionId = publicacionId;
+        this.preguntaId = preguntaId;
+        this.descripcion = descripcion;
+    }
+
     private String descripcion;
 
     public DatosPregunta(Integer publicacionId, String descripcion) {
@@ -30,5 +36,13 @@ public class DatosPregunta {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Integer getPreguntaId() {
+        return preguntaId;
+    }
+
+    public void setPreguntaId(Integer preguntaId) {
+        this.preguntaId = preguntaId;
     }
 }

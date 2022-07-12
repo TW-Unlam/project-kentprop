@@ -13,7 +13,6 @@ public interface ServicioPregunta {
 
      Publicacion buscarPublicacionPorId(Integer publicacionId);
 
-     void responderPregunta(Pregunta respuesta);
      Integer responderPregunta(Integer preguntaId, String descripcion);
 
      Pregunta buscarLaPregunta(Integer id);

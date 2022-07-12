@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.modelo.Pregunta;
+import ar.edu.unlam.tallerweb1.modelo.Publicacion;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPregunta;
 
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
@@ -57,23 +58,31 @@ public class ServicioPreguntaTest {
     public void alActualizarLaPregunta(){
         dadoQueExisteLaConsulteEnLaPublicacion();
         Pregunta preguntas = entoncesMeTraeLasConsultaConId(1);
-        cuandoGuardaLaPregunta(preguntas);
+        int iddeLaPublicacion=cuandoGuardaLaPregunta(preguntas.getId(),"3 meses");
         entoncesSeACtualizaLasDatos(preguntas);
 
     }
 
-    private void cuandoGuardaLaPregunta(Pregunta preguntas) {
-        servicioPregunta.responderPregunta(preguntas);
-    }
-
-    private void entoncesSeACtualizaLasDatos(Pregunta preguntas) {
-        verify(repositorioPregunta,times(1)).guardarRespuesta(preguntas);
+    private Integer cuandoGuardaLaPregunta(Integer id, String descripcion) {
+        return servicioPregunta.responderPregunta(id,descripcion);
     }
 
     private void dadoQueExisteLaConsulteEnLaPublicacion() {
         Pregunta pregunta = new Pregunta();
+        Publicacion publicacion= new Publicacion();
+        publicacion.setId(1);
+        pregunta.setId(1);
+        pregunta.setPublicacion(publicacion);
         when(repositorioPregunta.ObtenerPregunta(1)).thenReturn(pregunta);
 
+    }
+
+    /*private void cuandoGuardaLaPregunta(Pregunta preguntas) {
+        servicioPregunta.responderPregunta(preguntas);
+    }*/
+
+    private void entoncesSeACtualizaLasDatos(Pregunta preguntas) {
+        verify(repositorioPregunta,times(1)).guardarRespuesta(preguntas);
     }
 
     private void entoncesObtengoLaConsulta( Pregunta preguntas) {

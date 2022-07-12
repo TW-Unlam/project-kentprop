@@ -104,11 +104,12 @@
                                             <p class="response-user"><b>Respuesta: </b>${preguntas_h.respuesta}</p>
                                         </c:if>
                                     </div>
+
                                     <c:if test="${empty preguntas_h.respuesta}">
 <%--                                        <p class="response-user"><b>Respuesta: </b>${preguntas_h.respuesta}</p> --%>
                                         <c:if test="${(sessionScope.ROL.equals('PROPIETARIO')) and (detalle.propiedad.propietario.id.equals(sessionScope.id ))}">
                                         <form:form action="responder-pregunta-publicacion" modelAttribute="datosPregunta" method="POST" class="search_form">
-                                            <form:input path="publicacionId" placeholder="" id="idResp" type="hidden" class="form-control" value="${preguntas_h.id} "/>
+                                            <form:input path="preguntaId" placeholder="" id="idResp" type="hidden" class="form-control" value="${preguntas_h.id} "/>
                                             <form:input path="descripcion" placeholder="Escribila acá la respuesta" id="descripcionRes" type="text" class="form-control"/>
                                             <button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Enviar</button>
                                         </form:form>
@@ -122,6 +123,7 @@
                                 <p>${msg_sin_preguntas}</p>
                             </c:otherwise>
                         </c:choose>
+
                     </div>
                 </div>
                 <div class="private-question">

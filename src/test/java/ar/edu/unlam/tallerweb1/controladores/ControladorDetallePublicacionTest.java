@@ -2,7 +2,6 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Pregunta;
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
-import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPregunta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
 import org.junit.Before;
@@ -130,6 +129,36 @@ public class ControladorDetallePublicacionTest {
         ModelAndView mav = cuandoEnvioLaPregunta(datosPregunta,request);
 
         entoncesMeRedirecciona(VISTA_REDIRECCION_LOGUEADO, mav.getViewName());
+    }
+
+    @Test
+    public  void QueAlMarcarComoFavoritoUnaPublicacionSinEstarLogueadoIrALoguin()
+    {   request = givenNoExisteUnUsuarioLogueado();
+        Publicacion publicacion=dadoqueexisteLaPublicacionPAraMarcar();
+
+        ModelAndView mav=cuandoMarcoComoFavorito(publicacion.getId(),request);
+        entoncesMeRedirecciona(VISTA_REDIRECCION_SIN_LOGUEO, mav.getViewName());
+    }
+
+    @Test
+    public  void QueAlMarcarComoFavoritoUnaPublicacionIndiqueYSeMantengEnLaVistaDetalles()
+    {    request = givenExisteUnUsuarioConId(ID_USUARIO);
+        Publicacion publicacion=dadoqueexisteLaPublicacionPAraMarcar();
+        ModelAndView mav=cuandoMarcoComoFavorito(publicacion.getId(),request);
+        entoncesMeRedirecciona(VISTA_REDIRECCION_LOGUEADO, mav.getViewName() );
+    }
+
+    private Publicacion dadoqueexisteLaPublicacionPAraMarcar() {
+        Publicacion publicacionAindicar=new Publicacion();
+        publicacionAindicar.setId(1);
+        return publicacionAindicar;
+    }
+
+    private ModelAndView cuandoMarcoComoFavorito(int idPublicacion, HttpServletRequest request) {
+        return controladorDetallePublicacion.marcarComoFavorito(idPublicacion,request);
+    }
+
+    private void dadoqueexisteunaPublicacionYUsuarioLogueado() {
     }
 
     private void entoncesMeRedirecciona(String vistaRedireccion, String viewName) {

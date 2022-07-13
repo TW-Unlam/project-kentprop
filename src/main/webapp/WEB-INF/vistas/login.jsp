@@ -16,7 +16,7 @@
 			KENT-PROP
 		</button>
 		<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-			<li><a class="dropdown-item" href="/">Home</a></li>
+			<li><a class="dropdown-item" href="./">Home</a></li>
 			<li><a class="dropdown-item" href="mis-publicaciones">Ver Mis Publicaciones</a></li>
 			<li><a class="dropdown-item" href="#">Ver Mis Preguntas Realizadas</a></li>
 		</ul>

@@ -1,7 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.*;
-import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPregunta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -77,5 +77,18 @@ public class ControladorDetallePublicacion {
 
             return new ModelAndView("redirect:/detalle-publicacion?id=" +idPublicacion);
         }
+
+    @RequestMapping(value="marcar-como-favorito",method = RequestMethod.GET)
+    public ModelAndView marcarComoFavorito(@RequestParam(value= "idPublicacion")Integer idPublicacion, HttpServletRequest request){
+
+        ModelMap modelo = new ModelMap();
+
+        Object usuarioId = request.getSession().getAttribute("id");
+        if(usuarioId==null) {
+            return new ModelAndView("redirect:/loginConId?id="+ idPublicacion);
+        }
+        servicioPublicaciones.indicarPublicacionFavorita(idPublicacion,(Integer)usuarioId);
+    return new ModelAndView("redirect:/detalle-publicacion?id=" + idPublicacion);
+    }
 
     }

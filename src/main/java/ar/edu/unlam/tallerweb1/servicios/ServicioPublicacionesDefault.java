@@ -44,4 +44,9 @@ public class ServicioPublicacionesDefault implements ServicioPublicaciones {
         List<Publicacion> destacadas = repositorioPublicaciones.buscarPublicacionesDestacadas();
         return destacadas;
     }
+
+    @Override
+    public void indicarPublicacionFavorita(Integer id, Integer usuarioId) {
+
+    }
 }

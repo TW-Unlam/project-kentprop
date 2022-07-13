@@ -16,4 +16,6 @@ public interface ServicioPregunta {
      void responderPregunta(Pregunta respuesta);
 
      Pregunta buscarLaPregunta(Integer id);
+
+     List<Pregunta> buscarPreguntasPorIdDeUsuario(Integer usuarioId);
 }

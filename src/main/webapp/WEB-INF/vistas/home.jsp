@@ -11,14 +11,18 @@
 	</head>
 	<body>
 <%--Botonera Estilo Nav Bar Horizontal--%>
-	<div class="   bg-secondary  dropdowndropdown">
+	<div class="bg-secondary  dropdowndropdown">
 		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 			KENT-PROP
 		</button>
 		<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 			<li><a class="dropdown-item" href="login">Login</a></li>
-			<li><a class="dropdown-item" href="mis-publicaciones">Ver Mis Publicaciones</a></li>
-			<li><a class="dropdown-item" href="#">Ver Mis Preguntas Realizadas</a></li>
+			<c:if test="${sessionScope.ROL.equals('PROPIETARIO')}">
+				<li><a class="dropdown-item" href="mis-publicaciones">Mis publicaciones</a></li>
+			</c:if>
+			<c:if test="${sessionScope.ROL.equals('USUARIO')}">
+				<li><a class="dropdown-item" href="mis-preguntas">Mis preguntas</a></li>
+			</c:if>
 		</ul>
 	</div>
 
@@ -42,9 +46,6 @@
 						<button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Buscar</button>
 					</form:form>
 				</div>
-				<c:if test="${sessionScope.ROL.equals('PROPIETARIO')}">
-					<a href="mis-publicaciones">VER MIS PUBLICACIONES</a>
-				</c:if>
 			</div>
 
 		</div>

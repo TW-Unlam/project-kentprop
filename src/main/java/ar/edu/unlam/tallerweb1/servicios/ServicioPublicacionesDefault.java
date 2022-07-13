@@ -1,9 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
-import ar.edu.unlam.tallerweb1.modelo.Accion;
-import ar.edu.unlam.tallerweb1.modelo.Imagen;
-import ar.edu.unlam.tallerweb1.modelo.Publicacion;
-import ar.edu.unlam.tallerweb1.modelo.TipoPropiedad;
+import ar.edu.unlam.tallerweb1.modelo.*;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPublicaciones;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +12,6 @@ import java.util.List;
 public class ServicioPublicacionesDefault implements ServicioPublicaciones {
 
     private final RepositorioPublicaciones repositorioPublicaciones;
-
     @Autowired
     public ServicioPublicacionesDefault(RepositorioPublicaciones repositorioPublicaciones){
         this.repositorioPublicaciones = repositorioPublicaciones;
@@ -47,6 +43,11 @@ public class ServicioPublicacionesDefault implements ServicioPublicaciones {
 
     @Override
     public void indicarPublicacionFavorita(Integer id, Integer usuarioId) {
+        Favoritos publicacionFavorita= new Favoritos();
+        Publicacion existente=repositorioPublicaciones.buscarPublicacionId(id);
 
+        //publicacionFavorita.setPublicacion();
+        //repositorioPublicaciones.indicarFavorito();
+        //repositorioPublicaciones.indicarFavorito();
     }
 }

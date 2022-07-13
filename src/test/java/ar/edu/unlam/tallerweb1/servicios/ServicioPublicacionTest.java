@@ -5,6 +5,7 @@ import ar.edu.unlam.tallerweb1.modelo.Imagen;
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
 import ar.edu.unlam.tallerweb1.modelo.TipoPropiedad;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPublicaciones;
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,6 +19,7 @@ import static org.mockito.Mockito.when;
 public class ServicioPublicacionTest {
 
     private RepositorioPublicaciones repositorio;
+    private RepositorioUsuario repositorioUsuario;
     private ServicioPublicaciones servicioPublicaciones;
     private static final Integer ID_PUBLICACION = 1;
     private final Accion ACCION = Accion.COMPRAR;
@@ -27,7 +29,8 @@ public class ServicioPublicacionTest {
     @Before
     public void init(){
         repositorio = mock(RepositorioPublicaciones.class);
-        servicioPublicaciones = new ServicioPublicacionesDefault(repositorio);
+        repositorioUsuario = mock(RepositorioUsuario.class);
+        servicioPublicaciones = new ServicioPublicacionesDefault(repositorio, repositorioUsuario);
     }
 
     @Test

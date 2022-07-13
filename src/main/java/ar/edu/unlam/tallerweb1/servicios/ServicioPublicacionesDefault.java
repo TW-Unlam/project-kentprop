@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.modelo.*;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPublicaciones;
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,9 +13,11 @@ import java.util.List;
 public class ServicioPublicacionesDefault implements ServicioPublicaciones {
 
     private final RepositorioPublicaciones repositorioPublicaciones;
+    private final RepositorioUsuario repositorioUsuario;
     @Autowired
-    public ServicioPublicacionesDefault(RepositorioPublicaciones repositorioPublicaciones){
+    public ServicioPublicacionesDefault(RepositorioPublicaciones repositorioPublicaciones, RepositorioUsuario repositorioUsuario){
         this.repositorioPublicaciones = repositorioPublicaciones;
+        this.repositorioUsuario = repositorioUsuario;
     }
 
     @Override
@@ -42,12 +45,21 @@ public class ServicioPublicacionesDefault implements ServicioPublicaciones {
     }
 
     @Override
-    public void indicarPublicacionFavorita(Integer id, Integer usuarioId) {
-        Favoritos publicacionFavorita= new Favoritos();
-        Publicacion existente=repositorioPublicaciones.buscarPublicacionId(id);
+    public void indicarPublicacionFavorita(Integer idPublicacion, Integer usuarioId) {
 
-        //publicacionFavorita.setPublicacion();
-        //repositorioPublicaciones.indicarFavorito();
-        //repositorioPublicaciones.indicarFavorito();
+        Favoritos existente =repositorioPublicaciones.BuscarFavoritoExistente(idPublicacion,usuarioId);
+        if(existente !=null){
+            repositorioPublicaciones.eliminarfavorito(existente);
+            return;
+        }
+
+        Favoritos publicacionFavorita= new Favoritos();
+
+        Publicacion publicacion=repositorioPublicaciones.buscarPublicacionId(idPublicacion);
+        Usuario usuario=repositorioUsuario.obterneUsuario(usuarioId);
+        publicacionFavorita.setPublicacion(publicacion);
+        publicacionFavorita.setEstado(true);
+        publicacionFavorita.setUsuario(usuario);
+        repositorioPublicaciones.indicarFavorito(publicacionFavorita);
     }
 }

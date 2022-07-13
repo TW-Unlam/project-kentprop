@@ -73,4 +73,24 @@ public class RepositorioPublicacionesImpl implements RepositorioPublicaciones {
                 .list();
     }
 
+    @Override
+    public Publicacion buscarPublicacionId(Integer id) {
+        return null;
+    }
+
+    @Override
+    public void eliminarfavorito(Favoritos existente) {
+
+    }
+
+    @Override
+    public Favoritos BuscarFavoritoExistente(Integer idPublicacion, Integer usuarioId) {
+        return null;
+    }
+
+    @Override
+    public void indicarFavorito(Favoritos publicacionFavorita) {
+
+    }
+
 }

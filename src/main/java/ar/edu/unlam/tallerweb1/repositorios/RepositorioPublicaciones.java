@@ -18,4 +18,10 @@ public interface RepositorioPublicaciones {
     List<Publicacion> buscarPublicacionesDestacadas();
 
     Publicacion buscarPublicacionId(Integer id);
+
+    void eliminarfavorito(Favoritos existente);
+
+    Favoritos BuscarFavoritoExistente(Integer idPublicacion, Integer usuarioId);
+
+    void indicarFavorito(Favoritos publicacionFavorita);
 }

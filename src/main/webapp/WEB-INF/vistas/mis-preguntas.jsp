@@ -28,6 +28,9 @@
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li><a class="dropdown-item" href="login">Login</a></li>
             <li><a class="dropdown-item" href="/project_kentprop/">Home</a></li>
+            <c:if test="${sessionScope.ROL.equals('USUARIO')}">
+                <li><a class="dropdown-item" href="mis-favoritos">Mis publicaciones favoritas</a></li>
+            </c:if>
         </ul>
     </div>
     <div class="bg-container">
@@ -38,9 +41,9 @@
 
             <c:if test="${empty msg_vacio}">
                 <h2>Mis preguntas</h2>
-                <div class="lista-publicaciones">
+                <div class="lista-publicaciones lista-mis-preguntas">
                     <c:forEach var="pregunta" items="${preguntasRealizadas}" >
-                        <div class="card w-75">
+                        <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">
                                     <c:out value="${pregunta.publicacion.propiedad.ubicacion.provincia}"/> -

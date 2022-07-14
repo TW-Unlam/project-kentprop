@@ -22,6 +22,10 @@
     margin-top: 20px;
 }
 
+.detalle-publicacion-container .data-top div:first-child {
+    display: flex;
+}
+
 .detalle-publicacion-container .data-middle {
     display: flex;
     margin-top: 15px;
@@ -125,3 +129,18 @@
     width: 800px;
     height: 500px;
 }
+
+.detalle-publicacion-container .publicacion-favorito {
+    margin-left: 30px;
+}
+
+.detalle-publicacion-container .publicacion-favorito button{
+    border: none;
+    background: transparent;
+}
+
+.detalle-publicacion-container .publicacion-favorito .fa-heart{
+    font-size: 30px;
+    transition: 0.3s ease-in-out;
+}
+

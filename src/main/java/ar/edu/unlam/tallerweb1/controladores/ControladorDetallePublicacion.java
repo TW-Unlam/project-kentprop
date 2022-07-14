@@ -28,11 +28,13 @@ public class ControladorDetallePublicacion {
     }
 
     @RequestMapping(path = "/detalle-publicacion",method = RequestMethod.GET)
-    public ModelAndView verDetallePublicacion(Integer id) {
+    public ModelAndView verDetallePublicacion(Integer id, HttpServletRequest request) {
         ModelMap modelo = new ModelMap();
         Publicacion publicaciones = null;
         List<Pregunta> consultasHechas = null;
         List<Imagen> imagenes = null;
+        Object usuarioId = request.getSession().getAttribute("id");
+        Object usuarioRol = request.getSession().getAttribute("ROL");
 
         publicaciones = servicioPublicaciones.verDetallePublicacion(id);
         consultasHechas = servicioConsultas.buscarConsultasDePublicacion(id);
@@ -40,6 +42,12 @@ public class ControladorDetallePublicacion {
 
         modelo.put("imagenes", imagenes);
         modelo.put("datosPregunta", new DatosPregunta());
+
+        if( usuarioId != null && usuarioRol.equals("USUARIO")) {
+           boolean estadoFavorito = servicioPublicaciones.obtenerEstadoFavorito(id, (Integer)usuarioId );
+
+           modelo.put("estado_favorito", estadoFavorito);
+        }
 
         if(consultasHechas.isEmpty()){
             modelo.put("msg_sin_preguntas","Por el momento no se realizaron preguntas ¡Sé el primero!");
@@ -78,7 +86,6 @@ public class ControladorDetallePublicacion {
 
             return new ModelAndView("redirect:/detalle-publicacion?id=" +idPublicacion);
         }
-    //Presentacion o negocio?
 
     @RequestMapping(value="marcar-como-favorito",method = RequestMethod.GET)
     public ModelAndView marcarComoFavorito(@RequestParam(value= "idPublicacion")Integer idPublicacion, HttpServletRequest request){

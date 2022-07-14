@@ -1,103 +1,103 @@
 .lista-container {
-    background-color: white;
-    height: 88vh;
-    width: 84%;
-    border-radius: 8px;
-    padding: 30px 30px 50px 30px;
-    overflow-y: scroll;
+  background-color: white;
+  height: 88vh;
+  width: 84%;
+  border-radius: 8px;
+  padding: 30px 30px 50px 30px;
+  overflow-y: scroll;
 }
 
 .lista-container a {
-    text-decoration: none;
-    color: #333;
+  text-decoration: none;
+  color: #333;
 }
 
 .lista-container a:hover {
-    color:#333;
+  color: #333;
 }
 
 .lista-container h2 {
-    margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 
 .lista-publicaciones {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.lista-publicaciones.lista-mis-preguntas .card {
+  width: 400px;
 }
 
 .lista-publicaciones .card {
-    margin: 0 20px 25px 20px;
-    max-width: 28.3%;
-<<<<<<< HEAD
-=======
-    /*max-height: 470px;*/
->>>>>>> e6a59c9bbba1dae59973f0d82456b6c5ca1d3c3a
+  margin: 0 20px 25px 20px;
+  width: 320px;
 }
 
 .publicacion-top {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .separador {
-    width: 1px;
-    height: 56px;
-    background: #ddd;
+  width: 1px;
+  height: 56px;
+  background: #ddd;
 }
 
 .publicacion-top div:nth-child(1) h5 {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 .publicacion-top div:nth-child(2) h5 {
-    margin-bottom: 4px;
+  margin-bottom: 4px;
 }
 
 .publicacion-top div:nth-child(2) p {
-    color: gray;
+  color: gray;
 }
 
 .publicacion-data {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 15px;
 }
 
-.publicacion-descripcion{
-    color: gray;
-    width: 100%;
-    display: block;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    margin-top: 15px;
+.publicacion-descripcion {
+  color: gray;
+  width: 100%;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-top: 15px;
 }
 
 .publicacion-data p {
-    margin-right: 8px;
-    font-size: 14px;
-    margin-bottom: 10px;
-
+  margin-right: 8px;
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 
 .publicacion-data i {
-    color: gray;
-    margin-right: 5px;
+  color: gray;
+  margin-right: 5px;
 }
 
 .lista-destacadas {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 40px;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 40px;
+  justify-content: flex-start;
 }
 
 .lista-destacadas .card {
-    width: 320px;
-    background-color: #e6f6ff;
+  width: 320px;
+  background-color: #e6f6ff;
+  margin-right: 20px;
 }
 
 .lista-destacadas .card img {
-    height: 200px;
-    width: 100%;
+  height: 200px;
+  width: 100%;
 }

@@ -132,7 +132,7 @@ public class ControladorDetallePublicacionTest {
     }
 
     @Test
-    public  void QueAlMarcarComoFavoritoUnaPublicacionSinEstarLogueadoIrALoguin()
+    public void QueAlMarcarComoFavoritoUnaPublicacionSinEstarLogueadoIrALoguin()
     {   request = givenNoExisteUnUsuarioLogueado();
         Publicacion publicacion=dadoqueexisteLaPublicacionPAraMarcar();
 
@@ -141,7 +141,7 @@ public class ControladorDetallePublicacionTest {
     }
 
     @Test
-    public  void QueAlMarcarComoFavoritoUnaPublicacionIndiqueYSeMantengEnLaVistaDetalles()
+    public void QueAlMarcarComoFavoritoUnaPublicacionIndiqueYSeMantengEnLaVistaDetalles()
     {    request = givenExisteUnUsuarioConId(ID_USUARIO);
         Publicacion publicacion=dadoqueexisteLaPublicacionPAraMarcar();
         ModelAndView mav=cuandoMarcoComoFavorito(publicacion.getId(),request);
@@ -203,7 +203,7 @@ public class ControladorDetallePublicacionTest {
     }
 
     private ModelAndView cuandoSeleccionoVerDetalle() {
-        return controladorDetallePublicacion.verDetallePublicacion(PROPIEDAD_ID);
+        return controladorDetallePublicacion.verDetallePublicacion(PROPIEDAD_ID,request );
     }
 
     private void entoncesMeLLevaALaVista(String vistaEsperada, String vistaRecibida) {

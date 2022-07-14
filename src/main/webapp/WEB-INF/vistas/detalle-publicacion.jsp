@@ -21,6 +21,7 @@
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <li><a class="dropdown-item" href="login">Login</a></li>
+        <li><a class="dropdown-item" href="/project_kentprop/">Home</a></li>
         <c:if test="${sessionScope.ROL.equals('PROPIETARIO')}">
             <li><a class="dropdown-item" href="mis-publicaciones">Mis publicaciones</a></li>
         </c:if>
@@ -33,26 +34,23 @@
 <%--Botonera Estilo Nav Bar Horizontal--%>
     <div class="bg-container">
         <div class="detalle-publicacion-container">
-
-            <div class="=publicacion-Favorito">
-                <span class="postingGalleryFixedComponents__FixedContent-sc-1j3twev-0 etQqim">
-                <a href="marcar-como-favorito?idPublicacion=${detalle.id}">
-                <button data-qa="CARD_FAV" aria-label="Favorito" font-weight="bold" class="button__StyledButton-sc-1b3blmr-0 lilJET">
-                    <svg width="1em" height="1em" viewBox="0 0 16 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" color="currentColor" font-size="25px" stroke-width="0">
-                        <path d="M8 13.7c-.1 0-.3 0-.4-.1l-5.8-6a4.05 4.05 0 010-5.9C3.4.1 6.1.1 7.7 1.7l.3.4.4-.4c1.6-1.6 4.3-1.6 5.9 0 1.6 1.6 1.6 4.3 0 5.9l-5.9 5.9c-.1.1-.3.2-.4.2zM4.7 1.5c-.8 0-1.6.3-2.2.9-1.2 1.2-1.2 3.2 0 4.5L8 12.4l5.5-5.5c.6-.6.9-1.4.9-2.2 0-.8-.3-1.7-.9-2.3-1.2-1.2-3.2-1.2-4.5 0l-.6.7c-.2.2-.5.2-.7 0l-.8-.7c-.6-.6-1.4-.9-2.2-.9z" fill="#000">
-                        </path>
-                    </svg>
-                </button>
-                </a>
-                </span>
-            </div>
-
             <div class="publicacion-data">
                 <div class="data">
                     <div><span class="badge text-bg-primary"><c:out value="${detalle.tipoAccion}"/></span></div>
                     <div class="data-top">
-                        <div class="data-precio"><h4>$ <c:out value="${detalle.precio}"/></h4></div>
-                        <div><h4><i class="fa-solid fa-location-dot"></i> ${detalle.propiedad.ubicacion.localidad}</h4></div>
+                        <div>
+                            <div class="data-precio"><h4>$ <c:out value="${detalle.precio}"/></h4></div>
+                            <div><h4><i class="fa-solid fa-location-dot"></i> ${detalle.propiedad.ubicacion.localidad}</h4></div>
+                        </div>
+                        <div class="publicacion-favorito">
+                            <span class="postingGalleryFixedComponents__FixedContent-sc-1j3twev-0 etQqim">
+                            <a href="marcar-como-favorito?idPublicacion=${detalle.id}">
+                                <button data-qa="CARD_FAV" aria-label="Favorito" font-weight="bold" class="button__StyledButton-sc-1b3blmr-0 lilJET" >
+                                    <i class="fa-solid fa-heart" style="color: ${estado_favorito ? "#da6d6d" : "#c8c4c4"}"></i>
+                                </button>
+                            </a>
+                            </span>
+                        </div>
                     </div>
                     <div class="data-middle">
                         <p><i class="fa-solid fa-house"></i><c:out value="${detalle.propiedad.tipoPropiedad}"/></p>

@@ -24,12 +24,17 @@
 <%--Botonera Estilo Nav Bar Horizontal--%>
 <div class="   bg-secondary  dropdowndropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        KENK-PROP
+        KENT-PROP
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <li><a class="dropdown-item" href="login">Login</a></li>
-        <li><a class="dropdown-item" href="mis-publicaciones">Ver Mis Publicaciones</a></li>
-        <li><a class="dropdown-item" href="#">Ver Mis Preguntas Realizadas</a></li>
+        <li><a class="dropdown-item" href="/project_kentprop/">Home</a></li>
+        <c:if test="${sessionScope.ROL.equals('PROPIETARIO')}">
+            <li><a class="dropdown-item" href="mis-publicaciones">Mis publicaciones</a></li>
+        </c:if>
+        <c:if test="${sessionScope.ROL.equals('USUARIO')}">
+            <li><a class="dropdown-item" href="mis-preguntas">Mis preguntas</a></li>
+        </c:if>
     </ul>
 </div>
 <%--Botonera Estilo Nav Bar Horizontal--%>
@@ -38,7 +43,7 @@
 
         <c:choose>
             <c:when test="${empty msg_error}">
-                <h2>Publicaciones Favoritas emcomtradas encontradas</h2>
+                <h2>Mis publicaciones favoritas</h2>
             </c:when>
             <c:otherwise>
                 <h4><i class="fa-solid fa-circle-exclamation"></i> ${msg_error}</h4>
@@ -89,7 +94,7 @@
 <%-- ${publicaciones.get(1).descripcion}
  ${publicaciones.get(2).fechaPublicacion}
  ${publicaciones.get(3).propiedad}--%>
-
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
 <script src="https://kit.fontawesome.com/39a92c78bd.js" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,6 +1,5 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
-import ar.edu.unlam.tallerweb1.controladores.DatosPublicacion;
 import ar.edu.unlam.tallerweb1.modelo.*;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPublicaciones;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
@@ -49,7 +48,7 @@ public class ServicioPublicacionesDefault implements ServicioPublicaciones {
     @Override
     public void indicarPublicacionFavorita(Integer idPublicacion, Integer usuarioId) {
 
-        Favoritos existente =repositorioPublicaciones.BuscarFavoritoExistente(idPublicacion,usuarioId);
+        Favoritos existente =repositorioPublicaciones.buscarFavoritoExistente(idPublicacion,usuarioId);
         if(existente !=null){
             repositorioPublicaciones.eliminarfavorito(existente);
             return;
@@ -79,5 +78,12 @@ public class ServicioPublicacionesDefault implements ServicioPublicaciones {
         publicacionFavorita.setEstado(true);
         publicacionFavorita.setUsuario(usuario);
         return publicacionFavorita;
+    }
+
+    @Override
+    public boolean obtenerEstadoFavorito(Integer publicacionId, Integer usuarioId) {
+        Favoritos favorito = repositorioPublicaciones.buscarFavoritoExistente(publicacionId, usuarioId);
+
+        return favorito == null ? false: favorito.getEstado();
     }
 }

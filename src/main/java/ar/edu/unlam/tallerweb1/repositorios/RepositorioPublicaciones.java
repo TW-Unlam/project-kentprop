@@ -21,7 +21,7 @@ public interface RepositorioPublicaciones {
 
     void eliminarfavorito(Favoritos existente);
 
-    Favoritos BuscarFavoritoExistente(Integer idPublicacion, Integer usuarioId);
+    Favoritos buscarFavoritoExistente(Integer idPublicacion, Integer usuarioId);
 
     void indicarFavorito(Favoritos publicacionFavorita);
 

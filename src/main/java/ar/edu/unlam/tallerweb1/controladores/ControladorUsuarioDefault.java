@@ -27,17 +27,14 @@ public class ControladorUsuarioDefault {
         ModelMap modelo = new ModelMap();
         Integer usuarioId = (Integer) request.getSession().getAttribute("id");
 
-        if(usuarioId ==null) {
+        if(usuarioId==null) {
             return new ModelAndView("redirect:/login");
         }
 
         if(!request.getSession().getAttribute("ROL").equals("USUARIO")) {
             return new ModelAndView("redirect:/");
         }
-
-        List<Pregunta> preguntasDelUsuario = null;
-
-        preguntasDelUsuario = servicioPregunta.buscarPreguntasPorIdDeUsuario(usuarioId);
+        List<Pregunta> preguntasDelUsuario = servicioPregunta.buscarPreguntasPorIdDeUsuario(usuarioId);
 
         if(preguntasDelUsuario.isEmpty()){
             modelo.put("msg_vacio", "Todavía no has hecho ninguna pregunta...");

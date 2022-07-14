@@ -75,8 +75,6 @@ public class ControladorDetallePublicacion {
     /**/
     @RequestMapping(value = "responder-pregunta-publicacion", method = RequestMethod.POST)
     public ModelAndView responderPregunta(@ModelAttribute("datosPregunta") DatosPregunta datosPregunta){
-            ModelMap modelo = new ModelMap();
-
             int idPublicacion=servicioConsultas.responderPregunta(datosPregunta.getPreguntaId(),datosPregunta.getDescripcion());
 
             return new ModelAndView("redirect:/detalle-publicacion?id=" +idPublicacion);
@@ -126,7 +124,7 @@ public class ControladorDetallePublicacion {
     }
 
     private List<DatosPublicacion> completarConImagenes(List<Publicacion> publicaciones){
-        List<DatosPublicacion> resultado = new LinkedList<DatosPublicacion>();
+        List<DatosPublicacion> resultado = new LinkedList<>();
         for (Publicacion publicacionUni : publicaciones) {
             DatosPublicacion datos = new DatosPublicacion();
             datos.setPublicacion(publicacionUni);

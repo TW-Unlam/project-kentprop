@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 @Controller
@@ -28,18 +29,28 @@ public class ControladorDetallePublicacion {
     }
 
     @RequestMapping(path = "/detalle-publicacion",method = RequestMethod.GET)
-    public ModelAndView verDetallePublicacion(Integer id) {
+    public ModelAndView verDetallePublicacion(Integer id, HttpServletRequest request) {
         ModelMap modelo = new ModelMap();
         Publicacion publicaciones = null;
         List<Pregunta> consultasHechas = null;
         List<Imagen> imagenes = null;
+        Object usuarioId = request.getSession().getAttribute("id");
+        Object usuarioRol = request.getSession().getAttribute("ROL");
 
         publicaciones = servicioPublicaciones.verDetallePublicacion(id);
         consultasHechas = servicioConsultas.buscarConsultasDePublicacion(id);
         imagenes = servicioPublicaciones.traerImagenesPorId(id);
 
+        modelo.put("datosReserva", new DatosReserva());
+
         modelo.put("imagenes", imagenes);
         modelo.put("datosPregunta", new DatosPregunta());
+
+        if( usuarioId != null && usuarioRol.equals("USUARIO")) {
+           boolean estadoFavorito = servicioPublicaciones.obtenerEstadoFavorito(id, (Integer)usuarioId );
+
+           modelo.put("estado_favorito", estadoFavorito);
+        }
 
         if(consultasHechas.isEmpty()){
             modelo.put("msg_sin_preguntas","Por el momento no se realizaron preguntas ¡Sé el primero!");
@@ -72,13 +83,10 @@ public class ControladorDetallePublicacion {
     /**/
     @RequestMapping(value = "responder-pregunta-publicacion", method = RequestMethod.POST)
     public ModelAndView responderPregunta(@ModelAttribute("datosPregunta") DatosPregunta datosPregunta){
-            ModelMap modelo = new ModelMap();
-
             int idPublicacion=servicioConsultas.responderPregunta(datosPregunta.getPreguntaId(),datosPregunta.getDescripcion());
 
             return new ModelAndView("redirect:/detalle-publicacion?id=" +idPublicacion);
         }
-    //Presentacion o negocio?
 
     @RequestMapping(value="marcar-como-favorito",method = RequestMethod.GET)
     public ModelAndView marcarComoFavorito(@RequestParam(value= "idPublicacion")Integer idPublicacion, HttpServletRequest request){
@@ -91,6 +99,11 @@ public class ControladorDetallePublicacion {
         }
         servicioPublicaciones.indicarPublicacionFavorita(idPublicacion,(Integer)usuarioId);
     return new ModelAndView("redirect:/detalle-publicacion?id=" + idPublicacion);
+    }
+
+    @RequestMapping(value="crear-reserva",method = RequestMethod.POST)
+    public ModelAndView crearReserva(@ModelAttribute("datosReserva") DatosReserva datosReserva){
+        return new ModelAndView("redirect:/detalle-publicacion?id="+datosReserva.getIdPublicacion());
     }
 
     @RequestMapping(value="mis-favoritos",method = RequestMethod.GET)
@@ -118,7 +131,7 @@ public class ControladorDetallePublicacion {
     }
 
     private List<DatosPublicacion> completarConImagenes(List<Publicacion> publicaciones){
-        List<DatosPublicacion> resultado = new LinkedList<DatosPublicacion>();
+        List<DatosPublicacion> resultado = new LinkedList<>();
         for (Publicacion publicacionUni : publicaciones) {
             DatosPublicacion datos = new DatosPublicacion();
             datos.setPublicacion(publicacionUni);
@@ -127,6 +140,5 @@ public class ControladorDetallePublicacion {
         }
         return resultado;
     }
-
 
 }

@@ -84,7 +84,7 @@ public class RepositorioPublicacionesImpl implements RepositorioPublicaciones {
     }
 
     @Override
-    public Favoritos BuscarFavoritoExistente(Integer idPublicacion, Integer usuarioId) {
+    public Favoritos buscarFavoritoExistente(Integer idPublicacion, Integer usuarioId) {
         return (Favoritos) sessionFactory.getCurrentSession()
                 .createCriteria(Favoritos.class)
                 .createAlias("usuario", "usuario")

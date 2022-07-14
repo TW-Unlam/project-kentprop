@@ -51,7 +51,7 @@ public class Favoritos {
         this.publicacion = publicacion;
     }
 
-    public boolean isEstado() {
+    public boolean getEstado() {
         return Estado;
     }
 

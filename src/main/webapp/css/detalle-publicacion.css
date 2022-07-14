@@ -1,127 +1,160 @@
-.detalle-publicacion-container{
-    background-color: white;
-    height: 90vh;
-    width: 70%;
-    border-radius: 8px;
-    padding: 46px 45px 40px 45px;
-    overflow-y: scroll;
+.detalle-publicacion-container {
+  background-color: white;
+  height: 90vh;
+  width: 70%;
+  border-radius: 8px;
+  padding: 46px 45px 40px 45px;
+  overflow-y: scroll;
 }
 
 .detalle-publicacion-container .publicacion-data {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .detalle-publicacion-container .data {
-    width: 60%;
+  width: 60%;
 }
 
 .detalle-publicacion-container .data-top {
-    display: flex;
-    margin-top: 20px;
+  display: flex;
+  margin-top: 20px;
+}
+
+.detalle-publicacion-container .data-top div:first-child {
+  display: flex;
 }
 
 .detalle-publicacion-container .data-middle {
-    display: flex;
-    margin-top: 15px;
+  display: flex;
+  margin-top: 15px;
 }
 
 .detalle-publicacion-container .data-bottom {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
-.detalle-publicacion-container .data-bottom span{
-    font-weight: bold;
+.detalle-publicacion-container .data-bottom span {
+  font-weight: bold;
 }
 
 .detalle-publicacion-container .data-middle p {
-    margin-right: 14px;
+  margin-right: 14px;
 }
 
 .detalle-publicacion-container .data-middle p i {
-    margin-right: 6px;
-    color: gray;
+  margin-right: 6px;
+  color: gray;
 }
 
 .detalle-publicacion-container .data-precio {
-    padding-right: 20px;
-    margin-right: 20px;
-    border-right: 1px solid #ddd;
+  padding-right: 20px;
+  margin-right: 20px;
+  border-right: 1px solid #ddd;
 }
 
 .detalle-publicacion-container .carousel {
-    height: 300px;
-    width: 100%;
+  height: 300px;
+  width: 100%;
 }
 
 .detalle-publicacion-container .carousel .carousel-inner {
-    height: 100%;
+  height: 100%;
 }
 
 .detalle-publicacion-container .carousel .carousel-item {
-    height: 100%;
+  height: 100%;
 }
 
 .detalle-publicacion-container .carousel .carousel-item img {
-    height: 100%;
+  height: 100%;
 }
 
 .publicacion-questions {
-    margin-top: 45px;
+  margin-top: 45px;
 }
 
 .questions form {
-    display: flex;
-    margin-top: 15px;
-}
-
-.private-question {
-    width: 40%;
+  display: flex;
+  margin-top: 15px;
 }
 
 .questions h5,
 .private-question h5,
-.public-questions-asked h5{
-    color:#1b6d85;
+.public-questions-asked h5,
+.container-book h5,
+.container-map h5{
+  color: #1b6d85;
 }
 
 .questions form input:nth-child(2) {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
-.questions form .btn {
-    background-color: #1b6d85;
-    border: none;
+.questions form .btn,
+.container-book form .btn{
+  background-color: #1b6d85;
+  border: none;
 }
 
-.questions form .btn:hover {
-    background-color: #175a6e;
+.questions form .btn:hover,
+.container-book form .btn:hover{
+  background-color: #175a6e;
 }
 
 .public-questions {
-    width: 52%;
+  width: 52%;
 }
 
 .container-carousel {
-    width: 40%;
+  width: 40%;
 }
 
-.public-questions-asked h5{
-    margin-top: 30px;
+.public-questions-asked h5 {
+  margin-top: 30px;
 }
 
 .question p:nth-child(1) {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .question-user {
-   color: gray;
+  color: gray;
 }
 
-.response-user {}
+.response-user {
+}
 
-#mapa{
-    width: 800px;
-    height: 500px;
+#mapa {
+  width: 800px;
+  height: 500px;
+}
+
+.detalle-publicacion-container .publicacion-favorito {
+  margin-left: 30px;
+}
+
+.detalle-publicacion-container .publicacion-favorito button {
+  border: none;
+  background: transparent;
+}
+
+.detalle-publicacion-container .publicacion-favorito .fa-heart {
+  font-size: 30px;
+  transition: 0.3s ease-in-out;
+}
+
+.container-question-and-book {
+  display: flex;
+  flex-direction: column;
+}
+
+.container-book,
+.container-map {
+  margin-top: 50px;
+}
+
+.container-book .btn{
+  margin-top: 20px;
 }

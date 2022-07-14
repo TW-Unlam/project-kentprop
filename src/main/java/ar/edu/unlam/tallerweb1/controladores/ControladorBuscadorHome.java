@@ -44,7 +44,6 @@ public class ControladorBuscadorHome {
             modelo.put("msg_error", "No se encontraron publicaciones con estos datos");
             return new ModelAndView("lista-publicaciones", modelo);
         }
-        //Llevar logica al servicio ?
         modelo.put("publicaciones", completarConImagenes(publicaciones));
         return new ModelAndView("lista-publicaciones", modelo);
     }
@@ -62,7 +61,7 @@ public class ControladorBuscadorHome {
     }
 
     private List<DatosPublicacion> completarConImagenes(List<Publicacion> publicaciones){
-        List<DatosPublicacion> resultado = new LinkedList<DatosPublicacion>();
+        List<DatosPublicacion> resultado = new LinkedList<>();
         for (Publicacion publicacionUni : publicaciones) {
             DatosPublicacion datos = new DatosPublicacion();
             datos.setPublicacion(publicacionUni);

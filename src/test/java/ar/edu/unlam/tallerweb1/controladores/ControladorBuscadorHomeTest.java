@@ -33,7 +33,7 @@ public class ControladorBuscadorHomeTest {
     @Test
     public void alBuscarUnaPublicacionDeberiaDevolvermeUnaListaPublicaciones(){
         //Preparacion
-        dadoQueTenemosUnaListaDePublicaciones(10);
+        dadoQueTenemosUnaListaDePublicacionesConImagenes(10);
 
         //Ejecucion
         ModelAndView mav = cuandoBuscoUnaPublicacion(datosBusqueda);
@@ -55,7 +55,7 @@ public class ControladorBuscadorHomeTest {
 
    @Test
    public void alBuscarPublicacionDeberanAparecerLasPublicacionesDestacadas(){
-       dadoQueTenemosUnaListaDePublicacionesDestacadas(3,10);
+       dadoQueTenemosUnaListaDePublicacionesDestacadas(3,10,10);
 
        ModelAndView mav = cuandoBuscoUnaPublicacion(datosBusqueda);
 
@@ -73,7 +73,7 @@ public class ControladorBuscadorHomeTest {
    }
 
     private void entoncesMeTraeLasImagenesAsignadasAcadaPublicacion(ModelAndView mav, int cantidadEsperada) {
-        List<Publicacion> lista = (List<Publicacion>) mav.getModel().get("listaDeImagenDePublicaciones");
+        List<Publicacion> lista = (List<Publicacion>) mav.getModel().get("publicaciones");
         assertThat(lista).hasSize(cantidadEsperada);
     }
 
@@ -101,20 +101,25 @@ public class ControladorBuscadorHomeTest {
         assertThat(lista).hasSize(cantidadEsperada);
     }
 
-    private void dadoQueTenemosUnaListaDePublicacionesDestacadas(int cantidadDestacadas, int cantidadPublicaciones) {
+    private void dadoQueTenemosUnaListaDePublicacionesDestacadas(int cantidadDestacadas, int cantidadPublicaciones, int cantidadImagenes) {
         List<Publicacion> listaDestacadas = new LinkedList<>();
         List<Publicacion> listaPublicaciones = new LinkedList<>();
+        List<Imagen> imagenes = new LinkedList<>();
         for(int i = 0 ; i < cantidadDestacadas; i++){
             listaDestacadas.add(new Publicacion());
         }
         for(int i = 0 ; i < cantidadPublicaciones; i++){
             listaPublicaciones.add(new Publicacion());
         }
+        for(int i = 0 ; i < cantidadImagenes; i++){
+            imagenes.add(new Imagen());
+        }
         when(servicioPublicaciones.buscarPublicacion(datosBusqueda.getTipoAccion(),
                 datosBusqueda.getTipoPropiedad(),
                 datosBusqueda.getUbicacion()
         )).thenReturn(listaPublicaciones);
         when(servicioPublicaciones.obtenerPublicacionesDestacadas()).thenReturn(listaDestacadas);
+        when(servicioPublicaciones.traerImagenesPorId(listaPublicaciones.get(0).getId())).thenReturn(imagenes);
     }
 
     private void entoncesMeLLevaALaVista(String vistaEsperada, String vistaRecibida) {

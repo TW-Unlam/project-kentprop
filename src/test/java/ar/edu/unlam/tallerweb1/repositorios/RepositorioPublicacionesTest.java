@@ -94,7 +94,7 @@ public class RepositorioPublicacionesTest extends SpringTest {
     @Test @Transactional @Rollback
     public void alBuscarSiLAPublicacionYaEsFavoritoDevuelveNull() {
         Publicacion publicacionConImagenes=dadoQueExisteUnaListaDePublicacionesConImagenes();
-        Favoritos resultado=repositorioPublicaciones.BuscarFavoritoExistente(publicacionConImagenes.getId(),1);
+        Favoritos resultado=repositorioPublicaciones.buscarFavoritoExistente(publicacionConImagenes.getId(),1);
         entoncesMeDevuelvenFavoritoNulo(resultado);
     }
 
@@ -102,7 +102,7 @@ public class RepositorioPublicacionesTest extends SpringTest {
     public void alBuscarSiLAPublicacionYaEsFavoritoDevuelveLARelacion() {
         Publicacion publicacionConImagenes=dadoQueExisteUnaListaDePublicacionesConImagenes();
        Usuario usuario= dadoqueExisteUnaPublicacionFavorita( publicacionConImagenes);
-        Favoritos resultado=repositorioPublicaciones.BuscarFavoritoExistente(publicacionConImagenes.getId(),usuario.getId());
+        Favoritos resultado=repositorioPublicaciones.buscarFavoritoExistente(publicacionConImagenes.getId(),usuario.getId());
         entoncesMeDevuelvenFavorito(resultado,publicacionConImagenes.getId(),usuario.getId());
     }
 
@@ -111,7 +111,7 @@ public class RepositorioPublicacionesTest extends SpringTest {
         Publicacion publicacionConImagenes=dadoQueExisteUnaListaDePublicacionesConImagenes();
         Usuario usuario= dadoqueExisteUnaPublicacionFavorita( new Publicacion());
 
-        Favoritos resultado=repositorioPublicaciones.BuscarFavoritoExistente(publicacionConImagenes.getId(),usuario.getId());
+        Favoritos resultado=repositorioPublicaciones.buscarFavoritoExistente(publicacionConImagenes.getId(),usuario.getId());
         entoncesMeDevuelvenFavoritoNulo(resultado);
         Favoritos guardado=AlGuardarComoFavorioto(publicacionConImagenes,usuario);
 
@@ -124,7 +124,7 @@ public class RepositorioPublicacionesTest extends SpringTest {
         Publicacion publicacionConImagenes=dadoQueExisteUnaListaDePublicacionesConImagenes();
         Usuario usuario= dadoqueExisteUnaPublicacionFavorita(  publicacionConImagenes);
 
-        Favoritos resultado=repositorioPublicaciones.BuscarFavoritoExistente(publicacionConImagenes.getId(),usuario.getId());
+        Favoritos resultado=repositorioPublicaciones.buscarFavoritoExistente(publicacionConImagenes.getId(),usuario.getId());
 
         Actualizar_QuitarComoFavorito(resultado);
 
@@ -132,7 +132,7 @@ public class RepositorioPublicacionesTest extends SpringTest {
     }
 
     private void entoncesexDejaDeExistir(Publicacion publicacionConImagenes, Usuario usuario) {
-        assertThat(repositorioPublicaciones.BuscarFavoritoExistente(publicacionConImagenes.getId(),usuario.getId())).isNull();
+        assertThat(repositorioPublicaciones.buscarFavoritoExistente(publicacionConImagenes.getId(),usuario.getId())).isNull();
 
     }
 
@@ -143,7 +143,7 @@ public class RepositorioPublicacionesTest extends SpringTest {
     }
 
     private void entoncesexisteCorrectamente(Publicacion publicacionConImagenes, Usuario usuario) {
-        assertThat(repositorioPublicaciones.BuscarFavoritoExistente(publicacionConImagenes.getId(),usuario.getId())).isNotNull();
+        assertThat(repositorioPublicaciones.buscarFavoritoExistente(publicacionConImagenes.getId(),usuario.getId())).isNotNull();
     }
 
     private Favoritos AlGuardarComoFavorioto(Publicacion publicacionConImagenes, Usuario usuario) {

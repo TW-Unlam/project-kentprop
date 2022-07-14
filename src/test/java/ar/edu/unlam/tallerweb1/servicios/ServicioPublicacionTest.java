@@ -18,6 +18,7 @@ public class ServicioPublicacionTest {
     private RepositorioUsuario repositorioUsuario;
     private ServicioPublicaciones servicioPublicaciones;
     private static final Integer ID_PUBLICACION = 1;
+    private static final Integer ID_USUARIO = 2;
     private final Accion ACCION = Accion.COMPRAR;
     private final TipoPropiedad TIPO = TipoPropiedad.CASA;
     private final String descripcion = "";
@@ -73,6 +74,21 @@ public class ServicioPublicacionTest {
     }
 
     @Test
+    public void alIngresarComoUsuarioDeberiaTraerMiFavoritoExistente() {
+        dadoQueTengoUnaPublicacionFavorita(ID_PUBLICACION, ID_USUARIO);
+        boolean estadoFavorito = cuandoQuieroVerificarSiLaPublicacionEsFavorita(ID_PUBLICACION, ID_USUARIO);
+        entoncesDeberiaDevolvermeTrue(estadoFavorito);
+    }
+
+    private void entoncesDeberiaDevolvermeTrue(boolean estadoFavorito) {
+        assertThat(estadoFavorito).isTrue();
+    }
+
+    private boolean cuandoQuieroVerificarSiLaPublicacionEsFavorita(Integer idPublicacion, Integer idUsuario) {
+        return servicioPublicaciones.obtenerEstadoFavorito(idPublicacion, idUsuario);
+    }
+
+    @Test
     public void QueAlbuscarFavoritosMeTraigaUnaLista() {
         dadoqueLaPublicacionYaEsFavorito();
 
@@ -113,14 +129,19 @@ public class ServicioPublicacionTest {
     publicacionFav.setId(1);
     Usuario usuario= new Usuario();
     usuario.setId(1);
-     List<Favoritos> fav= new LinkedList<>();
+     List<Favoritos> lisfav= new LinkedList<>();
             Publicacion tmpP=new Publicacion();
             Favoritos tmpF=new Favoritos();
             tmpF.setPublicacion(tmpP);
             tmpF.setUsuario(usuario);
-            fav.add(tmpF);
+            lisfav.add(tmpF);
 
-    when(repositorio.BuscarFavoritosDelUsuario(1)).thenReturn(fav);
+    when(repositorio.BuscarFavoritosDelUsuario(1)).thenReturn(lisfav);
+    Favoritos fav=new Favoritos();
+    fav.setPublicacion(publicacionFav);
+    fav.setUsuario(usuario);
+    fav.setEstado(true);
+    when(repositorio.buscarFavoritoExistente(publicacionFav.getId(), usuario.getId())).thenReturn(fav);
     }
 
     @Test
@@ -223,5 +244,10 @@ public class ServicioPublicacionTest {
 
     }
 
+    private void dadoQueTengoUnaPublicacionFavorita(Integer publicacionId, Integer usuarioId) {
+        Favoritos favorito = new Favoritos();
 
+        favorito.setEstado(true);
+        when(repositorio.buscarFavoritoExistente(publicacionId, usuarioId)).thenReturn(favorito);
+    }
 }

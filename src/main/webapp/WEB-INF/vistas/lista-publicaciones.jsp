@@ -20,15 +20,19 @@
 </head>
 <body>
 <%--Botonera Estilo Nav Bar Horizontal--%>
-<div class="   bg-secondary  dropdowndropdown">
+<div class="bg-secondary dropdowndropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        KENK-PROP
+        KENT-PROP
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <li><a class="dropdown-item" href="login">Login</a></li>
-        <li><a class="dropdown-item" href="mis-publicaciones">Ver Mis Publicaciones</a></li>
-        <li><a class="dropdown-item" href="mis-favoritos">Ver Mis Publicaciones favoritas</a></li>
-        <li><a class="dropdown-item" href="#">Ver Mis Preguntas Realizadas</a></li>
+        <c:if test="${sessionScope.ROL.equals('PROPIETARIO')}">
+            <li><a class="dropdown-item" href="mis-publicaciones">Mis publicaciones</a></li>
+        </c:if>
+        <c:if test="${sessionScope.ROL.equals('USUARIO')}">
+            <li><a class="dropdown-item" href="mis-preguntas">Mis preguntas</a></li>
+            <li><a class="dropdown-item" href="mis-favoritos">Mis publicaciones favoritas</a></li>
+        </c:if>
     </ul>
 </div>
 <%--Botonera Estilo Nav Bar Horizontal--%>

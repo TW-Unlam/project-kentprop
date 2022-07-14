@@ -17,7 +17,6 @@
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet" >
     <!-- Bootstrap theme -->
-    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="css/general.css" rel="stylesheet">
     <link href="css/lista-publicaciones.css" rel="stylesheet">
 </head>
@@ -27,14 +26,9 @@
             KENT-PROP
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item" href="login">Login</a></li>
-        <c:if test="${sessionScope.ROL.equals('PROPIETARIO')}">
-            <li><a class="dropdown-item" href="mis-publicaciones">Mis publicaciones</a></li>
-        </c:if>
-        <c:if test="${sessionScope.ROL.equals('USUARIO')}">
-            <li><a class="dropdown-item" href="#">Mis preguntas</a></li>
-        </c:if>
-    </ul>
+            <li><a class="dropdown-item" href="login">Login</a></li>
+            <li><a class="dropdown-item" href="/project_kentprop/">Home</a></li>
+        </ul>
     </div>
     <div class="bg-container">
         <div class="lista-container">
@@ -48,8 +42,13 @@
                     <c:forEach var="pregunta" items="${preguntasRealizadas}" >
                         <div class="card w-75">
                             <div class="card-body">
-                                <h6 class="card-title"><c:out value="${pregunta.pregunta}"/></h6>
+                                <h5 class="card-title">
+                                    <c:out value="${pregunta.publicacion.propiedad.ubicacion.provincia}"/> -
+                                    <c:out value="${pregunta.publicacion.propiedad.ubicacion.localidad}"/> |
+                                    $ <c:out value="${pregunta.publicacion.precio}"/>
+                                </h5>
                                 <hr>
+                                <h6 class="card-title"><c:out value="${pregunta.pregunta}"/></h6>
                                 <c:choose>
                                     <c:when test="${not empty pregunta.respuesta}">
                                         <p class="card-text"><c:out value="${pregunta.respuesta}"/></p>
@@ -66,7 +65,7 @@
             </c:if>
         </div>
     </div>
-
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
     <script src="https://kit.fontawesome.com/39a92c78bd.js" crossorigin="anonymous"></script>
 </body>
 </html>

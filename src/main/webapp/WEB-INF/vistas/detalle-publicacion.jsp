@@ -102,17 +102,21 @@
                     </div>
                 </div>
             </div>
+
             <div class="publicacion-data publicacion-questions">
                 <div class="public-questions">
+                    <c:if test="${!sessionScope.ROL.equals('PROPIETARIO')}">
                     <div class="questions">
                         <h5>¿Tenés alguna pregunta sobre la propiedad?</h5>
                         <form:form action="hacer-pregunta-publicacion" modelAttribute="datosPregunta" method="POST" class="search_form">
                             <form:input path="publicacionId" placeholder="" id="publicacionId" type="hidden" class="form-control" value="${detalle.id} "/>
-                            <form:input path="descripcion" placeholder="Escribila acá" id="descripcion" type="text" class="form-control"/>
+                            <form:input required="required" path="descripcion" placeholder="Escribila acá" id="descripcion" type="text" class="form-control"/>
 
                             <button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Enviar</button>
                         </form:form>
                     </div>
+                    </c:if>
+
                     <div class="public-questions-asked">
                         <hr/>
                         <h5>Preguntas realizadas por otros usuarios:</h5>
@@ -149,6 +153,7 @@
                         </c:choose>
 
                     </div>
+
                 </div>
                 <c:if test="${!sessionScope.ROL.equals('PROPIETARIO')}">
                 <div class="container-question-and-book">

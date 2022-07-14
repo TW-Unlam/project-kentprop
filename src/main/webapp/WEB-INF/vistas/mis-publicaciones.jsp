@@ -48,38 +48,33 @@
             <h2>Publicaciones encontradas</h2>
 
             <div class="lista-publicaciones">
-                <c:forEach var="publicacion" items="${listaDepublicaciones}" >
+                <c:forEach var="publi" items="${publicaciones}" >
                     <div class="card">
-                        <a href="detalle-publicacion?id=${publicacion.propiedad.id}">
-
-                            <c:forEach var="imagen" items="${listaDeImagenesDePublicaciones}" >
-                                <c:if test="${imagen.publicacion.id eq publicacion.id}">
-                                    <img src="${imagen.urlImagen}" class="card-img-top" alt="Imagen de Propiedad">
-                                </c:if>
-                            </c:forEach>
-
+                        <a href="detalle-publicacion?id=${publi.publicacion.propiedad.id}">
+                            <c:if test="${publi.imagen.publicacion.id eq publi.publicacion.id}">
+                                <img src="${publi.imagen.urlImagen}" class="card-img-top" alt="Imagen de Propiedad">
+                            </c:if>
                             <div class="card-body">
                                 <div class="publicacion-top">
                                     <div>
-                                        <h5>$ <c:out value="${publicacion.precio}"/></h5>
-                                        <span class="badge text-bg-primary"><c:out value="${publicacion.tipoAccion.name()}"/></span>
+                                        <h5>$ <c:out value="${publi.publicacion.precio}"/></h5>
+                                        <span class="badge text-bg-primary"><c:out value="${publi.publicacion.tipoAccion.name()}"/></span>
                                     </div>
                                     <div class="separador"> </div>
                                     <div>
-                                        <h3><c:out value="${publicacion.propiedad.ubicacion.provincia}"/></h3>
-                                        <p><c:out value="${publicacion.propiedad.ubicacion.localidad}"/></p>
+                                        <h5><c:out value="${publi.publicacion.propiedad.ubicacion.provincia}"/></h5>
+                                        <p><c:out value="${publi.publicacion.propiedad.ubicacion.localidad}"/></p>
                                     </div>
                                 </div>
-
                                 <div class="publicacion-data">
-                                    <p><i class="fa-solid fa-ruler-vertical"></i><c:out value="${publicacion.propiedad.metrosCuadrados}"/> m<sup>2</sup>.</p>
-                                    <p><i class="fa-solid fa-door-open"></i></span><c:out value="${publicacion.propiedad.cantidadAmbientes}"/> amb.</p>
-                                    <p><i class="fa-solid fa-house"></i><c:out value="${publicacion.propiedad.tipoPropiedad.name()}"/> </p>
-                                    <c:if test="${publicacion.propiedad.cochera}">
+                                    <p><i class="fa-solid fa-ruler-vertical"></i><c:out value="${publi.publicacion.propiedad.metrosCuadrados}"/> m<sup>2</sup>.</p>
+                                    <p><i class="fa-solid fa-door-open"></i></span><c:out value="${publi.publicacion.propiedad.cantidadAmbientes}"/> amb.</p>
+                                    <p><i class="fa-solid fa-house"></i><c:out value="${publi.publicacion.propiedad.tipoPropiedad.name()}"/> </p>
+                                    <c:if test="${publi.publicacion.propiedad.cochera}">
                                         <p><i class="fa-solid fa-warehouse"></i> 1 coch. </p>
                                     </c:if>
                                 </div>
-                                <span class="publicacion-descripcion"><c:out value="${publicacion.descripcion}"/></span>
+                                <span class="publicacion-descripcion"><c:out value="${publi.publicacion.descripcion}"/></span>
                             </div>
                         </a>
                     </div>

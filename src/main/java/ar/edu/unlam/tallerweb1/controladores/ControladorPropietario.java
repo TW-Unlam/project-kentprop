@@ -46,8 +46,8 @@ public class ControladorPropietario {
         if(publicaciones.isEmpty()){
             modelo.put("msg_vacio","No tiene Propiedades publicadas...");
         }else{
-            modelo.put("listaDepublicaciones",publicaciones);
-            List<Imagen> listaImagenes=new LinkedList<>();
+            modelo.put("publicaciones",completarConImagenes(publicaciones));
+           /* List<Imagen> listaImagenes=new LinkedList<>();
             List<Imagen> imagenesBusqueda=null;
             for (Publicacion publicacionUni :publicaciones)
             {
@@ -63,8 +63,20 @@ public class ControladorPropietario {
                 }
             }
 
-            modelo.put("listaDeImagenesDePublicaciones",  listaImagenes);
+            modelo.put("listaDeImagenesDePublicaciones",  listaImagenes);*/
         }
         return new ModelAndView("mis-publicaciones", modelo);
     }
+
+    private List<DatosPublicacion> completarConImagenes(List<Publicacion> publicaciones){
+        List<DatosPublicacion> resultado = new LinkedList<DatosPublicacion>();
+        for (Publicacion publicacionUni : publicaciones) {
+            DatosPublicacion datos = new DatosPublicacion();
+            datos.setPublicacion(publicacionUni);
+            datos.setImagen(servicioPublicaciones.traerImagenesPorId(publicacionUni.getId()).get(0));
+            resultado.add(datos);
+        }
+        return resultado;
+    }
+
 }

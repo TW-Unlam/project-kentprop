@@ -143,32 +143,31 @@
 
                     </div>
                 </div>
-                <div class="private-question">
-                    <h5>¿Tenés alguna otra pregunta?</h5>
-                    <p>Dejanos tus datos y consultas:</p>
-                    <a href="enviar-consulta?propiedadId=${detalle.propiedad.id}"><i class="fa-solid fa-arrow-right"></i> Realizar Consulta</a>
-                </div>
-                <div>
-                    <h5>Si te intereso la propiedad no dudes en reservar!</h5>
-                    <form:form action="crear-reserva" modelAttribute="datosReserva" method="POST" >
-                        <form:input path="idPublicacion" type="hidden" value="${detalle.id}"></form:input>
-                        <form:input path="fechaInicioReserva"  type="date" placeholder="fechaInicio"></form:input>
-                        <form:input path="fechaFinReserva"  type="date" placeholder="fechaFin"></form:input>
-                        <button type="submit">Reservar</button>
-                    </form:form>
-
+                <div class="container-question-and-book">
+                    <div class="private-question">
+                        <h5>¿Tenés alguna otra pregunta?</h5>
+                        <p>Dejanos tus datos y consultas:</p>
+                        <a href="enviar-consulta?propiedadId=${detalle.propiedad.id}"><i class="fa-solid fa-arrow-right"></i> Realizar Consulta</a>
+                    </div>
+                    <div class="container-book">
+                        <h5>Si te intereso la propiedad no dudes en reservar!</h5>
+                        <form:form action="crear-reserva" modelAttribute="datosReserva" method="POST" >
+                            <form:input path="idPublicacion" type="hidden" value="${detalle.id}"></form:input>
+                            <form:label path="fechaInicioReserva" for="fechaInicioReserva"><b>Fecha inicio</b></form:label>
+                            <form:input path="fechaInicioReserva" id="fechaInicioReserva"  type="date" placeholder="fechaInicio" class="form-control"></form:input>
+                            <br>
+                            <form:label path="fechaInicioReserva" for="fechaFinReserva"><b>Fecha fin</b></form:label>
+                            <form:input path="fechaFinReserva" type="date" placeholder="fechaFin" class="form-control"></form:input>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Reservar</button>
+                        </form:form>
+                    </div>
                 </div>
             </div>
 
-
-            <h5>Ubicación de la propiedad:</h5>
-
-            <div id="mapa">
-
-                <%-- <iframe src="${detalle.propiedad.coordenadas}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    --%>
+            <div class="container-map">
+                <h5>Ubicación de la propiedad:</h5>
+                <div id="mapa"></div>
             </div>
-
         </div>
     </div>
     <script src="https://kit.fontawesome.com/39a92c78bd.js" crossorigin="anonymous"></script>

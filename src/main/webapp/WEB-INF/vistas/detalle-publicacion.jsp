@@ -42,6 +42,7 @@
                             <div class="data-precio"><h4>$ <c:out value="${detalle.precio}"/></h4></div>
                             <div><h4><i class="fa-solid fa-location-dot"></i> ${detalle.propiedad.ubicacion.localidad}</h4></div>
                         </div>
+                        <c:if test="${sessionScope.ROL.equals('USUARIO')}">
                         <div class="publicacion-favorito">
                             <span class="postingGalleryFixedComponents__FixedContent-sc-1j3twev-0 etQqim">
                             <a href="marcar-como-favorito?idPublicacion=${detalle.id}">
@@ -51,6 +52,8 @@
                             </a>
                             </span>
                         </div>
+                        </c:if>
+
                     </div>
                     <div class="data-middle">
                         <p><i class="fa-solid fa-house"></i><c:out value="${detalle.propiedad.tipoPropiedad}"/></p>
@@ -143,13 +146,15 @@
 
                     </div>
                 </div>
+                <c:if test="${!sessionScope.ROL.equals('PROPIETARIO')}">
                 <div class="container-question-and-book">
                     <div class="private-question">
                         <h5>¿Tenés alguna otra pregunta?</h5>
                         <p>Dejanos tus datos y consultas:</p>
                         <a href="enviar-consulta?propiedadId=${detalle.propiedad.id}"><i class="fa-solid fa-arrow-right"></i> Realizar Consulta</a>
                     </div>
-                    <div class="container-book">
+
+                    <%--<div class="container-book">
                         <h5>Si te intereso la propiedad no dudes en reservar!</h5>
                         <form:form action="crear-reserva" modelAttribute="datosReserva" method="POST" >
                             <form:input path="idPublicacion" type="hidden" value="${detalle.id}"></form:input>
@@ -161,7 +166,10 @@
                             <button class="btn btn-lg btn-primary btn-block" type="submit">Reservar</button>
                         </form:form>
                     </div>
+                    --%>
+
                 </div>
+                </c:if>
             </div>
 
             <div class="container-map">

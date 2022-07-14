@@ -40,7 +40,7 @@
             <form:form action="enviar-consulta-privada" method="POST" modelAttribute="datosConsulta">
                 <form:input required="required" path="email" placeholder="Mail" type="email" class="form-control" />
                 <form:input required="required" path="nombre" placeholder="Nombre" type="text" class="form-control" />
-                <form:input required="required" path="telefono" placeholder="Teléfono" type="text" class="form-control" />
+                <form:input required="required" path="telefono" placeholder="Telefono: ej- 1155228899" type="tel" pattern="[0-9]{10}" class="form-control" />
                 <form:textarea required="required" path="mensaje" placeholder="Mensaje" type="text" class="form-control" />
                 <form:input required="required" path="propiedadId" id="idPropiedad" type="hidden" class="form-control" value="${idPropiedad}" />
 

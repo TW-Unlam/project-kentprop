@@ -6,7 +6,8 @@ INSERT INTO usuario VALUES
 (2,1,'sullca@mail','1234','PROPIETARIO'),
 (3,1,'emiliano@mail','1234','PROPIETARIO'),
 (4,1,'valPardo@mail','1234','USUARIO'),
-(5,1,'Santy@mail','1234','PROPIETARIO');
+(5,1,'Santy@mail','1234','PROPIETARIO'),
+(6,1,'santifl27@gmail.com','1234','PROPIETARIO');
 
 select *
 from usuario;
@@ -35,14 +36,17 @@ INSERT INTO propiedad (id,cantidadAmbientes,cochera,metrosCuadrados, tipoPropied
 (4,1,0,80,2,1,3),
 (5,2,0,55,2,2,3),
 (6,3,0,61,2,2,3),
-(7,5,1,91.3,1,7,4),
-(8,4,1,80,3,2,4),
-(9,1,0,49.3,3,2,6),
+(7,5,1,91.3,1,7,6),
+(8,4,1,80,3,2,6),
+(9,1,0,49.3,1,2,6),
 (10,5,1,80,4,1,5),
 (11,2,1,50,4,2,5),
 (12,3,1,60.4,4,2,5),
 (13,3,1,60.5,1,12,2),
 (14,3,1,60.5,1,12,3);
+
+SELECT * 
+FROM PROPIEDAd;
 
 INSERT INTO publicacion (id,descripcion,estatus,fechaPublicacion,isActivo,precio,tipoAccion,propiedad_id,destacada) VALUES
 (1,'Departamento 1',0,'2022-05-05',1,45000,0,1,0),
@@ -59,6 +63,10 @@ INSERT INTO publicacion (id,descripcion,estatus,fechaPublicacion,isActivo,precio
 (12,'Local 3',2,'2022-04-10',1,75000,0,12,0),
 (13,'Oficina 1',0,'2022-04-10',1,75000,0,13,1),
 (14,'Oficina 2',0,'2022-04-10',1,75000,0,14,0);
+
+select * 
+from propiedad;
+
 
 select *
 from publicacion;
@@ -133,16 +141,11 @@ VALUES ('¿Se aceptan mascotas?',1, 4),
 ('¿Tiene cocina a gas?',1, 3),
 ('¿Cual es el valor de las expensas?', 1, 1);
 
-INSERT INTO usuario VALUES 
-(6,1,'valepardow.w@hotmail.com','1234','PROPIETARIO');
-
-
 select *
-from publicacion p join propiedad pr on p.propiedad_id = pr.id JOIN ubicacion u on u.id = pr.ubicacion_id;
+from favoritos;
 
 
-select *
-from propiedad;
+
 
 
 

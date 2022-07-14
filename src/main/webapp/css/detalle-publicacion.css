@@ -148,6 +148,8 @@
 .container-question-and-book {
   display: flex;
   flex-direction: column;
+  width: 40%;
+
 }
 
 .container-book,

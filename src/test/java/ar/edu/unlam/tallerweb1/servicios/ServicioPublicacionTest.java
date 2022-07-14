@@ -88,6 +88,19 @@ public class ServicioPublicacionTest {
         return servicioPublicaciones.obtenerEstadoFavorito(idPublicacion, idUsuario);
     }
 
+    @Test
+    public void QueAlbuscarFavoritosMeTraigaUnaLista() {
+        dadoqueLaPublicacionYaEsFavorito();
+
+        List<Publicacion> busqueda = cuandoBuscoUnaPublicacionFavorita();
+
+        entoncesSeObtieneLasPublicaciones(busqueda,1);
+    }
+
+    private List<Publicacion> cuandoBuscoUnaPublicacionFavorita() {
+        return servicioPublicaciones.buscarPublicacionFavoritas(1);
+    }
+
     private void entoncesDeberiaCrearlaRelacion() {
         verify(repositorio,times(1)).indicarFavorito(anyObject());
     }
@@ -116,6 +129,14 @@ public class ServicioPublicacionTest {
     publicacionFav.setId(1);
     Usuario usuario= new Usuario();
     usuario.setId(1);
+     List<Favoritos> lisfav= new LinkedList<>();
+            Publicacion tmpP=new Publicacion();
+            Favoritos tmpF=new Favoritos();
+            tmpF.setPublicacion(tmpP);
+            tmpF.setUsuario(usuario);
+            lisfav.add(tmpF);
+
+    when(repositorio.BuscarFavoritosDelUsuario(1)).thenReturn(lisfav);
     Favoritos fav=new Favoritos();
     fav.setPublicacion(publicacionFav);
     fav.setUsuario(usuario);

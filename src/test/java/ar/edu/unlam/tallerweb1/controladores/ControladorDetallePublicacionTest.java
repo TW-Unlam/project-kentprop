@@ -1,7 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
-import ar.edu.unlam.tallerweb1.modelo.Pregunta;
-import ar.edu.unlam.tallerweb1.modelo.Publicacion;
+import ar.edu.unlam.tallerweb1.modelo.*;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPregunta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
 import org.junit.Before;
@@ -12,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -22,6 +22,7 @@ public class ControladorDetallePublicacionTest {
     private static final Integer PROPIEDAD_ID = 1;
     private static final String VISTA_REDIRECCION_LOGUEADO = "redirect:/detalle-publicacion?id=1";
     private static final String VISTA_REDIRECCION_SIN_LOGUEO = "redirect:/loginConId?id=1";
+    private static final String VISTA_REDIRECCION_LOGIN = "redirect:/login";
     private static final Integer ID_USUARIO = 1;
     private ControladorDetallePublicacion controladorDetallePublicacion;
     private ServicioPublicaciones servicioPublicaciones;
@@ -147,6 +148,71 @@ public class ControladorDetallePublicacionTest {
         ModelAndView mav=cuandoMarcoComoFavorito(publicacion.getId(),request);
         entoncesMeRedirecciona(VISTA_REDIRECCION_LOGUEADO, mav.getViewName() );
     }
+
+    @Test
+    public void alQuererEntrarEnVerMisFavoritosSinEstarLogueadoMandeAlLogin(){
+        request = givenNoExisteUnUsuarioLogueado();
+
+        ModelAndView mav=cuandoquieroVerMisFavorito(request);
+        entoncesMeRedirecciona(VISTA_REDIRECCION_LOGIN, mav.getViewName());
+    }
+
+    @Test
+    public void alSeleccionarVerFavoritosMeTraeLaVistaMisFavoritosNULOS(){
+        request = givenExisteUnUsuarioConId(ID_USUARIO);
+
+        dadoQueNOExistePublicacionesFavoritas(ID_USUARIO);
+
+        ModelAndView mav=cuandoquieroVerMisFavorito(request);
+
+        entoncesMeLLevaALaVista("mis-publicaciones-favoritas", mav.getViewName());
+        entoncesSeRecibeMensajeListaVacia("No se encontraron publicaciones Favoritos",mav.getModel());
+    }
+    @Test
+
+    public void alSeleccionarVerFavoritosMeTraeLaVistaMisFavoritosTraigaUnaLista(){
+        request = givenExisteUnUsuarioConId(ID_USUARIO);
+        dadoQueExisteUnaListaDePublicacionesFavoritas(ID_USUARIO,10);
+        ModelAndView mav=cuandoquieroVerMisFavorito(request);
+
+        entoncesMeLLevaALaVista("mis-publicaciones-favoritas", mav.getViewName());
+        entoncesObtengoUnaListaDeFavoritos(10, mav);
+
+    }
+
+    private void entoncesObtengoUnaListaDeFavoritos(int cantidadEsperada, ModelAndView mav) {
+        List<DatosPublicacion> lista = (List<DatosPublicacion>) mav.getModel().get("publicaciones");
+        assertThat(lista).hasSize(cantidadEsperada);
+    }
+
+    private void entoncesSeRecibeMensajeListaVacia(String mensaje, Map<String, Object> model) {
+        assertThat(model.get("msg_error")).isEqualTo(mensaje);
+    }
+    private void dadoQueNOExistePublicacionesFavoritas(int idU){
+        List<Publicacion> listaPublicaciones = new LinkedList<>();
+        when(servicioPublicaciones.buscarPublicacionFavoritas(idU)).thenReturn(listaPublicaciones);
+    }
+
+    private void dadoQueExisteUnaListaDePublicacionesFavoritas(Integer idUsuario, int cantidadPublicaciones) {
+        List<Publicacion> listaPublicaciones = new LinkedList<>();
+        List<Imagen> listaImagenes = new LinkedList<>();
+
+        for(int i = 0 ; i < cantidadPublicaciones; i++){
+            Publicacion tmpP=new Publicacion();
+            tmpP.setId(i);
+            Imagen tmpI=new Imagen();
+            tmpI.setPublicacion(tmpP);
+            listaPublicaciones.add(tmpP);
+            listaImagenes.add(tmpI);
+            when(servicioPublicaciones.traerImagenesPorId(i)).thenReturn(listaImagenes);
+        }
+        when(servicioPublicaciones.buscarPublicacionFavoritas(idUsuario)).thenReturn(listaPublicaciones);
+    }
+
+    private ModelAndView cuandoquieroVerMisFavorito(HttpServletRequest request) {
+        return controladorDetallePublicacion.VerFavorito(request);
+    }
+
 
     private Publicacion dadoqueexisteLaPublicacionPAraMarcar() {
         Publicacion publicacionAindicar=new Publicacion();

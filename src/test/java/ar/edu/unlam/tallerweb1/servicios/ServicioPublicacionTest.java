@@ -18,6 +18,7 @@ public class ServicioPublicacionTest {
     private RepositorioUsuario repositorioUsuario;
     private ServicioPublicaciones servicioPublicaciones;
     private static final Integer ID_PUBLICACION = 1;
+    private static final Integer ID_USUARIO = 2;
     private final Accion ACCION = Accion.COMPRAR;
     private final TipoPropiedad TIPO = TipoPropiedad.CASA;
     private final String descripcion = "";
@@ -72,6 +73,21 @@ public class ServicioPublicacionTest {
         entoncesDeberiaCrearlaRelacion();
     }
 
+    @Test
+    public void alIngresarComoUsuarioDeberiaTraerMiFavoritoExistente() {
+        dadoQueTengoUnaPublicacionFavorita(ID_PUBLICACION, ID_USUARIO);
+        boolean estadoFavorito = cuandoQuieroVerificarSiLaPublicacionEsFavorita(ID_PUBLICACION, ID_USUARIO);
+        entoncesDeberiaDevolvermeTrue(estadoFavorito);
+    }
+
+    private void entoncesDeberiaDevolvermeTrue(boolean estadoFavorito) {
+        assertThat(estadoFavorito).isTrue();
+    }
+
+    private boolean cuandoQuieroVerificarSiLaPublicacionEsFavorita(Integer idPublicacion, Integer idUsuario) {
+        return servicioPublicaciones.obtenerEstadoFavorito(idPublicacion, idUsuario);
+    }
+
     private void entoncesDeberiaCrearlaRelacion() {
         verify(repositorio,times(1)).indicarFavorito(anyObject());
     }
@@ -104,7 +120,7 @@ public class ServicioPublicacionTest {
     fav.setPublicacion(publicacionFav);
     fav.setUsuario(usuario);
     fav.setEstado(true);
-    when(repositorio.BuscarFavoritoExistente(publicacionFav.getId(), usuario.getId())).thenReturn(fav);
+    when(repositorio.buscarFavoritoExistente(publicacionFav.getId(), usuario.getId())).thenReturn(fav);
     }
 
     @Test
@@ -207,5 +223,10 @@ public class ServicioPublicacionTest {
 
     }
 
+    private void dadoQueTengoUnaPublicacionFavorita(Integer publicacionId, Integer usuarioId) {
+        Favoritos favorito = new Favoritos();
 
+        favorito.setEstado(true);
+        when(repositorio.buscarFavoritoExistente(publicacionId, usuarioId)).thenReturn(favorito);
+    }
 }

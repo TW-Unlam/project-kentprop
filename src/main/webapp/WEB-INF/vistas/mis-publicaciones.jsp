@@ -29,6 +29,7 @@
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <li><a class="dropdown-item" href="login">Login</a></li>
+        <li><a class="dropdown-item" href="/project_kentprop/">Home</a></li>
         <c:if test="${sessionScope.ROL.equals('PROPIETARIO')}">
             <li><a class="dropdown-item" href="mis-publicaciones">Mis publicaciones</a></li>
         </c:if>
@@ -99,7 +100,7 @@
 </div>
 
 
-
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
 <script src="https://kit.fontawesome.com/39a92c78bd.js" crossorigin="anonymous"></script>
 </body>
 </html>

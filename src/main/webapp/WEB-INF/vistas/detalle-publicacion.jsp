@@ -14,8 +14,34 @@
     <title>Detalle De La publicacion</title>
 </head>
 <body>
+<%--Botonera Estilo Nav Bar Horizontal--%>
+<div class="   bg-secondary  dropdowndropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        KENK-PROP
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item" href="login">Login</a></li>
+        <li><a class="dropdown-item" href="mis-publicaciones">Ver Mis Publicaciones</a></li>
+        <li><a class="dropdown-item" href="#">Ver Mis Preguntas Realizadas</a></li>
+    </ul>
+</div>
+<%--Botonera Estilo Nav Bar Horizontal--%>
     <div class="bg-container">
         <div class="detalle-publicacion-container">
+
+            <div class="=publicacion-Favorito">
+                <span class="postingGalleryFixedComponents__FixedContent-sc-1j3twev-0 etQqim">
+                <a href="marcar-como-favorito">
+                <button data-qa="CARD_FAV" aria-label="Favorito" font-weight="bold" class="button__StyledButton-sc-1b3blmr-0 lilJET">
+                    <svg width="1em" height="1em" viewBox="0 0 16 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" color="currentColor" font-size="25px" stroke-width="0">
+                        <path d="M8 13.7c-.1 0-.3 0-.4-.1l-5.8-6a4.05 4.05 0 010-5.9C3.4.1 6.1.1 7.7 1.7l.3.4.4-.4c1.6-1.6 4.3-1.6 5.9 0 1.6 1.6 1.6 4.3 0 5.9l-5.9 5.9c-.1.1-.3.2-.4.2zM4.7 1.5c-.8 0-1.6.3-2.2.9-1.2 1.2-1.2 3.2 0 4.5L8 12.4l5.5-5.5c.6-.6.9-1.4.9-2.2 0-.8-.3-1.7-.9-2.3-1.2-1.2-3.2-1.2-4.5 0l-.6.7c-.2.2-.5.2-.7 0l-.8-.7c-.6-.6-1.4-.9-2.2-.9z" fill="#000">
+                        </path>
+                    </svg>
+                </button>
+                </a>
+                </span>
+            </div>
+
             <div class="publicacion-data">
                 <div class="data">
                     <div><span class="badge text-bg-primary"><c:out value="${detalle.tipoAccion}"/></span></div>
@@ -92,11 +118,12 @@
                                             <p class="response-user"><b>Respuesta: </b>${preguntas_h.respuesta}</p>
                                         </c:if>
                                     </div>
+
                                     <c:if test="${empty preguntas_h.respuesta}">
 <%--                                        <p class="response-user"><b>Respuesta: </b>${preguntas_h.respuesta}</p> --%>
                                         <c:if test="${(sessionScope.ROL.equals('PROPIETARIO')) and (detalle.propiedad.propietario.id.equals(sessionScope.id ))}">
                                         <form:form action="responder-pregunta-publicacion" modelAttribute="datosPregunta" method="POST" class="search_form">
-                                            <form:input path="publicacionId" placeholder="" id="idResp" type="hidden" class="form-control" value="${preguntas_h.id} "/>
+                                            <form:input path="preguntaId" placeholder="" id="idResp" type="hidden" class="form-control" value="${preguntas_h.id} "/>
                                             <form:input path="descripcion" placeholder="Escribila acá la respuesta" id="descripcionRes" type="text" class="form-control"/>
                                             <button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Enviar</button>
                                         </form:form>
@@ -110,6 +137,7 @@
                                 <p>${msg_sin_preguntas}</p>
                             </c:otherwise>
                         </c:choose>
+
                     </div>
                 </div>
                 <div class="private-question">

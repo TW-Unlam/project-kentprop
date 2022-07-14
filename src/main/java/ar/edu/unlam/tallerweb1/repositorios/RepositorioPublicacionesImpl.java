@@ -73,4 +73,33 @@ public class RepositorioPublicacionesImpl implements RepositorioPublicaciones {
                 .list();
     }
 
+    @Override
+    public Publicacion buscarPublicacionId(Integer id) {
+        return sessionFactory.getCurrentSession().get(Publicacion.class, id);
+    }
+
+    @Override
+    public void eliminarfavorito(Favoritos existente) {
+        sessionFactory.getCurrentSession().delete(existente);
+    }
+
+    @Override
+    public Favoritos BuscarFavoritoExistente(Integer idPublicacion, Integer usuarioId) {
+        return (Favoritos) sessionFactory.getCurrentSession()
+                .createCriteria(Favoritos.class)
+                .createAlias("usuario", "usuario")
+                .createAlias("publicacion","publicacion")
+                .add(
+                        Restrictions.and(
+                                Restrictions.eq("usuario.id", usuarioId),
+                                Restrictions.eq("publicacion.id", idPublicacion))
+                    )
+                .uniqueResult();
+    }
+
+    @Override
+    public void indicarFavorito(Favoritos publicacionFavorita) {
+        sessionFactory.getCurrentSession().save(publicacionFavorita);
+    }
+
 }

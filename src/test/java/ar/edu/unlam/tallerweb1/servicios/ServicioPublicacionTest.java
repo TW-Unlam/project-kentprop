@@ -1,10 +1,8 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
-import ar.edu.unlam.tallerweb1.modelo.Accion;
-import ar.edu.unlam.tallerweb1.modelo.Imagen;
-import ar.edu.unlam.tallerweb1.modelo.Publicacion;
-import ar.edu.unlam.tallerweb1.modelo.TipoPropiedad;
+import ar.edu.unlam.tallerweb1.modelo.*;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPublicaciones;
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,12 +10,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class ServicioPublicacionTest {
 
     private RepositorioPublicaciones repositorio;
+    private RepositorioUsuario repositorioUsuario;
     private ServicioPublicaciones servicioPublicaciones;
     private static final Integer ID_PUBLICACION = 1;
     private final Accion ACCION = Accion.COMPRAR;
@@ -27,7 +25,8 @@ public class ServicioPublicacionTest {
     @Before
     public void init(){
         repositorio = mock(RepositorioPublicaciones.class);
-        servicioPublicaciones = new ServicioPublicacionesDefault(repositorio);
+        repositorioUsuario = mock(RepositorioUsuario.class);
+        servicioPublicaciones = new ServicioPublicacionesDefault(repositorio, repositorioUsuario);
     }
 
     @Test
@@ -57,6 +56,55 @@ public class ServicioPublicacionTest {
 
         entoncesSeObtieneElDetalleDeLaPublicacion(resultado);
         
+    }
+
+    @Test
+    public void alIndicarQueDejeDeSerPublicacionFavoritaDelUsuarioSeElimine() {
+        dadoqueLaPublicacionYaEsFavorito();
+        cuandoSelecionaFavorito();
+        entocesLaPublicacionDejaDeSerFavorita();
+    }
+
+    @Test
+    public void alindicarComoPublicacionFavoritoQuelocree() {
+        dadoQueExisteUnaPublicacionYUsuario();
+        cuandoQuieroIndicarComoFavorito();
+        entoncesDeberiaCrearlaRelacion();
+    }
+
+    private void entoncesDeberiaCrearlaRelacion() {
+        verify(repositorio,times(1)).indicarFavorito(anyObject());
+    }
+
+    private void cuandoQuieroIndicarComoFavorito() {
+        servicioPublicaciones.indicarPublicacionFavorita(ID_PUBLICACION,1);
+    }
+
+    private void dadoQueExisteUnaPublicacionYUsuario() {
+       Publicacion publicacion=new Publicacion();
+        when(repositorio.buscarPublicacionId(1)).thenReturn(publicacion);
+       Usuario usuario=new Usuario();
+        when(repositorioUsuario.obterneUsuario(1)).thenReturn( usuario);
+    }
+
+    private void entocesLaPublicacionDejaDeSerFavorita() {
+        verify(repositorio,times(1)).eliminarfavorito(anyObject());
+    }
+
+    private void cuandoSelecionaFavorito() {
+        servicioPublicaciones.indicarPublicacionFavorita(1,1);
+    }
+
+    private void dadoqueLaPublicacionYaEsFavorito() {
+    Publicacion publicacionFav=new Publicacion();
+    publicacionFav.setId(1);
+    Usuario usuario= new Usuario();
+    usuario.setId(1);
+    Favoritos fav=new Favoritos();
+    fav.setPublicacion(publicacionFav);
+    fav.setUsuario(usuario);
+    fav.setEstado(true);
+    when(repositorio.BuscarFavoritoExistente(publicacionFav.getId(), usuario.getId())).thenReturn(fav);
     }
 
     @Test

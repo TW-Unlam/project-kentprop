@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ServicioConsultasTest {
+public class ServicioConsultasPrivadasTest {
 
     private RepositorioPublicaciones repositorioPublicaciones;
     private ServicioEmailDefault servicioEmails;
@@ -39,8 +39,7 @@ public class ServicioConsultasTest {
         entoncesSeObtieneUnUsuarioValido(busqueda);
 
     }
-    @Test
-            (expected = UsuarioInexistente.class)
+    @Test (expected = UsuarioInexistente.class)
     public void alEnviarConsultaDeEmailDevuelveElUsuarioPropietarioNoexiste() throws UsuarioInexistente {
         dadoQueExisteUnaPublicacion();
 

@@ -1,8 +1,10 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.excepciones.UsuarioInexistente;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEmail;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
+//import org.simplejavamail.api.email.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class ControladorConsultas {
+public class ControladorConsultasPrivadas {
 
     private ServicioPublicaciones servicioPublicacion;
     private ServicioEmail servicioEmail;
     @Autowired
-    public ControladorConsultas(ServicioPublicaciones servicioPublicacion, ServicioEmail servicioEmail) {
+    public ControladorConsultasPrivadas(ServicioPublicaciones servicioPublicacion, ServicioEmail servicioEmail) {
         this.servicioPublicacion = servicioPublicacion;
         this.servicioEmail = servicioEmail;
     }
@@ -41,8 +43,8 @@ public class ControladorConsultas {
                     datosConsulta.getTelefono(),
                     datosConsulta.getMensaje(),
                     datosConsulta.getPropiedadId());
-        }catch(Exception e){
-            modelo.put("msg-error", "Propietario inexistente");
+        }catch(UsuarioInexistente u){
+            modelo.put("msg-error", "Propietario inexistente .El-Mail , no fue posible ser enviado");
             return new ModelAndView("redirect:/detalle-publicacion?id="+datosConsulta.getPropiedadId(),modelo);
         }
         modelo.put("msg","Mensaje Enviado Exitosamente");

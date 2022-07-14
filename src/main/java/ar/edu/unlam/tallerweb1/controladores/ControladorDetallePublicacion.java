@@ -1,7 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.*;
-import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPregunta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,13 +20,10 @@ public class ControladorDetallePublicacion {
     private ServicioPregunta servicioConsultas;
     private ServicioPublicaciones servicioPublicaciones;
 
-    private ServicioLogin servicioUsuario;
-
     @Autowired
-    public ControladorDetallePublicacion(ServicioPregunta servicioPregunta, ServicioPublicaciones servicioPublicaciones, ServicioLogin servicioUsuario) {
+    public ControladorDetallePublicacion(ServicioPregunta servicioPregunta, ServicioPublicaciones servicioPublicaciones) {
         this.servicioConsultas = servicioPregunta;
         this.servicioPublicaciones = servicioPublicaciones;
-        this.servicioUsuario = servicioUsuario;
     }
 
     @RequestMapping(path = "/detalle-publicacion",method = RequestMethod.GET)
@@ -64,10 +61,7 @@ public class ControladorDetallePublicacion {
         Object usuarioId = request.getSession().getAttribute("id");
 
         if(usuarioId!=null) {
-
-           Publicacion publicacion = servicioConsultas.buscarPublicacionPorId(datosPregunta.getPublicacionId());
-           Usuario usuario = servicioUsuario.obterneUsuario((Integer) usuarioId);
-           servicioConsultas.hacerPregunta(new Pregunta(datosPregunta.getDescripcion(), publicacion, usuario));
+           servicioConsultas.hacerPregunta(datosPregunta.getDescripcion(), datosPregunta.getPublicacionId(),(Integer) usuarioId);
 
             return new ModelAndView("redirect:/detalle-publicacion?id=" + datosPregunta.getPublicacionId(), modelo);
         }else{
@@ -78,10 +72,24 @@ public class ControladorDetallePublicacion {
     @RequestMapping(value = "responder-pregunta-publicacion", method = RequestMethod.POST)
     public ModelAndView responderPregunta(@ModelAttribute("datosPregunta") DatosPregunta datosPregunta){
             ModelMap modelo = new ModelMap();
-            Pregunta preguntaAresponder=servicioConsultas.buscarLaPregunta(datosPregunta.getPublicacionId());
-            preguntaAresponder.setRespuesta(datosPregunta.getDescripcion());
-            servicioConsultas.responderPregunta(preguntaAresponder);
-            return new ModelAndView("redirect:/detalle-publicacion?id=" + preguntaAresponder.getPublicacion().getId());
+
+            int idPublicacion=servicioConsultas.responderPregunta(datosPregunta.getPreguntaId(),datosPregunta.getDescripcion());
+
+            return new ModelAndView("redirect:/detalle-publicacion?id=" +idPublicacion);
         }
     //Presentacion o negocio?
+
+    @RequestMapping(value="marcar-como-favorito",method = RequestMethod.GET)
+    public ModelAndView marcarComoFavorito(@RequestParam(value= "idPublicacion")Integer idPublicacion, HttpServletRequest request){
+
+        ModelMap modelo = new ModelMap();
+
+        Object usuarioId = request.getSession().getAttribute("id");
+        if(usuarioId==null) {
+            return new ModelAndView("redirect:/loginConId?id="+ idPublicacion);
+        }
+        servicioPublicaciones.indicarPublicacionFavorita(idPublicacion,(Integer)usuarioId);
+    return new ModelAndView("redirect:/detalle-publicacion?id=" + idPublicacion);
+    }
+
     }

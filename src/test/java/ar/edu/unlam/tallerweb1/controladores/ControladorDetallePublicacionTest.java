@@ -2,7 +2,6 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Pregunta;
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
-import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPregunta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPublicaciones;
 import org.junit.Before;
@@ -27,7 +26,6 @@ public class ControladorDetallePublicacionTest {
     private ControladorDetallePublicacion controladorDetallePublicacion;
     private ServicioPublicaciones servicioPublicaciones;
     private ServicioPregunta servicioPregunta;
-    private ServicioLogin servicioLogin;
     private HttpServletRequest request;
     private HttpSession session;
     private DatosPregunta datosPregunta;
@@ -40,8 +38,7 @@ public class ControladorDetallePublicacionTest {
         session = mock(HttpSession.class);
         servicioPregunta = mock(ServicioPregunta.class);
         servicioPublicaciones = mock(ServicioPublicaciones.class);
-        servicioLogin = mock(ServicioLogin.class);
-        controladorDetallePublicacion = new ControladorDetallePublicacion(servicioPregunta, servicioPublicaciones, servicioLogin);
+        controladorDetallePublicacion = new ControladorDetallePublicacion(servicioPregunta, servicioPublicaciones);
     }
 
     private HttpServletRequest givenExisteUnUsuarioConId(Integer id) {
@@ -99,6 +96,30 @@ public class ControladorDetallePublicacionTest {
         entoncesMeRedirecciona(VISTA_REDIRECCION_SIN_LOGUEO, mav.getViewName());
     }
 
+    @Test
+    public  void queAlResponderUnaPreguntaMeDirreecionAlDetalleDeLaPublicacion(){
+        alrealizarUnaRespuesta();
+        ModelAndView mav=cuandoEnvioLaRespuesta(datosPregunta);
+        entoncesMeRedirecciona(VISTA_REDIRECCION_LOGUEADO, mav.getViewName());
+
+    }
+
+    private ModelAndView cuandoEnvioLaRespuesta(DatosPregunta datosPregunta) {
+        return controladorDetallePublicacion.responderPregunta(datosPregunta);
+    }
+
+    private void alrealizarUnaRespuesta() {
+        when(datosPregunta.getPublicacionId()).thenReturn(1);
+        when(datosPregunta.getPublicacionId()).thenReturn(1);
+        Pregunta pregunta = new Pregunta();
+        Publicacion publicacion=new Publicacion();
+        publicacion.setId(datosPregunta.getPublicacionId());
+        pregunta.setPublicacion(publicacion);
+        when(datosPregunta.getDescripcion()).thenReturn("5 Meses");
+
+        when(servicioPregunta.responderPregunta(datosPregunta.getPreguntaId(),datosPregunta.getDescripcion())).thenReturn(pregunta.getPublicacion().getId());
+    }
+
 
     @Test
     public void queAlCargarUnaPreguntaAlEstarLogeadoMeRedireccioneALaPaginaVerDetalle(){
@@ -108,6 +129,36 @@ public class ControladorDetallePublicacionTest {
         ModelAndView mav = cuandoEnvioLaPregunta(datosPregunta,request);
 
         entoncesMeRedirecciona(VISTA_REDIRECCION_LOGUEADO, mav.getViewName());
+    }
+
+    @Test
+    public  void QueAlMarcarComoFavoritoUnaPublicacionSinEstarLogueadoIrALoguin()
+    {   request = givenNoExisteUnUsuarioLogueado();
+        Publicacion publicacion=dadoqueexisteLaPublicacionPAraMarcar();
+
+        ModelAndView mav=cuandoMarcoComoFavorito(publicacion.getId(),request);
+        entoncesMeRedirecciona(VISTA_REDIRECCION_SIN_LOGUEO, mav.getViewName());
+    }
+
+    @Test
+    public  void QueAlMarcarComoFavoritoUnaPublicacionIndiqueYSeMantengEnLaVistaDetalles()
+    {    request = givenExisteUnUsuarioConId(ID_USUARIO);
+        Publicacion publicacion=dadoqueexisteLaPublicacionPAraMarcar();
+        ModelAndView mav=cuandoMarcoComoFavorito(publicacion.getId(),request);
+        entoncesMeRedirecciona(VISTA_REDIRECCION_LOGUEADO, mav.getViewName() );
+    }
+
+    private Publicacion dadoqueexisteLaPublicacionPAraMarcar() {
+        Publicacion publicacionAindicar=new Publicacion();
+        publicacionAindicar.setId(1);
+        return publicacionAindicar;
+    }
+
+    private ModelAndView cuandoMarcoComoFavorito(int idPublicacion, HttpServletRequest request) {
+        return controladorDetallePublicacion.marcarComoFavorito(idPublicacion,request);
+    }
+
+    private void dadoqueexisteunaPublicacionYUsuarioLogueado() {
     }
 
     private void entoncesMeRedirecciona(String vistaRedireccion, String viewName) {

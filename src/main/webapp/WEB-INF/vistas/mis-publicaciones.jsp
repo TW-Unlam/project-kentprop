@@ -22,6 +22,18 @@
     <link href="css/lista-publicaciones.css" rel="stylesheet">
 </head>
 <body>
+<%--Botonera Estilo Nav Bar Horizontal--%>
+<div class="   bg-secondary  dropdowndropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        KENK-PROP
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item" href="login">Login</a></li>
+        <li><a class="dropdown-item" href="mis-publicaciones">Ver Mis Publicaciones</a></li>
+        <li><a class="dropdown-item" href="#">Ver Mis Preguntas Realizadas</a></li>
+    </ul>
+</div>
+<%--Botonera Estilo Nav Bar Horizontal--%>
 <div class="bg-container">
     <div class="lista-container">
 

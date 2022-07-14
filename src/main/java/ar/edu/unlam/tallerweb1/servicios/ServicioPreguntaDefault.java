@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.modelo.Pregunta;
 import ar.edu.unlam.tallerweb1.modelo.Publicacion;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPregunta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,11 +13,12 @@ import java.util.List;
 @Service @Transactional
 public class ServicioPreguntaDefault implements ServicioPregunta {
     private final RepositorioPregunta repositorioPregunta;
+    private ServicioLogin servicioUsuario;
 
     @Autowired
-    public ServicioPreguntaDefault(RepositorioPregunta repositorioPregunta) {
+    public ServicioPreguntaDefault(RepositorioPregunta repositorioPregunta, ServicioLogin servicioUsuario) {
         this.repositorioPregunta = repositorioPregunta;
-
+        this.servicioUsuario = servicioUsuario;
     }
 
     @Override
@@ -26,9 +28,12 @@ public class ServicioPreguntaDefault implements ServicioPregunta {
     }
 
     @Override
-    public void hacerPregunta(Pregunta pregunta) {
-        //Cambiar
-        repositorioPregunta.guardarConsulta(pregunta);
+
+    public void hacerPregunta(String pregunta, Integer publicacionId, Integer usuarioId) {
+    Publicacion publicacion = buscarPublicacionPorId(publicacionId);
+    Usuario usuario = servicioUsuario.obterneUsuario((Integer) usuarioId);
+
+    repositorioPregunta.guardarConsulta(new Pregunta(pregunta, publicacion, usuario));
     }
 
     @Override
@@ -38,8 +43,11 @@ public class ServicioPreguntaDefault implements ServicioPregunta {
     }
 
     @Override
-    public void responderPregunta(Pregunta respuestar) {
-        repositorioPregunta.guardarRespuesta(respuestar);
+    public Integer responderPregunta(Integer preguntaId, String descripcion) {
+        Pregunta preguntaAresponder=buscarLaPregunta(preguntaId);
+        preguntaAresponder.setRespuesta(descripcion);
+        repositorioPregunta.guardarRespuesta(preguntaAresponder);
+        return preguntaAresponder.getPublicacion().getId();
     }
 
     @Override

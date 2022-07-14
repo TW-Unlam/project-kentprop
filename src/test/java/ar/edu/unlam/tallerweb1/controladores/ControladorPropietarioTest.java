@@ -31,11 +31,12 @@ public class ControladorPropietarioTest {
     private HttpSession session;
     private String VISTA_HOME = "/";;
     private String VISTA_REDIRECCION_HOME="redirect:/";
-
+    private  DatosConsulta datosConsulta;
     @Before
     public void init(){
         servicioPropietario = mock(ServicioPropietario.class);
         servicioPublicaciones=mock(ServicioPublicaciones.class);
+        datosConsulta=mock(DatosConsulta.class);
         request = mock(HttpServletRequest.class);
         session = mock(HttpSession.class);
         controladorPropietario = new ControladorPropietario(servicioPublicaciones,servicioPropietario);
@@ -67,7 +68,8 @@ public class ControladorPropietarioTest {
     public void AlPedirLasPublicacionesDeLPropietarioMeDevuelveLAListaDePublicaciones(){
         //Preparacion
         request = dadoQueExisteUnUsuarioLogueado();
-        DadoQueExisteUnaListaDePublicacionesConSuPropietario(10);
+//        DadoQueExisteUnaListaDePublicacionesConSuPropietario(10);
+        DadoQueExisteUnaListaDePublicacionesConSuPropietarioeImagenes(10);
         //Ejecucion
         ModelAndView mav = cuandoBuscolasPublicacionDelPropietario(PROPIETARIO_ID_VALIDO,request);
         //Validacion
@@ -158,12 +160,13 @@ public class ControladorPropietarioTest {
     }
 
     private void entoncesEncuentroImagenes(ModelAndView mav, int cantidadEsperada) {
-        List<Imagen> lista = (List<Imagen>) mav.getModel().get("listaDeImagenesDePublicaciones");
+        List<DatosPublicacion> lista = (List<DatosPublicacion>) mav.getModel().get("publicaciones");
         assertThat(lista).hasSize(cantidadEsperada);
+        assertThat(lista.get(0).getImagen()).isNotNull();
     }
 
     private void entoncesEncuentroPublicaciones(ModelAndView mav, int cantidadEsperada) {
-        List<Publicacion> lista = (List<Publicacion>) mav.getModel().get("listaDepublicaciones");
+        List<Publicacion> lista = (List<Publicacion>) mav.getModel().get("publicaciones");
         assertThat(lista).hasSize(cantidadEsperada);
     }
 

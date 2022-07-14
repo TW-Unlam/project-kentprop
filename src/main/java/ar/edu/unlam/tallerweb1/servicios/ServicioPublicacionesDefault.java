@@ -53,17 +53,17 @@ public class ServicioPublicacionesDefault implements ServicioPublicaciones {
             return;
         }
 
-        Favoritos publicacionFavorita= new Favoritos();
-
-        asignacionDeDatosDelFavorito(idPublicacion, usuarioId, publicacionFavorita);
+        Favoritos publicacionFavorita = asignacionDeDatosDelFavorito(idPublicacion, usuarioId);
         repositorioPublicaciones.indicarFavorito(publicacionFavorita);
     }
 
-    private void asignacionDeDatosDelFavorito(Integer idPublicacion, Integer usuarioId, Favoritos publicacionFavorita) {
+    private Favoritos asignacionDeDatosDelFavorito(Integer idPublicacion, Integer usuarioId) {
+        Favoritos publicacionFavorita= new Favoritos();
         Publicacion publicacion=repositorioPublicaciones.buscarPublicacionId(idPublicacion);
         Usuario usuario=repositorioUsuario.obterneUsuario(usuarioId);
         publicacionFavorita.setPublicacion(publicacion);
         publicacionFavorita.setEstado(true);
         publicacionFavorita.setUsuario(usuario);
+        return publicacionFavorita;
     }
 }

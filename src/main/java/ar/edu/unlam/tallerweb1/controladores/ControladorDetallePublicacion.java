@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.LinkedList;
 import java.util.List;
 @Controller
 public class ControladorDetallePublicacion {
@@ -77,6 +78,7 @@ public class ControladorDetallePublicacion {
 
             return new ModelAndView("redirect:/detalle-publicacion?id=" +idPublicacion);
         }
+    //Presentacion o negocio?
 
     @RequestMapping(value="marcar-como-favorito",method = RequestMethod.GET)
     public ModelAndView marcarComoFavorito(@RequestParam(value= "idPublicacion")Integer idPublicacion, HttpServletRequest request){
@@ -91,4 +93,40 @@ public class ControladorDetallePublicacion {
     return new ModelAndView("redirect:/detalle-publicacion?id=" + idPublicacion);
     }
 
+    @RequestMapping(value="mis-favoritos",method = RequestMethod.GET)
+    public ModelAndView VerFavorito(HttpServletRequest request){
+        ModelMap modelo = new ModelMap();
+        Object usuarioId = request.getSession().getAttribute("id");
+        if(usuarioId==null) {
+            return new ModelAndView("redirect:/login");
+        }
+
+        List<Publicacion> publicaciones = realizarBusquedaDeFavoritos((Integer)usuarioId);
+
+        if (publicaciones.isEmpty()) {
+            modelo.put("msg_error", "No se encontraron publicaciones Favoritos");
+            return new ModelAndView("mis-publicaciones-favoritas", modelo);
+        }
+        //Llevar logica al servicio ?
+        modelo.put("publicaciones", completarConImagenes(publicaciones));
+        return new ModelAndView("mis-publicaciones-favoritas", modelo);
+
     }
+
+    private List<Publicacion> realizarBusquedaDeFavoritos(Integer usuarioId) {
+        return servicioPublicaciones.buscarPublicacionFavoritas(usuarioId);
+    }
+
+    private List<DatosPublicacion> completarConImagenes(List<Publicacion> publicaciones){
+        List<DatosPublicacion> resultado = new LinkedList<DatosPublicacion>();
+        for (Publicacion publicacionUni : publicaciones) {
+            DatosPublicacion datos = new DatosPublicacion();
+            datos.setPublicacion(publicacionUni);
+            datos.setImagen(servicioPublicaciones.traerImagenesPorId(publicacionUni.getId()).get(0));
+            resultado.add(datos);
+        }
+        return resultado;
+    }
+
+
+}

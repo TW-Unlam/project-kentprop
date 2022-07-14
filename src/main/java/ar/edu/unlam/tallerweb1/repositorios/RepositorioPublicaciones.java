@@ -24,4 +24,6 @@ public interface RepositorioPublicaciones {
     Favoritos BuscarFavoritoExistente(Integer idPublicacion, Integer usuarioId);
 
     void indicarFavorito(Favoritos publicacionFavorita);
+
+    List<Favoritos> BuscarFavoritosDelUsuario(Integer usuarioId);
 }

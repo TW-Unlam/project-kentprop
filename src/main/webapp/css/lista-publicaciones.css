@@ -28,7 +28,10 @@
 .lista-publicaciones .card {
     margin: 0 20px 25px 20px;
     max-width: 28.3%;
+<<<<<<< HEAD
+=======
     /*max-height: 470px;*/
+>>>>>>> e6a59c9bbba1dae59973f0d82456b6c5ca1d3c3a
 }
 
 .publicacion-top {

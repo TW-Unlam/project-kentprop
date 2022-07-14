@@ -26,6 +26,7 @@
         </c:if>
         <c:if test="${sessionScope.ROL.equals('USUARIO')}">
             <li><a class="dropdown-item" href="mis-preguntas">Mis preguntas</a></li>
+            <li><a class="dropdown-item" href="mis-favoritos">Mis publicaciones favoritas</a></li>
         </c:if>
     </ul>
 </div>
@@ -35,7 +36,7 @@
 
             <div class="=publicacion-Favorito">
                 <span class="postingGalleryFixedComponents__FixedContent-sc-1j3twev-0 etQqim">
-                <a href="marcar-como-favorito">
+                <a href="marcar-como-favorito?idPublicacion=${detalle.id}">
                 <button data-qa="CARD_FAV" aria-label="Favorito" font-weight="bold" class="button__StyledButton-sc-1b3blmr-0 lilJET">
                     <svg width="1em" height="1em" viewBox="0 0 16 14" fill="currentColor" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" color="currentColor" font-size="25px" stroke-width="0">
                         <path d="M8 13.7c-.1 0-.3 0-.4-.1l-5.8-6a4.05 4.05 0 010-5.9C3.4.1 6.1.1 7.7 1.7l.3.4.4-.4c1.6-1.6 4.3-1.6 5.9 0 1.6 1.6 1.6 4.3 0 5.9l-5.9 5.9c-.1.1-.3.2-.4.2zM4.7 1.5c-.8 0-1.6.3-2.2.9-1.2 1.2-1.2 3.2 0 4.5L8 12.4l5.5-5.5c.6-.6.9-1.4.9-2.2 0-.8-.3-1.7-.9-2.3-1.2-1.2-3.2-1.2-4.5 0l-.6.7c-.2.2-.5.2-.7 0l-.8-.7c-.6-.6-1.4-.9-2.2-.9z" fill="#000">

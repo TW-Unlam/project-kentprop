@@ -34,6 +34,7 @@
         </c:if>
         <c:if test="${sessionScope.ROL.equals('USUARIO')}">
             <li><a class="dropdown-item" href="mis-preguntas">Mis preguntas</a></li>
+            <li><a class="dropdown-item" href="mis-favoritos">Mis publicaciones favoritas</a></li>
         </c:if>
     </ul>
 </div>

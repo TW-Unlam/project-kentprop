@@ -19,12 +19,12 @@ public class ControladorBuscadorHome {
     private ServicioPublicaciones servicioPublicacion;
 
     @Autowired
-    public ControladorBuscadorHome(ServicioPublicaciones servicioPublicacion){
+    public ControladorBuscadorHome(ServicioPublicaciones servicioPublicacion) {
         this.servicioPublicacion = servicioPublicacion;
     }
+
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    public ModelAndView irAHome()
-    {
+    public ModelAndView irAHome() {
         ModelMap modelo = new ModelMap();
         modelo.put("datosBusqueda", new DatosBusqueda());
         modelo.put("tipoPropiedades", TipoPropiedad.values());
@@ -32,44 +32,27 @@ public class ControladorBuscadorHome {
         return new ModelAndView("home", modelo);
     }
 
-    @RequestMapping(path="/buscar-publicaciones", method = RequestMethod.POST)
+    @RequestMapping(path = "/buscar-publicaciones", method = RequestMethod.POST)
     public ModelAndView buscar(@ModelAttribute("datosBusqueda") DatosBusqueda datosBusqueda) {
         ModelMap modelo = new ModelMap();
-        List<Publicacion> resultado = null;
-        resultado = servicioPublicacion.buscarPublicacion(datosBusqueda.getTipoAccion(),
-                    datosBusqueda.getTipoPropiedad(),
-                    datosBusqueda.getUbicacion());
 
-        if(resultado.isEmpty()){
+        List<Publicacion> publicaciones = realizarBusqueda(datosBusqueda);
+        List<Publicacion> resultadoDestacadas = servicioPublicacion.obtenerPublicacionesDestacadas();
+        modelo.put("destacadas", completarConImagenes(resultadoDestacadas));
+
+        if (publicaciones.isEmpty()) {
             modelo.put("msg_error", "No se encontraron publicaciones con estos datos");
-        }else{
-            modelo.put("publicaciones", resultado);
-            List<Imagen> listaImagenes=new LinkedList<>();
-            List<Imagen> listaImagenesDestacadas=new LinkedList<>();
-            List<Imagen> imagenesBusqueda=null;
-            List<Publicacion> resultadoDestacadas = null;
-
-            resultadoDestacadas = servicioPublicacion.obtenerPublicacionesDestacadas();
-
-            for (Publicacion publicacionUni :resultado) {
-               imagenesBusqueda=servicioPublicacion.traerImagenesPorId(publicacionUni.getId());
-               if(imagenesBusqueda.size()>0){
-                    listaImagenes.add(imagenesBusqueda.get(0));
-                }
-            }
-            if(!resultadoDestacadas.isEmpty()){
-                modelo.put("destacadas", resultadoDestacadas);
-                for (Publicacion publicacionUni :resultadoDestacadas) {
-                    imagenesBusqueda=servicioPublicacion.traerImagenesPorId(publicacionUni.getId());
-                    if(imagenesBusqueda.size()>0){
-                        listaImagenesDestacadas.add(imagenesBusqueda.get(0));
-                    }
-                }
-            }
-            modelo.put("listaDeImagenDePublicacionesDestacadas", listaImagenesDestacadas);
-            modelo.put("listaDeImagenDePublicaciones",  listaImagenes);
+            return new ModelAndView("lista-publicaciones", modelo);
         }
+        //Llevar logica al servicio ?
+        modelo.put("publicaciones", completarConImagenes(publicaciones));
         return new ModelAndView("lista-publicaciones", modelo);
+    }
+
+    private List<Publicacion> realizarBusqueda(DatosBusqueda datosBusqueda) {
+        return servicioPublicacion.buscarPublicacion(datosBusqueda.getTipoAccion(),
+                datosBusqueda.getTipoPropiedad(),
+                datosBusqueda.getUbicacion());
     }
 
     @RequestMapping(path = "/lista-publicaciones")
@@ -77,5 +60,17 @@ public class ControladorBuscadorHome {
 
         return new ModelAndView("lista-publicaciones");
     }
+
+    private List<DatosPublicacion> completarConImagenes(List<Publicacion> publicaciones){
+        List<DatosPublicacion> resultado = new LinkedList<DatosPublicacion>();
+        for (Publicacion publicacionUni : publicaciones) {
+            DatosPublicacion datos = new DatosPublicacion();
+            datos.setPublicacion(publicacionUni);
+            datos.setImagen(servicioPublicacion.traerImagenesPorId(publicacionUni.getId()).get(0));
+            resultado.add(datos);
+        }
+        return resultado;
+    }
+
 
 }

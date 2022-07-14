@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import ar.edu.unlam.tallerweb1.controladores.DatosPublicacion;
 import ar.edu.unlam.tallerweb1.modelo.*;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPublicaciones;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Service @Transactional
@@ -53,13 +55,29 @@ public class ServicioPublicacionesDefault implements ServicioPublicaciones {
             return;
         }
 
-        Favoritos publicacionFavorita= new Favoritos();
+        Favoritos publicacionFavorita = asignacionDeDatosDelFavorito(idPublicacion, usuarioId);
+        repositorioPublicaciones.indicarFavorito(publicacionFavorita);
+    }
 
+    @Override
+    public List<Publicacion> buscarPublicacionFavoritas(Integer usuarioId) {
+        List <Favoritos> listaFavoritos=repositorioPublicaciones.BuscarFavoritosDelUsuario(usuarioId);
+        List<Publicacion> resultado = new LinkedList<Publicacion>();
+
+        for (Favoritos favoritoUni : listaFavoritos) {
+          resultado.add(favoritoUni.getPublicacion());
+        }
+
+        return resultado;
+    }
+
+    private Favoritos asignacionDeDatosDelFavorito(Integer idPublicacion, Integer usuarioId) {
+        Favoritos publicacionFavorita= new Favoritos();
         Publicacion publicacion=repositorioPublicaciones.buscarPublicacionId(idPublicacion);
         Usuario usuario=repositorioUsuario.obterneUsuario(usuarioId);
         publicacionFavorita.setPublicacion(publicacion);
         publicacionFavorita.setEstado(true);
         publicacionFavorita.setUsuario(usuario);
-        repositorioPublicaciones.indicarFavorito(publicacionFavorita);
+        return publicacionFavorita;
     }
 }

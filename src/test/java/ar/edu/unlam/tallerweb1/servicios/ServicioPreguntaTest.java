@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.modelo.Pregunta;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPregunta;
 
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
@@ -16,6 +17,9 @@ import static org.mockito.Mockito.*;
 public class ServicioPreguntaTest {
 
     private static final Integer PUBLICACION_ID = 1;
+    private static final Integer USUARIO_ID = 1;
+
+    private static final Integer USUARIO_ID_SIN_PREGUNTAS = 2;
     private RepositorioPregunta repositorioPregunta;
     private RepositorioUsuario repositorioUsuario;
     private ServicioLogin servicioUsuario;
@@ -61,6 +65,23 @@ public class ServicioPreguntaTest {
         entoncesSeACtualizaLasDatos(preguntas);
 
     }
+    @Test
+    public void queAlBuscarPreguntasExistentesPorIdDeUsuarioMeDevuelvaUnaLista(){
+        dadoQueExistenPreguntas();
+        List<Pregunta> preguntas = entoncesMeTraeLasPreguntasDelUsuarioConId(USUARIO_ID);
+        entoncesObtengoLasConsultas(2, preguntas);
+    }
+
+    @Test
+    public void queAlBuscarPreguntasInexistentesPorIdDeUsuarioMeDevuelvaUnaListaVacia(){
+        dadoQueExistenPreguntas();
+        List<Pregunta> preguntas = entoncesMeTraeLasPreguntasDelUsuarioConId(USUARIO_ID_SIN_PREGUNTAS);
+        entoncesObtengoLasConsultas(0, preguntas);
+    }
+
+    private List<Pregunta> entoncesMeTraeLasPreguntasDelUsuarioConId(Integer usuarioId) {
+        return repositorioPregunta.buscarConsultasDeUsuario(usuarioId);
+    }
 
     private void cuandoGuardaLaPregunta(Pregunta preguntas) {
         servicioPregunta.responderPregunta(preguntas);
@@ -70,10 +91,21 @@ public class ServicioPreguntaTest {
         verify(repositorioPregunta,times(1)).guardarRespuesta(preguntas);
     }
 
+    private void dadoQueExistenPreguntas() {
+        List<Pregunta> preguntas = new LinkedList<>();
+
+        Pregunta pregunta1 = new Pregunta();
+        Pregunta pregunta2 = new Pregunta();
+
+        preguntas.add(pregunta1);
+        preguntas.add(pregunta2);
+
+        when(repositorioPregunta.buscarConsultasDeUsuario(1)).thenReturn(preguntas);
+    }
+
     private void dadoQueExisteLaConsulteEnLaPublicacion() {
         Pregunta pregunta = new Pregunta();
         when(repositorioPregunta.ObtenerPregunta(1)).thenReturn(pregunta);
-
     }
 
     private void entoncesObtengoLaConsulta( Pregunta preguntas) {

@@ -59,7 +59,7 @@ public class RepositorioPreguntaTest extends SpringTest {
 
         dadoQueExistenPreguntasParaLaPublicacionDeIdyUsuarioDeId();
 
-        List<Pregunta> preguntas = repositorioPregunta.buscarConsultasDePublicacion(ID_USUARIO_INEXISTENTE);
+        List<Pregunta> preguntas = repositorioPregunta.buscarConsultasDeUsuario(ID_USUARIO_INEXISTENTE);
 
         entoncesMeDevuelveUnaListaDePreguntasVacia(preguntas);
     }

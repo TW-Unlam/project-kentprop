@@ -19,8 +19,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ControladorPropietarioTest {
-
-
     private static final String MENSAJE_PROPIEDADES_INEXISTENTES = "No tiene Propiedades publicadas...";
     private final String VISTA_MIS_PROPIEDADES="mis-publicaciones";
 

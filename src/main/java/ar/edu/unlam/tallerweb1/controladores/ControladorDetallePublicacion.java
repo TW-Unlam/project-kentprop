@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 @Controller
 public class ControladorDetallePublicacion {
@@ -36,6 +37,8 @@ public class ControladorDetallePublicacion {
         publicaciones = servicioPublicaciones.verDetallePublicacion(id);
         consultasHechas = servicioConsultas.buscarConsultasDePublicacion(id);
         imagenes = servicioPublicaciones.traerImagenesPorId(id);
+
+        modelo.put("datosReserva", new DatosReserva());
 
         modelo.put("imagenes", imagenes);
         modelo.put("datosPregunta", new DatosPregunta());
@@ -92,4 +95,8 @@ public class ControladorDetallePublicacion {
     return new ModelAndView("redirect:/detalle-publicacion?id=" + idPublicacion);
     }
 
+    @RequestMapping(value="crear-reserva",method = RequestMethod.POST)
+    public ModelAndView crearReserva(@ModelAttribute("datosReserva") DatosReserva datosReserva){
+        return new ModelAndView("redirect:/detalle-publicacion?id="+datosReserva.getIdPublicacion());
     }
+}

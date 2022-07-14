@@ -145,6 +145,16 @@
                     <p>Dejanos tus datos y consultas:</p>
                     <a href="enviar-consulta?propiedadId=${detalle.propiedad.id}"><i class="fa-solid fa-arrow-right"></i> Realizar Consulta</a>
                 </div>
+                <div>
+                    <h5>Si te intereso la propiedad no dudes en reservar!</h5>
+                    <form:form action="crear-reserva" modelAttribute="datosReserva" method="POST" >
+                        <form:input path="idPublicacion" type="hidden" value="${detalle.id}"></form:input>
+                        <form:input path="fechaInicioReserva"  type="date" placeholder="fechaInicio"></form:input>
+                        <form:input path="fechaFinReserva"  type="date" placeholder="fechaFin"></form:input>
+                        <button type="submit">Reservar</button>
+                    </form:form>
+
+                </div>
             </div>
 
 

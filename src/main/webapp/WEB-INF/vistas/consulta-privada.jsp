@@ -25,7 +25,9 @@
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <li><a class="dropdown-item" href="./">Home</a></li>
-        <li><a class="dropdown-item" href="login">Login</a></li>
+        <c:if test="${sessionScope.id.equals(null)}">
+            <li><a class="dropdown-item" href="login">Login</a></li>
+        </c:if>
         <li><a class="dropdown-item" href="mis-publicaciones">Ver Mis Publicaciones</a></li>
         <li><a class="dropdown-item" href="mis-favoritos">Ver Mis Publicaciones favoritas</a></li>
         <li><a class="dropdown-item" href="#">Ver Mis Preguntas Realizadas</a></li>

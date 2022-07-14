@@ -5,8 +5,11 @@ INSERT INTO usuario VALUES
 (1,1,'kentprop@mail','1234','ADMIN'),
 (2,1,'sullca@mail','1234','PROPIETARIO'),
 (3,1,'emiliano@mail','1234','PROPIETARIO'),
-(4,1,'valPardo@mail','1234','PROPIETARIO'),
+(4,1,'valPardo@mail','1234','USUARIO'),
 (5,1,'Santy@mail','1234','PROPIETARIO');
+
+select *
+from usuario;
 
 INSERT INTO ubicacion (`id`, `latitud`, `localidad`, `longitud`, `provincia`) 
 VALUES 
@@ -34,7 +37,7 @@ INSERT INTO propiedad (id,cantidadAmbientes,cochera,metrosCuadrados, tipoPropied
 (6,3,0,61,2,2,3),
 (7,5,1,91.3,1,7,4),
 (8,4,1,80,3,2,4),
-(9,1,0,49.3,1,2,4),
+(9,1,0,49.3,3,2,6),
 (10,5,1,80,4,1,5),
 (11,2,1,50,4,2,5),
 (12,3,1,60.4,4,2,5),
@@ -130,10 +133,16 @@ VALUES ('¿Se aceptan mascotas?',1, 4),
 ('¿Tiene cocina a gas?',1, 3),
 ('¿Cual es el valor de las expensas?', 1, 1);
 
+INSERT INTO usuario VALUES 
+(6,1,'valepardow.w@hotmail.com','1234','PROPIETARIO');
 
 
+select *
+from publicacion p join propiedad pr on p.propiedad_id = pr.id JOIN ubicacion u on u.id = pr.ubicacion_id;
 
 
+select *
+from propiedad;
 
 
 

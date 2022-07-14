@@ -16,4 +16,6 @@ public interface ServicioPregunta {
      Integer responderPregunta(Integer preguntaId, String descripcion);
 
      Pregunta buscarLaPregunta(Integer id);
+
+     List<Pregunta> buscarPreguntasPorIdDeUsuario(Integer usuarioId);
 }

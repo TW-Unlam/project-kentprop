@@ -27,14 +27,19 @@
         KENT-PROP
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item" href="login">Login</a></li>
+        <c:if test="${sessionScope.id.equals(null)}">
+            <li><a class="dropdown-item" href="login">Login</a></li>
+        </c:if>
         <li><a class="dropdown-item" href="/project_kentprop/">Home</a></li>
         <c:if test="${sessionScope.ROL.equals('PROPIETARIO')}">
             <li><a class="dropdown-item" href="mis-publicaciones">Mis publicaciones</a></li>
+            <li><a class="dropdown-item" href="logout">Logout</a></li>
         </c:if>
         <c:if test="${sessionScope.ROL.equals('USUARIO')}">
             <li><a class="dropdown-item" href="mis-preguntas">Mis preguntas</a></li>
+            <li><a class="dropdown-item" href="logout">Logout</a></li>
         </c:if>
+
     </ul>
 </div>
 <%--Botonera Estilo Nav Bar Horizontal--%>

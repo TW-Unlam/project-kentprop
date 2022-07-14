@@ -62,5 +62,14 @@ public class ControladorLogin {
 		return new ModelAndView("login", model);
 	}
 
+	@RequestMapping(value = "logout")
+	public ModelAndView cerrarSesion(HttpServletRequest request) {
 
+		if (request.getSession().getAttribute("id") != null) {
+			request.getSession().setAttribute("id", null);
+			request.getSession().setAttribute("ROL", null);
+		}
+
+		return new ModelAndView("redirect:/");
+	}
 }

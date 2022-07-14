@@ -65,6 +65,28 @@ public class ServicioPublicacionTest {
         entocesLaPublicacionDejaDeSerFavorita();
     }
 
+    @Test
+    public void alindicarComoPublicacionFavoritoQuelocree() {
+        dadoQueExisteUnaPublicacionYUsuario();
+        cuandoQuieroIndicarComoFavorito();
+        entoncesDeberiaCrearlaRelacion();
+    }
+
+    private void entoncesDeberiaCrearlaRelacion() {
+        verify(repositorio,times(1)).indicarFavorito(anyObject());
+    }
+
+    private void cuandoQuieroIndicarComoFavorito() {
+        servicioPublicaciones.indicarPublicacionFavorita(ID_PUBLICACION,1);
+    }
+
+    private void dadoQueExisteUnaPublicacionYUsuario() {
+       Publicacion publicacion=new Publicacion();
+        when(repositorio.buscarPublicacionId(1)).thenReturn(publicacion);
+       Usuario usuario=new Usuario();
+        when(repositorioUsuario.obterneUsuario(1)).thenReturn( usuario);
+    }
+
     private void entocesLaPublicacionDejaDeSerFavorita() {
         verify(repositorio,times(1)).eliminarfavorito(anyObject());
     }

@@ -85,6 +85,107 @@ public class RepositorioPublicacionesTest extends SpringTest {
     }
 
     @Test @Transactional @Rollback
+    public void ObtenerLaPublicacionBuscadoPorElID() {
+       Publicacion publicacionConImagenes=dadoQueExisteUnaListaDePublicacionesConImagenes();
+       Publicacion resultado=repositorioPublicaciones.buscarPublicacionId(publicacionConImagenes.getId());
+        entoncesMeDevuelveALPublicacion(resultado);
+    }
+
+    @Test @Transactional @Rollback
+    public void alBuscarSiLAPublicacionYaEsFavoritoDevuelveNull() {
+        Publicacion publicacionConImagenes=dadoQueExisteUnaListaDePublicacionesConImagenes();
+        Favoritos resultado=repositorioPublicaciones.BuscarFavoritoExistente(publicacionConImagenes.getId(),1);
+        entoncesMeDevuelvenFavoritoNulo(resultado);
+    }
+
+    @Test @Transactional @Rollback
+    public void alBuscarSiLAPublicacionYaEsFavoritoDevuelveLARelacion() {
+        Publicacion publicacionConImagenes=dadoQueExisteUnaListaDePublicacionesConImagenes();
+       Usuario usuario= dadoqueExisteUnaPublicacionFavorita( publicacionConImagenes);
+        Favoritos resultado=repositorioPublicaciones.BuscarFavoritoExistente(publicacionConImagenes.getId(),usuario.getId());
+        entoncesMeDevuelvenFavorito(resultado,publicacionConImagenes.getId(),usuario.getId());
+    }
+
+    @Test @Transactional @Rollback
+    public void alMarcarLaPublicacionComoFavoritoSeDebeGuardar() {
+        Publicacion publicacionConImagenes=dadoQueExisteUnaListaDePublicacionesConImagenes();
+        Usuario usuario= dadoqueExisteUnaPublicacionFavorita( new Publicacion());
+
+        Favoritos resultado=repositorioPublicaciones.BuscarFavoritoExistente(publicacionConImagenes.getId(),usuario.getId());
+        entoncesMeDevuelvenFavoritoNulo(resultado);
+        Favoritos guardado=AlGuardarComoFavorioto(publicacionConImagenes,usuario);
+
+        assertThat(guardado).isNotNull();
+        entoncesexisteCorrectamente(publicacionConImagenes,usuario);
+    }
+
+    @Test @Transactional @Rollback
+    public void alMarcarLaPublicacionComoFavoritoNuevamenteSeDebeEliminar() {
+        Publicacion publicacionConImagenes=dadoQueExisteUnaListaDePublicacionesConImagenes();
+        Usuario usuario= dadoqueExisteUnaPublicacionFavorita(  publicacionConImagenes);
+
+        Favoritos resultado=repositorioPublicaciones.BuscarFavoritoExistente(publicacionConImagenes.getId(),usuario.getId());
+
+        Actualizar_QuitarComoFavorito(resultado);
+
+        entoncesexDejaDeExistir(publicacionConImagenes,usuario);
+    }
+
+    private void entoncesexDejaDeExistir(Publicacion publicacionConImagenes, Usuario usuario) {
+        assertThat(repositorioPublicaciones.BuscarFavoritoExistente(publicacionConImagenes.getId(),usuario.getId())).isNull();
+
+    }
+
+    private void Actualizar_QuitarComoFavorito(Favoritos resultado) {
+
+        repositorioPublicaciones.eliminarfavorito(resultado);
+
+    }
+
+    private void entoncesexisteCorrectamente(Publicacion publicacionConImagenes, Usuario usuario) {
+        assertThat(repositorioPublicaciones.BuscarFavoritoExistente(publicacionConImagenes.getId(),usuario.getId())).isNotNull();
+    }
+
+    private Favoritos AlGuardarComoFavorioto(Publicacion publicacionConImagenes, Usuario usuario) {
+        Favoritos fav =new Favoritos();
+        fav.setPublicacion(publicacionConImagenes);
+        fav.setUsuario(usuario);
+        repositorioPublicaciones.indicarFavorito(fav);
+        return fav;
+    }
+
+    private void entoncesMeDevuelvenFavorito(Favoritos resultado, Integer id, Integer usuarioId) {
+    assertThat(resultado).isNotNull();
+    assertThat(resultado.getPublicacion().getId()).isEqualTo(id);
+    assertThat(resultado.getUsuario().getId()).isEqualTo(usuarioId);
+    }
+
+    private Usuario dadoqueExisteUnaPublicacionFavorita(Publicacion publicacion) {
+
+        Usuario usuario=new Usuario();
+
+        Favoritos fav=new Favoritos();
+
+        fav.setUsuario(usuario);
+        fav.setPublicacion(publicacion);
+
+        session().save(publicacion);
+        session().save(usuario);
+        session().save(fav);
+
+        return usuario;
+    }
+
+
+    private void entoncesMeDevuelvenFavoritoNulo(Favoritos resultado) {
+        assertThat(resultado).isNull();
+    }
+
+    private void entoncesMeDevuelveALPublicacion(Publicacion resultado) {
+        assertThat(resultado).isNotNull();
+    }
+
+    @Test @Transactional @Rollback
     public void obtenerPublicacionesDestacadas(){
         dadoQueExisteUnaListaDePublicaciones();
         

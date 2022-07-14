@@ -102,4 +102,13 @@ public class RepositorioPublicacionesImpl implements RepositorioPublicaciones {
         sessionFactory.getCurrentSession().save(publicacionFavorita);
     }
 
+    @Override
+    public List<Favoritos> BuscarFavoritosDelUsuario(Integer usuarioId) {
+        return sessionFactory.getCurrentSession()
+                .createCriteria(Favoritos.class)
+                .createAlias("usuario", "usuario")
+                .add(Restrictions.eq("usuario.id", usuarioId))
+                .list();
+    }
+
 }

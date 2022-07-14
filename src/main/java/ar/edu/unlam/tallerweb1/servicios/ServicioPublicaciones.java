@@ -17,6 +17,8 @@ public interface ServicioPublicaciones {
     List<Publicacion> obtenerPublicacionesDestacadas();
 
     void indicarPublicacionFavorita(Integer id, Integer usuarioId);
+
+    List<Publicacion> buscarPublicacionFavoritas(Integer usuarioId);
 }
 
 // Vamos a usar test doubles con un mock, para hacer pruebas de un controlador que dependen de un servicio

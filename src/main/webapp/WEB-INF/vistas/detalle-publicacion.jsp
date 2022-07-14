@@ -154,7 +154,7 @@
                         <form:form action="crear-reserva" modelAttribute="datosReserva" method="POST" >
                             <form:input path="idPublicacion" type="hidden" value="${detalle.id}"></form:input>
                             <form:label path="fechaInicioReserva" for="fechaInicioReserva"><b>Fecha inicio</b></form:label>
-                            <form:input path="fechaInicioReserva" id="fechaInicioReserva"  type="date" placeholder="fechaInicio" class="form-control"></form:input>
+                            <form:input path="fechaInicioReserva" min="2022-07-14"  id="fechaInicioReserva"  type="date" placeholder="fechaInicio" class="form-control"></form:input>
                             <br>
                             <form:label path="fechaInicioReserva" for="fechaFinReserva"><b>Fecha fin</b></form:label>
                             <form:input path="fechaFinReserva" type="date" placeholder="fechaFin" class="form-control"></form:input>
@@ -180,50 +180,21 @@
         </script>
 
         <script type="text/javascript">
-
-            function initMap(){
-
-                const ubicacion = new Localizacion(()=>{
-
-                    const options = {
-                        center: {
-                            lat: ubicacion.latitude,
-                            lng: ubicacion.longitude
-                        },
-                        zoom: 17
-                    }
-
-                    var map = document.getElementById('mapa');
-
-                    const mapa = new google.maps.Map(map, options);
-
+            function initMap() {
+                const myLatLng = { lat: ${detalle.propiedad.ubicacion.latitud}, lng: ${detalle.propiedad.ubicacion.longitud}};
+                const map = new google.maps.Map(document.getElementById("mapa"), {
+                    zoom: 17,
+                    center: myLatLng,
                 });
 
+                new google.maps.Marker({
+                    position: myLatLng,
+                    map,
+                });
             }
+
+            window.initMap = initMap;
         </script>
-        <script type="text/javascript">
-            class Localizacion{
-
-                constructor(callback) {
-
-                    if (navigator.geolocation){
-                        //obtenemos la ubicación
-                        navigator.geolocation.getCurrentPosition((position) =>{
-                            this.latitude = ${detalle.propiedad.ubicacion.latitud};
-                            this.longitude = ${detalle.propiedad.ubicacion.longitud};
-
-                            callback();
-                        });
-
-                    }else{
-                        alert("navegador no soporta geolocalización");
-                    }
-                }
-
-            }
-        </script>
-
-
 </body>
 
 

@@ -27,6 +27,7 @@ public class ServicioPreguntaDefault implements ServicioPregunta {
 
     @Override
     public void hacerPregunta(Pregunta pregunta) {
+        //Cambiar
         repositorioPregunta.guardarConsulta(pregunta);
     }
 

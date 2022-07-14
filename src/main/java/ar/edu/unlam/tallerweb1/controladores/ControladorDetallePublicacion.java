@@ -83,5 +83,5 @@ public class ControladorDetallePublicacion {
             servicioConsultas.responderPregunta(preguntaAresponder);
             return new ModelAndView("redirect:/detalle-publicacion?id=" + preguntaAresponder.getPublicacion().getId());
         }
-
+    //Presentacion o negocio?
     }

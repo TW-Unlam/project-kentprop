@@ -77,6 +77,7 @@ public class ControladorDetallePublicacion {
 
             return new ModelAndView("redirect:/detalle-publicacion?id=" +idPublicacion);
         }
+    //Presentacion o negocio?
 
     @RequestMapping(value="marcar-como-favorito",method = RequestMethod.GET)
     public ModelAndView marcarComoFavorito(@RequestParam(value= "idPublicacion")Integer idPublicacion, HttpServletRequest request){

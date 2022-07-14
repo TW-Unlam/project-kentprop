@@ -28,6 +28,7 @@ public class ServicioPreguntaDefault implements ServicioPregunta {
     }
 
     @Override
+
     public void hacerPregunta(String pregunta, Integer publicacionId, Integer usuarioId) {
     Publicacion publicacion = buscarPublicacionPorId(publicacionId);
     Usuario usuario = servicioUsuario.obterneUsuario((Integer) usuarioId);

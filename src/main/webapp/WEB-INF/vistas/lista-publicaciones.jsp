@@ -38,33 +38,30 @@
                 <div class="lista-destacadas">
                     <c:forEach var="publiDestacada" items="${destacadas}">
                         <div class="card">
-                            <a href="detalle-publicacion?id=${publiDestacada.propiedad.id}">
-                                <c:forEach var="imagen" items="${listaDeImagenDePublicacionesDestacadas}" >
-                                    <c:if test="${imagen.publicacion.id eq publiDestacada.id}">
-                                        <img src="${imagen.urlImagen}" class="card-img-top" alt="Imagen de Propiedad">
-                                    </c:if>
-                                </c:forEach>
+                            <a href="detalle-publicacion?id=${publiDestacada.publicacion.propiedad.id}">
+                                <img src="${publiDestacada.imagen.urlImagen}" class="card-img-top" alt="Imagen de Propiedad">
+
                                 <div class="card-body">
                                     <div class="publicacion-top">
                                         <div>
-                                            <h5>$ <c:out value="${publiDestacada.precio}"/></h5>
-                                            <span class="badge text-bg-primary"><c:out value="${publiDestacada.tipoAccion.name()}"/></span>
+                                            <h5>$ <c:out value="${publiDestacada.publicacion.precio}"/></h5>
+                                            <span class="badge text-bg-primary"><c:out value="${publiDestacada.publicacion.tipoAccion.name()}"/></span>
                                         </div>
                                         <div class="separador"> </div>
                                         <div>
-                                            <h5><c:out value="${publiDestacada.propiedad.ubicacion.provincia}"/></h5>
-                                            <p><c:out value="${publiDestacada.propiedad.ubicacion.localidad}"/></p>
+                                            <h5><c:out value="${publiDestacada.publicacion.propiedad.ubicacion.provincia}"/></h5>
+                                            <p><c:out value="${publiDestacada.publicacion.propiedad.ubicacion.localidad}"/></p>
                                         </div>
                                     </div>
                                     <div class="publicacion-data">
-                                        <p><i class="fa-solid fa-ruler-vertical"></i><c:out value="${publiDestacada.propiedad.metrosCuadrados}"/> m<sup>2</sup>.</p>
-                                        <p><i class="fa-solid fa-door-open"></i></span><c:out value="${publiDestacada.propiedad.cantidadAmbientes}"/> amb.</p>
-                                        <p><i class="fa-solid fa-house"></i><c:out value="${publiDestacada.propiedad.tipoPropiedad.name()}"/> </p>
-                                        <c:if test="${publiDestacada.propiedad.cochera}">
+                                        <p><i class="fa-solid fa-ruler-vertical"></i><c:out value="${publiDestacada.publicacion.propiedad.metrosCuadrados}"/> m<sup>2</sup>.</p>
+                                        <p><i class="fa-solid fa-door-open"></i></span><c:out value="${publiDestacada.publicacion.propiedad.cantidadAmbientes}"/> amb.</p>
+                                        <p><i class="fa-solid fa-house"></i><c:out value="${publiDestacada.publicacion.propiedad.tipoPropiedad.name()}"/> </p>
+                                        <c:if test="${publiDestacada.publicacion.propiedad.cochera}">
                                             <p><i class="fa-solid fa-warehouse"></i> 1 coch. </p>
                                         </c:if>
                                     </div>
-                                    <span class="publicacion-descripcion"><c:out value="${publiDestacada.descripcion}"/></span>
+                                    <span class="publicacion-descripcion"><c:out value="${publiDestacada.publicacion.descripcion}"/></span>
                                 </div>
                             </a>
                         </div>
@@ -84,33 +81,31 @@
             <div class="lista-publicaciones">
                 <c:forEach var="publi" items="${publicaciones}" >
                     <div class="card">
-                        <a href="detalle-publicacion?id=${publi.propiedad.id}">
-                            <c:forEach var="imagen" items="${listaDeImagenDePublicaciones}" >
-                                <c:if test="${imagen.publicacion.id eq publi.id}">
-                                    <img src="${imagen.urlImagen}" class="card-img-top" alt="Imagen de Propiedad">
+                        <a href="detalle-publicacion?id=${publi.publicacion.propiedad.id}">
+                                <c:if test="${publi.imagen.publicacion.id eq publi.publicacion.id}">
+                                    <img src="${publi.imagen.urlImagen}" class="card-img-top" alt="Imagen de Propiedad">
                                 </c:if>
-                            </c:forEach>
                             <div class="card-body">
                                 <div class="publicacion-top">
                                     <div>
-                                        <h5>$ <c:out value="${publi.precio}"/></h5>
-                                        <span class="badge text-bg-primary"><c:out value="${publi.tipoAccion.name()}"/></span>
+                                        <h5>$ <c:out value="${publi.publicacion.precio}"/></h5>
+                                        <span class="badge text-bg-primary"><c:out value="${publi.publicacion.tipoAccion.name()}"/></span>
                                     </div>
                                     <div class="separador"> </div>
                                     <div>
-                                        <h5><c:out value="${publi.propiedad.ubicacion.provincia}"/></h5>
-                                        <p><c:out value="${publi.propiedad.ubicacion.localidad}"/></p>
+                                        <h5><c:out value="${publi.publicacion.propiedad.ubicacion.provincia}"/></h5>
+                                        <p><c:out value="${publi.publicacion.propiedad.ubicacion.localidad}"/></p>
                                     </div>
                                 </div>
                                 <div class="publicacion-data">
-                                    <p><i class="fa-solid fa-ruler-vertical"></i><c:out value="${publi.propiedad.metrosCuadrados}"/> m<sup>2</sup>.</p>
-                                    <p><i class="fa-solid fa-door-open"></i></span><c:out value="${publi.propiedad.cantidadAmbientes}"/> amb.</p>
-                                    <p><i class="fa-solid fa-house"></i><c:out value="${publi.propiedad.tipoPropiedad.name()}"/> </p>
-                                    <c:if test="${publi.propiedad.cochera}">
+                                    <p><i class="fa-solid fa-ruler-vertical"></i><c:out value="${publi.publicacion.propiedad.metrosCuadrados}"/> m<sup>2</sup>.</p>
+                                    <p><i class="fa-solid fa-door-open"></i></span><c:out value="${publi.publicacion.propiedad.cantidadAmbientes}"/> amb.</p>
+                                    <p><i class="fa-solid fa-house"></i><c:out value="${publi.publicacion.propiedad.tipoPropiedad.name()}"/> </p>
+                                    <c:if test="${publi.publicacion.propiedad.cochera}">
                                         <p><i class="fa-solid fa-warehouse"></i> 1 coch. </p>
                                     </c:if>
                                 </div>
-                                <span class="publicacion-descripcion"><c:out value="${publi.descripcion}"/></span>
+                                <span class="publicacion-descripcion"><c:out value="${publi.publicacion.descripcion}"/></span>
                             </div>
                         </a>
                     </div>

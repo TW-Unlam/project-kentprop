@@ -32,7 +32,7 @@ public class RepositorioPreguntaImpl implements RepositorioPregunta {
     public List<Pregunta> buscarConsultasDeUsuario(Integer idUsuario) {
         return sessionFactory.getCurrentSession()
                 .createCriteria(Pregunta.class)
-                .createAlias("publicacion", "publ") //Chequear
+                .createAlias("publicacion", "publ")
                 .createAlias("usuario", "usu")
                 .add(Restrictions.eq("usu.id", idUsuario))
                 .list();

@@ -54,4 +54,8 @@ public class ServicioPreguntaDefault implements ServicioPregunta {
     public Pregunta buscarLaPregunta(Integer id) {
         return repositorioPregunta.ObtenerPregunta(id);
     }
+
+    public List<Pregunta> buscarPreguntasPorIdDeUsuario(Integer usuarioId){
+        return repositorioPregunta.buscarConsultasDeUsuario(usuarioId);
+    }
 }

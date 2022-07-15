@@ -34,14 +34,13 @@ public class ControladorDetallePublicacion {
         Publicacion publicaciones = null;
         List<Pregunta> consultasHechas = null;
         List<Imagen> imagenes = null;
+
         Object usuarioId = request.getSession().getAttribute("id");
         Object usuarioRol = request.getSession().getAttribute("ROL");
 
         publicaciones = servicioPublicaciones.verDetallePublicacion(id);
         consultasHechas = servicioConsultas.buscarConsultasDePublicacion(id);
         imagenes = servicioPublicaciones.traerImagenesPorId(id);
-
-        modelo.put("datosReserva", new DatosReserva());
 
         modelo.put("imagenes", imagenes);
         modelo.put("datosPregunta", new DatosPregunta());

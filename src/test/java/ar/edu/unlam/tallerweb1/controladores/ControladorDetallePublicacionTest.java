@@ -42,9 +42,10 @@ public class ControladorDetallePublicacionTest {
         controladorDetallePublicacion = new ControladorDetallePublicacion(servicioPregunta, servicioPublicaciones);
     }
 
-    private HttpServletRequest givenExisteUnUsuarioConId(Integer id) {
+    private HttpServletRequest givenExisteUnUsuarioConId(Integer id, String rol) {
         when(request.getSession()).thenReturn(session);
         when(request.getSession().getAttribute("id")).thenReturn(id);
+        when(request.getSession().getAttribute("ROL")).thenReturn(rol);
         return request;
     }
 
@@ -56,7 +57,7 @@ public class ControladorDetallePublicacionTest {
 
     @Test
     public void alSeleccionarVerDetalleMeTraeLaVistaDetalle(){
-
+        givenExisteUnUsuarioConId(1,"USUARIO");
         dadoQueExisteUnaPropiedad();
 
         ModelAndView mav = cuandoSeleccionoVerDetalle();
@@ -67,6 +68,7 @@ public class ControladorDetallePublicacionTest {
     @Test
     public void alEntrarEnVerDetalleDeberianDeCargarLaSeccionPreguntas(){
         dadoQueExisteUnaPropiedad();
+        givenExisteUnUsuarioConId(1,"USUARIO");
         dadoQueExistenPreguntasEnUnaPublicacion(10);
 
         ModelAndView mav = cuandoSeleccionoVerDetalle();
@@ -79,6 +81,7 @@ public class ControladorDetallePublicacionTest {
     @Test
     public void alEntrarEnVerDetalleSiLaSeccionPreguntasEstaVaciaArrojarMensaje(){
         dadoQueExisteUnaPropiedad();
+        givenExisteUnUsuarioConId(1,"USUARIO");
         dadoQueNoExistenPreguntasEnUnaPublicacion();
 
         ModelAndView mav = cuandoSeleccionoVerDetalle();
@@ -124,7 +127,7 @@ public class ControladorDetallePublicacionTest {
 
     @Test
     public void queAlCargarUnaPreguntaAlEstarLogeadoMeRedireccioneALaPaginaVerDetalle(){
-        request = givenExisteUnUsuarioConId(ID_USUARIO);
+        request = givenExisteUnUsuarioConId(ID_USUARIO,"USUARIO");
         alRealizarUnaPregunta();
 
         ModelAndView mav = cuandoEnvioLaPregunta(datosPregunta,request);
@@ -143,7 +146,7 @@ public class ControladorDetallePublicacionTest {
 
     @Test
     public void QueAlMarcarComoFavoritoUnaPublicacionIndiqueYSeMantengEnLaVistaDetalles()
-    {    request = givenExisteUnUsuarioConId(ID_USUARIO);
+    {    request = givenExisteUnUsuarioConId(ID_USUARIO,"USUARIO");
         Publicacion publicacion=dadoqueexisteLaPublicacionPAraMarcar();
         ModelAndView mav=cuandoMarcoComoFavorito(publicacion.getId(),request);
         entoncesMeRedirecciona(VISTA_REDIRECCION_LOGUEADO, mav.getViewName() );
@@ -159,7 +162,7 @@ public class ControladorDetallePublicacionTest {
 
     @Test
     public void alSeleccionarVerFavoritosMeTraeLaVistaMisFavoritosNULOS(){
-        request = givenExisteUnUsuarioConId(ID_USUARIO);
+        request = givenExisteUnUsuarioConId(ID_USUARIO,"USUARIO");
 
         dadoQueNOExistePublicacionesFavoritas(ID_USUARIO);
 
@@ -171,7 +174,7 @@ public class ControladorDetallePublicacionTest {
     @Test
 
     public void alSeleccionarVerFavoritosMeTraeLaVistaMisFavoritosTraigaUnaLista(){
-        request = givenExisteUnUsuarioConId(ID_USUARIO);
+        request = givenExisteUnUsuarioConId(ID_USUARIO,"USUARIO");
         dadoQueExisteUnaListaDePublicacionesFavoritas(ID_USUARIO,10);
         ModelAndView mav=cuandoquieroVerMisFavorito(request);
 
